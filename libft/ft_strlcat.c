@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 12:49:29 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/19 12:49:32 by antcampo         ###   ########.fr       */
+/*   Created: 2023/09/20 10:14:38 by antcampo          #+#    #+#             */
+/*   Updated: 2023/09/20 10:14:40 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
-	char	index;
+	int				dest_size;
+	unsigned int	index;
+	unsigned int	total_size;
 
+	dest_size = ft_strlen(dst);
 	index = 0;
-	while (n != 0)
+	while ((src[index] != '\0') && (index < dstsize))
 	{
-		if (s1[index] == '\0' || s2[index] == '\0')
-		{
-			if (ft_strlen(s1) > ft_strlen(s2))
-				return (1);
-			else if (ft_strlen(s1) < ft_strlen(s2))
-				return (-1);
-			else if (ft_strlen(s1) == ft_strlen(s2))
-				return (0);
-		}
-		if (s1[index] != s2[index])
-			return ((unsigned char) s1[index] - (unsigned char) s2[index]);
+		dst[dest_size] = src[index];
 		index++;
-		n--;
+		dest_size++;
 	}
-	return (0);
+	dst[dest_size] = '\0';
+	total_size = ft_strlen(dst);
+	return (total_size);
 }
