@@ -37,5 +37,19 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 //TODO: memcmp
 //TODO: strnstr
 //TODO: atoi
+//TODO: calloc
+//TODO: strdup
+// ---
+//TODO: ft_substr
+//TODO: ft_strjoin
+//TODO: ft_strtrim
+//TODO: ft_split
+//TODO: ft_itoa
+//TODO:	ft_strmapi
+//TODO: ft_striteri
+//TODO: ft_putchar_fd
+//TODO: ft_putstr_fd
+//TODO: ft_putendl_fd
+//TODO: ft_putnbr_fd
 
 #endif

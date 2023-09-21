@@ -24,10 +24,10 @@ $(TEMP)%.o: %.c ${INCLUDE} Makefile
 	@echo "Compiling" $< ...
 
 clean:
-	@RM -rf $(TEMP)
+	@rm -rf $(TEMP)
 
 fclean: clean
-	@RM -f $(NAME) $(TEMP)
+	@rm -f $(NAME) $(TEMP)
 
 re: fclean all
 .PHONY: all clean fclean
