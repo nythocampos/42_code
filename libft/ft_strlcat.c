@@ -16,38 +16,41 @@
 
 size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
-	int				dest_index;
-	unsigned int	index;
-	unsigned int	total_size;
+	int				dst_len;
+	int				src_len;
+	size_t			index;
+	int				dest_first_size;
 
-	dest_index = ft_strlen(dst);
+	dst_len = ft_strlen(dst);
+	dest_first_size = dst_len;
+	src_len = ft_strlen(src);
 	index = 0;
-	while (dstsize != 0)
+	if (dstsize < dst_len)
+		return (src_len + (int) dstsize);
+	while ((src[index] != '\0') && (dst_len + 1 < dstsize))
 	{
-		dst[dest_index] = src[index];
-		if (dstsize == 1)
-			dst[dest_index] = '\0';
+		dst[dst_len] = src[index];
 		index++;
-		dest_index++;
-		dstsize--;
+		dst_len++;
 	}
-	total_size = dest_index;
-	return (total_size);
+	dst[dst_len] = '\0';
+	return (dest_first_size + src_len);
 }
 /*
 int	main(void)
 {
-	char	*dest;
+	//char	dest[20] =  "a";
+	char	dest[20] =  "pqrs";
 	char	*src;
 	int		dstsize;
-	int     result;
+	int		result;
 
-	dest = "pqrstuvwxyz";
-	src = "abcd";
-	dstsize = 4;
-	//ft_strlcat(dest, src, dstsize);
-	result = strlcat(dest, src, dstsize);
-	printf("dest: %s \n", dest);
-	printf("result: %d \n", result);
+	//src = "lorem ipsum dolor sit amet";
+	src = "abcdefghi";
+	dstsize = 13;
+	result = ft_strlcat(dest, src, dstsize);
+	//result = strlcat(dest, src, dstsize);
+	printf("dest result: %s \n", dest);
+	printf("total string lenght: %d \n", result);
 	return (0);
 }*/
