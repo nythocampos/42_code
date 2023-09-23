@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 00:28:01 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/23 17:12:10 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:26:27 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 /*
+Concat 2 strings
 int	main(void)
 {
 	printf("%zu\n", ft_strlen(""));

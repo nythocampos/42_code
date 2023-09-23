@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:58:46 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/23 00:28:33 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:16:01 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
-//TODO: ft_strtrim
+char	*ft_strtrim(char const *s1, char const *set);
 //TODO: ft_split
 //TODO: ft_itoa
 //TODO:	ft_strmapi
