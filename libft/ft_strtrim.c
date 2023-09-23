@@ -6,14 +6,14 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:15:24 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/23 22:37:20 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/23 23:06:00 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	find_substr(char *s1, char *set, int *l_pos, int *r_pos)
+static int	find_substr(char *s1, char *set, int *l_pos, int *r_pos)
 {
 	int	index;
 
@@ -49,13 +49,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	l_pos = 0;
 	r_pos = ft_strlen(s1);
-	str = (char *)ft_calloc(1, sizeof(char));
 	res_find_sub = find_substr((char *) s1, (char *) set, &l_pos, &r_pos);
 	if (ft_strlen(s1) <= 0 || res_find_sub == 0)
-		return (str);
-	free(str);
-	if (str == 0)
-		return (0);
+		return ((char *)ft_calloc(1, sizeof(char)));
 	str = ft_substr(s1, l_pos, (r_pos - l_pos));
 	return (str);
 }

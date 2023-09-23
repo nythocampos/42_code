@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 00:28:01 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/23 19:26:27 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/23 22:49:32 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t		str_size;
 	char		*str;
 
-	str = (char *)ft_calloc(1, sizeof(char));
 	index = 0;
 	if ((ft_strlen(s1) <= 0 && ft_strlen(s2) <= 0))
-		return (str);
-	free(str);
+		return ((char *)ft_calloc(1, sizeof(char)));
 	str_size = ft_strlen(s1) + ft_strlen(s2);
 	str = (char *)ft_calloc(str_size + 1, sizeof(char));
 	if (str == 0)
