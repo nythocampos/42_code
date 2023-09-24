@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 22:38:40 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/24 03:10:55 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/24 21:38:21 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,78 +38,72 @@ static int	find_pos(char const *s, int start, int *len, char c)
 
 	index = start;
 	*len = 0;
-	while (s[index] != '\0')
+	if (index == 0 && s[0] != c)
+		return (0);
+	while (1)
 	{
-		if (s[index] == c && (s[index - 1] != c))
-			return (index - 1);
-		*len = *len + 1;
+		if (s[index - 1] == c && (s[index] != c))
+			return (index);
+		if (s[index] != c)
+			*len = *len + 1;
+		if (index >= ft_strlen(s))
+			break ;
 		index++;
 	}
-	*len = index - 1;
-	return (index - 1);
-}
-
-char	*get_substr(char const *s, char c)
-{
-	int		start;
-	int		end;
-	int		len;
-	char	*str;
-
-	while (start < ft_strlen(s))
-	{
-		end = find_pos(s, start, &len, c);
-		printf("start: %d, end: %d, len: %d ", start, end, len);
-		str = ft_substr(s, start, len);
-		printf("--->%s\n", str);
-		free(str);
-		start = end + 2;
-	}
-	return (str);
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	int		index;
 	int		start;
-	int		end;
+	int		next_start;
 	int		len;
 	char	**str;
 
 	index = 0;
-	start = 0;
-	end = 0;
-	if (ft_strlen(s) == 0 || c == '\0')
-		return ((char **)ft_calloc(1, sizeof(char)));
+	start = find_pos(s, index, &len, c);
+	str = (char **)ft_calloc(1, sizeof(char *));
+	if (ft_strlen(s) == 0 || start >= ft_strlen(s))
+		return (str);
+	free(str);
 	str = (char **)ft_calloc(get_array_size(s, c), sizeof(char *));
-	while (start < ft_strlen(s) && index <= get_array_size(s, c))
+	if (str == 0)
+		return (0);
+	while (index < get_array_size(s, c))
 	{
-		end = find_pos(s, start, &len, c);
-		printf("start: %d, end: %d, len: %d ", start, end, len);
-		str[index] = ft_substr(s, start, len);
-		printf("--->%s\n", str[index]);
-		start = end + 2;
+		next_start = find_pos(s, start + 1, &len, c);
+		str[index] = ft_substr(s, start, len + 1);
+		start = next_start;
 		index++;
 	}
-	printf(" ----- \n");
 	return (str);
 }
 
-int	main(void)
+/*int	main(void)
 {
-	//char const text[] = "perro cor tej";
-	char const text[] = "perro cor tej    asd";
+	//char const text[] = "ggggggggggg";
+	//char const text[] = "\t\t\t\thello!\t\t\t\t";
+	char const text[] = "  tripouille  42";
+	//char const text[] = "hello!";
+	//char const text[] = "hello!zzzzzzzz";
 	char	**result;
 	char	c = ' ';
 	int		rows = get_array_size(text, c);
 	int		i;
-	int		j;
+	int		len;
+	int		start;
 
-	//get_substr(text, c);
+	start = find_pos(text, 0, &len, c);
+	printf("source->%s\n", text);
+	printf("rows->%d\n", rows);
+	printf("start->%d\n", start);
 	result = ft_split(text, c);
-	for (i=0; i<rows; i++)
+	printf("result->%s\n", result[0]);
+	for (i=0; result[i] != 0; i++)
 		printf("-->%s\n", result[i]);
-	//printf("%d \n", get_array_size(text, c));
 	free(result);
 	return (0);
-}
+}*/
+//printf("index: %d ", index);
+//printf("start:%d,next:%d,len:%d->%s\n", start, next_start, len, str[index]);
