@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 22:38:40 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/24 21:38:21 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/25 20:05:58 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	**ft_split(char const *s, char c)
 	if (ft_strlen(s) == 0 || start >= ft_strlen(s))
 		return (str);
 	free(str);
-	str = (char **)ft_calloc(get_array_size(s, c), sizeof(char *));
+	str = (char **)ft_calloc(get_array_size(s, c), sizeof(char *) + 8);
 	if (str == 0)
 		return (0);
 	while (index < get_array_size(s, c))
@@ -82,13 +82,11 @@ char	**ft_split(char const *s, char c)
 
 /*int	main(void)
 {
-	//char const text[] = "ggggggggggg";
-	//char const text[] = "\t\t\t\thello!\t\t\t\t";
-	char const text[] = "  tripouille  42";
-	//char const text[] = "hello!";
-	//char const text[] = "hello!zzzzzzzz";
+	
+	printf("rows: %d, sizeof: %zu\n", get_array_size(s, c), sizeof(char *));
+	char const text[] = "--1-2--3---4----5-----42";
 	char	**result;
-	char	c = ' ';
+	char	c = '-';
 	int		rows = get_array_size(text, c);
 	int		i;
 	int		len;
@@ -99,7 +97,7 @@ char	**ft_split(char const *s, char c)
 	printf("rows->%d\n", rows);
 	printf("start->%d\n", start);
 	result = ft_split(text, c);
-	printf("result->%s\n", result[0]);
+	printf("result->%s\n", result[5]);
 	for (i=0; result[i] != 0; i++)
 		printf("-->%s\n", result[i]);
 	free(result);
@@ -107,3 +105,6 @@ char	**ft_split(char const *s, char c)
 }*/
 //printf("index: %d ", index);
 //printf("start:%d,next:%d,len:%d->%s\n", start, next_start, len, str[index]);
+// if (index == (get_array_size(s, c)))
+// 			str[index] = ft_calloc(1, sizeof(char));
+// 		else
