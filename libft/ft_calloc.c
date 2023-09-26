@@ -19,10 +19,10 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	int		index;
 
 	index = 0;
-	if ((int) size == 0 || (int) nmemb == 0)
-		return (0);
 	result = (char *)malloc(nmemb * size);
-	while (result[index] != '\0')
+	if (!result)
+		return (0);
+	while (index <= (nmemb * size))
 	{
 		result[index] = 0;
 		index++;
@@ -32,8 +32,8 @@ void	*ft_calloc(size_t nmemb, size_t size)
 /*
 int	main(void)
 {
-	size_t	nmemb = 30;
-	size_t	size = 1;
+	size_t	nmemb = 0;
+	size_t	size = 0;
 
 	printf("Real function: %s \n", (char *) calloc(nmemb, size));
 	printf("Fake function: %s \n", (char *)ft_calloc(nmemb, size));

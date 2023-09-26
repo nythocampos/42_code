@@ -19,37 +19,41 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*str;
 
 	index = 0;
-	if (len >= ft_strlen(s))
-		len = ft_strlen(s) - (size_t) start;
-	if ((int) start > (int) ft_strlen(s) 
-		|| (int) ft_strlen(s) == 0 || (int) start < 0 || (int) len < 0)
+	if ((int)len >= (int)ft_strlen(s) || (int) len < 0)
+		len = (size_t)(ft_strlen(s) - (int) start);
+	if ((int) start > (int) ft_strlen(s) || (int) ft_strlen(s) == 0
+		|| (int) start < 0 || (int) len == 0)
 		return ((char *)ft_calloc(1, sizeof(char)));
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (str == 0)
 		return (0);
-	while (len > 0 && s[start] != '\0')
+	while (s[start + index] != '\0' && len > index)
 	{
-		str[index] = s[start];
-		start++;
+		str[index] = s[start + index];
 		index++;
-		len--;
 	}
 	return (str);
 }
-/*
-This function returns a sub string from other string
-int	main(void)
-{
-	char *result;
 
-	result = ft_substr("hola", -1, -1);
-	printf("result --->%s\n", result);
-	printf("size: %ld\n", strlen(result));
-	// if (len > ft_strlen(s))
-	// 	len = ft_strlen(s) - (int) start;
-	//str = (char *)ft_calloc(len + 1, sizeof(char));
-	//str = (char *)malloc(len * sizeof(char) + 1);
-	//printf("%u\n",start);
-	//printf("%zu\n",len);
+/*
+str = (char *)ft_calloc(len + 1, sizeof(char));
+str = (char *)malloc(len * sizeof(char));
+printf("start: %d, index: %d, len: %d\n", start, index, (int)len);
+This function returns a sub string from other string
+
+If len is greater than s size, then assign to len the 
+total size from start onwards
+*/
+/*int	main(void)
+{
+	char			*result;
+	unsigned int	start = 0;
+	size_t			len = -1;
+
+	if ((int)len < 0)
+		printf("negative\n");
+
+	printf("Fake--->%s\n", ft_substr("hola", start, len));
+	printf("Real--->%s\n", ft_substr("hola", start, len));
 	return (0);
 }*/

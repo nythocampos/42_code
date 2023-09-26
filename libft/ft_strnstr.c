@@ -31,7 +31,7 @@ char	*check_sub_string(char *sub_big, char *sub_little)
 	}
 	if (diff == 0)
 		return ((char *) &sub_big[0]);
-	return (sub_little);
+	return (0);
 }
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
@@ -49,7 +49,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		if (big[index] == little[0])
 		{
 			check_sub = check_sub_string((char *) &big[index], (char *) little);
-			if (check_sub != little)
+			if (check_sub != 0)
 			{
 				len = (len - ft_strlen(little)) + 1;
 				if ((int) len <= 0)
@@ -62,19 +62,21 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (0);
 }
-/*
-int	main(void)
+
+/*int	main(void)
 {
-	char	haystack[30] = "aaabcabcd";
-	char	needle[10] = "aabc";
-	size_t	num = -1;
-	char	*result;
+	//This function locates the first occurence of the null terminated
+	// string little in the nul terminated string big
+	char	haystack[30] = "AAAAAAAAAAAAA";
+	char	needle[30] = "AAAAAAAAAAAAA";
+	size_t	num = strlen(haystack);
+	char	*result1;
+	char	*result2;
 
 	printf("%ld \n",  num);
-	result = ft_strnstr(haystack, needle, num);
-	printf("fake function result: %s \n", result);
-	printf("---> Expected result: %s \n", haystack + 1);
-	if (result == haystack + 1)
-		printf("OK \n");
+	result1 = ft_strnstr(haystack, haystack, num);
+	result2 = strnstr(haystack, haystack, num);
+	printf("Fake     result-->%s\n", result1);
+	printf("Expected result-->%s\n", result2);
 	return (0);
 }*/

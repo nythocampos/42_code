@@ -22,7 +22,7 @@ int	ft_atoi(const char *nptr)
 	index = 0;
 	result = 0;
 	is_negative = 0;
-	while (nptr[index] == ' ' || nptr[index] == '\f' || nptr[index] == '\n' 
+	while (nptr[index] == ' ' || nptr[index] == '\f' || nptr[index] == '\n'
 		|| nptr[index] == '\r' || nptr[index] == '\t' || nptr[index] == '\v')
 		index++;
 	if (nptr[index] == '-' || nptr[index] == '+')

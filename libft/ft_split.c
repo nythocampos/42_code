@@ -22,7 +22,7 @@ static int	get_array_size(char const *s, char c)
 	rows = 0;
 	while (1)
 	{
-		if ((s[index] == c || s[index] == '\0') 
+		if ((s[index] == c || s[index] == '\0')
 			&& (s[index - 1] != c))
 			rows++;
 		if (s[index] == '\0')
