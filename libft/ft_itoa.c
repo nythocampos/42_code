@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 23:52:31 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/27 15:56:21 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/28 00:50:25 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-char	*reverse_string(char str[], int length)
-{
-	int		start;
-	int		end;
-	char	temp;
-
-	start = 0;
-	end = length - 1;
-	while (start < end) 
-	{
-		temp = str[start];
-		str[start] = str[end];
-		str[end] = temp;
-		start++;
-		end--;
-	}
-	return (str);
-}
-
-int	count_numbers(int num)
+int	count_nums(int num)
 {
 	int	count;
 
@@ -44,52 +25,59 @@ int	count_numbers(int num)
 		num = -num;
 	while (num > 0) 
 	{
-		num /= 10;
+		num = num / 10;
 		count++;
 	}
 	return (count);
 }
 
-void	to_string(int n, int index, char *str)
+void	to_string(unsigned int num, int *index, char *str)
 {
-	int		is_negative;
-
-	index = 0;
-	is_negative = 0;
-	if (n == 0)
-		str[index++] = '0';
-	else if (n < 0) 
-	{
-		is_negative = 1;
-		n = -n;
-	}
-	while (n > 0) 
-	{
-		str[index++] = n % 10 + '0';
-		n /= 10;
-	}
-	if (is_negative) 
-		str[index++] = '-';
-	str[index] = '\0';
-	str = reverse_string(str, index);
+	if (num >= 10)
+		to_string(num / 10, index, str);
+	str[*index] = (num % 10 + '0');
+	*index = *index + 1;
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
+	unsigned int	num;
+	int				index;
+	int				size;
+	char			*str;
 
-	str = (char *)ft_calloc(count_numbers(n) + 1, sizeof(char) + 8);
+	index = 0;
+	if (n < 0)
+		str = (char *)malloc((sizeof(char)) * ((count_nums(num) + 1) + 1));
+	else
+		str = (char *)malloc((sizeof(char)) * (count_nums(num) + 1));
 	if (str == 0)
 		return (0);
-	to_string(n, 0, str);
+	num = n;
+	if (n < 0)
+	{
+		str[0] = '-';
+		num = -n;
+		index = index + 1;
+	}
+	to_string(num, &index, str);
+	str[index] = '\0';
 	return (str);
 }
 
+/*
+if (n < 0)
+		size = count_numbers(num) + 1;
+	else
+		size = count_numbers(num);
+	str = (char *)malloc(sizeof(char) * (size + 1));
+*/
 /*int	main(void)
 {
+	printf("count: %d\n", count_nums(1000034));
 	printf("Test 0.ft_itoa->%s, Expected:%s\n", ft_itoa(-9), "-9");
-	printf("Test 1.ft_itoa->%s, Expected:%s\n", ft_itoa(-10), "0");
-	printf("Test 2.ft_itoa->%s, Expected:%s\n", ft_itoa(-9874), "-9874");
-	printf("Test 3.ft_itoa->%s", ft_itoa(-2147483648));
+	printf("Test 1.ft_itoa->%s, Expected:%s\n", ft_itoa(-10), "-10");
+	printf("Test 2.ft_itoa->%s, Expected:%s\n", ft_itoa(543000), "543000");
+	printf("Test 3.ft_itoa->%s\n", ft_itoa(-2147483648));
 	return (0);
 }*/

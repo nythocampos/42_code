@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:58:46 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/27 18:31:30 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:34:46 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-//TODO: ft_putnbr_fd
+void	ft_putnbr_fd(int n, int fd);
 
 #endif
