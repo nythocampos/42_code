@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:58:46 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/23 23:10:27 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:54:29 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
-//TODO: ft_itoa
+char	*ft_itoa(int n);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 //TODO:	ft_strmapi
 //TODO: ft_striteri
 //TODO: ft_putchar_fd
