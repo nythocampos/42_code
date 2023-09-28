@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 23:52:31 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/28 00:50:25 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/28 03:46:34 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ char	*ft_itoa(int n)
 
 	index = 0;
 	if (n < 0)
-		str = (char *)malloc((sizeof(char)) * ((count_nums(num) + 1) + 1));
+		str = (char *)malloc((sizeof(char) + 8) * ((count_nums(num) + 1) + 1));
 	else
-		str = (char *)malloc((sizeof(char)) * (count_nums(num) + 1));
+		str = (char *)malloc((sizeof(char) + 8) * (count_nums(num) + 1));
 	if (str == 0)
 		return (0);
 	num = n;
