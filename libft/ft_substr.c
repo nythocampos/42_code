@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -27,7 +26,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (str == 0)
 		return (0);
-	while (s[start + index] != '\0' && len > index)
+	while (s[start + index] != '\0' && (int)len > index)
 	{
 		str[index] = s[start + index];
 		index++;

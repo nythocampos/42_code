@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 static int	find_substr(char *s1, char *set, int *l_pos, int *r_pos)
 {

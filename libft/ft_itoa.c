@@ -11,19 +11,19 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <unistd.h>
 
-int	count_nums(int num)
+static int	count_nums(int num)
 {
 	int	count;
 
 	count = 0;
+	if (num == -2147483648)
+		return (14);
 	if (num == 0)
-		return (1); 
+		return (1);
 	if (num < 0)
 		num = -num;
-	while (num > 0) 
+	while (num > 0)
 	{
 		num = num / 10;
 		count++;
@@ -31,7 +31,7 @@ int	count_nums(int num)
 	return (count);
 }
 
-void	to_string(unsigned int num, int *index, char *str)
+static void	to_string(unsigned int num, int *index, char *str)
 {
 	if (num >= 10)
 		to_string(num / 10, index, str);
@@ -43,17 +43,16 @@ char	*ft_itoa(int n)
 {
 	unsigned int	num;
 	int				index;
-	int				size;
 	char			*str;
 
 	index = 0;
+	num = n;
 	if (n < 0)
-		str = (char *)malloc((sizeof(char) + 8) * ((count_nums(num) + 1) + 1));
+		str = (char *)malloc((sizeof(char)) * (count_nums(num) + 2));
 	else
-		str = (char *)malloc((sizeof(char) + 8) * (count_nums(num) + 1));
+		str = (char *)malloc((sizeof(char)) * (count_nums(num) + 1));
 	if (str == 0)
 		return (0);
-	num = n;
 	if (n < 0)
 	{
 		str[0] = '-';
@@ -65,13 +64,6 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-/*
-if (n < 0)
-		size = count_numbers(num) + 1;
-	else
-		size = count_numbers(num);
-	str = (char *)malloc(sizeof(char) * (size + 1));
-*/
 /*int	main(void)
 {
 	printf("count: %d\n", count_nums(1000034));

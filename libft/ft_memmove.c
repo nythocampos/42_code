@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 /*
 This function copies len bytes from string src to a temporal buffer
@@ -21,7 +20,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	const unsigned char		*a;
 	unsigned char			*b;
-	char					temp;
 
 	if ((dst == (void *) '\0' && src == (void *) '\0'))
 		return (dst);
@@ -32,7 +30,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		while (len-- > 0)
 			*--b = *--a;
 	}
-	else 
+	else
 	{
 		a = src;
 		b = dst;

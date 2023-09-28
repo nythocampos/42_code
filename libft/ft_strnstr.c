@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-char	*check_sub_string(char *sub_big, char *sub_little)
+static char	*check_sub_string(char *sub_big, char *sub_little)
 {
 	int		index;
 	int		diff;

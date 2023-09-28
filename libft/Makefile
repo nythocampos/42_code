@@ -9,28 +9,22 @@ SRCS 	= ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strl
 	ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 	ft_memmove.c
 
-TEMP = temp/
+OBJS = $(SRCS:.c=.o)
 
-OBJS = ${addprefix ${TEMP}, $(SRCS:.c=.o)}
-
-all: temp $(NAME)
-
-temp:
-	@mkdir -p ${TEMP}
-	@echo "Temp directory created."
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(LIB) $(NAME) $(OBJS)
 
-$(TEMP)%.o: %.c ${INCLUDE} Makefile
+%.o: %.c ${INCLUDE} Makefile
 	@$(CC) $(FLAGS) -c $< -o $@
 	@echo "Compiling" $< ...
 
 clean:
-	@rm -rf $(TEMP)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	@rm -f $(NAME) $(TEMP)
+	@rm -f $(NAME) $(OBJS)
 
 re: fclean all
 .PHONY: all clean fclean

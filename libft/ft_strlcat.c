@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
 size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
@@ -25,9 +23,9 @@ size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 	dest_first_size = dst_len;
 	src_len = ft_strlen(src);
 	index = 0;
-	if (dstsize < dst_len)
+	if (dstsize < (size_t)dst_len)
 		return (src_len + (int) dstsize);
-	while ((src[index] != '\0') && (dst_len + 1 < dstsize))
+	while ((src[index] != '\0') && ((size_t)(dst_len + 1) < dstsize))
 	{
 		dst[dst_len] = src[index];
 		index++;
@@ -36,8 +34,8 @@ size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 	dst[dst_len] = '\0';
 	return (dest_first_size + src_len);
 }
-/*
-int	main(void)
+
+/*int	main(void)
 {
 	//char	dest[20] =  "a";
 	char	dest[20] =  "pqrs";

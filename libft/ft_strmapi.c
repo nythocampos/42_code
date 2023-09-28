@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <unistd.h>
 
 /*char	update(unsigned int i, char c)
 {
@@ -49,6 +47,11 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[index] = '\0';
 	return (str);
 }
+
+/*
+This function apply a (*f) function to each char item in the
+string char const *s.
+*/
 
 /*int	main(void)
 {

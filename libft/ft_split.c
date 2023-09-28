@@ -11,7 +11,19 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+
+static void	free_strings(int len, char **str)
+{
+	int	index;
+
+	index = 0;
+	while (index <= len)
+	{
+		free(str[index]);
+		index++;
+	}
+	free(str);
+}
 
 static int	get_array_size(char const *s, char c)
 {
@@ -46,7 +58,7 @@ static int	find_pos(char const *s, int start, int *len, char c)
 			return (index);
 		if (s[index] != c)
 			*len = *len + 1;
-		if (index >= ft_strlen(s))
+		if (index >= (int)ft_strlen(s))
 			break ;
 		index++;
 	}
@@ -63,23 +75,28 @@ char	**ft_split(char const *s, char c)
 
 	index = 0;
 	start = find_pos(s, index, &len, c);
-	str = (char **)ft_calloc(1, sizeof(char *));
-	if (ft_strlen(s) == 0 || start >= ft_strlen(s))
-		return (str);
-	free(str);
-	str = (char **)ft_calloc(get_array_size(s, c), sizeof(char *) + 8);
+	if (ft_strlen(s) == 0 || start >= (int)ft_strlen(s))
+		return ((char **)ft_calloc(1, sizeof(char *)));
+	str = (char **)malloc((get_array_size(s, c) + 1) * sizeof(char *));
 	if (str == 0)
 		return (0);
 	while (index < get_array_size(s, c))
 	{
 		next_start = find_pos(s, start + 1, &len, c);
 		str[index] = ft_substr(s, start, len + 1);
+		if (str[index] == 0)
+			free_strings(index, str);
 		start = next_start;
 		index++;
 	}
+	str[index] = NULL;
 	return (str);
 }
 
+/*
+This function separates words contained in the char *s and
+push them in its own memory spaces pointed by a new array.
+*/
 /*int	main(void)
 {
 	
