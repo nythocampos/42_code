@@ -1,38 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/29 11:12:42 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/29 11:12:56 by antcampo         ###   ########.fr       */
+/*   Created: 2023/09/29 11:14:02 by antcampo          #+#    #+#             */
+/*   Updated: 2023/09/29 11:14:23 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	struct s_list	*node_ptr;
-
-	if (new == 0)
-		return ;
-	if (*lst == 0)
-	{
-		*lst = new;
-	}
-	else
-	{
-		node_ptr = ft_lstlast(*lst);
-		node_ptr->next = new;
-	}
+	del(lst->content);
+	free(lst);
 }
-/*
-This function adds a node to the end of the linked list
 
-@param lst (t_list **): A pointer to the first node of the linked list
-@param new (t_list *): A pointer to the new node to be added
+/*
+This function free the memory of the content of the node and free the node
+
+@param lst (t_list *): A pointer to the node
+@param del (*del): A pointer to the function to use
 @return void
 */
 /*int  main(void)

@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 12:53:36 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/28 12:53:38 by antcampo         ###   ########.fr       */
+/*   Created: 2023/09/29 15:57:59 by antcampo          #+#    #+#             */
+/*   Updated: 2023/09/29 15:58:17 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	struct s_list	*node;
+	struct s_list	*node_ptr;
 
-	node = malloc(sizeof(t_list));
-	if (node == 0)
-		return (NULL);
-	node->content = content;
-	node->next = NULL;
-	return (node);
+	if (lst == NULL)
+		return ;
+	node_ptr = lst;
+	while (node_ptr->next != NULL)
+	{
+		f(node_ptr->content);
+		node_ptr = node_ptr->next;
+	}
+	f(node_ptr->content);
 }
+
+/*
+This function apply the (*f) function to the content of each node.
+
+@param lst (t_list *):  a pointer to the first node
+@param del (*del): a pointer to the function
+*/

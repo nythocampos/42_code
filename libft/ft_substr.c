@@ -11,26 +11,30 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	int		index;
 	char	*str;
+	int		size;
 
 	index = 0;
-	if ((int)len >= (int)ft_strlen(s) || (int) len < 0)
-		len = (size_t)(ft_strlen(s) - (int) start);
+	size = (int) len;
 	if ((int) start > (int) ft_strlen(s) || (int) ft_strlen(s) == 0
-		|| (int) start < 0 || (int) len == 0)
+		|| (int) start < 0 || size == 0)
 		return ((char *)ft_calloc(1, sizeof(char)));
-	str = (char *)ft_calloc(len + 1, sizeof(char));
+	if (size >= (int)ft_strlen(s + start) || size < 0)
+		size = ((int)ft_strlen(s + start));
+	str = (char *)malloc((size + 1) * sizeof(char));
 	if (str == 0)
 		return (0);
-	while (s[start + index] != '\0' && (int)len > index)
+	while (s[start + index] != '\0' && size > index)
 	{
 		str[index] = s[start + index];
 		index++;
 	}
+	str[index] = '\0';
 	return (str);
 }
 
@@ -45,14 +49,14 @@ total size from start onwards
 */
 /*int	main(void)
 {
-	char			*result;
-	unsigned int	start = 0;
-	size_t			len = -1;
+	//char			*result;
+	//unsigned int	start = 0;
+	//size_t			len = -1;
 
-	if ((int)len < 0)
-		printf("negative\n");
+	//if ((int)len < 0)
+	//	printf("negative\n");
 
-	printf("Fake--->%s\n", ft_substr("hola", start, len));
-	printf("Real--->%s\n", ft_substr("hola", start, len));
+	printf("\"%s\"\n", ft_substr("hola", 2, 9));
+	//printf("Real--->%s\n", ft_substr("hola", start, len));
 	return (0);
 }*/
