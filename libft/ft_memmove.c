@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 09:15:54 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/28 03:44:16 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/09/28 20:25:30 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,35 +57,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
     printf("Fake->%s\n", str1); // Imprimirá "Hello, world!"
     return 0;
 }*/
-// void	*ft_memmove(void *dst, const void *src, size_t len)
-// {
-// 	char	*a;
-// 	char	*b;
-// 	char	temp;
-
-// 	if ((dst == (void *) '\0' && src == (void *) '\0'))
-// 		return (dst);
-// 	if (dst > src)
-// 	{
-// 		a = (char *)src + len;
-// 		b = (char *)dst + len;
-// 		while (len-- >= 0)
-// 		{
-// 			if (b == src)
-// 				break ;
-// 			temp = *a--;
-// 			*b-- = temp;
-// 		}
-// 	}
-// 	else 
-// 	{
-// 		a = (char *)src;
-// 		b = (char *)dst;
-// 		while (len-- > 0)
-// 		{
-// 			temp = *a++;
-// 			*b++ = temp;
-// 		}
-// 	}
-// 	return (dst);
-// }
