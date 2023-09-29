@@ -9,22 +9,29 @@ SRCS 	= ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strl
 	ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 	ft_memmove.c
 
+SRC_BONUS = ft_lstnew.c ft_lstadd_front
+
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(SRC_BONUS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(LIB) $(NAME) $(OBJS)
 
+bonus: $(OBJS_BONUS) $(OBJS)
+	@$(LIB) $(NAME) $(OBJS_BONUS) $(OBJS)
+
 %.o: %.c ${INCLUDE} Makefile
 	@$(CC) $(FLAGS) -c $< -o $@
 	@echo "Compiling" $< ...
 
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	@rm -f $(NAME) $(OBJS)
+	@rm -f $(NAME)
 
 re: fclean all
-.PHONY: all clean fclean
+
+.PHONY: all clean fclean re bonus
