@@ -18,7 +18,7 @@ static int	count_nums(int num)
 
 	count = 0;
 	if (num == -2147483648)
-		return (14);
+		return (10);
 	if (num == 0)
 		return (1);
 	if (num < 0)

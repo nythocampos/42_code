@@ -12,17 +12,18 @@
 
 #include "libft.h"
 
-static void	free_strings(int len, char **str)
+static char	**free_strings(int len, char **str)
 {
 	int	index;
 
 	index = 0;
-	while (index <= len)
+	while (index < len)
 	{
 		free(str[index]);
 		index++;
 	}
 	free(str);
+	return (NULL);
 }
 
 static int	get_array_size(char const *s, char c)
@@ -77,7 +78,7 @@ char	**ft_split(char const *s, char c)
 	start = find_pos(s, index, &len, c);
 	if (ft_strlen(s) == 0 || start >= (int)ft_strlen(s))
 		return ((char **)ft_calloc(1, sizeof(char *)));
-	str = (char **)malloc((get_array_size(s, c) + 1) * sizeof(char *));
+	str = (char **)malloc(sizeof(char *) * (get_array_size(s, c) + 1));
 	if (str == 0)
 		return (0);
 	while (index < get_array_size(s, c))
@@ -85,7 +86,7 @@ char	**ft_split(char const *s, char c)
 		next_start = find_pos(s, start + 1, &len, c);
 		str[index] = ft_substr(s, start, len + 1);
 		if (str[index] == 0)
-			free_strings(index, str);
+			return (free_strings(index, str));
 		start = next_start;
 		index++;
 	}
@@ -100,10 +101,9 @@ push them in its own memory spaces pointed by a new array.
 /*int	main(void)
 {
 	
-	printf("rows: %d, sizeof: %zu\n", get_array_size(s, c), sizeof(char *));
-	char const text[] = "--1-2--3---4----5-----42";
+	char const text[] = "hello!";
 	char	**result;
-	char	c = '-';
+	char	c = ' ';
 	int		rows = get_array_size(text, c);
 	int		i;
 	int		len;
@@ -114,7 +114,7 @@ push them in its own memory spaces pointed by a new array.
 	printf("rows->%d\n", rows);
 	printf("start->%d\n", start);
 	result = ft_split(text, c);
-	printf("result->%s\n", result[5]);
+	printf("result->%s\n", result[0]);
 	for (i=0; result[i] != 0; i++)
 		printf("-->%s\n", result[i]);
 	free(result);
