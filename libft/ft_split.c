@@ -12,85 +12,59 @@
 
 #include "libft.h"
 
-static char	**free_strings(int len, char **str)
+static size_t	ft_counter(const char *str, char c)
 {
-	int	index;
+	size_t	cont1;
+	size_t	cont2;
 
-	index = 0;
-	while (index < len)
+	cont1 = 0;
+	cont2 = 0;
+	while (str[cont1] != '\0')
 	{
-		free(str[index]);
-		index++;
+		if (str[cont1] != c && (str[cont1 + 1] == c || str[cont1 + 1] == '\0'))
+			cont2++;
+		cont1++;
+	}
+	return (cont2);
+}
+
+static char	**ft_free_split(char **str, size_t i)
+{
+	while (i > 0)
+	{
+		i--;
+		free(str[i]);
 	}
 	free(str);
 	return (NULL);
 }
 
-static int	get_array_size(char const *s, char c)
-{
-	int	index;
-	int	rows;
-
-	index = 1;
-	rows = 0;
-	while (1)
-	{
-		if ((s[index] == c || s[index] == '\0')
-			&& (s[index - 1] != c))
-			rows++;
-		if (s[index] == '\0')
-			break ;
-		index++;
-	}
-	return (rows);
-}
-
-static int	find_pos(char const *s, int start, int *len, char c)
-{
-	int	index;
-
-	index = start;
-	*len = 0;
-	if (index == 0 && s[0] != c)
-		return (0);
-	while (1)
-	{
-		if (s[index - 1] == c && (s[index] != c))
-			return (index);
-		if (s[index] != c)
-			*len = *len + 1;
-		if (index >= (int)ft_strlen(s))
-			break ;
-		index++;
-	}
-	return (0);
-}
-
 char	**ft_split(char const *s, char c)
 {
-	int		index;
-	int		start;
-	int		next_start;
-	int		len;
 	char	**str;
+	size_t	cont1;
+	int		cont2;
 
-	index = 0;
-	start = find_pos(s, index, &len, c);
-	if (ft_strlen(s) == 0 || start >= (int)ft_strlen(s))
-		return ((char **)ft_calloc(1, sizeof(char *)));
-	str = (char **)malloc(sizeof(char *) * (get_array_size(s, c) + 1));
-	if (str == 0)
-		return (0);
-	while (index < get_array_size(s, c))
+	str = malloc(sizeof(char *) * (ft_counter(s, c) + 1));
+	if (!str)
+		return (NULL);
+	cont2 = -1;
+	while (*s)
 	{
-		next_start = find_pos(s, start + 1, &len, c);
-		str[index] = ft_substr(s, start, len + 1);
-		if (str[index] == 0)
-			return (free_strings(index, str));
-		start = next_start;
-		index++;
+		if (*s != c)
+		{
+			cont1 = 0;
+			while (s[cont1] && s[cont1] != c)
+				cont1++;
+			str[++cont2] = ft_substr(s, 0, cont1);
+			if (!str[cont2])
+				return (ft_free_split(str, cont2));
+			s += cont1;
+		}
+		else
+			s++;
 	}
-	str[index] = NULL;
+	str[++cont2] = NULL;
 	return (str);
 }
 

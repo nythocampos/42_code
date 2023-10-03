@@ -47,19 +47,22 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char		*str;
 
 	l_pos = 0;
+	if (s1 == 0 || set == 0)
+		return (0);
 	r_pos = ft_strlen(s1);
 	res_find_sub = find_substr((char *) s1, (char *) set, &l_pos, &r_pos);
-	if (ft_strlen(s1) <= 0 || res_find_sub == 0)
-		return ((char *)ft_calloc(1, sizeof(char)));
+	if (res_find_sub == 0)
+		return (ft_strdup(""));
 	str = ft_substr(s1, l_pos, (r_pos - l_pos));
 	return (str);
 }
-/*
-Find a sub string contained between characteres
-int	main(void)
+
+//Find a sub string contained between characteres
+/*int	main(void)
 {
 	char	set[] = "+-/?";
 
+	printf("Test: 0-->%s\n", ft_strtrim(NULL, " "));
 	printf("Test: 0-->%s\n", ft_strtrim("ab cd  f   ", " "));
 	printf("Test: 1-->%s\n", ft_strtrim("lorem ipsum dolor sit amet", "te"));
 	printf("Test: 2-->%s\n", 

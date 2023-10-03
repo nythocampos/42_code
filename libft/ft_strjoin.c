@@ -19,6 +19,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char		*str;
 
 	index = 0;
+	if (s1 == 0 || s2 == 0)
+		return (0);
 	if ((ft_strlen(s1) <= 0 && ft_strlen(s2) <= 0))
 		return ((char *)ft_calloc(1, sizeof(char)));
 	str_size = ft_strlen(s1) + ft_strlen(s2);
@@ -31,12 +33,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ft_memcpy(&str[ft_strlen(s1)], (const char *)s2, ft_strlen(s2));
 	return (str);
 }
-/*
-Concat 2 strings
-int	main(void)
+
+//Concat 2 strings
+/*int	main(void)
 {
 	printf("%zu\n", ft_strlen(""));
-	printf("Test: 0-->%s\n", ft_strjoin("perro ", "corriendo"));
+	printf("Test: 0-->%s\n", ft_strjoin(NULL, "corriendo"));
 	printf("Test: 1-->%s\n", ft_strjoin(" ", "corriendo"));
 	printf("Test: 2-->%s\n", ft_strjoin(" ", " "));
 	printf("Test: 3-->%s\n", ft_strjoin("", " "));

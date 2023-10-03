@@ -16,3 +16,13 @@ void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
+
+/*int	main(void)
+{
+	char	test;
+
+	test = 0;
+	ft_putchar_fd(test, 1);
+	ft_putchar_fd('C', 1);
+	return (0);
+}*/

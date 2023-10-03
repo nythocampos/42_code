@@ -14,24 +14,18 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*result;
-	int		index;
+	void	*result;
 
-	index = 0;
-	result = (char *)malloc(nmemb * size);
+	result = malloc(nmemb * size);
 	if (!result)
 		return (0);
-	while (index <= (int)(nmemb * size))
-	{
-		result[index] = 0;
-		index++;
-	}
-	return ((void *)result);
+	ft_bzero(result, nmemb * size);
+	return (result);
 }
-/*
-int	main(void)
+
+/*int	main(void)
 {
-	size_t	nmemb = 0;
+	size_t	nmemb = 1;
 	size_t	size = 0;
 
 	printf("Real function: %s \n", (char *) calloc(nmemb, size));

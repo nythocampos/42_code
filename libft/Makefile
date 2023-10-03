@@ -23,8 +23,7 @@ bonus: $(OBJS_BONUS) $(OBJS)
 	@$(LIB) $(NAME) $(OBJS_BONUS) $(OBJS)
 
 %.o: %.c ${INCLUDE} Makefile
-	@$(CC) $(FLAGS) -c $< -o $@
-	@echo "Compiling" $< ...
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJS) $(OBJS_BONUS)
