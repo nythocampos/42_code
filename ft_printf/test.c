@@ -16,8 +16,8 @@ void	check_args(int index,...)
 	va_end(valist);	
 }
 
-int	main(void)
+/*int	main(void)
 {
 	check_args(4, 1,2,3,4);
 	return (0);
-}
+}*/
