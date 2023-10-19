@@ -38,20 +38,24 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, s, ft_strlen(s));
 }
 
-char	*ft_strdup(const char *s)
+void	ft_puthex(int num, int mode)
 {
-	char	*str;
-	int		index;
+	char	c;
+	char	to_print;
+	char	*hex;
 
-	str = (char *)malloc(ft_strlen(s) * sizeof(char) + 1);
-	if (str == 0)
-		return (0);
-	index = 0;
-	while (s[index] != '\0')
+	c = num - '0';
+	if (mode == 1)
+		hex = "0123456789abcdef";
+	else if (mode == 2)
+		hex = "0123456789ABCDEF";
+	if (mode == 0)
 	{
-		str[index] = s[index];
-		index++;
+		to_print = hex[c / 16];
+		write(1, &to_print, 1);
+		to_print = hex[c % 16];
+		write(1, &to_print, 1);
 	}
-	str[index] = '\0';
-	return (str);
+	else if (mode == 1)
+		write(1, &c, 1);
 }

@@ -30,7 +30,7 @@ static int	count_args(char const *s)
 int	ft_printf(char const *args, ...)
 {
 	int		index;
-	int		result; //num returned by printf with the total len of the function
+	int		total_len; //num returned by printf with the total len of the function
 	int		start;
 	va_list	valist;
 
@@ -39,26 +39,34 @@ int	ft_printf(char const *args, ...)
 	va_start(valist, args);
 	while (args[index] != '\0')
 	{
+		if (args[index] != '%')
+			ft_putchar_fd(args[index], 1);
 		if (args[index] == '%')
 		{
-			ft_putstr_fd(ft_substr(args, start, (index - start)), 1);
-			start = index;
-			result += (index - start);
-
-			result++;
-			//if (args[index + 1] != '\0')
-			//	select_writer(args[index + 1], valist, &result);
+			if (args[index + 1] != '\0') // What if the % is at the end of the string?
+			{
+				select_writer(args[index + 1], valist, &total_len);
+				index++;
+			}
 		}
 		index++;
 	}
 	va_end(valist);
-	return (0);
+	return (total_len);
 }
 
 #include <stdio.h>
 int	main(void)
 {
-	ft_printf("Fake: -->%d", 5);
-	printf("Real: -->%d", 5);
+	//ft_printf("Fake: -->%d\n", 5);
+	//printf("Real: -->%d\n", 5);
+	char str[10]= "perro";
+
+	// ft_printf("Fake: -->%d | %s\n", 5, str);
+	// printf("Real: -->%d | %s\n", 5, str);
+
+	ft_printf("Fake: -->%x \n", 4779);
+	printf("Real: -->%x \n", 4779);
+	printf("|--------|");
 	return (0);
 }
