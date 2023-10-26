@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:04:02 by antcampo          #+#    #+#             */
-/*   Updated: 2023/10/26 12:39:06 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:17:15 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,19 @@ int	main(void)
 	//ft_printf("Fake: -->%d\n", 5);
 	//printf("Real: -->%d\n", 5);
 	char str[10]= "perro";
+	void *ptr = &str;
 
 	// ft_printf("Fake: -->%d | %s\n", 5, str);
 	// printf("Real: -->%d | %s\n", 5, str);
 
-	ft_printf("Fake: -->%X \n", 4779);
-	printf("Real: -->%X \n", 4779);
+	// ft_printf("Fake: -->%X \n", 4779);
+	// printf("Real: -->%X \n", 4779);
+
+	// ft_printf("Fake: -->%u \n", -10);
+	// printf("Real: -->%u \n", -10);
+
+	ft_printf("Fake: -->%p \n", ptr);
+	printf("Real: -->%p \n", ptr);
 	printf("|--------|");
 	return (0);
 }

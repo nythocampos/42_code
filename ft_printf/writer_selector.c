@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:09:10 by antcampo          #+#    #+#             */
-/*   Updated: 2023/10/26 12:17:45 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:14:54 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	select_writer(char type, va_list valist, int *len)
 		ft_putchar((char) va_arg(valist, int));
 	if (type == 's')
 		ft_putstr((char *) va_arg(valist, char *));
-	//if (type == 'p')
-	//	ft_putchar_fd((void *) va_arg(valist, void *), 1);
+	if (type == 'p')
+		ft_putptr((void *) va_arg(valist, void *));
 	if (type == 'd')
 		ft_putnbr((int) va_arg(valist, int));
 	if (type == 'i')
 		ft_putnbr((int) va_arg(valist, int));
 	if (type == 'u')
-		ft_putnbr((int) va_arg(valist, int));
+		ft_putunbr((unsigned int) va_arg(valist, unsigned int));
 	if (type == 'x')
 		ft_puthex((int) va_arg(valist, int), 1);
 	if (type == 'X')

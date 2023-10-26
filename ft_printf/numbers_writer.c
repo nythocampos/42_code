@@ -6,13 +6,13 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:47:32 by antcampo          #+#    #+#             */
-/*   Updated: 2023/10/26 12:35:27 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:16:30 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	count_nums(int num)
+int	count_nums(int num)
 {
 	int	count;
 
@@ -36,13 +36,24 @@ int	ft_putnbr(int n)
 	unsigned int	num;
 	int				num_size;
 
-	num = n;
-	num_size = count_nums(n);
+	num = (unsigned int) n;
+	num_size = count_nums(num);
 	if (n < 0)
 	{
 		ft_putchar('-');
 		num = -n;
 	}
+	if (num >= 10)
+		ft_putnbr(num / 10);
+	ft_putchar(num % 10 + '0');
+	return (num_size);
+}
+
+int	ft_putunbr(unsigned int num)
+{
+	int	num_size;
+
+	num_size = count_nums(num);
 	if (num >= 10)
 		ft_putnbr(num / 10);
 	ft_putchar(num % 10 + '0');
@@ -70,10 +81,8 @@ int	ft_puthex(int num, int mode)
 		index++;
 	}
 	to_write[index] = '\0';
-	while (index >= 0)
-	{
+	while (index-- >= 0)
 		ft_putchar(to_write[index]);
-		index--;
-	}
+	free(to_write);
 	return (num_size);
 }
