@@ -3,7 +3,8 @@ CC 		= cc
 LIB 	= ar rcs
 CFLAGS 	= -Wall -Wextra -Werror #-g3 -fsanitize=address
 INCLUDE = libftprintf.h
-SRCS 	= ft_printf.c ft_putstr_fd.c ft_strdup.c ft_strlen.c tools.c
+SRCS 	= ft_printf.c characters_writer.c numbers_writer.c pointers_writer.c \
+writers_selector.c
 
 OBJS = $(SRCS:.c=.o)
 

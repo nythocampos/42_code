@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 13:07:51 by antcampo          #+#    #+#             */
-/*   Updated: 2023/10/26 14:39:22 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:11:20 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	putptrhex(unsigned long int num)
 int	ft_putptr(void *ptr)
 {
 	int		result_size;
-	int		address;
 
 	result_size = 0;
 	result_size += ft_putstr("0x");
