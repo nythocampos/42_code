@@ -2,7 +2,7 @@ NAME 	= libftprintf.a
 CC 		= cc
 LIB 	= ar rcs
 CFLAGS 	= -Wall -Wextra -Werror #-g3 -fsanitize=address
-INCLUDE = libftprintf.h
+INCLUDE = ft_printf.h
 SRCS 	= ft_printf.c characters_writer.c numbers_writer.c pointers_writer.c \
 writers_selector.c
 

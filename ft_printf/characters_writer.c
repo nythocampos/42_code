@@ -6,11 +6,11 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:47:24 by antcampo          #+#    #+#             */
-/*   Updated: 2023/10/26 15:03:47 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:32:54 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putchar(char c)
 {

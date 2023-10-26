@@ -6,11 +6,11 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 13:07:51 by antcampo          #+#    #+#             */
-/*   Updated: 2023/10/26 15:11:20 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:32:57 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	putptrhex(unsigned long int num)
 {
