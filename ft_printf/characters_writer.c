@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   characters_writer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 15:36:27 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/23 19:13:48 by antcampo         ###   ########.fr       */
+/*   Created: 2023/10/26 11:47:24 by antcampo          #+#    #+#             */
+/*   Updated: 2023/10/26 12:25:16 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_putchar(char c)
 {
-	int	index;
+	write(1, &c, 1);
+	return (1);
+}
 
-	index = 0;
-	while (s[index] != '\0')
-		index++;
-	return (index);
+int	ft_putstr(char *s)
+{
+	if (s != 0)
+		write(1, s, ft_strlen(s));
+	return (ft_strlen(s));
 }

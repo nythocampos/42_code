@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:04:02 by antcampo          #+#    #+#             */
-/*   Updated: 2023/10/05 15:39:15 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/10/26 12:39:06 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_printf(char const *args, ...)
 	while (args[index] != '\0')
 	{
 		if (args[index] != '%')
-			ft_putchar_fd(args[index], 1);
+			ft_putchar(args[index]);
 		if (args[index] == '%')
 		{
 			if (args[index + 1] != '\0') // What if the % is at the end of the string?
@@ -65,8 +65,8 @@ int	main(void)
 	// ft_printf("Fake: -->%d | %s\n", 5, str);
 	// printf("Real: -->%d | %s\n", 5, str);
 
-	ft_printf("Fake: -->%x \n", 4779);
-	printf("Real: -->%x \n", 4779);
+	ft_printf("Fake: -->%X \n", 4779);
+	printf("Real: -->%X \n", 4779);
 	printf("|--------|");
 	return (0);
 }
