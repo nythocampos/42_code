@@ -14,8 +14,10 @@
 #endif
 #include "get_next_line.h"
 
+#include <stdio.h>
+
 /*
-	This function reads the buffer until reach a \n
+	This function reads the buffer until reach a \n 
 	then returns the new string
 
 	Args:
@@ -25,52 +27,65 @@
 */
 char	*read_line(char *buffer)
 {
-	char	*result;
 	int		index;
 	int		sec_index;
+	char	*line;
 
 	index = 0;
 	sec_index = 0;
-	while (buffer[index] != '\n')
+	while (buffer[index] != '\n') //! loop infinito 
 		index++;
-	result = (char *) malloc((sizeof(char) + 1) * index);
+	line = (char *) malloc(index * (sizeof(char) + 1));
+	if (line == 0)
+		return (NULL);
 	while (sec_index < index)
-	{
-		result[sec_index] = buffer[sec_index];
+	{ //! continue from last please if buffer cant covert all line
+		line[sec_index] = *buffer;
 		sec_index++;
+		buffer++;
 	}
-	result[sec_index] = '\0';
-	return (result);
-}
-
-char	read_file()
-{
-	char			*result;
-	size_t			bytes_read;
-	void			*buffer;
-
-	buffer = (char *) malloc(sizeof(char) * BUFFER_SIZE);
-	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	result = read_line(buffer);
-	free(buffer);
-	return (result);
+	line[sec_index] = '\0';
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static void		*last_pos;
+	static char	*buffer;
+	size_t		bytes_read;
+	char		*result;
+
+	//buffer = 0;
+	buffer = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == 0 || fd == -1)
+		return (NULL);
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	if (bytes_read <= 0)
+		return (NULL);
+	buffer[bytes_read + 1] = '\0';
+	//printf("%s", buffer);
+	result = read_line(buffer);
+	//free(buffer);
+	//buffer = 0;
+	return (result);
 }
 
 #include <fcntl.h>
-#include <stdio.h>
+
 int main(void)
 {
 	int		fd;
-	char 	*file_name;
+	char	*result;
 
-	file_name = "test";
-	fd = open(file_name, O_RDONLY);
+	fd = open("test_file", O_RDONLY);
 	//use a loop to test
 	printf("%s", get_next_line(fd));
+	while(result != NULL)
+	{
+		result = get_next_line(fd);
+		printf("%s", result);
+	}
+	close(fd);
 	return (0);
 }
+
+//terminar en nulo el \n
