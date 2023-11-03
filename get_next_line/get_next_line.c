@@ -18,12 +18,12 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
   char  *result;
 
   if (ft_strlen(s) < start)
-          return (ft_strdup(""));
-  if (len >= ft_strlen(s + start) || len < 0)
+          return (NULL);
+  if (len >= ft_strlen(s + start))
           len = (ft_strlen(s + start));
   result = (char *)malloc(sizeof(char) * (len + 1));
   if (!result)
-          return (0);
+    return (NULL);
   ft_memcpy(result, s + start, len);
   result[len] = '\0';
   return (result);
@@ -33,7 +33,7 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
 	This function reads the buffer until reach a \n 
 	then returns the new string
 */
-static char	*get_line_content(char *buffer, int *flag)
+static char	*get_line_content(char *buffer, int *last_nl)
 {
 	int		index;//re use this variable
 	int		sec_index;
@@ -46,14 +46,30 @@ static char	*get_line_content(char *buffer, int *flag)
 	line = (char *) malloc(index * (sizeof(char) + 1));
 	if (line == 0)
 		return (NULL);
-	while (buffer[sec_index] != '\n' && buffer[sec_index] != '\0')
+	while (sec_index < index)
 	{
 		line[sec_index] = buffer[sec_index];
 		sec_index++;
 	}
-  *flag = sec_index + 1;
+  if (buffer[index] == '\n')
+    line[index] = 'n';
+  *last_nl = sec_index + 1;
 	line[sec_index] = '\0';
 	return (line);
+}
+
+static char *update_buffer(int last_nl, char **buffer)
+{
+  char  *new_buf;
+
+  //printf("Buffer->%s\n",*buffer);
+  new_buf = ft_substr(*buffer, last_nl, ft_strlen(*buffer));
+  if (new_buf == NULL)
+    new_buf = ft_strdup(*buffer);
+  free(*buffer);
+  //printf("NewBuffer->%s\n", new_buf);
+  //printf("last_nl->%d\n", last_nl);
+  return (new_buf);
 }
 
 /*
@@ -64,57 +80,50 @@ static char	*get_line_content(char *buffer, int *flag)
  * lot by lot until be able to return the line completed
  *
  */
-static char	*update_buffer(int fd, char **buffer, int last_nl)
+static int	fill_buffer(int fd, char **buffer)
 {
-	size_t  bytes_read;
-  char    *temp;
-  char    *new_buf;
+	int   bytes_read;
+  char  *temp;
 
   bytes_read = 1;
-  if (!*buffer)
+  temp = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+  if (temp == 0)
+    return (-1);
+  while (!ft_strchr(*buffer, '\n') && bytes_read != 0)
   {
-    *buffer = (char *) malloc(1);
-    if (*buffer == 0)
-      return (NULL);
-    temp = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    if (temp == 0)
-      return (NULL);
-    while (bytes_read != 0)
+    bytes_read = read(fd, temp, BUFFER_SIZE);
+    if (bytes_read < 0)
     {
-      bytes_read = read(fd, temp, BUFFER_SIZE);
-      if (bytes_read < 0)
-      {
-        free(temp);
-        return (NULL);
-      }
-      temp[bytes_read] = '\0';//use dup for mod_strjoin?
-      *buffer = mod_strjoin(*buffer, temp);// what happent to the last *buffer
+      free(temp);
+      return (-1);
     }
-  }
+    temp[bytes_read] = '\0';//use dup for mod_strjoin?
+    *buffer = mod_strjoin(*buffer, temp);// what happent to the last *buffer
+    //printf("Buffer->%s\n",*buffer);
+  } 
   free(temp);
-  new_buf = ft_substr(*buffer, last_nl, ft_strlen(*buffer));
-  //new_buf = ft_strdup("line\nline2\n");
-  free(*buffer);
-  if (new_buf == 0)
-    return (NULL);
-	return (new_buf);
+	return (bytes_read);
 }
 
 char  *get_next_line(int fd)
 {
-  char        *new_buf;  
+  char        *new_buf;
+  char        *result;
 	static char	*buffer = 0;
   static int  last_nl = 0;
 
   if (fd < 0 || BUFFER_SIZE <= 0)
     return (NULL);
-  printf(" |-----|\n");
-  printf("Initial_Buffer-->%s\n",buffer);
-  printf("last_nl %d\n", last_nl);
-  new_buf = update_buffer(fd, &buffer, last_nl);
+  if (!buffer)
+  {
+    buffer = (char *) malloc(1);
+    if (buffer == 0)
+      return (NULL);
+  }
+  if (fill_buffer(fd, &buffer) <= 0)
+    return (NULL);
+  result = get_line_content(buffer, &last_nl);
+  new_buf = update_buffer(last_nl, &buffer);
   buffer = ft_strdup(new_buf);
-  printf("Result_Buffer->%s\n",buffer);
-  //free(buffer);
-  return (get_line_content(new_buf, &last_nl));
-  //return ("");
+  return (result);
 }

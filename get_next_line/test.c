@@ -9,14 +9,19 @@ int main(void)
 	char	*result;
 
 	fd = open("test_file", O_RDONLY);
+  //result = "";
 	//use a loop to test
-	printf("Result------>%s\n", get_next_line(fd));
-	printf("Result------>%s\n", get_next_line(fd));
+  
+	printf("1 Result------>%s\n", get_next_line(fd));
+	printf("2 Result------>%s\n", get_next_line(fd));
+	printf("3 Result------>%s\n", get_next_line(fd));
+	printf("4 Result------>%s\n", get_next_line(fd));
+	printf("5 Result------>%s\n", get_next_line(fd));
   return (0); 
 	while(result != NULL)
 	{
+		printf("Next_line-->%s\n", result);
 		result = get_next_line(fd);
-		printf("%s\n", result);
 	}
   free(result);
 	close(fd);

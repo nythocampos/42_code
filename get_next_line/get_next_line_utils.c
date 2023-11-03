@@ -1,5 +1,22 @@
 #include "get_next_line.h"
 
+char    *ft_strchr(const char *s, int c)
+{
+  char    to_find;
+
+  to_find = (char) c;
+  while (1)
+  {
+    if ((*s == to_find) || (*s == '\0' && to_find == '\0'))
+      return ((char *)s);
+    if (*s == '\0')
+      break ;
+    s++;
+  }
+  return ((char *) '\0');
+}
+
+
 char    *ft_strdup(const char *s)
 {
   char  *str;
@@ -16,22 +33,6 @@ char    *ft_strdup(const char *s)
   }
   str[index] = '\0';
   return (str);
-}
-
-
-void    ft_bzero(void *s, size_t n)
-{
-  int   index;
-  char  *a;
-
-  index = 0;
-  a = (char *) s;
-  while (n != 0)
-  {
-    a[index] = 0;
-    index++;
-    n--;
-  }
 }
 
 size_t  ft_strlen(const char *s)
@@ -74,9 +75,6 @@ char  *mod_strjoin(char const *s1, char const *s2)
   str_size = ft_strlen(s1) + ft_strlen(s2);
   str = (char *)malloc((str_size + 1) * sizeof(char));
   if (!str)
-    return (NULL);
-  ft_bzero(str, str_size);
-  if (str == 0)
     return (NULL);
   if (s1[0] != 0)
     ft_memcpy(str, (const char *)s1, ft_strlen(s1));
