@@ -10,12 +10,15 @@ int main(void)
 
 	fd = open("test_file", O_RDONLY);
 	//use a loop to test
-	//printf("%s", get_next_line(fd));
+	printf("Result------>%s\n", get_next_line(fd));
+	printf("Result------>%s\n", get_next_line(fd));
+  return (0); 
 	while(result != NULL)
 	{
 		result = get_next_line(fd);
 		printf("%s\n", result);
 	}
+  free(result);
 	close(fd);
 	return (0);
 }

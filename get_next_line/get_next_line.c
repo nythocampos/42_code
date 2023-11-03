@@ -15,36 +15,47 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
+char    *ft_substr(char const *s, unsigned int start, size_t len)
+{
+  char                    *result;
+
+  if (ft_strlen(s) < start)
+          return (ft_strdup(""));
+  if (len >= ft_strlen(s + start) || len < 0)
+          len = (ft_strlen(s + start));
+  result = (char *)malloc(sizeof(char) * (len + 1));
+  if (!result)
+          return (0);
+  ft_memcpy(result, s + start, len);
+  result[len] = '\0';
+  return (result);
+}
+
 /*
 	This function reads the buffer until reach a \n 
 	then returns the new string
-
-	Args:
-		buffer (char *): a pointer to the string
-	Return:
-		result (char *): the new pointer to the line readed
 */
-char	*get_line_content(char *buffer)
+static char	*get_line_content(char *buffer, int *flag)
 {
-	int		index;
+	int		index;//re use this variable
 	int		sec_index;
 	char	*line;
 
 	index = 0;
 	sec_index = 0;
-	while (buffer[index] != '\n' && buffer[index] != '\0') //! loop infini 
+	while (buffer[index] != '\n' && buffer[index] != '\0')
 		index++;
 	line = (char *) malloc(index * (sizeof(char) + 1));
 	if (line == 0)
 		return (NULL);
-	while (*buffer != '\n' && *buffer != '\0')
-	{ //! continue from last please if buffer cant covert all line
-		line[sec_index] = *buffer;
+	while (buffer[sec_index] != '\n' && buffer[sec_index] != '\0')
+	{
+		line[sec_index] = buffer[sec_index];
 		sec_index++;
-		buffer++;
+    if (buffer[sec_index] == '\n')
+      *flag = 1;
 	}
 	line[sec_index] = '\0';
-  printf("line: %s\n", line);
 	return (line);
 }
 
@@ -55,50 +66,54 @@ char	*get_line_content(char *buffer)
  * then it iterates opening the file and getting the data
  * lot by lot until be able to return the line completed
  *
- * Args:
- *  fd (int): the file directive of the file to open
- *
- * Return:
- *  total_line (char *): the line to get from the file
  */
-char	*find_line(int fd)
+static char	*find_line(int fd, char *buffer)
 {
-	static char	*buffer;
-	size_t		  bytes_read;
-	char		    *total_line;
+	size_t  bytes_read;
+	char	  *total_line;
+  char    *line;
+  int     flag;
 
-	//buffer = 0;
-	buffer = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (buffer == 0 || fd == -1)
-		return (NULL);
-  total_line = (char *) malloc(sizeof(char) + 1);
+  bytes_read = 1;
+  flag = 0;
+  total_line = (char *) malloc(1);
   if (total_line == 0)
     return (NULL);
-  total_line[sizeof(char) + 1] = '\0';
-  while (*buffer != '\n' && bytes_read != 0)
+  total_line[0] = 0;
+  while (flag == 0 && bytes_read != 0)
   {
-    bytes_read = read(fd, buffer, BUFFER_SIZE);
-    if (bytes_read < 0)
+    if (*buffer == '\0')
+      bytes_read = read(fd, buffer, BUFFER_SIZE);
+    if (bytes_read <= 0)
     {
-      free(buffer);
+      free(total_line);
       return (NULL);
     }
-    buffer[bytes_read + 1] = '\0';
-    printf("buff: %s\n",buffer);
-    total_line = ft_strjoin(total_line, get_line_content(buffer));
+    buffer[bytes_read] = '\0';
+    line = get_line_content(buffer, &flag);
+    total_line = mod_strjoin(total_line, line);
   }
-	free(buffer);
-	//buffer = 0;
+  free(line);
 	return (total_line);
 }
 
 char  *get_next_line(int fd)
 {
-  char  *result;
+  char  *result;  
+	static char	*buffer;
 
-  if (fd < -1 || BUFFER_SIZE <= 0)
+  //buffer = 0;
+  result = 0;
+  if (fd < 0 || BUFFER_SIZE <= 0)
     return (NULL);
-
-  result = find_line(fd);
+  if (!buffer)
+  	buffer = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == 0)
+		return (NULL);
+  printf("Initial_Buffer-->%s\n",buffer);
+  result = find_line(fd, buffer);
+  buffer = ft_substr(buffer, ft_strlen(result), ft_strlen(buffer));
+  printf("Result_Buffer->%s\n",buffer);
+  //free(buffer);
   return (result);
 }
