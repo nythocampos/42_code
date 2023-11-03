@@ -9,15 +9,13 @@
 /*   Updated: 2023/10/30 16:02:36 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
-#endif
+
 #include "get_next_line.h"
 #include <stdio.h>
 
 char    *ft_substr(char const *s, unsigned int start, size_t len)
 {
-  char                    *result;
+  char  *result;
 
   if (ft_strlen(s) < start)
           return (ft_strdup(""));
@@ -52,9 +50,8 @@ static char	*get_line_content(char *buffer, int *flag)
 	{
 		line[sec_index] = buffer[sec_index];
 		sec_index++;
-    if (buffer[sec_index] == '\n')
-      *flag = 1;
 	}
+  *flag = sec_index + 1;
 	line[sec_index] = '\0';
 	return (line);
 }
@@ -67,53 +64,57 @@ static char	*get_line_content(char *buffer, int *flag)
  * lot by lot until be able to return the line completed
  *
  */
-static char	*find_line(int fd, char *buffer)
+static char	*update_buffer(int fd, char **buffer, int last_nl)
 {
 	size_t  bytes_read;
-	char	  *total_line;
-  char    *line;
-  int     flag;
+  char    *temp;
+  char    *new_buf;
 
   bytes_read = 1;
-  flag = 0;
-  total_line = (char *) malloc(1);
-  if (total_line == 0)
-    return (NULL);
-  total_line[0] = 0;
-  while (flag == 0 && bytes_read != 0)
+  if (!*buffer)
   {
-    if (*buffer == '\0')
-      bytes_read = read(fd, buffer, BUFFER_SIZE);
-    if (bytes_read <= 0)
-    {
-      free(total_line);
+    *buffer = (char *) malloc(1);
+    if (*buffer == 0)
       return (NULL);
+    temp = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+    if (temp == 0)
+      return (NULL);
+    while (bytes_read != 0)
+    {
+      bytes_read = read(fd, temp, BUFFER_SIZE);
+      if (bytes_read < 0)
+      {
+        free(temp);
+        return (NULL);
+      }
+      temp[bytes_read] = '\0';//use dup for mod_strjoin?
+      *buffer = mod_strjoin(*buffer, temp);// what happent to the last *buffer
     }
-    buffer[bytes_read] = '\0';
-    line = get_line_content(buffer, &flag);
-    total_line = mod_strjoin(total_line, line);
   }
-  free(line);
-	return (total_line);
+  free(temp);
+  new_buf = ft_substr(*buffer, last_nl, ft_strlen(*buffer));
+  //new_buf = ft_strdup("line\nline2\n");
+  free(*buffer);
+  if (new_buf == 0)
+    return (NULL);
+	return (new_buf);
 }
 
 char  *get_next_line(int fd)
 {
-  char  *result;  
-	static char	*buffer;
+  char        *new_buf;  
+	static char	*buffer = 0;
+  static int  last_nl = 0;
 
-  //buffer = 0;
-  result = 0;
   if (fd < 0 || BUFFER_SIZE <= 0)
     return (NULL);
-  if (!buffer)
-  	buffer = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (buffer == 0)
-		return (NULL);
+  printf(" |-----|\n");
   printf("Initial_Buffer-->%s\n",buffer);
-  result = find_line(fd, buffer);
-  buffer = ft_substr(buffer, ft_strlen(result), ft_strlen(buffer));
+  printf("last_nl %d\n", last_nl);
+  new_buf = update_buffer(fd, &buffer, last_nl);
+  buffer = ft_strdup(new_buf);
   printf("Result_Buffer->%s\n",buffer);
   //free(buffer);
-  return (result);
+  return (get_line_content(new_buf, &last_nl));
+  //return ("");
 }

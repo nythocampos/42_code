@@ -82,5 +82,6 @@ char  *mod_strjoin(char const *s1, char const *s2)
     ft_memcpy(str, (const char *)s1, ft_strlen(s1));
   if (s2[0] != 0)
     ft_memcpy(&str[ft_strlen(s1)], (const char *)s2, ft_strlen(s2));
+  free((char *)(s1));
   return (str);
 }
