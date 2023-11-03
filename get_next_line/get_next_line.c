@@ -67,6 +67,7 @@ static char *update_buffer(int last_nl, char **buffer)
   if (new_buf == NULL)
     new_buf = ft_strdup(*buffer);
   free(*buffer);
+  //*buffer = 0;
   //printf("NewBuffer->%s\n", new_buf);
   //printf("last_nl->%d\n", last_nl);
   return (new_buf);
@@ -98,9 +99,12 @@ static int	fill_buffer(int fd, char **buffer)
       return (-1);
     }
     temp[bytes_read] = '\0';//use dup for mod_strjoin?
+    //printf("|-%d-|",bytes_read);
+    //printf("temp->%s<-",temp);
     *buffer = mod_strjoin(*buffer, temp);// what happent to the last *buffer
     //printf("Buffer->%s\n",*buffer);
   } 
+  //printf("Buff->%s\n",*buffer);
   free(temp);
 	return (bytes_read);
 }
