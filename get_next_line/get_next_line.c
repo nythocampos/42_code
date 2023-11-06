@@ -13,6 +13,8 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
+
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*result;
@@ -43,6 +45,8 @@ static char	*get_line_content(char *buffer, int *last_nl)
 	sec_index = 0;
 	while (buffer[index] != '\n' && buffer[index] != '\0')
 		index++;
+	if (buffer[index] == '\0')
+		index -= 1;
 	line = (char *) malloc(index * (sizeof(char) + 1));
 	if (line == 0)
 		return (NULL);
@@ -51,6 +55,10 @@ static char	*get_line_content(char *buffer, int *last_nl)
 		line[sec_index] = buffer[sec_index];
 		sec_index++;
 	}
+	// if (buffer[index] == '\0')
+	// 	line[index] = '\0';
+	// else
+	// 	line[index + 1] = '\0';
 	*last_nl = sec_index;
 	line[sec_index] = '\0';
 	return (line);
@@ -78,27 +86,31 @@ static char	*update_buffer(int last_nl, char **buffer)
  */
 static int	fill_buffer(int fd, char **buffer)
 {
-	static int		bytes_read = 1;
-	char			*temp;
+	int		bytes_read;
+	char	*temp;
 
+	bytes_read = 1;
 	temp = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (temp == 0)
 		return (0);
-	while (!ft_strchr(*buffer, '\n') && bytes_read != 0)
+	temp[0] = '\0';
+	//bytes_read = read(fd, temp, BUFFER_SIZE); // -------
+	while (bytes_read > 0 && !ft_strchr(*buffer, '\n'))
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
-		if (bytes_read < 0)
-		{
-			free(temp);
-			return (0);
-		}
+		if (bytes_read <= 0)
+			return(ft_free(&temp), 0);
 		temp[bytes_read] = '\0';
 		*buffer = mod_strjoin(*buffer, temp);
+		/*if (ft_strchr(*buffer, '\0'))
+			break ;*/
+		if (!(*buffer))
+			return(ft_free(&temp), 0);
+		//bytes_read = read(fd, temp, BUFFER_SIZE);
 	}
-	free(temp);
-	if (bytes_read == 0)
-		return (0);
-	return (1);
+	ft_free(&temp);
+	//temp = NULL;
+	return (bytes_read);
 }
 
 char	*get_next_line(int fd)
@@ -112,19 +124,19 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!buffer)
 	{
-		buffer = (char *) malloc(1);
+		buffer = (char *) malloc(2);
 		if (buffer == 0)
 			return (NULL);
 	}
-	if (fill_buffer(fd, &buffer) == 0)
+	if (fill_buffer(fd, &buffer) <= 0)
 	{
-		free(buffer);
+		ft_free(&buffer);
 		buffer = 0;
 		return (NULL);
 	}
 	result = get_line_content(buffer, &last_nl);
 	new_buf = update_buffer(last_nl, &buffer);
 	buffer = ft_strdup(new_buf);
-	free(new_buf);
+	ft_free(&new_buf);
 	return (result);
 }

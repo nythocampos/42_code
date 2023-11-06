@@ -8,7 +8,7 @@ int	main(void)
 	int		fd;
 	char	*result;
 
-	fd = open("./files/42_no_nl", O_RDONLY);
+	fd = open("./files/LUCILA.txt", O_RDONLY);
 	//fd = open("./files/multiple_line_with_nl", O_RDONLY);
 	//fd = open("./files/multiple_nlx5", O_RDONLY);
   	result = "";

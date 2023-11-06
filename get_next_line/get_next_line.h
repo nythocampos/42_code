@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1
 # endif
 
 # include <unistd.h>
@@ -27,5 +27,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);
+char	*ft_free(char **buffer);
 
 #endif

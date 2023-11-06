@@ -12,6 +12,13 @@
 
 #include "get_next_line.h"
 
+char	*ft_free(char **buffer)
+{
+	free(*buffer);
+	buffer = NULL;
+	return (NULL);
+}
+
 char	*ft_strchr(const char *s, int c)
 {
 	char	to_find;
