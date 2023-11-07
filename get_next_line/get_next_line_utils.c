@@ -19,20 +19,20 @@ char	*ft_free(char **buffer)
 	return (NULL);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	mod_strchr(char *s, char c)
 {
-	char	to_find;
+	int	index;
 
-	to_find = (char) c;
-	while (1)
+	index = 0;
+	if (s == 0)
+		return (-1);
+	while (s[index] != '\0')
 	{
-		if ((*s == to_find) || (*s == '\0' && to_find == '\0'))
-			return ((char *)s);
-		if (*s == '\0')
-			break ;
-		s++;
+		if (s[index] == c)
+			return (1);
+		index++;
 	}
-	return ((char *) '\0');
+	return (0);
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
@@ -85,22 +85,24 @@ size_t	ft_strlen(const char *s)
 
 char	*mod_strjoin(char const *s1, char const *s2)
 {
-	size_t	str_size;
 	char	*str;
 	int		index;
+	int 	len1;
+	int 	len2;
 
 	if (s2 == 0)
 		return (NULL);
 	index = -1;
-	str_size = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)malloc((str_size + 1) * sizeof(char));
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	while (index++ < (int) ft_strlen(s1))
+	while (index++ < len1)
 		str[index] = s1[index];
 	index = -1;
-	while (index++ < (int) ft_strlen(s2))
-		str[ft_strlen(s1) + index] = s2[index];
+	while (index++ < len2)
+		str[len1 + index] = s2[index];
 	free((char *)(s1));
 	return (str);
 }

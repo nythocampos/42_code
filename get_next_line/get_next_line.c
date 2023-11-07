@@ -13,8 +13,6 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*result;
@@ -45,19 +43,16 @@ static char	*get_line_content(char *buffer, int *last_nl)
 	sec_index = 0;
 	while (buffer[index] != '\n' && buffer[index] != '\0')
 		index++;
-	if (buffer[index] == '\0')
-		index -= 1;
-	line = (char *) malloc(index * (sizeof(char) + 1));
+	if (buffer[index] == '\n')
+		index += 1;
+	line = (char *) malloc((index + 1)* sizeof(char));
 	if (line == 0)
 		return (NULL);
-	while (sec_index <= index)
+	while (sec_index < index)
 	{
 		line[sec_index] = buffer[sec_index];
 		sec_index++;
 	}
-	// if (buffer[index] == '\0')
-	// 	line[index] = '\0';
-	// else
 	// 	line[index + 1] = '\0';
 	*last_nl = sec_index;
 	line[sec_index] = '\0';
@@ -92,24 +87,19 @@ static int	fill_buffer(int fd, char **buffer)
 	bytes_read = 1;
 	temp = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (temp == 0)
-		return (0);
+		return (-1);
+	//temp[0] = '\0';
+	//bytes_read = read(fd, temp, BUFFER_SIZE); // -------.
 	temp[0] = '\0';
-	//bytes_read = read(fd, temp, BUFFER_SIZE); // -------
-	while (bytes_read > 0 && !ft_strchr(*buffer, '\n'))
+	while (bytes_read > 0 && mod_strchr(temp, '\n') == 0)
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
-		if (bytes_read <= 0)
-			return(ft_free(&temp), 0);
+		if (bytes_read == -1)
+			return (ft_free(&temp), -1);
 		temp[bytes_read] = '\0';
 		*buffer = mod_strjoin(*buffer, temp);
-		/*if (ft_strchr(*buffer, '\0'))
-			break ;*/
-		if (!(*buffer))
-			return(ft_free(&temp), 0);
-		//bytes_read = read(fd, temp, BUFFER_SIZE);
 	}
 	ft_free(&temp);
-	//temp = NULL;
 	return (bytes_read);
 }
 
@@ -124,17 +114,24 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!buffer)
 	{
-		buffer = (char *) malloc(2);
+		buffer = (char *) malloc(1);
 		if (buffer == 0)
 			return (NULL);
+		buffer[0] = '\0';
 	}
-	if (fill_buffer(fd, &buffer) <= 0)
+	if (fill_buffer(fd, &buffer) == -1 || buffer[0] == '\0')
 	{
 		ft_free(&buffer);
 		buffer = 0;
 		return (NULL);
 	}
 	result = get_line_content(buffer, &last_nl);
+	if(!result)
+	{
+		ft_free(&buffer);
+		buffer = 0;
+		return (NULL);
+	}
 	new_buf = update_buffer(last_nl, &buffer);
 	buffer = ft_strdup(new_buf);
 	ft_free(&new_buf);

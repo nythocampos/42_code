@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include "get_next_line.h"
 #include <fcntl.h>
@@ -8,8 +7,8 @@ int	main(void)
 	int		fd;
 	char	*result;
 
-	fd = open("./files/LUCILA.txt", O_RDONLY);
-	//fd = open("./files/multiple_line_with_nl", O_RDONLY);
+	//fd = open("./files/LUCILA", O_RDONLY);
+	fd = open("./files/multiple_line_with_nl", O_RDONLY);
 	//fd = open("./files/multiple_nlx5", O_RDONLY);
   	result = "";
 	//use a loop to test
@@ -20,6 +19,7 @@ int	main(void)
 	printf("4 Result------>%s\n", get_next_line(fd));
 	printf("5 Result------>%s\n", get_next_line(fd));
   	return (0);*/
+	printf("search->%d\n", mod_strchr("ppupp", 'u'));
 	while (result != NULL)
 	{
 		result = get_next_line(fd);
