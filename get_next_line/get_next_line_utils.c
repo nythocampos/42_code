@@ -35,32 +35,12 @@ int	mod_strchr(char *s, char c)
 	return (0);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	int		index;
-	char	*a;
-
-	index = 0;
-	a = (char *) dst;
-	if (dst == (void *) '\0' && src == (void *) '\0')
-		return (dst);
-	while (n != 0)
-	{
-		a[index] = *(char *)src;
-		n--;
-		index++;
-		src++;
-	}
-	dst = a;
-	return (dst);
-}
-
 char	*ft_strdup(const char *s)
 {
 	char	*str;
 	int		index;
 
-	str = (char *)malloc(ft_strlen(s) * sizeof(char) + 1);
+	str = (char *)malloc((ft_strlen(s)+ 1) * sizeof(char));
 	if (str == 0)
 		return (0);
 	index = 0;
@@ -83,12 +63,12 @@ size_t	ft_strlen(const char *s)
 	return (index);
 }
 
-char	*mod_strjoin(char const *s1, char const *s2)
+char	*mod_strjoin(char *s1, char const *s2)
 {
 	char	*str;
 	int		index;
-	int 	len1;
-	int 	len2;
+	int		len1;
+	int		len2;
 
 	if (s2 == 0)
 		return (NULL);
@@ -97,12 +77,13 @@ char	*mod_strjoin(char const *s1, char const *s2)
 	len2 = ft_strlen(s2);
 	str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
 	if (!str)
-		return (NULL);
+		return (ft_free(&s1));
 	while (index++ < len1)
 		str[index] = s1[index];
 	index = -1;
 	while (index++ < len2)
 		str[len1 + index] = s2[index];
-	free((char *)(s1));
+	str[len1 + index - 1] = '\0';
+	ft_free(&s1);
 	return (str);
 }

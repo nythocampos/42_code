@@ -17,15 +17,12 @@
 #  define BUFFER_SIZE 1
 # endif
 
-//typedef struct 
-
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
 
 char	*get_next_line(int fd);
-char	*mod_strjoin(char const *s1, char const *s2);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+char	*mod_strjoin(char *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 int		mod_strchr(char *s, char c);

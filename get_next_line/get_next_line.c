@@ -16,16 +16,26 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*result;
+	int		index;
+	size_t	s_size;
+	size_t	sup_s_size;
 
-	if (ft_strlen(s) < start)
+	index = 0;
+	s_size = ft_strlen(s);
+	sup_s_size = ft_strlen(s + start);
+	if (s_size < start)
 		return (NULL);
-	if (len >= ft_strlen(s + start))
-		len = (ft_strlen(s + start));
+	if (len >= sup_s_size)
+		len = sup_s_size;
 	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (!result)
 		return (NULL);
-	ft_memcpy(result, s + start, len);
-	result[len] = '\0';
+	while (index < (int) len)
+	{
+		result[index] = s[index + start];
+		index++;
+	}
+	result[index] = '\0';
 	return (result);
 }
 
@@ -45,7 +55,7 @@ static char	*get_line_content(char *buffer, int *last_nl)
 		index++;
 	if (buffer[index] == '\n')
 		index += 1;
-	line = (char *) malloc((index + 1)* sizeof(char));
+	line = (char *) malloc((index + 1) * sizeof(char));
 	if (line == 0)
 		return (NULL);
 	while (sec_index < index)
@@ -53,7 +63,6 @@ static char	*get_line_content(char *buffer, int *last_nl)
 		line[sec_index] = buffer[sec_index];
 		sec_index++;
 	}
-	// 	line[index + 1] = '\0';
 	*last_nl = sec_index;
 	line[sec_index] = '\0';
 	return (line);
@@ -67,17 +76,17 @@ static char	*update_buffer(int last_nl, char **buffer)
 	if (new_buf == NULL)
 		new_buf = ft_strdup(*buffer);
 	free(*buffer);
-	*buffer = 0;
+	*buffer = NULL;
 	return (new_buf);
 }
 
 /*
- * This Function get a line from a file
- *
- * If the BUFFER_SIZE is not enough to read the entier line
- * then it iterates opening the file and getting the data
- * lot by lot until be able to return the line completed
- *
+	This Function get a line from a file
+
+ If the BUFFER_SIZE is not enough to read the entier line
+ then it iterates opening the file and getting the data
+ lot by lot until be able to return the line completed
+
  */
 static int	fill_buffer(int fd, char **buffer)
 {
@@ -85,11 +94,9 @@ static int	fill_buffer(int fd, char **buffer)
 	char	*temp;
 
 	bytes_read = 1;
-	temp = (char *) malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	temp = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (temp == 0)
 		return (-1);
-	//temp[0] = '\0';
-	//bytes_read = read(fd, temp, BUFFER_SIZE); // -------.
 	temp[0] = '\0';
 	while (bytes_read > 0 && mod_strchr(temp, '\n') == 0)
 	{
@@ -98,6 +105,8 @@ static int	fill_buffer(int fd, char **buffer)
 			return (ft_free(&temp), -1);
 		temp[bytes_read] = '\0';
 		*buffer = mod_strjoin(*buffer, temp);
+		if (!*buffer)
+			return (-2);
 	}
 	ft_free(&temp);
 	return (bytes_read);
@@ -109,6 +118,7 @@ char	*get_next_line(int fd)
 	char		*result;
 	static char	*buffer = 0;
 	static int	last_nl = 0;
+	int			res;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -119,19 +129,12 @@ char	*get_next_line(int fd)
 			return (NULL);
 		buffer[0] = '\0';
 	}
-	if (fill_buffer(fd, &buffer) == -1 || buffer[0] == '\0')
-	{
-		ft_free(&buffer);
-		buffer = 0;
+	res = fill_buffer(fd, &buffer);
+	if (res == -1 || buffer[0] == '\0')
+		return (ft_free(&buffer));
+	else if (res == -2 || !buffer)
 		return (NULL);
-	}
 	result = get_line_content(buffer, &last_nl);
-	if(!result)
-	{
-		ft_free(&buffer);
-		buffer = 0;
-		return (NULL);
-	}
 	new_buf = update_buffer(last_nl, &buffer);
 	buffer = ft_strdup(new_buf);
 	ft_free(&new_buf);
