@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -68,15 +67,17 @@ static char	*get_line_content(char *buffer, int *last_nl)
 	return (line);
 }
 
-static char	*update_buffer(int last_nl, char **buffer)
+static char	*update_buffer(int last_nl, char *buffer)
 {
 	char	*new_buf;
 
-	new_buf = ft_substr(*buffer, last_nl, ft_strlen(*buffer));
+	new_buf = ft_substr(buffer, last_nl, ft_strlen(buffer));
 	if (new_buf == NULL)
-		new_buf = ft_strdup(*buffer);
-	free(*buffer);
-	*buffer = NULL;
+	{
+		free(buffer);
+		return (NULL);
+	}
+	free(buffer);
 	return (new_buf);
 }
 
@@ -105,8 +106,11 @@ static int	fill_buffer(int fd, char **buffer)
 			return (ft_free(&temp), -1);
 		temp[bytes_read] = '\0';
 		*buffer = mod_strjoin(*buffer, temp);
-		if (!*buffer)
-			return (-2);
+		if (*buffer == NULL)
+		{
+			free(temp);
+			return (-1);
+		}
 	}
 	ft_free(&temp);
 	return (bytes_read);
@@ -114,12 +118,12 @@ static int	fill_buffer(int fd, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	char		*new_buf;
 	char		*result;
 	static char	*buffer = 0;
-	static int	last_nl = 0;
+	int			last_nl;
 	int			res;
 
+	res = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buffer)
@@ -132,11 +136,9 @@ char	*get_next_line(int fd)
 	res = fill_buffer(fd, &buffer);
 	if (res == -1 || buffer[0] == '\0')
 		return (ft_free(&buffer));
-	else if (res == -2 || !buffer)
-		return (NULL);
 	result = get_line_content(buffer, &last_nl);
-	new_buf = update_buffer(last_nl, &buffer);
-	buffer = ft_strdup(new_buf);
-	ft_free(&new_buf);
+	if (!result)
+		return (ft_free(&buffer));
+	buffer = update_buffer(last_nl, buffer);
 	return (result);
 }

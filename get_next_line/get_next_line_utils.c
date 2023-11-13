@@ -15,8 +15,18 @@
 char	*ft_free(char **buffer)
 {
 	free(*buffer);
-	buffer = NULL;
+	*buffer = NULL;
 	return (NULL);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	index;
+
+	index = 0;
+	while (s[index] != '\0')
+		index++;
+	return (index);
 }
 
 int	mod_strchr(char *s, char c)
@@ -53,16 +63,6 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	int	index;
-
-	index = 0;
-	while (s[index] != '\0')
-		index++;
-	return (index);
-}
-
 char	*mod_strjoin(char *s1, char const *s2)
 {
 	char	*str;
@@ -72,12 +72,12 @@ char	*mod_strjoin(char *s1, char const *s2)
 
 	if (s2 == 0)
 		return (NULL);
-	index = -1;
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	str = (char *)malloc((len1 + len2 + 1) * sizeof(char));
-	if (!str)
+	str = (char *) malloc((len1 + len2) + 1 * sizeof(char));
+	if (str == 0)
 		return (ft_free(&s1));
+	index = -1;
 	while (index++ < len1)
 		str[index] = s1[index];
 	index = -1;
