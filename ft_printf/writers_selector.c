@@ -22,24 +22,46 @@ size_t	ft_strlen(const char *s)
 	return (index);
 }
 
-void	select_writer(char type, va_list valist, int *len)
+int	ft_putchar(char c, int *total_len)
 {
+	if (c == '\0')
+		return (-1);
+	write(1, &c, 1);
+	*total_len += 1;
+	return (1);
+}
+
+int	ft_putstr(char *s, int *total_len)
+{
+	int	s_size;
+
+	if (!s)
+		return (-1);
+	write(1, s, s_size);
+	*total_len += s_size;
+	return (1);
+}
+
+int	select_writer(char type, va_list valist, int *len)
+{
+	int	result;
+
+	result = 0;
 	if (type == 'c')
-		*len = ft_putchar((char) va_arg(valist, int));
+		result = ft_putchar((char) va_arg(valist, int), len);
 	if (type == 's')
-		*len = ft_putstr((char *) va_arg(valist, char *));
+		result = ft_putstr((char *) va_arg(valist, char *), len);
 	if (type == 'p')
-		*len = ft_putptr((void *) va_arg(valist, void *));
-	if (type == 'd')
-		*len = ft_putnbr((int) va_arg(valist, int));
-	if (type == 'i')
-		*len = ft_putnbr((int) va_arg(valist, int));
+		result = ft_putptr((void *) va_arg(valist, void *), len);
+	if (type == 'd' || type == 'i')
+		result = ft_putnbr((int) va_arg(valist, int), len);
 	if (type == 'u')
-		*len = ft_putunbr((unsigned int) va_arg(valist, unsigned int));
+		result = ft_putunbr((unsigned int) va_arg(valist, unsigned int), len);
 	if (type == 'x')
-		*len = ft_puthex((int) va_arg(valist, int), 1);
+		result = ft_puthex((int) va_arg(valist, int), "0123456789abcdef", len);
 	if (type == 'X')
-		*len = ft_puthex((int) va_arg(valist, int), 2);
+		result = ft_puthex((int) va_arg(valist, int), "0123456789ABCDEF", len);
 	if (type == '%')
-		*len = ft_putchar('%');
+		result = ft_putchar('%', len);
+	return (result);
 }

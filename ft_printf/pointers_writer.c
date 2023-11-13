@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	putptrhex(unsigned long int num)
+static int	putptrhex(unsigned long int num, int *len)
 {
 	char	*to_write;
 	char	*hex;
@@ -20,9 +20,9 @@ static int	putptrhex(unsigned long int num)
 	int		index;
 
 	hex = "0123456789abcdef";
-	index = 0;
+	index = 1;
 	num_size = count_nums(num);
-	to_write = (char *) malloc((sizeof(char) + 1) * num_size);
+	to_write = (char *) malloc(num_size * (sizeof(char) + 1));
 	while (num != 0)
 	{
 		to_write[index] = hex[num % 16];
@@ -31,17 +31,17 @@ static int	putptrhex(unsigned long int num)
 	}
 	to_write[index] = '\0';
 	while (index-- >= 0)
-		ft_putchar(to_write[index]);
+		ft_putchar(to_write[index], len);
 	free(to_write);
 	return (num_size);
 }
 
-int	ft_putptr(void *ptr)
+int	ft_putptr(void *ptr, int *len)
 {
 	int		result_size;
 
 	result_size = 0;
-	result_size += ft_putstr("0x");
-	result_size += putptrhex((unsigned long int) ptr);
+	result_size += ft_putstr("0x", len);
+	result_size += putptrhex((unsigned long int) ptr, len);
 	return (result_size + 2);
 }

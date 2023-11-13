@@ -1,0 +1,9 @@
+*.swp
+_test
+**/*files
+**/*_test.dSYM
+*.dSYM
+_test
+*.swp
+*.DS_Store
+

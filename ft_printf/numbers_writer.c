@@ -31,49 +31,41 @@ int	count_nums(int num)
 	return (count);
 }
 
-int	ft_putnbr(int n)
+int	ft_putnbr(int n, int *len)
 {
 	unsigned int	num;
-	int				num_size;
 
 	num = (unsigned int) n;
-	num_size = count_nums(num);
 	if (n < 0)
 	{
-		ft_putchar('-');
+		ft_putchar('-', len);
 		num = -n;
 	}
 	if (num >= 10)
-		ft_putnbr(num / 10);
-	ft_putchar(num % 10 + '0');
-	return (num_size);
+		ft_putnbr(num / 10, len);
+	ft_putchar(num % 10 + '0', len);
+	return (1);
 }
 
-int	ft_putunbr(unsigned int num)
+int	ft_putunbr(unsigned int num, int *len)
 {
-	int	num_size;
-
-	num_size = count_nums(num);
 	if (num >= 10)
-		ft_putnbr(num / 10);
-	ft_putchar(num % 10 + '0');
-	return (num_size);
+		ft_putnbr(num / 10, len);
+	ft_putchar(num % 10 + '0', len);
+	return (-1);
 }
 
-int	ft_puthex(int num, int mode)
+int	ft_puthex(int num, char *hex, int *len)
 {
 	char	*to_write;
-	char	*hex;
 	char	num_size;
 	int		index;
 
-	if (mode == 1)
-		hex = "0123456789abcdef";
-	else if (mode == 2)
-		hex = "0123456789ABCDEF";
 	index = 0;
 	num_size = count_nums(num);
-	to_write = (char *) malloc((sizeof(char) + 1) * num_size);
+	to_write = (char *) malloc((num_size + 1) * (sizeof(char)));
+	if (!to_write || !hex)
+		return (-1);
 	while (num != 0)
 	{
 		to_write[index] = hex[num % 16];
@@ -81,8 +73,9 @@ int	ft_puthex(int num, int mode)
 		index++;
 	}
 	to_write[index] = '\0';
+	//index += 1;
 	while (index-- >= 0)
-		ft_putchar(to_write[index]);
+		ft_putchar(to_write[index], len);
 	free(to_write);
-	return (num_size);
+	return (1);
 }

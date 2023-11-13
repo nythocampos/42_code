@@ -19,17 +19,17 @@
 # include <unistd.h>
 
 int		ft_printf(char const *args, ...);
-void	select_writer(char type, va_list valist, int *len);
+int		select_writer(char type, va_list valist, int *len);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		count_nums(int num);
 
-int		ft_putchar(char c);
-int		ft_putstr(char *s);
-int		ft_putnbr(int n);
-int		ft_putunbr(unsigned int n);
-int		ft_puthex(int num, int mode);
-int		ft_putptr(void *ptr);
+int		ft_putchar(char c, int *total_len);
+int		ft_putstr(char *s, int *total_len);
+int		ft_putnbr(int n, int *total_len);
+int		ft_putunbr(unsigned int n, int *total_len);
+int		ft_puthex(int num, char *hex, int *total_len);
+int		ft_putptr(void *ptr, int *total_len);
 
 #endif
