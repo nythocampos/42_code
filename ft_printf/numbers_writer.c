@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:47:32 by antcampo          #+#    #+#             */
-/*   Updated: 2023/10/26 15:33:06 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/14 09:19:54 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,30 @@ int	ft_putnbr(int n, int *len)
 	}
 	if (num >= 10)
 		ft_putnbr(num / 10, len);
-	ft_putchar(num % 10 + '0', len);
+	if (ft_putchar(num % 10 + '0', len) == -1)
+		return (-1);
 	return (1);
 }
 
 int	ft_putunbr(unsigned int num, int *len)
 {
 	if (num >= 10)
-		ft_putnbr(num / 10, len);
-	ft_putchar(num % 10 + '0', len);
-	return (-1);
-}
+		ft_putnbr((num / 10), len);
+	if (ft_putchar((num % 10 + '0'), len) == -1)
+		return (-1);
+	return (1);
+} 
 
-int	ft_puthex(int num, char *hex, int *len)
+int	ft_puthex(long long num, char *hex, int *len)
 {
 	char	*to_write;
-	char	num_size;
 	int		index;
 
 	index = 0;
-	num_size = count_nums(num);
-	to_write = (char *) malloc((num_size + 1) * (sizeof(char)));
-	if (!to_write || !hex)
+	if (num == 0)
+		return (ft_putchar('0', len), 1);
+	to_write = (char *) malloc((count_nums(num) + 1) * (sizeof(char)));
+	if (!to_write)
 		return (-1);
 	while (num != 0)
 	{
@@ -73,9 +75,11 @@ int	ft_puthex(int num, char *hex, int *len)
 		index++;
 	}
 	to_write[index] = '\0';
-	//index += 1;
-	while (index-- >= 0)
-		ft_putchar(to_write[index], len);
+	while (index-- > 0)
+	{
+		if (ft_putchar(to_write[index], len) == -1)
+			return (free(to_write), -1);
+	}
 	free(to_write);
 	return (1);
 }
