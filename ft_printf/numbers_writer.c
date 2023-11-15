@@ -6,19 +6,17 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:47:32 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 11:39:25 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:46:02 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	count_nums(long long num)
+static int	count_nums(unsigned long long num)
 {
 	int	count;
 
 	count = 0;
-	if (num == -2147483648)
-		return (10);
 	if (num == 0)
 		return (1);
 	if (num < 0)

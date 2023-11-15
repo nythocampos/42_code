@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:09:10 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/14 11:51:53 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:41:38 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ void	select_writer(char type, va_list valist, int *len)
 	else if (type == 'u')
 		ft_putunbr(va_arg(valist, unsigned int), len);
 	else if (type == 'x')
-		result = ft_puthex(va_arg(valist, unsigned int), "0123456789abcdef", len);
+		result = ft_puthex(va_arg(valist, unsigned int),
+				"0123456789abcdef", len);
 	else if (type == 'X')
-		result = ft_puthex(va_arg(valist, unsigned int), "0123456789ABCDEF", len);
+		result = ft_puthex(va_arg(valist, unsigned int),
+				"0123456789ABCDEF", len);
 	else if (type == '%')
 		result = ft_putchar('%', len);
 	else

@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:04:02 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 11:37:38 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:43:09 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ int	ft_printf(char const *args, ...)
 {
 	int		index;
 	int		total_len;
-	int		args_num;
 	va_list	valist;
 
 	index = 0;
-	args_num = 0;
 	total_len = 0;
 	va_start(valist, args);
 	while (args[index] != '\0')
@@ -35,7 +33,6 @@ int	ft_printf(char const *args, ...)
 			if (total_len == -1)
 				return (-1);
 			index++;
-			args_num++;
 		}
 		index++;
 	}
