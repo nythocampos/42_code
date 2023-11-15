@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:47:32 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 11:46:02 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:48:37 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,5 @@ int	ft_puthex(unsigned long long num, char *hex, int *len)
 		if (ft_putchar(to_write[index], len) == -1)
 			return (free(to_write), -1);
 	}
-	free(to_write);
-	return (1);
+	return (free(to_write), 1);
 }

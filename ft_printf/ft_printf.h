@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:06:48 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 11:37:17 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:50:53 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@
 
 int		ft_printf(char const *args, ...);
 void	select_writer(char type, va_list valist, int *len);
-char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 int		ft_putchar(char c, int *total_len);
 int		ft_putstr(char *s, int *total_len);

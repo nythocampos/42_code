@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:09:10 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 11:41:38 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:47:31 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,18 @@ int	ft_putstr(char *s, int *total_len)
 
 	if (!s)
 	{
-		write(1, "(null)", 6);
-		*total_len += 6;
+		if (write(1, "(null)", 6) == -1)
+			*total_len = -1;
+		else
+			*total_len += 6;
 		return (1);
 	}
 	s_size = ft_strlen(s);
 	if (write(1, s, s_size) == -1)
+	{
+		*total_len = -1;
 		return (-1);
+	}
 	*total_len += s_size;
 	return (1);
 }
@@ -56,15 +61,15 @@ void	select_writer(char type, va_list valist, int *len)
 
 	result = 0;
 	if (type == 'c')
-		ft_putchar(va_arg(valist, int), len);
+		result = ft_putchar(va_arg(valist, int), len);
 	else if (type == 's')
-		ft_putstr(va_arg(valist, char *), len);
+		result = ft_putstr(va_arg(valist, char *), len);
 	else if (type == 'p')
 		result = ft_putptr(va_arg(valist, unsigned long long), len);
 	else if (type == 'd' || type == 'i')
-		ft_putnbr(va_arg(valist, int), len);
+		result = ft_putnbr(va_arg(valist, int), len);
 	else if (type == 'u')
-		ft_putunbr(va_arg(valist, unsigned int), len);
+		result = ft_putunbr(va_arg(valist, unsigned int), len);
 	else if (type == 'x')
 		result = ft_puthex(va_arg(valist, unsigned int),
 				"0123456789abcdef", len);

@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:04:02 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 11:43:09 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:47:34 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	ft_printf(char const *args, ...)
 			if (args[index + 1] == '\0')
 				return (0);
 			select_writer(args[index + 1], valist, &total_len);
-			if (total_len == -1)
-				return (-1);
 			index++;
 		}
+		if (total_len == -1)
+			return (-1);
 		index++;
 	}
 	va_end(valist);
