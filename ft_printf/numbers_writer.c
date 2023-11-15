@@ -6,13 +6,13 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:47:32 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/14 09:19:54 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:37:06 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	count_nums(int num)
+static int	count_nums(long long num)
 {
 	int	count;
 
@@ -57,7 +57,7 @@ int	ft_putunbr(unsigned int num, int *len)
 	return (1);
 }
 
-int	ft_puthex(long long num, char *hex, int *len)
+int	ft_puthex(unsigned long long num, char *hex, int *len)
 {
 	char	*to_write;
 	int		index;
@@ -70,7 +70,8 @@ int	ft_puthex(long long num, char *hex, int *len)
 		return (-1);
 	while (num != 0)
 	{
-		to_write[index] = hex[num % 16];
+		// global-buffer-overflow (void *)-14523 format=pointer
+		to_write[index] = hex[num % 16]; // heap-buffer-overflow on address 
 		num = num / 16;
 		index++;
 	}
