@@ -21,6 +21,7 @@ int	ft_printf(char const *args, ...)
 
 	index = 0;
 	args_num = 0;
+	total_len = 0;
 	va_start(valist, args);
 	while (args[index] != '\0')
 	{
@@ -42,7 +43,7 @@ int	ft_printf(char const *args, ...)
 	return (total_len);
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 int	main(void)
 {
 	//ft_printf("Fake: -->%d\n", 5);
@@ -71,4 +72,4 @@ int	main(void)
 	printf("Real: -->%p \n", ptr);
 	printf("|--------|\n");
 	return (0);
-}
+}*/

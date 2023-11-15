@@ -55,7 +55,7 @@ int	ft_putunbr(unsigned int num, int *len)
 	if (ft_putchar((num % 10 + '0'), len) == -1)
 		return (-1);
 	return (1);
-} 
+}
 
 int	ft_puthex(long long num, char *hex, int *len)
 {

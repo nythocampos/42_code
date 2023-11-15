@@ -56,15 +56,15 @@ void	select_writer(char type, va_list valist, int *len)
 
 	result = 0;
 	if (type == 'c')
-		result = ft_putchar(va_arg(valist, int), len);
+		ft_putchar(va_arg(valist, int), len);
 	else if (type == 's')
-		result = ft_putstr(va_arg(valist, char *), len);
+		ft_putstr(va_arg(valist, char *), len);
 	else if (type == 'p')
-		result = ft_putptr(va_arg(valist, void *), len);
+		result = ft_putptr(va_arg(valist, unsigned long long), len);
 	else if (type == 'd' || type == 'i')
-		result = ft_putnbr(va_arg(valist, int), len);
+		ft_putnbr(va_arg(valist, int), len);
 	else if (type == 'u')
-		result = ft_putunbr(va_arg(valist, unsigned int), len);
+		ft_putunbr(va_arg(valist, unsigned int), len);
 	else if (type == 'x')
 		result = ft_puthex(va_arg(valist, unsigned int), "0123456789abcdef", len);
 	else if (type == 'X')
@@ -72,5 +72,7 @@ void	select_writer(char type, va_list valist, int *len)
 	else if (type == '%')
 		result = ft_putchar('%', len);
 	else
+		*len = -1;
+	if (result == -1)
 		*len = -1;
 }
