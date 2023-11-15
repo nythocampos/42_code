@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:47:32 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 11:37:06 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:39:25 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	ft_puthex(unsigned long long num, char *hex, int *len)
 		return (-1);
 	while (num != 0)
 	{
-		// global-buffer-overflow (void *)-14523 format=pointer
-		to_write[index] = hex[num % 16]; // heap-buffer-overflow on address 
+		to_write[index] = hex[num % 16];
 		num = num / 16;
 		index++;
 	}
