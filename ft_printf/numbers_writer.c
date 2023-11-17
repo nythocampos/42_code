@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:47:32 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 12:48:37 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/17 08:09:23 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	count_nums(unsigned long long num)
 	return (count);
 }
 
-int	ft_putnbr(int n, int *len)
+void	ft_putnbr(int n, int *len)
 {
 	unsigned int	num;
 
@@ -41,31 +41,43 @@ int	ft_putnbr(int n, int *len)
 	}
 	if (num >= 10)
 		ft_putnbr(num / 10, len);
-	if (ft_putchar(num % 10 + '0', len) == -1)
-		return (-1);
-	return (1);
+	ft_putchar(num % 10 + '0', len);
 }
 
-int	ft_putunbr(unsigned int num, int *len)
+void	ft_putunbr(unsigned int num, int *len)
 {
 	if (num >= 10)
 		ft_putnbr((num / 10), len);
-	if (ft_putchar((num % 10 + '0'), len) == -1)
-		return (-1);
-	return (1);
+	ft_putchar((num % 10 + '0'), len);
 }
 
-int	ft_puthex(unsigned long long num, char *hex, int *len)
+static void	write_hex(int index, char *to_write, int *len)
+{
+	while (index-- > 0)
+	{
+		ft_putchar(to_write[index], len);
+		if (*len == -1)
+			return ;
+	}
+}
+
+void	ft_puthex(unsigned long long num, char *hex, int *len)
 {
 	char	*to_write;
 	int		index;
 
 	index = 0;
 	if (num == 0)
-		return (ft_putchar('0', len), 1);
+	{
+		ft_putchar('0', len);
+		return ;
+	}
 	to_write = (char *) malloc((count_nums(num) + 1) * (sizeof(char)));
 	if (!to_write)
-		return (-1);
+	{
+		*len = -1;
+		return ;
+	}
 	while (num != 0)
 	{
 		to_write[index] = hex[num % 16];
@@ -73,10 +85,6 @@ int	ft_puthex(unsigned long long num, char *hex, int *len)
 		index++;
 	}
 	to_write[index] = '\0';
-	while (index-- > 0)
-	{
-		if (ft_putchar(to_write[index], len) == -1)
-			return (free(to_write), -1);
-	}
-	return (free(to_write), 1);
+	write_hex(index, to_write, len);
+	free(to_write);
 }

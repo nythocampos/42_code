@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:09:10 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/15 12:47:31 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/11/17 08:03:40 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,15 @@ size_t	ft_strlen(const char *s)
 	return (index);
 }
 
-int	ft_putchar(char c, int *total_len)
+void	ft_putchar(char c, int *total_len)
 {
 	if (write(1, &c, 1) == -1)
-	{
 		*total_len = -1;
-		return (-1);
-	}
-	*total_len += 1;
-	return (1);
+	else
+		*total_len += 1;
 }
 
-int	ft_putstr(char *s, int *total_len)
+void	ft_putstr(char *s, int *total_len)
 {
 	int	s_size;
 
@@ -43,43 +40,36 @@ int	ft_putstr(char *s, int *total_len)
 			*total_len = -1;
 		else
 			*total_len += 6;
-		return (1);
+		return ;
 	}
 	s_size = ft_strlen(s);
 	if (write(1, s, s_size) == -1)
 	{
 		*total_len = -1;
-		return (-1);
+		return ;
 	}
-	*total_len += s_size;
-	return (1);
+	else
+		*total_len += s_size;
 }
 
 void	select_writer(char type, va_list valist, int *len)
 {
-	int	result;
-
-	result = 0;
 	if (type == 'c')
-		result = ft_putchar(va_arg(valist, int), len);
+		ft_putchar(va_arg(valist, int), len);
 	else if (type == 's')
-		result = ft_putstr(va_arg(valist, char *), len);
+		ft_putstr(va_arg(valist, char *), len);
 	else if (type == 'p')
-		result = ft_putptr(va_arg(valist, unsigned long long), len);
+		ft_putptr(va_arg(valist, unsigned long long), len);
 	else if (type == 'd' || type == 'i')
-		result = ft_putnbr(va_arg(valist, int), len);
+		ft_putnbr(va_arg(valist, int), len);
 	else if (type == 'u')
-		result = ft_putunbr(va_arg(valist, unsigned int), len);
+		ft_putunbr(va_arg(valist, unsigned int), len);
 	else if (type == 'x')
-		result = ft_puthex(va_arg(valist, unsigned int),
-				"0123456789abcdef", len);
+		ft_puthex(va_arg(valist, unsigned int), "0123456789abcdef", len);
 	else if (type == 'X')
-		result = ft_puthex(va_arg(valist, unsigned int),
-				"0123456789ABCDEF", len);
+		ft_puthex(va_arg(valist, unsigned int), "0123456789ABCDEF", len);
 	else if (type == '%')
-		result = ft_putchar('%', len);
+		ft_putchar('%', len);
 	else
-		*len = -1;
-	if (result == -1)
 		*len = -1;
 }
