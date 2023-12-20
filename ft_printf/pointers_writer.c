@@ -15,5 +15,7 @@
 void	ft_putptr(unsigned long long ptr, int *len)
 {
 	ft_putstr("0x", len);
+	if (*len == -1)
+		return ;
 	ft_puthex(ptr, "0123456789abcdef", len);
 }

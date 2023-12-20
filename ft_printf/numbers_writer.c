@@ -37,10 +37,14 @@ void	ft_putnbr(int n, int *len)
 	if (n < 0)
 	{
 		ft_putchar('-', len);
+		if (*len == -1)
+			return ;
 		num = -n;
 	}
 	if (num >= 10)
 		ft_putnbr(num / 10, len);
+	if (*len == -1)
+		return ;
 	ft_putchar(num % 10 + '0', len);
 }
 
@@ -48,6 +52,8 @@ void	ft_putunbr(unsigned int num, int *len)
 {
 	if (num >= 10)
 		ft_putnbr((num / 10), len);
+	if (*len == -1)
+		return ;
 	ft_putchar((num % 10 + '0'), len);
 }
 
