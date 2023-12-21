@@ -1,6 +1,6 @@
 //test ft_print from libft
 #include <stdio.h>
-#include "../lib_ulti/libft.h"
+#include "../libft_ulti/libft.h"
 
 int	main(void)
 {
