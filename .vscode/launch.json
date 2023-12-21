@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/antcampo/Desktop/backup_cursus/lib_ulti/ft_printf",
+      "program": "/Users/antcampo/Desktop/backup_cursus/lib_ulti/ft_printf/build/Debug/outDebug"
+    }
+  ]
+}

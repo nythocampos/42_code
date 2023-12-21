@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   pointers_writer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/03 20:26:55 by antcampo          #+#    #+#             */
-/*   Updated: 2023/11/03 20:26:58 by antcampo         ###   ########.fr       */
+/*   Created: 2023/10/26 13:07:51 by antcampo          #+#    #+#             */
+/*   Updated: 2023/11/17 08:04:17 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-
-char	*get_next_line(int fd);
-char	*mod_strjoin(char *s1, char const *s2);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);
-int		mod_strchr(char *s, char c);
-char	*ft_free(char **buffer);
-
-#endif
+void	ft_putptr(unsigned long long ptr, int *len)
+{
+	ft_putstr("0x", len);
+	if (*len == -1)
+		return ;
+	ft_puthex(ptr, "0123456789abcdef", len);
+}

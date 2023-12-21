@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+// libft
 typedef struct s_list
 {
 	void			*content;
@@ -59,6 +60,7 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
+void	ft_putchar(char c, int *total_len);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
@@ -72,7 +74,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-// Get next line
+// get_next_line
 char	*get_next_line(int fd);
 char	*mod_strjoin(char *s1, char const *s2);
 char	*ft_strdup(const char *s);
@@ -82,5 +84,10 @@ char	*ft_free(char **buffer);
 // ft_printf
 int		ft_printf(char const *args, ...);
 void	select_writer(char type, va_list valist, int *len);
+void	ft_puthex(unsigned long long num, char *hex, int *len);
+void	ft_putptr(unsigned long long ptr, int *len);
+void	ft_putstr(char *s, int *total_len);
+void	ft_putnbr(int n, int *len);
+void	ft_putunbr(unsigned int num, int *len);
 
 #endif

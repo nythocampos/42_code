@@ -1,7 +1,7 @@
 NAME 	= libft.a
 CC 		= cc
 LIB 	= ar rcs
-CFLAGS 	= -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS 	= -Wall -Wextra -Werror -g3 -fsanitize=address
 INCLUDE = libft.h
 # libft files
 SRC_LIBFT	= ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c \
@@ -14,7 +14,7 @@ SRC_GNL = get_next_line.c get_next_line_utils.c
 # ft_printf files
 SRC_PRN = ft_printf.c numbers_writer.c pointers_writer.c writers_selector.c
 # libft bonus files
-SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ftdflstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 OBJS_LIBFT = $(SRC_LIBFT:.c=.o)
 OBJS_GNL = $(SRC_GNL:.c=.o)
