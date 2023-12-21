@@ -13,9 +13,14 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -66,5 +71,17 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+// Get next line
+char	*get_next_line(int fd);
+char	*mod_strjoin(char *s1, char const *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
+int		mod_strchr(char *s, char c);
+char	*ft_free(char **buffer);
+
+// ft_printf
+int		ft_printf(char const *args, ...);
+void	select_writer(char type, va_list valist, int *len);
 
 #endif
