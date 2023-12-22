@@ -1,4 +1,4 @@
-NAME	= libft_tester
+LIBFTNAME = libft.a
 LIBFT 	= ./libft_ulti/libft.a
 LIBFTDIR= libft_ulti/
 CC		= cc
@@ -7,26 +7,31 @@ SRCS	= test_ft_printf.c
 # program files
 OBJS 	= $(SRCS:.c=.o)
 
-all: makelib $(NAME)
+all: makelib build
 
 makelib:
-	@echo "COMPILING LIBFT LIBRARY"
+	@echo "---->COMPILING LIBFT LIBRARY..."
 	@make -C $(LIBFTDIR)
+	@echo "---->LIBFT LIBRARY COMPLIED."
 
-$(NAME): $(OBJS) $(LIBFT)
-	@cp $(LIBFT) $(NAME)
-	cc test_ft_printf.c $(NAME) -o libft_teter1
+build: $(OBJS) $(LIBFT)
+	@echo "---->BUILDING PROGRAM..."
+	@cp $(LIBFT) $(LIBFTNAME)
+	@cc test_ft_printf.c $(LIBFTNAME) -o libft_tester
+	@echo "---->PROGRAM BUILD."
+
 
 %.o: %.c Makefile $(LIBFT)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make -C $(LIBFTDIR) clean
-	rm -f $(OBJS)
+	@make -C $(LIBFTDIR) clean
+	@rm -f $(OBJS)
+	@echo "---->OBJECTS CLEANED."
 	
 fclean: clean
-	rm -f $(LIBFT)
-	rm -f $(NAME)
+	@rm -f $(LIBFT)
+	@echo "---->ALL CLEANED."
 	
 re: fclean all
 
