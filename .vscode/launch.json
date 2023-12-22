@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/antcampo/Desktop/backup_cursus/lib_ulti/ft_printf",
-      "program": "/Users/antcampo/Desktop/backup_cursus/lib_ulti/ft_printf/build/Debug/outDebug"
+      "cwd": "/Users/antcampo/Desktop/backup_cursus/test_lib_ultim",
+      "program": "/Users/antcampo/Desktop/backup_cursus/test_lib_ultim/build/Debug/outDebug"
     }
   ]
 }
