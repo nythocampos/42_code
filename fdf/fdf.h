@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2023/12/29 20:03:55 by antcampo         ###   ########.fr       */
+/*   Updated: 2023/12/29 21:49:06 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,33 @@ typedef struct	s_mlx_data
 	void	*win_ptr;
 }	t_mlx_data;
 
-// functions
+// a node is the most basic shape
+typedef struct s_element_node
+{
+	int	*base;//coordinates
+	int	*linked_to[];//list of directions of nodes that are pointed by this
+
+} t_element_node;
+
+//the element is the group of nodes
+//the element can be scalable and moved
+typedef struct	s_element
+{
+	int	*base;//coordinates where the element will be pleaced
+	s_element_node	*shape[];//initial coordinates of every point and line that compone the object
+	int	*size;//define the size of the element drawed
+} t_element;
+
+typedef struct	s_area
+{
+	void	*avaliable_area[]//coordinates where a node can be pleased
+} t_area;
+
+// Functions
+//events_manager
+
+//hooks
+void	minimize_window(t_mlx_data *data)
 void	end_program(t_mlx_data *data);
 
 #endif
