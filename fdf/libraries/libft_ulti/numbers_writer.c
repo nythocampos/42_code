@@ -19,8 +19,6 @@ static int	count_nums(unsigned long long num)
 	count = 0;
 	if (num == 0)
 		return (1);
-	if (num < 0)
-		num = -num;
 	while (num > 0)
 	{
 		num = num / 10;

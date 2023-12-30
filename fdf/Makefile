@@ -1,8 +1,13 @@
 # Minilibx variables
-MINILIBX		= ./libraries/mlx/libmlx.a
-MINILIBXDIR		= libraries/mlx/
-MINFLAGS		= -framework OpenGL -framework AppKit
-
+ifeq ($(shell uname -s), Linux)
+	MINILIBX	= ./libraries/mlx_linux/libmlx.a
+	MINILIBXDIR		= libraries/mlx_linux/
+	MINFLAGS		= -lXext -lX11 -lm -lz
+else
+	MINILIBX		= ./libraries/mlx/libmlx.a
+	MINILIBXDIR		= libraries/mlx/
+	MINFLAGS		= -framework OpenGL -framework AppKit
+endif
 # Libft_ulti variables
 LIBFT			= ./libraries/libft_ulti/libft.a
 LIBFTDIR		= libraries/libft_ulti/

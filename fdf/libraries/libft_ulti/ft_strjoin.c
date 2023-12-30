@@ -14,11 +14,9 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int			index;
 	size_t		str_size;
 	char		*str;
 
-	index = 0;
 	if (s1 == 0 || s2 == 0)
 		return (0);
 	if ((ft_strlen(s1) <= 0 && ft_strlen(s2) <= 0))
