@@ -37,7 +37,8 @@ int	main(void)
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
   */
 
-  // Set events
+  // Set event
+  ft_printf("Set events");
   set_events(data);
 
   // Start loop

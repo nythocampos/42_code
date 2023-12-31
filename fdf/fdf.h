@@ -20,11 +20,14 @@
 //TODO: check what is being imported twice
 
 // includes
+#if defined(__linux__)
+  #include "libraries/mlx_linux/mlx.h"
+#elif defined(__APPLE__) && defined (__MATCH__)
+  #include "libraries/mlx/mlx.h"
+#endif
 #include <X11/keysym.h>
 #include <stdlib.h>
 #include "libraries/libft_ulti/libft.h"
-#include "libraries/mlx/mlx.h"
-
 // structs
 typedef struct	s_data {
 	void	*img;

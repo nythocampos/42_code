@@ -17,11 +17,7 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror
-SRCS			= fdf.c
-
-#!TO FIX OBJS
-OBJS 			= $(SRCS:.c=.o)
-
+SRCS			= fdf.c events_manager.c hooks.c 
 
 # Rules
 all: makelib build
@@ -38,9 +34,9 @@ makelib:
 	@echo "---->LIBFT LIBRARY COMPILED."
 	@echo "---->MINILIBX LIBRARY COMPILED."
 
-build: $(OBJS) $(LIBFT) $(MINILIBX)
+build: $(LIBFT) $(MINILIBX)
 	@echo "---->BUILDING PROGRAM..."
-	@cc fdf.c $(LIBS) $(MINFLAGS) -o $(PROGRAM)
+	@cc $(SRCS) $(LIBS) $(MINFLAGS) -o $(PROGRAM)
 	@echo "---->PROGRAM BUILD."
 
 
