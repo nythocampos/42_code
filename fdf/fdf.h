@@ -22,6 +22,8 @@
 // includes
 #include <X11/keysym.h>
 #include <stdlib.h>
+#include "libraries/libft_ulti/libft.h"
+#include "libraries/mlx/mlx.h"
 
 // structs
 typedef struct	s_data {
@@ -51,20 +53,21 @@ typedef struct s_element_node
 typedef struct	s_element
 {
 	int	*base;//coordinates where the element will be pleaced
-	s_element_node	*shape[];//initial coordinates of every point and line that compone the object
+	struct s_element_node	*shape;//initial coordinates of every point and line that compone the object
 	int	*size;//define the size of the element drawed
 } t_element;
 
 typedef struct	s_area
 {
-	void	*avaliable_area[]//coordinates where a node can be pleased
+	void	*avaliable_area;//coordinates where a node can be pleased
 } t_area;
 
 // Functions
 //events_manager
+void	set_events(t_mlx_data data);
 
 //hooks
-void	minimize_window(t_mlx_data *data)
+void	minimize_window(t_mlx_data *data);
 void	end_program(t_mlx_data *data);
 
 #endif

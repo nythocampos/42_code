@@ -12,7 +12,20 @@
 
 #include "fdf.h"
 
-void	set_events()
+// TO CONCIDER: Use an interface to controler the keys pressed
+int handle_keys(int key_num, t_mlx_data *data)
 {
-	mlx_key_hook(data.win_ptr, handle_input, &data);
+  // ESC or X button are pressed
+  if (key_num == XK_Escape)
+  {
+    ft_printf("ESC pressed");
+    end_program(data);
+  }
+  //if (key_num == )
+  return (0);
+}
+
+void	set_events(t_mlx_data data)
+{
+	mlx_key_hook(data.win_ptr,  handle_keys, &data);
 }
