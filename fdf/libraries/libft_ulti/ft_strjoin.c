@@ -12,23 +12,31 @@
 
 #include "libft.h"
 
+/*
+ * This function concat 2 strings and return a new string with the result
+ *
+ */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t		str_size;
+	size_t  str_size;
+  int     s1_len;
+  int     s2_len;
 	char		*str;
 
+  s1_len = ft_strlen(s1);
+  s2_len = ft_strlen(s2);
 	if (s1 == 0 || s2 == 0)
 		return (0);
-	if ((ft_strlen(s1) <= 0 && ft_strlen(s2) <= 0))
+	if ((s1_len <= 0 && s2_len <= 0))
 		return ((char *)ft_calloc(1, sizeof(char)));
-	str_size = ft_strlen(s1) + ft_strlen(s2);
+	str_size = s1_len + s2_len;
 	str = (char *)ft_calloc(str_size + 1, sizeof(char));
 	if (str == 0)
 		return (0);
 	if (s1[0] != 0)
-		ft_memcpy(str, (const char *)s1, ft_strlen(s1));
+		ft_memcpy(str, (const char *)s1, s1_len);
 	if (s2[0] != 0)
-		ft_memcpy(&str[ft_strlen(s1)], (const char *)s2, ft_strlen(s2));
+		ft_memcpy(&str[s1_len], (const char *)s2, s2_len);
 	return (str);
 }
 

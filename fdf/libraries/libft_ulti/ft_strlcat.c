@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+ * This function is used to concat the src string to the end of dst string
+ * it takes the full buffer size not just the lenght.
+ * dst string must have enogh size to append the src string.
+ */
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	int				dst_len;
