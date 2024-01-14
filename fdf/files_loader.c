@@ -1,11 +1,44 @@
 #include "fdf.h"
 #include "libraries/libft_ulti/libft.h"
 
+int get_item_value(char *str, int start)
+{
+  int num;
+  char  *str_num;
+  int   end;
+  int   index;
+
+  end = start;
+  index = 0;
+  while (str[end] != ' ')
+    end++;
+  str_num = malloc((end - start + 1) * sizeof(char));
+  while (start < end)
+  {
+    // fill the str_num from str[start]
+    str_num[index] = str[start + index];
+    index++;
+  }
+  num = ft_atoi(str_num);
+  return (num);
+}
 
 char *convert_line(char *line, int line_num)
 {
   char  *converted_line;
-
+  int   index;
+  int   column_num;
+  int   value;
+ 
+  index = 0;
+  column_num = 0;
+  while (line[index] == NULL)
+  {
+    value = get_item_value(line, index);
+    if (line[index] == ' ')
+      column_num++;
+    index++;
+  }
   // set a v character
   // set a space
   // set column number as X
