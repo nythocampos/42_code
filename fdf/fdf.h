@@ -26,6 +26,7 @@
   #include "libraries/mlx/mlx.h"
 #endif
 #include <X11/keysym.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include "libraries/libft_ulti/libft.h"
 // structs
@@ -67,10 +68,13 @@ typedef struct	s_area
 
 // Functions
 //events_manager
-void	set_events(t_mlx_data data);
+  void	set_events(t_mlx_data data);
 
 //hooks
-void	minimize_window(t_mlx_data *data);
-void	end_program(t_mlx_data *data);
+  void	minimize_window(t_mlx_data *data);
+  void	end_program(t_mlx_data *data);
+
+//files management
+  void  manage_file_content(char *file_name);
 
 #endif

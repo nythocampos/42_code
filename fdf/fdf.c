@@ -11,6 +11,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+/*
 void  set_pixels()
 {
   img.img = mlx_new_image(mlx, 1920, 1080);
@@ -18,13 +19,16 @@ void  set_pixels()
 	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 }
-
+*/
 
 int	main(void)
 {
   t_mlx_data data;
 
+  manage_file_content("42.fdf");
+
   // Set window
+  /*
 	data.mlx_ptr = mlx_init();
   if(data.mlx_ptr == NULL)
     return (0);
@@ -37,16 +41,16 @@ int	main(void)
     mlx_destroy_display(data.mlx_ptr);
     free(data.mlx_ptr); 
     return (0);
-
-  }
+  }*/
 
   // Set Images
-  set_pixels();
+  //set_pixels();
 
   // Set event
-  ft_printf("Set events");
-  set_events(data);
+  //ft_printf("Set events");
+  //set_events(data);
 
   // Start loop
-	mlx_loop(data.mlx_ptr);
+	//mlx_loop(data.mlx_ptr);
+  return (0);
 }

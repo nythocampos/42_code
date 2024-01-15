@@ -17,7 +17,7 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror
-SRCS			= fdf.c events_manager.c hooks.c 
+SRCS			= fdf.c events_manager.c hooks.c files_loader.c
 
 # Rules
 all: makelib build
