@@ -1,11 +1,12 @@
 # Minilibx variables
+MINILIBX		= ./libraries/mlx/libmlx.a
+MINILIBXDIR		= libraries/mlx/
 ifeq ($(shell uname -s), Linux)
-	MINILIBX	= ./libraries/mlx_linux/libmlx.a
-	MINILIBXDIR		= libraries/mlx_linux/
+	#MINILIBX	= ./libraries/mlx_linux/libmlx.a
+	#MINILIBXDIR		= libraries/mlx_linux/
 	MINFLAGS		= -lXext -lX11 -lm -lz
-else
-	MINILIBX		= ./libraries/mlx/libmlx.a
-	MINILIBXDIR		= libraries/mlx/
+endif
+ifeq ($(shell uname -s), Darwin)	
 	MINFLAGS		= -framework OpenGL -framework AppKit
 endif
 # Libft_ulti variables
@@ -17,7 +18,7 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror
-SRCS			= fdf.c events_manager.c hooks.c files_loader.c
+SRCS			= fdf.c events_manager.c hooks.c frames_builder.c
 
 # Rules
 all: makelib build
