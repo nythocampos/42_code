@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/18 19:51:03 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/19 21:25:45 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,30 @@ typedef struct	s_mlx_data
 }	t_mlx_data;
 
 // a node is the most basic shape
-/*
+
+typedef struct s_coordinates
+{
+	int	x;
+	int	y;
+	int	z;
+} t_coordinates;
+
 typedef struct s_element_node
 {
-	int	*base;//coordinates
-	int	*linked_to[];//list of directions of nodes that are pointed by this
+	struct s_coordinates	position;
+	struct s_coordinates	*linked_to[];//list of coordinates of all nodes pointed by this
 
 } t_element_node;
 
 //the element is the group of nodes
-//the element can be scalable and moved
+//the element can be moved
 typedef struct	s_element
 {
-	int	*base;//coordinates where the element will be pleaced
+	struct s_coordinates	position;//coordinates where the element will be pleaced
 	struct s_element_node	*shape;//initial coordinates of every point and line that compone the object
-	int	*size;//define the size of the element drawed
+	int						*size;//define the size of the element drawed / pixels of distance between every vertex
 } t_element;
-
+/*
 typedef struct	s_area
 {
 	void	*avaliable_area;//coordinates where a node can be pleased
@@ -72,6 +79,8 @@ typedef struct	s_area
   void	end_program(t_mlx_data *data);
 
 //files management
-  void  manage_file_content(char *file_name);
+  void  load_model(char *file_name);
+
+  struct s_element	load_model(char *file_name);
 
 #endif
