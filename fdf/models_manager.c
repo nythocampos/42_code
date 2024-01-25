@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 21:01:41 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/19 21:25:48 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:51:12 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 struct s_element	load_model(char *file_name)
 {
 	char  *file_extension;
-	char  *model;
+	struct s_element	model;
 	int	  extension_len;
  	int   file_fd;
+	struct s_element	result;
 
 	// if the file loaded
 	file_extension = ft_strchr(file_name, 46);
@@ -31,12 +32,13 @@ struct s_element	load_model(char *file_name)
 	{
 		// call process to load fdf file
     	model = load_terrain_model(file_fd);
-	 	ft_printf("fdf file loaded");
-    	ft_printf("%s", model);
+	 	ft_printf("Fdf file loaded \n");
 	}
 	else if (ft_strncmp(file_extension, ".obj", extension_len) == 0)
 	{
 	  // call process to load obj file
-	  ft_printf("obj file loaded");
+	  ft_printf("Obj file loaded \n");
 	}
+
+	return (result);
 }

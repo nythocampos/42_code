@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/19 21:25:45 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:37:00 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,21 @@ typedef struct	s_area
 	void	*avaliable_area;//coordinates where a node can be pleased
 } t_area;
 */
+
 // Functions
-//events_manager
-  void	set_events(t_mlx_data data);
 
-//hooks
-  void	minimize_window(t_mlx_data *data);
-  void	end_program(t_mlx_data *data);
+// Window section
+void	set_events(t_mlx_data data);
+void	minimize_window(t_mlx_data *data);
+void	end_program(t_mlx_data *data);
+void	run_window();
+void	initializate_window();
 
-//files management
-  void  load_model(char *file_name);
+// Models manager section
+struct s_element	load_terrain_model(int file_df);
+struct s_element	load_model(char *file_name);
 
-  struct s_element	load_model(char *file_name);
+// Frame builder section
+void	build_frame();
 
 #endif
