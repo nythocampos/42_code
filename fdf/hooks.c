@@ -6,13 +6,19 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:01:05 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/18 17:52:18 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:50:23 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	minimize_window(t_mlx_data *data){}
+void	minimize_window(t_mlx_data *data)
+{
+	data = malloc(sizeof(t_mlx_data) * 1);
+	if (!data)
+		return;
+	free(data);
+}
 
 void	end_program(t_mlx_data *data)
 {

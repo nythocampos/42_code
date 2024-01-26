@@ -6,30 +6,48 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/25 20:19:57 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:58:52 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int get_item_value(char *str, int start)
+static int	get_columns_num(char *line)
+{
+	int	index;
+	int	column_num;
+
+	index = 1;
+	column_num = 0;
+	while (line[index] != '\0')
+	{
+		if ((line[index - 1] >= 48 && line[index - 1] <= 57) && 
+			(line[index] < 48 || line[index] > 57))
+			column_num++;
+		index++;
+	}
+	return (column_num);
+}
+
+static int get_item_value(char *str, int end)
 {
 	int   num;
 	char  *str_num;
-	int   end;
+	int   start;
 	int   index;
 
-	end = start;
+	start = end;
 	index = 0;
-	while (str[end + 1] != ' ' && str[end] != '\0')
-		end++;
-	str_num = (char *) malloc((end - start + 1) * sizeof(char));
-	if (str_num == NULL)
+	while (str[start - 1] >= 48 && str[start - 1] <= 57)
+		start--;
+	str_num = (char *) malloc(sizeof(char) * (end - start + 1));
+	if (!str_num)
 		return (0);
-	while (start < end)
+	while (start <= end)
 	{
-		str_num[index] = str[start + index];
+		str_num[index] = str[start];
 		index++;
+		start++;
 	}
 	str_num[index] = '\0';
 	num = ft_atoi(str_num);
@@ -37,81 +55,79 @@ static int get_item_value(char *str, int start)
 	return (num);
 }
 
-static void	convert_line(char *line, int line_num)
+static t_element_node	**convert_line(char *line, int line_num)
 {
-  char  *res_line;
-  int   index;
-  int   column_num;
-  int   item_value;
- 
+	int   index;
+	int   column_num;
+	int   item_value;
+	int		columns_num;
+	struct s_coordinates	*coor;
+	struct s_element_node	*element_node;
+	struct s_element_node	**nodes_list;
 
-  index = 1;
-  column_num = 0;
-  // set a v character
-  // set a space
- 
-  //res_line = ft_strdup("v ");
-  if (line == NULL)
-	  return;
-  while (line[index] != '\0')
-  {
-    // set column number as X
-	
-    //res_line = ft_strjoin(res_line, ft_itoa(column_num));
-
-    // set a space
-	
-    //res_line = ft_strjoin(res_line, " ");
-
-    // set line_number as Z
-    // set a space
-
-	// detect number area
-	// increment the number of column
-	if ((line[index - 1] >= 48 && line[index - 1] <= 57) && 
-		(line[index] < 48 || line[index] > 57))
+	index = 1;
+	column_num = 0;
+	line_num = 0;
+	if (!line)
+		return;
+	columns_num = get_columns_num(line);
+	nodes_list = malloc(sizeof(t_element_node) * columns_num);
+	if (!nodes_list)
+		return (0);
+	while (line[index] != '\0')
 	{
-    	//item_value = get_item_value(line, index);
-		column_num++;
-		ft_printf("column: %d value: %d \n", column_num, item_value);
+		if ((line[index - 1] >= 48 && line[index - 1] <= 57) && 
+			(line[index] < 48 || line[index] > 57))
+		{
+			column_num++;
+			item_value = get_item_value(line, index);
+
+			free(coor);
+			coor = malloc(sizeof(t_coordinates) * 1);
+			element_node = malloc(sizeof(t_element_node) * 1);
+
+			coor->x = column_num;
+			coor->y = line_num;
+			coor->z = item_value;
+
+			element_node->position = coor;
+			//	define the list of nodes linked to this node
+			//	element_node->linked_to
+			nodes_list[columns_num] = element_node;
+			columns_num--;
+
+		}
+		index++;
 	}
-    /*res_line = ft_strjoin(res_line, ft_itoa(item_value));
-    res_line = ft_strjoin(res_line, " ");*/
-
-    // set item value as Y
-    // set a new line '\n' and do it again with the next item in the line
-	
-    /*res_line = ft_strjoin(res_line, ft_itoa(line_num));
-    res_line = ft_strjoin(res_line, "\n");*/
-
-    index++;
-  } 
-  // when the end of the line is reached, return the converted_line
-
+	return (nodes_list);
 }
 
 /*
  * This function loads the content of the file
  */
-struct s_element	load_terrain_model(int file_df)
+t_element	*load_terrain_model(int file_df)
 {
 	// load file data and convert it to a obj
 	int   line_num;
 	char  *temp_line;
-	struct s_element  model;
+	struct s_element  *model;
+	struct s_element_node	**nodes_list;
 
 	line_num = 0;
-	temp_line = (char *) malloc(1);
-	if (temp_line == NULL)
-		return (model);
+	temp_line = (char *) malloc(sizeof(char) * 1);
+	if (temp_line == 0)
+		return (0);
 	temp_line[0] = '\0';
+	model = malloc(sizeof(t_element) * 1);
+	if (!model)
+		return (0);
 	while (temp_line != NULL)
 	{
 		free(temp_line);
 		temp_line = get_next_line(file_df);
 		//ft_printf("%s \n", temp_line);
-		convert_line(temp_line, line_num);
-		// append converted line	
+		nodes_list = convert_line(temp_line, line_num);
+		// append nodes_list to the element
 		line_num++;
 	}
 	return (model);

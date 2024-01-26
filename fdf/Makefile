@@ -47,7 +47,7 @@ makelib:
 
 build: $(LIBFT) $(MINILIBX)
 	@echo "---->BUILDING PROGRAM..."
-	@cc $(SRCS) $(LIBS) $(MINFLAGS) -o $(PROGRAM)
+	@cc $(CFLAGS) $(SRCS) $(LIBS) $(MINFLAGS) -o $(PROGRAM)
 	@echo "---->PROGRAM BUILD."
 
 
