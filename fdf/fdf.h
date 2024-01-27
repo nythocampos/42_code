@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/26 19:58:49 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/27 12:51:19 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_coordinates
 typedef struct s_element_node
 {
 	struct s_coordinates	*position;
-	struct s_coordinates	**linked_to;//list of coordinates of all nodes pointed by this
+	struct s_coordinates	**linked_to;
 
 } t_element_node;
 
@@ -60,9 +60,9 @@ typedef struct s_element_node
 //the element can be moved
 typedef struct	s_element
 {
-	struct s_coordinates	*position;//coordinates where the element will be pleaced
-	struct s_element_node	**shape;//initial coordinates of every point and line that compone the object
-	int						scale;//define the size of the element drawed / pixels of distance between every vertex
+	struct s_coordinates	*position;
+	struct s_element_node	**shape;
+	int						scale;
 } t_element;
 /*
 typedef struct	s_area

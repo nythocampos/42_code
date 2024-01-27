@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 21:01:41 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/26 17:48:39 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:02:16 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 * This function is used to choose the process to follow
-* considering the type of file to load
+* considering the format of model to load
 */
 t_element	*load_model(char *file_name)
 {
@@ -30,7 +30,7 @@ t_element	*load_model(char *file_name)
 	if (ft_strncmp(file_extension, ".fdf", extension_len) == 0)
 	{
 		// call process to load fdf file
-    	model = load_terrain_model(file_fd);
+    	model = load_terrain_model(file_fd);	
 	 	ft_printf("Fdf file loaded \n");
 	}
 	else

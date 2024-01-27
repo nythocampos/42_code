@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/26 19:58:52 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/27 12:51:15 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static t_element_node	**convert_line(char *line, int line_num)
 	column_num = 0;
 	line_num = 0;
 	if (!line)
-		return;
+		return (0);
 	columns_num = get_columns_num(line);
 	nodes_list = malloc(sizeof(t_element_node) * columns_num);
 	if (!nodes_list)
@@ -82,7 +82,6 @@ static t_element_node	**convert_line(char *line, int line_num)
 			column_num++;
 			item_value = get_item_value(line, index);
 
-			free(coor);
 			coor = malloc(sizeof(t_coordinates) * 1);
 			element_node = malloc(sizeof(t_element_node) * 1);
 
@@ -102,6 +101,39 @@ static t_element_node	**convert_line(char *line, int line_num)
 	return (nodes_list);
 }
 
+static t_element	*initialice_model()
+{
+	struct s_element		*model;
+	struct s_coordinates	*coor;
+	
+	coor = malloc(sizeof(t_coordinates) * 1);
+	coor->x = 0;
+	coor->y = 0;
+	coor->z = 0;
+	model = malloc(sizeof(t_element) * 1);
+	model->scale = 1;
+	model->position = coor;
+	return (model);
+}
+
+t_element	**lst_join(t_element_node **n_list1, t_element_node **n_list2)
+{
+	struct s_element_node	**new_list;
+	int						lst1_len;
+	int						lst2_len;
+	
+	lst1_len = ft_strlen(n_list1);
+	lst2_len = ft_strlen(n_list2);
+	new_list = malloc(sizeof(t_element_node) * (lst1_len + lst2_len));
+	if (!new_list)
+		return (0);
+	if (n_list1[0])
+		ft_memcpy(new_list, (t_element_node *)n_list1, lst1_len);
+	if (n_list2[0])
+		ft_memcpy(&new_list[lst1_len], (t_element_node *)n_list2, lst2_len);
+	return (new_list);
+}
+
 /*
  * This function loads the content of the file
  */
@@ -112,13 +144,14 @@ t_element	*load_terrain_model(int file_df)
 	char  *temp_line;
 	struct s_element  *model;
 	struct s_element_node	**nodes_list;
+	struct s_element_node	**temp;
 
 	line_num = 0;
 	temp_line = (char *) malloc(sizeof(char) * 1);
 	if (temp_line == 0)
 		return (0);
 	temp_line[0] = '\0';
-	model = malloc(sizeof(t_element) * 1);
+	model = initialice_model();
 	if (!model)
 		return (0);
 	while (temp_line != NULL)
@@ -126,10 +159,15 @@ t_element	*load_terrain_model(int file_df)
 		free(temp_line);
 		temp_line = get_next_line(file_df);
 		//ft_printf("%s \n", temp_line);
-		nodes_list = convert_line(temp_line, line_num);
+		*temp = convert_line(temp_line, line_num);
+		*nodes_list = lst_join(nodes_list, temp);
+		
+
+
 		// append nodes_list to the element
 		line_num++;
 	}
+	model->shape = nodes_list;
 	return (model);
 }
 
