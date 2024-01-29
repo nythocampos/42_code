@@ -2,12 +2,12 @@
 MINILIBX		= ./libraries/mlx/libmlx.a
 MINILIBXDIR		= libraries/mlx/
 ifeq ($(shell uname -s), Linux)
-	#MINILIBX	= ./libraries/mlx_linux/libmlx.a
-	#MINILIBXDIR		= libraries/mlx_linux/
-	MINFLAGS		= -lXext -lX11 -lm -lz
+	MINILIBX	= ./libraries/mlx_linux/libmlx.a
+	MINILIBXDIR	= libraries/mlx_linux/
+	MINFLAGS	= -lXext -lX11 -lm -lz
 endif
 ifeq ($(shell uname -s), Darwin)	
-	MINFLAGS		= -framework OpenGL -framework AppKit
+	MINFLAGS	= -framework OpenGL -framework AppKit
 endif
 # Libft_ulti variables
 LIBFT			= ./libraries/libft_ulti/libft.a
@@ -17,7 +17,8 @@ LIBFTDIR		= libraries/libft_ulti/
 PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
+# IMPLEMENT FLAGS!!!!!
+#CFLAGS			= -Wall -Wextra -Werror
 
 # C FILES ---------
 # Frame builder section

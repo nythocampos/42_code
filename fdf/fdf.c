@@ -12,13 +12,14 @@
 
 #include "fdf.h"
 
-void	check_model(struct s_element *model)
+static void	check_model(struct s_element *model)
 {
 	struct s_element_node	*current_node;
 	//struct s_coordinates	*coor;
 	struct s_element_node	**nodes_list;
 	int						index;
 
+	current_node = NULL;
 	nodes_list = model->shape;
 	index = 0;
 	ft_printf("MODEL DATA ------------------\n");
@@ -31,7 +32,7 @@ void	check_model(struct s_element *model)
 		//coor = current_node->position;
 		//ft_printf("X: %d, Y: %d, Z %d\n", coor->x, coor->y, coor->z);
 		index++;
-	}	
+	}
 }
 
 int	main(void)

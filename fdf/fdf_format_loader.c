@@ -140,9 +140,9 @@ t_element	**lst_join(t_element_node **n_list1, t_element_node **n_list2)
 t_element	*load_terrain_model(int file_df)
 {
 	// load file data and convert it to a obj
-	int   line_num;
-	char  *temp_line;
-	struct s_element  *model;
+	int   			line_num;
+	char  			*temp_line;
+	struct s_element  	*model;
 	struct s_element_node	**nodes_list;
 	struct s_element_node	**temp;
 
