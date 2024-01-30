@@ -2,8 +2,8 @@
 MINILIBX		= ./libraries/mlx/libmlx.a
 MINILIBXDIR		= libraries/mlx/
 ifeq ($(shell uname -s), Linux)
-	MINILIBX	= ./libraries/mlx_linux/libmlx.a
-	MINILIBXDIR	= libraries/mlx_linux/
+	#MINILIBX	= ./libraries/mlx_linux/libmlx.a
+	#MINILIBXDIR	= libraries/mlx_linux/
 	MINFLAGS	= -lXext -lX11 -lm -lz
 endif
 ifeq ($(shell uname -s), Darwin)	
@@ -18,7 +18,7 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC				= cc
 # IMPLEMENT FLAGS!!!!!
-#CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 
 # C FILES ---------
 # Frame builder section
@@ -28,7 +28,9 @@ MODLS_SRC		= models_manager.c fdf_format_loader.c
 # Window manager section
 WIN_SRC			= window_manager.c hooks.c events_manager.c
 
-SRCS			= fdf.c $(FRA_SRC) $(MODLS_SRC) $(WIN_SRC)
+GEN_SRC			= fdf.c util.c
+
+SRCS			= $(GEN_SRC) $(FRA_SRC) $(MODLS_SRC) $(WIN_SRC)
 # -----------------
 
 # Rules

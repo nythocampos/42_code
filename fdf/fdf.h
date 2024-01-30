@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/27 12:51:19 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:48:13 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	initializate_window();
 // Models manager section
 t_element	*load_terrain_model(int file_df);
 t_element	*load_model(char *file_name);
+int			node_list_len(struct s_element_node **nodes_list);
+t_element_node	**lst_join(struct s_element_node **n_list1, struct s_element_node **n_list2);
 
 // Frame builder section
 void	build_frame();
