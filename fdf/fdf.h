@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/29 18:48:13 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/31 20:08:42 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,30 @@
 #include <stdlib.h>
 #include "libraries/libft_ulti/libft.h"
 // structs
+
+// a node is the most basic shape
+
+/*typedef struct s_coordinates
+{
+	int	x;
+	int	y;
+	int	z;
+} t_coordinates;
+
+typedef struct s_element_node
+{
+	struct s_coordinates	*position;
+	struct s_coordinates	**linked_to;
+
+} t_element_node;
+
+typedef struct	s_element
+{
+	struct s_coordinates	*position;
+	struct s_element_node	**shape;
+	int						scale;
+} t_element;*/
+
 typedef struct	s_frame {
 	void	*img;
 	char	*addr;
@@ -40,37 +64,6 @@ typedef struct	s_mlx_data
 	void	*img_ptr;
 }	t_mlx_data;
 
-// a node is the most basic shape
-
-typedef struct s_coordinates
-{
-	int	x;
-	int	y;
-	int	z;
-} t_coordinates;
-
-typedef struct s_element_node
-{
-	struct s_coordinates	*position;
-	struct s_coordinates	**linked_to;
-
-} t_element_node;
-
-//the element is the group of nodes
-//the element can be moved
-typedef struct	s_element
-{
-	struct s_coordinates	*position;
-	struct s_element_node	**shape;
-	int						scale;
-} t_element;
-/*
-typedef struct	s_area
-{
-	void	*avaliable_area;//coordinates where a node can be pleased
-} t_area;
-*/
-
 // Functions
 
 // Window section
@@ -81,10 +74,12 @@ void	run_window();
 void	initializate_window();
 
 // Models manager section
+/*
 t_element	*load_terrain_model(int file_df);
 t_element	*load_model(char *file_name);
 int			node_list_len(struct s_element_node **nodes_list);
 t_element_node	**lst_join(struct s_element_node **n_list1, struct s_element_node **n_list2);
+void	free_nodes_list(struct s_element_node **nodes_list);*/
 
 // Frame builder section
 void	build_frame();

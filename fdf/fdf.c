@@ -6,13 +6,13 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:50:30 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/29 19:51:34 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/01/31 19:58:54 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	check_model(struct s_element *model)
+/*static void	check_model(struct s_element *model)
 {
 	struct s_element_node	*current_node;
 	//struct s_coordinates	*coor;
@@ -33,20 +33,17 @@ static void	check_model(struct s_element *model)
 		//ft_printf("X: %d, Y: %d, Z %d\n", coor->x, coor->y, coor->z);
 		index++;
 	}
-}
+}*/
 
 int	main(void)
 {
 	struct s_element *model;
 
 	//Add a way to recive the file name
+	model = NULL;
 	initializate_window();
 
-	model = load_model("42.fdf");
-	
-	check_model(model);
-	free(model);
-	build_frame();
+	build_frame("42.fdf");
 
 	run_window();
 	return (0);

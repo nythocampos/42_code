@@ -18,17 +18,17 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC				= cc
 # IMPLEMENT FLAGS!!!!!
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -g
 
 # C FILES ---------
 # Frame builder section
 FRA_SRC			= frame_builder.c
 # Models manager section
-MODLS_SRC		= models_manager.c fdf_format_loader.c
+#MODLS_SRC		= models_manager.c fdf_format_loader.c
 # Window manager section
 WIN_SRC			= window_manager.c hooks.c events_manager.c
 
-GEN_SRC			= fdf.c util.c
+GEN_SRC			= fdf.c #util.c
 
 SRCS			= $(GEN_SRC) $(FRA_SRC) $(MODLS_SRC) $(WIN_SRC)
 # -----------------
