@@ -12,9 +12,17 @@
 
 #include "fdf.h"
 
+/* 
+ * This function set pixels to defined positions on the screen
+ * */
 static void  set_pixels()
 {
-  img.img = mlx_new_image(mlx, 1920, 1080);
+	int	width;
+	int	hight;
+
+	width = 1920;
+	hight = 1080;
+	img.img = mlx_new_image(mlx, width, hight);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
@@ -23,57 +31,15 @@ static void  set_pixels()
 /*
  * This function 
  */
-static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+static void	my_mlx_pixel_put(t_frame *frame, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (y * frame->line_length + x * (frame->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
-static int	get_columns_num(char *line)
-{
-	int	index;
-	int	column_num;
 
-	index = 1;
-	column_num = 0;
-	while (line[index] != '\0')
-	{
-		if ((line[index - 1] >= 48 && line[index - 1] <= 57) && 
-			(line[index] < 48 || line[index] > 57))
-			column_num++;
-		index++;
-	}
-	return (column_num);
-}
-
-static int get_item_value(char *str, int end)
-{
-	int   num;
-	char  *str_num;
-	int   start;
-	int   index;
-
-	start = end;
-	index = 0;
-	num = 0;
-	while (str[start - 1] >= 48 && str[start - 1] <= 57)
-		start--;
-	str_num = (char *) malloc(sizeof(char) * (end - start + 1));
-	if (!str_num)
-		return (0);
-	while (start <= end)
-	{
-		str_num[index] = str[start];
-		index++;
-		start++;
-	}
-	str_num[index] = '\0';
-	num = ft_atoi(str_num);
-	free(str_num);
-	return (num);
-}
 
 static void	draw_line(char *line, int line_num)
 {

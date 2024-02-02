@@ -2,8 +2,8 @@
 MINILIBX		= ./libraries/mlx/libmlx.a
 MINILIBXDIR		= libraries/mlx/
 ifeq ($(shell uname -s), Linux)
-	#MINILIBX	= ./libraries/mlx_linux/libmlx.a
-	#MINILIBXDIR	= libraries/mlx_linux/
+	MINILIBX	= ./libraries/mlx_linux/libmlx.a
+	MINILIBXDIR	= libraries/mlx_linux/
 	MINFLAGS	= -lXext -lX11 -lm -lz
 endif
 ifeq ($(shell uname -s), Darwin)	

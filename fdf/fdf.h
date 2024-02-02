@@ -24,6 +24,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include "libraries/libft_ulti/libft.h"
+#include <math.h>
 // structs
 
 // a node is the most basic shape
@@ -64,6 +65,12 @@ typedef struct	s_mlx_data
 	void	*img_ptr;
 }	t_mlx_data;
 
+typedef struct	s_perspective
+{
+	int	a;
+	int	n;
+}	t_perspective
+
 // Functions
 
 // Window section
@@ -80,6 +87,8 @@ t_element	*load_model(char *file_name);
 int			node_list_len(struct s_element_node **nodes_list);
 t_element_node	**lst_join(struct s_element_node **n_list1, struct s_element_node **n_list2);
 void	free_nodes_list(struct s_element_node **nodes_list);*/
+int	get_columns_num(char *line);
+int	get_item_value(char *str, int end);
 
 // Frame builder section
 void	build_frame();
