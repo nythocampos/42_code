@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// defs
+// defs ----------------------------------
 #ifndef FDF_H
 # define FDF_H
 
-#define WINDOW_WIDTH 400
-#define WINDOW_HEIGHT 400
 #define XK_Escape	0xff1b
+#define COLOR	0x00FF0000
 
 //TODO: check what is being imported twice
 
@@ -25,7 +24,8 @@
 #include <stdlib.h>
 #include "libraries/libft_ulti/libft.h"
 #include <math.h>
-// structs
+
+// structs ------------------------------
 
 // a node is the most basic shape
 
@@ -53,25 +53,36 @@ typedef struct	s_element
 typedef struct	s_frame {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_frame;
+	int	bits_per_pixel;
+	int	line_length;
+	int	endian;
+}	t_frame;
 
 typedef struct	s_mlx_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
+	int	width;
+	int	hight;
+	char	*title;
 }	t_mlx_data;
 
 typedef struct	s_perspective
 {
 	int	a;
 	int	n;
-}	t_perspective
+}	t_perspective;
 
-// Functions
+
+typedef struct	s_world_coor
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_world_coor;
+
+// Functions ------------------------------
 
 // Window section
 void	set_events(t_mlx_data data);
@@ -81,16 +92,14 @@ void	run_window();
 void	initializate_window();
 
 // Models manager section
-/*
-t_element	*load_terrain_model(int file_df);
-t_element	*load_model(char *file_name);
-int			node_list_len(struct s_element_node **nodes_list);
-t_element_node	**lst_join(struct s_element_node **n_list1, struct s_element_node **n_list2);
-void	free_nodes_list(struct s_element_node **nodes_list);*/
 int	get_columns_num(char *line);
 int	get_item_value(char *str, int end);
 
 // Frame builder section
-void	build_frame();
+t_mlx_data	*init_mlx_data();
+t_mlx_data	*build_frame();
+
+//utils
+int	convert_3d_to_2d(int coordinate, int z_coordinate, int a);
 
 #endif

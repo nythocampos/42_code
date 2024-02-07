@@ -37,10 +37,10 @@
 
 int	main(void)
 {
-	struct s_element *model;
+	//struct s_element *model;
 
 	//Add a way to recive the file name
-	model = NULL;
+	//model = NULL;
 	initializate_window();
 
 	build_frame("42.fdf");

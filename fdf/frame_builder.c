@@ -12,21 +12,6 @@
 
 #include "fdf.h"
 
-/* 
- * This function set pixels to defined positions on the screen
- * */
-static void  set_pixels()
-{
-	int	width;
-	int	hight;
-
-	width = 1920;
-	hight = 1080;
-	img.img = mlx_new_image(mlx, width, hight);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	my_mlx_pixel_put(&img, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-}
 
 /*
  * This function 
@@ -35,19 +20,35 @@ static void	my_mlx_pixel_put(t_frame *frame, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * frame->line_length + x * (frame->bits_per_pixel / 8));
+	dst = frame->addr + (y * frame->line_length + x * (frame->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
-
-
-static void	draw_line(char *line, int line_num)
+/* 
+ * This function set pixels to defined positions on the screen
+ * */
+static void	set_pixels(t_frame *frame, t_world_coor world_coor)
 {
-	int   					index;
-	int   					column_num;
-	int   					item_value;
-	int						columns_num;
-	int						lst_index;
+	int	new_x;
+	int	new_y;
+	int	a;
+
+	a = 60;
+	// convert 3D to 2D
+	ft_printf("X: %d, Y: %d, Z: %d\n", world_coor.x, world_coor.y, world_coor.z);
+	new_x = convert_3d_to_2d(world_coor.x, world_coor.z, a);
+	new_y = convert_3d_to_2d(world_coor.y, world_coor.z, a);
+	my_mlx_pixel_put(frame->img, new_x, new_y, COLOR);
+}
+
+static void	draw_line(char *line, int line_num, t_frame *frame)
+{
+	int   	index;
+	int   	column_num;
+	int   	item_value;
+	int	columns_num;
+	int	lst_index;
+	t_world_coor	world_coor;
 
 	index = 1;
 	lst_index = 0;
@@ -64,11 +65,12 @@ static void	draw_line(char *line, int line_num)
 			item_value = get_item_value(line, index);
 
 			//X: column_num;
-			// !!!! FIX: Y item_value
-			//Y: item_value;
+			//Y: item_value; !!!! FIX: Y item_value
 			//Z: line_num;
-			ft_printf("X: %d, Y: %d, Z: %d\n", column_num, item_value, line_num);
-
+			world_coor.x = column_num;
+			world_coor.y = item_value;
+			world_coor.z = line_num;
+			set_pixels(frame, world_coor);
 			column_num++;
 			lst_index++;
 		}
@@ -76,10 +78,10 @@ static void	draw_line(char *line, int line_num)
 	}
 }
 
-static void	load_terrain_model(int file_df)
+static void	load_terrain_model(int file_df, t_frame *frame)
 {
-	int   					line_num;
-	char  					*temp_line;
+	int	line_num;
+	char	*temp_line;
 
 	line_num = 0;
 	temp_line = (char *) malloc(sizeof(char) * 1);
@@ -89,17 +91,33 @@ static void	load_terrain_model(int file_df)
 	{
 		free(temp_line);
 		temp_line = get_next_line(file_df);
-		draw_line(temp_line, line_num);
+		draw_line(temp_line, line_num, frame);
 		line_num++;
 	}
 }
 
 
-void	build_frame(char *file_name)
-{
-	int	fd;
 
-	fd	= open(file_name, O_RDONLY);
-	load_terrain_model(fd);
-	ft_printf("Build frame \n");
+t_mlx_data	*build_frame(char *file_name)
+{
+	int			fd;
+	struct s_mlx_data	*mlx_data;
+	struct s_frame		*frame;
+
+	ft_printf("Building frame... \n");
+	frame = NULL;
+	fd = open(file_name, O_RDONLY);
+	mlx_data = init_mlx_data();
+	frame->addr = mlx_get_data_addr(
+		frame->img,
+		&frame->bits_per_pixel,
+		&frame->line_length,
+		&frame->endian);
+	load_terrain_model(fd, frame);
+	mlx_put_image_to_window(
+		mlx_data->mlx_ptr,
+		mlx_data->win_ptr,
+		frame->img, 0, 0);
+	ft_printf("Frame built. \n");
+	return (mlx_data);
 }
