@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-02-02T15:52:55.912Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="f68ren-1Yva00u8Ttp8v" version="23.1.1" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-02-25T04:35:38.642Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="-SU2eigaWkrwo9lMXjik" version="23.1.1" type="github" pages="4">
   <diagram name="flow" id="aBuU1QujseAlj-02DdNP">
-    <mxGraphModel dx="1086" dy="559" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1045" dy="588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -32,7 +32,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="mVYhmjhfYFTRFEVsNTue" name="data layer">
-    <mxGraphModel dx="1465" dy="586" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1895" dy="588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -96,7 +96,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="RIVBxEoXH4w1-5JPoeqC" name="classes">
-    <mxGraphModel dx="1936" dy="1659" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1895" dy="1688" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -203,7 +203,7 @@
           <mxGeometry y="80" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="uSgxzbkU0yIOY7WTysCI-5" value="hooks.c" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="480" y="-140" width="160" height="106" as="geometry" />
+          <mxGeometry x="480" y="-320" width="160" height="106" as="geometry" />
         </mxCell>
         <mxCell id="uSgxzbkU0yIOY7WTysCI-6" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="uSgxzbkU0yIOY7WTysCI-5" vertex="1">
           <mxGeometry y="26" width="160" height="8" as="geometry" />
@@ -215,7 +215,7 @@
           <mxGeometry y="80" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="uSgxzbkU0yIOY7WTysCI-9" value="events_manager.c" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="480" y="-10" width="160" height="106" as="geometry" />
+          <mxGeometry x="480" y="-190" width="160" height="106" as="geometry" />
         </mxCell>
         <mxCell id="uSgxzbkU0yIOY7WTysCI-10" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="uSgxzbkU0yIOY7WTysCI-9" vertex="1">
           <mxGeometry y="26" width="160" height="8" as="geometry" />
@@ -235,24 +235,39 @@
         <mxCell id="uSgxzbkU0yIOY7WTysCI-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="uSgxzbkU0yIOY7WTysCI-3" target="uSgxzbkU0yIOY7WTysCI-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="CajAjbK_Wv2P_WCwdATI-1" value="mlx_builder.c" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="-60" width="160" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="CajAjbK_Wv2P_WCwdATI-2" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="CajAjbK_Wv2P_WCwdATI-1">
+          <mxGeometry y="26" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="CajAjbK_Wv2P_WCwdATI-3" value="Manages events." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CajAjbK_Wv2P_WCwdATI-1">
+          <mxGeometry y="34" width="160" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="CajAjbK_Wv2P_WCwdATI-4" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="CajAjbK_Wv2P_WCwdATI-1">
+          <mxGeometry y="80" width="160" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="CajAjbK_Wv2P_WCwdATI-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="uSgxzbkU0yIOY7WTysCI-3" target="CajAjbK_Wv2P_WCwdATI-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="5Xn4Aonk20tA2w0zakIP" name="flow diagram drawing">
-    <mxGraphModel dx="1086" dy="559" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1045" dy="588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="PiHnxBG2-GKwNKznG-CU-1" value="Get 3D coordinates from file" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PiHnxBG2-GKwNKznG-CU-1" value="Get 3D coordinates from file" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="320" y="400" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="PiHnxBG2-GKwNKznG-CU-2" value="Convert 3D coordinates to 2D screen space coordinates" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PiHnxBG2-GKwNKznG-CU-2" value="Convert 3D coordinates to 2D screen space coordinates" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="320" y="500" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="PiHnxBG2-GKwNKznG-CU-3" value="Update 2D coordinates considering the screen reconfig to x= 0 ,y = 0" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PiHnxBG2-GKwNKznG-CU-3" value="Update 2D coordinates considering the screen reconfig to x= 0 ,y = 0" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="300" y="590" width="160" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="PiHnxBG2-GKwNKznG-CU-4" value="Set 2D coordinates to the screen space using the function to set pixels" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="PiHnxBG2-GKwNKznG-CU-4" value="Set 2D coordinates to the screen space using the function to set pixels" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="305" y="740" width="150" height="80" as="geometry" />
         </mxCell>
       </root>
