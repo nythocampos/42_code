@@ -12,29 +12,12 @@
 
 #include "fdf.h"
 
-void	initializate_window()
+/*
+ * This function sets everything nessary to run the window
+ */
+void	initializate_window(t_mlx_data *mlx_data)
 {
-	ft_printf("Initializate window \n");
-	// Set window
-	/*
-	data.mlx_ptr = mlx_init();
-	if(data.mlx_ptr == NULL)
-	return (0);
-	data.win_ptr = mlx_new_window(data.mlx_ptr,
-						  WINDOW_WIDTH,
-						  WINDOW_HEIGHT,
-						  "Hello world!");
-	if (data.win_ptr == NULL)
-	{
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr); 
-	return (0);
-	}*/
+	mlx_data = init_mlx_data();
+	set_events(mlx_data);	
 }
 
-void	run_window()
-{
-	// Start loop
-	ft_printf("Run window \n");
-	//mlx_loop(data.mlx_ptr);
-}

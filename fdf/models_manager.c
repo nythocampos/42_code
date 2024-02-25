@@ -59,6 +59,7 @@ int get_item_value(char *str, int end)
 * This function is used to choose the process to follow
 * considering the format of model to load
 */
+/*
 t_element	*load_model(char *file_name)
 {
 	char  				*file_extension;
@@ -85,4 +86,4 @@ t_element	*load_model(char *file_name)
 	}
 
 	return (model);
-}
+}*/

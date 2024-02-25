@@ -78,6 +78,7 @@ static void	draw_line(char *line, int line_num, t_frame *frame)
 	}
 }
 
+//TODO: move this function to other file related with files loading
 static void	load_terrain_model(int file_df, t_frame *frame)
 {
 	int	line_num;
@@ -98,10 +99,9 @@ static void	load_terrain_model(int file_df, t_frame *frame)
 
 
 
-t_mlx_data	*build_frame(char *file_name)
+void	build_frame(t_mlx_data *mlx_data)
 {
 	int			fd;
-	struct s_mlx_data	*mlx_data;
 	struct s_frame		*frame;
 
 	ft_printf("Building frame... \n");
@@ -119,5 +119,4 @@ t_mlx_data	*build_frame(char *file_name)
 		mlx_data->win_ptr,
 		frame->img, 0, 0);
 	ft_printf("Frame built. \n");
-	return (mlx_data);
 }

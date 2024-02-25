@@ -37,14 +37,13 @@
 
 int	main(void)
 {
-	//struct s_element *model;
-
-	//Add a way to recive the file name
-	//model = NULL;
-	initializate_window();
-
-	build_frame("42.fdf");
-
-	run_window();
+	struct s_mlx_data	*mlx_data;
+	//TODO: Add a way to recive the file name
+	initializate_window(mlx_data);
+	// set image / call frame_builder
+	build_frame(mlx_data);
+	// run window
+	mlx_loop(mlx_data->mlx_ptr);
+	// free the mlx_data->mlx.ptr
 	return (0);
 }

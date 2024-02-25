@@ -90,6 +90,7 @@ void	minimize_window(t_mlx_data *data);
 void	end_program(t_mlx_data *data);
 void	run_window();
 void	initializate_window();
+t_mlx_data	init_mlx_data();
 
 // Models manager section
 int	get_columns_num(char *line);
