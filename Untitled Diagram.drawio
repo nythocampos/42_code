@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-26T21:34:42.221Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="K6F9gUnxUnbBv4WiCH7q" version="23.1.6" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-02-26T21:36:44.101Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="AlXvgkSWF2XPgD3JSVzU" version="23.1.6" type="github" pages="4">
   <diagram name="flow" id="aBuU1QujseAlj-02DdNP">
     <mxGraphModel dx="1045" dy="588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -70,13 +70,13 @@
           <mxGeometry x="870" y="305" width="250" height="30" as="geometry" />
         </mxCell>
         <mxCell id="eB11fWtXM781tJoJPI_v-1" value="s_world_triangle" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="360" y="340" width="240" height="110" as="geometry" />
+          <mxGeometry x="360" y="340" width="240" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="eB11fWtXM781tJoJPI_v-4" value="The order of the lines is position 0 to 2&lt;br&gt;every world_triangle must have just 3 w_coor" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="eB11fWtXM781tJoJPI_v-1">
-          <mxGeometry y="30" width="240" height="50" as="geometry" />
+        <mxCell id="eB11fWtXM781tJoJPI_v-4" value="The order of the lines is position 0 to 2, use the order in the list to define how to draw the lines.&lt;br&gt;every world_triangle must have just 3 w_coor." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="eB11fWtXM781tJoJPI_v-1">
+          <mxGeometry y="30" width="240" height="80" as="geometry" />
         </mxCell>
         <mxCell id="eB11fWtXM781tJoJPI_v-2" value="s_world_coor *w_coors" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="eB11fWtXM781tJoJPI_v-1">
-          <mxGeometry y="80" width="240" height="30" as="geometry" />
+          <mxGeometry y="110" width="240" height="30" as="geometry" />
         </mxCell>
         <mxCell id="eB11fWtXM781tJoJPI_v-9" value="s_screen_triangle" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="360" y="480" width="240" height="90" as="geometry" />
