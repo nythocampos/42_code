@@ -37,13 +37,18 @@
 
 int	main(void)
 {
-	struct s_mlx_data	*mlx_data;
+	t_mlx_data	mlx_data;
+
+	mlx_data.mlx_ptr = mlx_init();
+	mlx_data.title = ft_strdup("FDF");
+	mlx_data.width = 200;
+	mlx_data.hight = 200;
 	//TODO: Add a way to recive the file name
-	initializate_window(mlx_data);
+	set_window(&mlx_data);
 	// set image / call frame_builder
-	build_frame(mlx_data);
+	build_image(&mlx_data, "42.fdf");
 	// run window
-	mlx_loop(mlx_data->mlx_ptr);
+	mlx_loop(mlx_data.mlx_ptr);
 	// free the mlx_data->mlx.ptr
 	return (0);
 }

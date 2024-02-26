@@ -21,8 +21,8 @@ CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -g
 
 # C FILES ---------
-# Frame builder section
-FRA_SRC			= frame_builder.c
+# Image builder section
+IMG_SRC			= img_builder.c
 # Models manager section
 MODLS_SRC		= models_manager.c #fdf_format_loader.c
 # Window manager section
@@ -30,7 +30,7 @@ WIN_SRC			= window_manager.c hooks.c events_manager.c
 
 GEN_SRC			= fdf.c calculates.c #util.c 
 
-SRCS			= $(GEN_SRC) $(FRA_SRC) $(MODLS_SRC) $(WIN_SRC)
+SRCS			= $(GEN_SRC) $(IMG_SRC) $(MODLS_SRC) $(WIN_SRC)
 # -----------------
 
 # Rules

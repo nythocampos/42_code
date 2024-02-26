@@ -27,5 +27,5 @@ int handle_keys(int key_num, t_mlx_data *data)
 
 void	set_events(t_mlx_data *data)
 {
-	mlx_key_hook(data.win_ptr,  handle_keys, &data);
+	mlx_key_hook(data->win_ptr,  handle_keys, &data);
 }

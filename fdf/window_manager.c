@@ -12,12 +12,25 @@
 
 #include "fdf.h"
 
+static void	initialize_window(t_mlx_data *mlx_data)
+{
+	mlx_data->win_ptr = mlx_new_window(
+		mlx_data->mlx_ptr,
+		mlx_data->width,
+		mlx_data->hight,
+		mlx_data->title
+		);
+	
+}
+
 /*
  * This function sets everything nessary to run the window
  */
-void	initializate_window(t_mlx_data *mlx_data)
+void	set_window(t_mlx_data *mlx_data)
 {
-	mlx_data = init_mlx_data();
-	set_events(mlx_data);	
+	ft_printf("Building window...\n");	
+	initialize_window(mlx_data);
+	set_events(mlx_data);
+	ft_printf("Window built...\n");
 }
 

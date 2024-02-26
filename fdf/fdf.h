@@ -50,19 +50,19 @@ typedef struct	s_element
 	int						scale;
 } t_element;*/
 
-typedef struct	s_frame {
+typedef struct	s_img {
 	void	*img;
 	char	*addr;
 	int	bits_per_pixel;
 	int	line_length;
 	int	endian;
-}	t_frame;
+}	t_img;
 
 typedef struct	s_mlx_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*img_ptr;
+	t_img	img;
 	int	width;
 	int	hight;
 	char	*title;
@@ -84,21 +84,20 @@ typedef struct	s_world_coor
 
 // Functions ------------------------------
 
-// Window section
-void	set_events(t_mlx_data data);
+// Hooks
 void	minimize_window(t_mlx_data *data);
 void	end_program(t_mlx_data *data);
-void	run_window();
-void	initializate_window();
-t_mlx_data	init_mlx_data();
+
+// Window section
+void	set_events(t_mlx_data *data);
+void	set_window();
 
 // Models manager section
 int	get_columns_num(char *line);
 int	get_item_value(char *str, int end);
 
-// Frame builder section
-t_mlx_data	*init_mlx_data();
-t_mlx_data	*build_frame();
+// Image builder section
+void	build_image(t_mlx_data *mlx_data, char *file_name);
 
 //utils
 int	convert_3d_to_2d(int coordinate, int z_coordinate, int a);
