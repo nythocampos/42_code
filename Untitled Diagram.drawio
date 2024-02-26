@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-26T21:41:54.444Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="QrpNGznfUOmF8rboNyFu" version="23.1.6" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-02-26T21:43:22.367Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="BVxBkowYQwymqU4MUZ4O" version="23.1.6" type="github" pages="4">
   <diagram name="flow" id="aBuU1QujseAlj-02DdNP">
     <mxGraphModel dx="1045" dy="588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -185,7 +185,7 @@
         <mxCell id="iyW4xrd2CfbeKw3dvq5Z-2" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="iyW4xrd2CfbeKw3dvq5Z-1" vertex="1">
           <mxGeometry y="26" width="160" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="iyW4xrd2CfbeKw3dvq5Z-3" value="Create the list of nodes from a fdf file." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="iyW4xrd2CfbeKw3dvq5Z-1" vertex="1">
+        <mxCell id="iyW4xrd2CfbeKw3dvq5Z-3" value="Load all data from a .fdf file and storage it in a list." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="iyW4xrd2CfbeKw3dvq5Z-1" vertex="1">
           <mxGeometry y="34" width="160" height="46" as="geometry" />
         </mxCell>
         <mxCell id="iyW4xrd2CfbeKw3dvq5Z-4" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="iyW4xrd2CfbeKw3dvq5Z-1" vertex="1">
