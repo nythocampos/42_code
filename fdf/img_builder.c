@@ -31,16 +31,21 @@ static void	set_pixels(t_mlx_data *mlx_data, t_world_coor *world_coor)
 	int	new_x;
 	int	new_y;
 	int	a;
-
-	a = 90;
+	
+	// a = mlx_data->hight / mlx_data->width ?
+	a = 100;
 	// convert 3D to 2D
 	ft_printf("X: %d, Y: %d, Z: %d\n", world_coor->x, world_coor->y, world_coor->z);
 	new_x = convert_3d_to_2d(world_coor->x, world_coor->z, a);
 	ft_printf("new_x: %d\n", new_x);
 	new_y = convert_3d_to_2d(world_coor->y, world_coor->z, a);
 	ft_printf("new_y: %d\n", new_y);
-	new_x = new_x + (mlx_data->width/2);
+	//new_x = new_x + (mlx_data->width/2);
+	//new_x = new_x + (mlx_data->width);
+	//new_x = new_x * -1;
+	new_x = (new_x * -1) + (mlx_data->width/2);
 	new_y = new_y + (mlx_data->hight/2);
+	//new_y = new_y + (mlx_data->hight);
 	my_mlx_pixel_put(mlx_data->img, new_x, new_y, 0x33FFC4);
 }
 
@@ -51,12 +56,13 @@ static void	draw_line(char *line, int line_num, t_mlx_data *mlx_data)
 	int   	item_value;
 	int	columns_num;
 	int	lst_index;
-	// !FIX world_coor
+	int	mult;
 	t_world_coor	world_coor;
 
 	index = 1;
 	lst_index = 0;
 	column_num = 0;
+	mult = 50;
 	if (!line)
 		return;
 	columns_num = get_columns_num(line);
@@ -70,9 +76,9 @@ static void	draw_line(char *line, int line_num, t_mlx_data *mlx_data)
 			//X: column_num;
 			//Y: item_value; !!!! FIX: Y item_value
 			//Z: line_num;
-			world_coor.x = (column_num * 100);
-			world_coor.y = (item_value * 100);
-			world_coor.z = (line_num * 100);
+			world_coor.x = (column_num * (mult * 2));
+			world_coor.y = (item_value * (mult));
+			world_coor.z = (line_num * (mult / 2));
 			set_pixels(mlx_data, &world_coor);
 			column_num++;
 			lst_index++;
