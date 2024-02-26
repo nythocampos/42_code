@@ -18,7 +18,7 @@ int handle_keys(int key_num, t_mlx_data *data)
   // ESC or X button are pressed
   if (key_num == XK_Escape)
   {
-    ft_printf("ESC pressed");
+    ft_printf("ESC pressed\n");
     end_program(data);
   }
   //if (key_num == )
@@ -27,5 +27,5 @@ int handle_keys(int key_num, t_mlx_data *data)
 
 void	set_events(t_mlx_data *data)
 {
-	mlx_key_hook(data->win_ptr,  handle_keys, &data);
+	mlx_key_hook(data->win,  handle_keys, &data);
 }

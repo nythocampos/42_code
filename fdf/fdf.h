@@ -60,9 +60,9 @@ typedef struct	s_img {
 
 typedef struct	s_mlx_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
+	void	*mlx;
+	void	*win;
+	t_img	*img;
 	int	width;
 	int	hight;
 	char	*title;

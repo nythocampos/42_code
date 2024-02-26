@@ -22,8 +22,8 @@ void	minimize_window(t_mlx_data *mlx_data)
 
 void	end_program(t_mlx_data *mlx_data)
 {
-	mlx_destroy_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
-  	mlx_destroy_image(mlx_data->mlx_ptr, mlx_data->img.img);
-	free(mlx_data->mlx_ptr);
+	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
+  	mlx_destroy_image(mlx_data->mlx, mlx_data->img->img);
+	free(mlx_data->mlx);
 	exit(1);
 }

@@ -39,16 +39,17 @@ int	main(void)
 {
 	t_mlx_data	mlx_data;
 
-	mlx_data.mlx_ptr = mlx_init();
+	mlx_data.mlx = mlx_init();
 	mlx_data.title = ft_strdup("FDF");
-	mlx_data.width = 200;
-	mlx_data.hight = 200;
+	mlx_data.width = 1300;
+	mlx_data.hight = 700;
 	//TODO: Add a way to recive the file name
-	set_window(&mlx_data);
+	set_window(&mlx_data);	
 	// set image / call frame_builder
 	build_image(&mlx_data, "42.fdf");
 	// run window
-	mlx_loop(mlx_data.mlx_ptr);
-	// free the mlx_data->mlx.ptr
+	set_events(&mlx_data);
+	mlx_loop(mlx_data.mlx);
+	// free the mlx_data->mlx
 	return (0);
 }

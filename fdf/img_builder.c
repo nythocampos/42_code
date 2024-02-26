@@ -12,16 +12,15 @@
 
 #include "fdf.h"
 
-
 /*
  * This function 
  */
 static void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	int	offset;
+	
+	offset = (img->line_length *y) + (x*(img->bits_per_pixel/8));
+	*((unsigned int*)(offset + img->addr)) = color;
 }
 
 /* 
@@ -99,31 +98,57 @@ static void	load_terrain_model(int file_df, t_img *img)
 	}
 }
 
+static void	set_background(t_mlx_data *mlx_data, int color)
+{
+	//return;
+	for (int y = 0; y < mlx_data->hight; ++y)	
+	{
+		for (int x = 0; x < mlx_data->width; ++x)
+		{
+			my_mlx_pixel_put(
+				mlx_data->img,
+				x, 
+				y, 
+				color);
+		}
+	}
+}
+
 void	build_image(t_mlx_data *mlx_data, char *file_name)
 {
 	int	fd;
+	t_img	img;
 
 	ft_printf("Building img... \n");
 	fd = open(file_name, O_RDONLY);
 	ft_printf("Setting image address ...\n");
-	mlx_data->img.img = mlx_new_image(
-		mlx_data->mlx_ptr,
+
+	ft_printf("1 img: %d\n", img.img);
+	img.img = mlx_new_image(
+		mlx_data->mlx,
 		mlx_data->width,
 		mlx_data->hight
-			);
-	mlx_data->img.addr = mlx_get_data_addr(
-		mlx_data->img.img,
-		&mlx_data->img.bits_per_pixel,
-		&mlx_data->img.line_length,
-		&mlx_data->img.endian);
+		);
+	img.addr = mlx_get_data_addr(
+		img.img,
+		&img.bits_per_pixel,
+		&img.line_length,
+		&img.endian);
 	// Test
 	ft_printf("Building pixel test... \n");
-	my_mlx_pixel_put(&mlx_data->img, 5, 5, 0x00FF0000);
+	
+	mlx_data->img = &img;	
+	set_background(mlx_data, 0x00000000);
+	my_mlx_pixel_put(mlx_data->img, 5, 5, 0x33FFC4);
+	//my_mlx_pixel_put(mlx_data->img, 10, 10, 0x33FFC4);
 	// ---
-	load_terrain_model(fd, &mlx_data->img);
+	load_terrain_model(fd, &img);
+	ft_printf("2 img: %d\n", img.img);
+
 	mlx_put_image_to_window(
-		mlx_data->mlx_ptr,
-		mlx_data->win_ptr,
-		mlx_data->img.img, 0, 0);
+		mlx_data->mlx,
+		mlx_data->win,
+		img.img, 0, 0);
+
 	ft_printf("Image built. \n");
 }
