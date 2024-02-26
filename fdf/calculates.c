@@ -11,8 +11,7 @@ int	convert_3d_to_2d(int coordinate, int z_coordinate, int a)
 {
 	int	result;
 
-	result = 0;
-	result = coordinate / z_coordinate * tan(a / 2);
+	result = coordinate / (z_coordinate * tan(a / 2));
 	return (result);
 }
 

@@ -27,8 +27,6 @@ static void	initialize_window(t_mlx_data *mlx_data)
  */
 void	set_window(t_mlx_data *mlx_data)
 {
-	ft_printf("Building window...\n");	
 	initialize_window(mlx_data);	
-	ft_printf("Window built...\n");
 }
 

@@ -26,21 +26,25 @@ static void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 /* 
  * This function set pixels to defined positions on the screen
  * */
-static void	set_pixels(t_img *img, t_world_coor world_coor)
+static void	set_pixels(t_mlx_data *mlx_data, t_world_coor *world_coor)
 {
 	int	new_x;
 	int	new_y;
 	int	a;
 
-	a = 60;
+	a = 90;
 	// convert 3D to 2D
-	ft_printf("X: %d, Y: %d, Z: %d\n", world_coor.x, world_coor.y, world_coor.z);
-	new_x = convert_3d_to_2d(world_coor.x, world_coor.z, a);
-	new_y = convert_3d_to_2d(world_coor.y, world_coor.z, a);
-	my_mlx_pixel_put(img->img, new_x, new_y, COLOR);
+	ft_printf("X: %d, Y: %d, Z: %d\n", world_coor->x, world_coor->y, world_coor->z);
+	new_x = convert_3d_to_2d(world_coor->x, world_coor->z, a);
+	ft_printf("new_x: %d\n", new_x);
+	new_y = convert_3d_to_2d(world_coor->y, world_coor->z, a);
+	ft_printf("new_y: %d\n", new_y);
+	new_x = new_x + (mlx_data->width/2);
+	new_y = new_y + (mlx_data->hight/2);
+	my_mlx_pixel_put(mlx_data->img, new_x, new_y, 0x33FFC4);
 }
 
-static void	draw_line(char *line, int line_num, t_img *img)
+static void	draw_line(char *line, int line_num, t_mlx_data *mlx_data)
 {
 	int   	index;
 	int   	column_num;
@@ -53,7 +57,6 @@ static void	draw_line(char *line, int line_num, t_img *img)
 	index = 1;
 	lst_index = 0;
 	column_num = 0;
-	line_num = 0;
 	if (!line)
 		return;
 	columns_num = get_columns_num(line);
@@ -67,10 +70,10 @@ static void	draw_line(char *line, int line_num, t_img *img)
 			//X: column_num;
 			//Y: item_value; !!!! FIX: Y item_value
 			//Z: line_num;
-			world_coor.x = column_num;
-			world_coor.y = item_value;
-			world_coor.z = line_num;
-			set_pixels(img, world_coor);
+			world_coor.x = (column_num * 100);
+			world_coor.y = (item_value * 100);
+			world_coor.z = (line_num * 100);
+			set_pixels(mlx_data, &world_coor);
 			column_num++;
 			lst_index++;
 		}
@@ -79,9 +82,8 @@ static void	draw_line(char *line, int line_num, t_img *img)
 }
 
 //TODO: move this function to other file related with files loading
-static void	load_terrain_model(int file_df, t_img *img)
+static void	load_terrain_model(int file_df, t_mlx_data *mlx_data)
 {
-	return;
 	int	line_num;
 	char	*temp_line;
 
@@ -93,14 +95,13 @@ static void	load_terrain_model(int file_df, t_img *img)
 	{
 		free(temp_line);
 		temp_line = get_next_line(file_df);
-		draw_line(temp_line, line_num, img);
+		draw_line(temp_line, line_num, mlx_data);
 		line_num++;
 	}
 }
 
 static void	set_background(t_mlx_data *mlx_data, int color)
 {
-	//return;
 	for (int y = 0; y < mlx_data->hight; ++y)	
 	{
 		for (int x = 0; x < mlx_data->width; ++x)
@@ -123,7 +124,6 @@ void	build_image(t_mlx_data *mlx_data, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	ft_printf("Setting image address ...\n");
 
-	ft_printf("1 img: %d\n", img.img);
 	img.img = mlx_new_image(
 		mlx_data->mlx,
 		mlx_data->width,
@@ -139,11 +139,10 @@ void	build_image(t_mlx_data *mlx_data, char *file_name)
 	
 	mlx_data->img = &img;	
 	set_background(mlx_data, 0x00000000);
-	my_mlx_pixel_put(mlx_data->img, 5, 5, 0x33FFC4);
+	//my_mlx_pixel_put(mlx_data->img, 5, 5, 0x33FFC4);
 	//my_mlx_pixel_put(mlx_data->img, 10, 10, 0x33FFC4);
 	// ---
-	load_terrain_model(fd, &img);
-	ft_printf("2 img: %d\n", img.img);
+	load_terrain_model(fd, mlx_data);
 
 	mlx_put_image_to_window(
 		mlx_data->mlx,
