@@ -12,70 +12,31 @@
 
 #include "fdf.h"
 
-int	get_columns_num(char *line)
-{
-	int	index;
-	int	column_num;
-
-	index = 1;
-	column_num = 0;
-	while (line[index] != '\0')
-	{
-		if ((line[index - 1] >= 48 && line[index - 1] <= 57) && 
-			(line[index] < 48 || line[index] > 57))
-			column_num++;
-		index++;
-	}
-	return (column_num);
-}
-
-int get_item_value(char *str, int end)
-{
-	int   num;
-	char  *str_num;
-	int   start;
-	int   index;
-
-	start = end;
-	index = 0;
-	num = 0;
-	while (str[start - 1] >= 48 && str[start - 1] <= 57)
-		start--;
-	str_num = (char *) malloc(sizeof(char) * (end - start + 1));
-	if (!str_num)
-		return (0);
-	while (start <= end)
-	{
-		str_num[index] = str[start];
-		index++;
-		start++;
-	}
-	str_num[index] = '\0';
-	num = ft_atoi(str_num);
-	free(str_num);
-	return (num);
-}
 /*
 * This function is used to choose the process to follow
 * considering the format of model to load
 */
-/*
-t_element	*load_model(char *file_name)
-{
-	char  				*file_extension;
-	struct s_element	*model;
-	int	  				extension_len;
- 	int   				file_fd;
 
-	// if the file loaded
-	file_extension = ft_strchr(file_name, 46);
-	extension_len = ft_strlen(file_extension);
-	file_fd = open(file_name, O_RDONLY);
-	if (ft_strncmp(file_extension, ".fdf", extension_len) == 0)
+t_list	*load_model(char *file_name)
+{
+	//char  	*file_extension;
+	t_list	*model;
+	//int	extension_len;
+ 	int	fd;
+
+	//file_extension = ft_strchr(file_name, 46);
+	//extension_len = ft_strlen(file_extension);
+	ft_printf("file name: %s \n", file_name);
+	fd = open("42.fdf", O_RDONLY);
+	model = load_terrain_model(fd);
+	//TODO: add close
+	
+	/*if (ft_strncmp(file_extension, ".fdf", extension_len) == 0)
 	{
 		// call process to load fdf file
-    	model = load_terrain_model(file_fd);	
-	 	ft_printf("Fdf file loaded \n");
+		ft_printf("Loading fdf file fd: %d... \n", file_fd);
+    		model = load_terrain_model(file_fd);
+	 	ft_printf("FDF file loaded \n");
 	}
 	else
 	{
@@ -83,7 +44,7 @@ t_element	*load_model(char *file_name)
 		model = load_terrain_model(file_fd);
 		// call process to load obj file
 		ft_printf("Obj file loaded \n");
-	}
+	}*/
 
 	return (model);
-}*/
+}

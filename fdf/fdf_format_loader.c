@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_loader.c                                      :+:      :+:    :+:   */
+/*   fdf_format_loader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,163 +12,77 @@
 
 #include "fdf.h"
 
-static int	get_columns_num(char *line)
+static t_w_cor	*load_line(char *line, int row_num)
 {
-	int	index;
-	int	column_num;
+	int   	index;
+	int   	col_num;
+	int	cols_quantity;
+	t_w_cor	*pts_list;
 
 	index = 1;
-	column_num = 0;
-	while (line[index] != '\0')
-	{
-		if ((line[index - 1] >= 48 && line[index - 1] <= 57) && 
-			(line[index] < 48 || line[index] > 57))
-			column_num++;
-		index++;
-	}
-	return (column_num);
-}
-
-static int get_item_value(char *str, int end)
-{
-	int   num;
-	char  *str_num;
-	int   start;
-	int   index;
-
-	start = end;
-	index = 0;
-	num = 0;
-	while (str[start - 1] >= 48 && str[start - 1] <= 57)
-		start--;
-	str_num = (char *) malloc(sizeof(char) * (end - start + 1));
-	if (!str_num)
-		return (0);
-	while (start <= end)
-	{
-		str_num[index] = str[start];
-		index++;
-		start++;
-	}
-	str_num[index] = '\0';
-	num = ft_atoi(str_num);
-	free(str_num);
-	return (num);
-}
-
-static t_element_node	**convert_line(char *line, int line_num)
-{
-	int   					index;
-	int   					column_num;
-	int   					item_value;
-	int						columns_num;
-	struct s_coordinates	*coor;
-	struct s_element_node	*element_node;
-	struct s_element_node	**nodes_list;
-	int						lst_index;
-
-	index = 1;
-	lst_index = 0;
-	column_num = 0;
-	line_num = 0;
-	if (!line)
+	col_num = 1;
+	cols_quantity = get_columns_num(line);
+	pts_list = NULL;
+	ft_printf("cols quantity: %d\n", cols_quantity);
+	ft_printf("OK 1 col num: %d\n\n", col_num);
+	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_quantity + 1));
+	if (!pts_list)
 		return (NULL);
-	columns_num = get_columns_num(line);
-	nodes_list = malloc(sizeof(t_element_node) * (columns_num + 1));
-	if (!nodes_list)
-		return (NULL);
-	while (line[index] != '\0' && lst_index < columns_num)
+	
+	while (line[index] != '\0' && col_num <= cols_quantity)
 	{
-		if ((line[index - 1] >= 48 && line[index - 1] <= 57) && 
-			(line[index] < 48 || line[index] > 57))
-		{
-			item_value = get_item_value(line, index);
-
-			coor = malloc(sizeof(t_coordinates) * 1);
-			element_node = malloc(sizeof(t_element_node) * 1);
-
-			coor->x = column_num;
-			// !!!! FIX item_value
-			coor->y = item_value;
-			coor->z = line_num;
-
-			//!!!! check if coor is being passed to position
-			// maybe adding a & this can be changed
-			element_node->position = coor;
-			//	define the list of nodes linked to this node
-			//	element_node->linked_to
-			nodes_list[lst_index] = element_node;
-			//!! Free element_node here because the direction of the node was
-			// passed to the nodes_list[lst_index] it is the same with coor
-			column_num++;
-			lst_index++;
+		if (on_item(line, index) == 1) 
+		{			
+			pts_list[col_num].x = col_num - 1;
+			pts_list[col_num].y = get_item_value(line, index);
+			pts_list[col_num].z = row_num;
+			pts_list[col_num].id = col_num - 1;
+			ft_printf("x:%d, ", pts_list[col_num].x);
+			ft_printf("y:%d,", pts_list[col_num].y);
+			ft_printf("z:%d,", pts_list[col_num].z);
+			ft_printf("id:%d,", pts_list[col_num].id);
+			ft_printf("col num: %d\n\n", col_num);
+			col_num++;
 		}
 		index++;
 	}
-	nodes_list[index] = NULL;
-	return (nodes_list);
+	pts_list[col_num - 1].id = -1;
+	return(&pts_list[0]);
 }
 
-static t_element	*initialice_model()
+//TODO: move this function to other file related with files loading
+t_list	*load_terrain_model(int file_df)
 {
-	struct s_element		*model;
-	struct s_coordinates	*coor;
-	
-	coor = malloc(sizeof(t_coordinates) * 1);
-	coor->x = 0;
-	coor->y = 0;
-	coor->z = 0;
-	model = malloc(sizeof(t_element) * 1);
-	model->scale = 1;
-	model->position = coor;
-	return (model);
-}
+	char	*temp_line;
+	t_list	*first_node;
+	t_list	*cur_node;
+	t_list	*last_node;
+	int	row_num;
+	t_w_cor	*pts_list;
 
-/*
- * This function loads the content of the file
- */
-t_element	*load_terrain_model(int file_df)
-{
-	// load file data and convert it to a obj
-	int   					line_num;
-	char  					*temp_line;
-	struct s_element  		*model;
-	struct s_element_node	**nodes_list;
-	struct s_element_node	**temp;
-
-	line_num = 0;
+	row_num = 0;
+	last_node = NULL;
+	cur_node = NULL;
 	temp_line = (char *) malloc(sizeof(char) * 1);
-	nodes_list = malloc(sizeof(t_element_node) * 1);
-	temp = malloc(sizeof(t_element_node) * 1);
-
-	if (!temp_line || !nodes_list || !temp)
+	if (!temp_line)
 		return (NULL);
-
-	temp_line[0] = '\0';
-	temp[0] = NULL;
-	nodes_list[0] = NULL;
-	model = initialice_model();
-
-	if (!model)
-		return (NULL);
-	while (temp_line)
+	while (temp_line != NULL)
 	{
-		ft_printf("Test 0\n");
 		free(temp_line);
-		ft_printf("Test 0.1\n");
 		temp_line = get_next_line(file_df);
-		ft_printf("%s", temp_line);
-		temp = convert_line(temp_line, line_num);
-		// append nodes_list to the element
-		ft_printf("temp converted\n");
-		nodes_list = lst_join(nodes_list, temp);
-		if (!nodes_list)
-			return (NULL);
-		line_num++;
+		ft_printf("line: %s\n", temp_line);	
+		if (temp_line != NULL)
+		{
+			pts_list = load_line(temp_line, row_num);
+			cur_node = ft_lstnew((void *) pts_list);
+			if (last_node == NULL)
+				first_node = cur_node;
+			ft_lstadd_back(&last_node, cur_node);
+		}
+		row_num++;
 	}
-	ft_printf("Fill shape finished\n");
-	free_nodes_list(temp);
-	model->shape = nodes_list;
-	return (model);
+	free(temp_line);
+	// Free pointers cur, last
+	return (first_node);
 }
 

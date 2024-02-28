@@ -28,29 +28,47 @@
 // structs ------------------------------
 
 // a node is the most basic shape
+// matrix coordinates
+// world coordinates {x,y,z}
 
-/*typedef struct s_coordinates
+// world coordinates
+typedef struct
 {
 	int	x;
 	int	y;
 	int	z;
-} t_coordinates;
+	int	id;
+}	t_w_cor;
 
-typedef struct s_element_node
+// screen coordinates {x, y}
+typedef struct
 {
-	struct s_coordinates	*position;
-	struct s_coordinates	**linked_to;
+	int	x;
+	int	y;
+}	t_s_cor;
 
-} t_element_node;
-
-typedef struct	s_element
+// world triangle [{x,y,z},[{x,y,z},[{x,y,z}]
+typedef struct
 {
-	struct s_coordinates	*position;
-	struct s_element_node	**shape;
-	int						scale;
-} t_element;*/
+	t_w_cor	*w_cor;
+}	t_w_tri;
 
-typedef struct	s_img {
+// screen triangle [{x,y},[{x,y},[{x,y}]
+typedef struct
+{
+	t_s_cor	*scr_cor;
+}	t_s_tri;
+// --- --- ---
+/*typedef struct	s_p_mtr
+{
+	float	f_near = 0.1;
+	float	f_far = 1000.0;
+	float	f_fov = 90.0;
+	float	f_asp_rat = hight / width;
+	float	f_fov_rat = 1.0 / tan(f_fov *0.5/ 180.0 * 3.14159);
+}	t_p_mtr;*/
+
+typedef struct	{
 	void	*img;
 	char	*addr;
 	int	bits_per_pixel;
@@ -58,7 +76,7 @@ typedef struct	s_img {
 	int	endian;
 }	t_img;
 
-typedef struct	s_mlx_data
+typedef struct	
 {
 	void	*mlx;
 	void	*win;
@@ -67,20 +85,6 @@ typedef struct	s_mlx_data
 	int	hight;
 	char	*title;
 }	t_mlx_data;
-
-typedef struct	s_perspective
-{
-	int	a;
-	int	n;
-}	t_perspective;
-
-
-typedef struct	s_world_coor
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_world_coor;
 
 // Functions ------------------------------
 
@@ -95,9 +99,12 @@ void	set_window();
 // Models manager section
 int	get_columns_num(char *line);
 int	get_item_value(char *str, int end);
+int	on_item(char *line, int index);
+t_list	*load_model(char *file_name);
+t_list	*load_terrain_model(int file_df);
 
 // Image builder section
-void	build_image(t_mlx_data *mlx_data, char *file_name);
+void	build_image(t_mlx_data *mlx_data);
 
 //utils
 int	convert_3d_to_2d(int coordinate, int z_coordinate, int a);

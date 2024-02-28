@@ -26,6 +26,7 @@ static void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 /* 
  * This function set pixels to defined positions on the screen
  * */
+/*
 static void	set_pixels(t_mlx_data *mlx_data, t_world_coor *world_coor)
 {
 	int	new_x;
@@ -47,9 +48,10 @@ static void	set_pixels(t_mlx_data *mlx_data, t_world_coor *world_coor)
 	new_y = new_y + (mlx_data->hight/2);
 	//new_y = new_y + (mlx_data->hight);
 	my_mlx_pixel_put(mlx_data->img, new_x, new_y, 0x33FFC4);
-}
+}*/
 
-static void	draw_line(char *line, int line_num, t_mlx_data *mlx_data)
+//! DEPRECATED
+/*static void	draw_line(char *line, int line_num, t_mlx_data *mlx_data)
 {
 	int   	index;
 	int   	column_num;
@@ -85,26 +87,7 @@ static void	draw_line(char *line, int line_num, t_mlx_data *mlx_data)
 		}
 		index++;
 	}
-}
-
-//TODO: move this function to other file related with files loading
-static void	load_terrain_model(int file_df, t_mlx_data *mlx_data)
-{
-	int	line_num;
-	char	*temp_line;
-
-	line_num = 0;
-	temp_line = (char *) malloc(sizeof(char) * 1);
-	if (!temp_line)
-		return;
-	while (temp_line)
-	{
-		free(temp_line);
-		temp_line = get_next_line(file_df);
-		draw_line(temp_line, line_num, mlx_data);
-		line_num++;
-	}
-}
+}*/
 
 static void	set_background(t_mlx_data *mlx_data, int color)
 {
@@ -121,15 +104,12 @@ static void	set_background(t_mlx_data *mlx_data, int color)
 	}
 }
 
-void	build_image(t_mlx_data *mlx_data, char *file_name)
+void	build_image(t_mlx_data *mlx_data)
 {
-	int	fd;
 	t_img	img;
 
 	ft_printf("Building img... \n");
-	fd = open(file_name, O_RDONLY);
 	ft_printf("Setting image address ...\n");
-
 	img.img = mlx_new_image(
 		mlx_data->mlx,
 		mlx_data->width,
@@ -147,8 +127,8 @@ void	build_image(t_mlx_data *mlx_data, char *file_name)
 	set_background(mlx_data, 0x00000000);
 	//my_mlx_pixel_put(mlx_data->img, 5, 5, 0x33FFC4);
 	//my_mlx_pixel_put(mlx_data->img, 10, 10, 0x33FFC4);
-	// ---
-	load_terrain_model(fd, mlx_data);
+	// ---	
+	//load_terrain_model(fd, mlx_data);
 
 	mlx_put_image_to_window(
 		mlx_data->mlx,

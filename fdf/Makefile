@@ -24,7 +24,7 @@ CFLAGS			= -Wall -Wextra -Werror -g
 # Image builder section
 IMG_SRC			= img_builder.c
 # Models manager section
-MODLS_SRC		= models_manager.c #fdf_format_loader.c
+MODLS_SRC		= models_manager.c fdf_format_loader.c fdf_format_utils.c
 # Window manager section
 WIN_SRC			= window_manager.c hooks.c events_manager.c
 
