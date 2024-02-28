@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-27T14:20:34.616Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="wBeHRu1GBEbWN_rWDNr9" version="23.1.7" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2024-02-28T10:04:38.112Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="FigBkX2DVm-bXkwnMmkp" version="23.1.7" type="github" pages="4">
   <diagram name="flow" id="aBuU1QujseAlj-02DdNP">
     <mxGraphModel dx="1045" dy="588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -32,7 +32,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="mVYhmjhfYFTRFEVsNTue" name="data layer">
-    <mxGraphModel dx="1895" dy="588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1895" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -96,18 +96,6 @@
         <mxCell id="eB11fWtXM781tJoJPI_v-14" value="int y" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="eB11fWtXM781tJoJPI_v-12" vertex="1">
           <mxGeometry y="60" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="eB11fWtXM781tJoJPI_v-16" value="s_list" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="80" y="340" width="240" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="eB11fWtXM781tJoJPI_v-17" value="This struct is to storage all the data found in a file" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="eB11fWtXM781tJoJPI_v-16" vertex="1">
-          <mxGeometry y="30" width="240" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="_C5l3XgWZMqjpQRKXyxJ-1" value="void&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;*content" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="eB11fWtXM781tJoJPI_v-16" vertex="1">
-          <mxGeometry y="80" width="240" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="eB11fWtXM781tJoJPI_v-19" value="struct s_list *next" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="eB11fWtXM781tJoJPI_v-16" vertex="1">
-          <mxGeometry y="110" width="240" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="eB11fWtXM781tJoJPI_v-26" value="s_projection_matrix" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="360" y="510" width="140" height="150" as="geometry" />
         </mxCell>
@@ -127,7 +115,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="RIVBxEoXH4w1-5JPoeqC" name="classes">
-    <mxGraphModel dx="1895" dy="1688" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1895" dy="1685" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -270,7 +258,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="5Xn4Aonk20tA2w0zakIP" name="flow diagram drawing">
-    <mxGraphModel dx="1045" dy="588" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1045" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
