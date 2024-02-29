@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_manager.c                                   :+:      :+:    :+:   */
+/*   events_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 18:20:09 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/25 18:43:37 by antcampo         ###   ########.fr       */
+/*   Created: 2023/12/29 19:55:03 by antcampo          #+#    #+#             */
+/*   Updated: 2023/12/29 20:03:52 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../../fdf.h"
 
-static void	initialize_window(t_mlx_data *mlx_data)
+// TO CONCIDER: Use an interface to controler the keys pressed
+int handle_keys(int key_num, t_mlx_data *data)
 {
-	mlx_data->win = mlx_new_window(
-		mlx_data->mlx,
-		mlx_data->width,
-		mlx_data->hight,
-		mlx_data->title
-		);
+  // ESC or X button are pressed
+  if (key_num == XK_Escape)
+  {
+    ft_printf("ESC pressed\n");
+    end_program(data);
+  }
+  //if (key_num == )
+  return (0);
 }
 
-/*
- * This function sets everything nessary to run the window
- */
-void	set_window(t_mlx_data *mlx_data)
+void	set_events(t_mlx_data *data)
 {
-	initialize_window(mlx_data);	
+	mlx_key_hook(data->win,  handle_keys, &data);
 }
-

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../../fdf.h"
 
 static t_w_cor	*load_line(char *line, int row_num)
 {
@@ -23,12 +23,9 @@ static t_w_cor	*load_line(char *line, int row_num)
 	col_num = 1;
 	cols_quantity = get_columns_num(line);
 	pts_list = NULL;
-	ft_printf("cols quantity: %d\n", cols_quantity);
-	ft_printf("OK 1 col num: %d\n\n", col_num);
 	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_quantity + 1));
 	if (!pts_list)
 		return (NULL);
-	
 	while (line[index] != '\0' && col_num <= cols_quantity)
 	{
 		if (on_item(line, index) == 1) 
@@ -37,11 +34,6 @@ static t_w_cor	*load_line(char *line, int row_num)
 			pts_list[col_num].y = get_item_value(line, index);
 			pts_list[col_num].z = row_num;
 			pts_list[col_num].id = col_num - 1;
-			ft_printf("x:%d, ", pts_list[col_num].x);
-			ft_printf("y:%d,", pts_list[col_num].y);
-			ft_printf("z:%d,", pts_list[col_num].z);
-			ft_printf("id:%d,", pts_list[col_num].id);
-			ft_printf("col num: %d\n\n", col_num);
 			col_num++;
 		}
 		index++;
@@ -70,7 +62,6 @@ t_list	*load_terrain_model(int file_df)
 	{
 		free(temp_line);
 		temp_line = get_next_line(file_df);
-		ft_printf("line: %s\n", temp_line);	
 		if (temp_line != NULL)
 		{
 			pts_list = load_line(temp_line, row_num);
@@ -82,7 +73,9 @@ t_list	*load_terrain_model(int file_df)
 		row_num++;
 	}
 	free(temp_line);
-	// Free pointers cur, last
+	// !TODO: Free pointers cur, last
+	cur_node = NULL;
+	last_node = NULL;
 	return (first_node);
 }
 

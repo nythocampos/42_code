@@ -16,21 +16,27 @@ LIBFTDIR		= libraries/libft_ulti/
 # Program variables
 PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
-CC				= cc
+CC			= cc
 # IMPLEMENT FLAGS!!!!!
 CFLAGS			= -Wall -Wextra -Werror -g
+INCLUDE			= fdf.h structs.h
 
 # C FILES ---------
 # Image builder section
-IMG_SRC			= img_builder.c
+GRPDIR			= ./src/graphic_module/
+GRAPHIC_MODULE		= $(GRPDIR)img_builder.c
 # Models manager section
-MODLS_SRC		= models_manager.c fdf_format_loader.c fdf_format_utils.c
+FLSDIR			=./src/files_module/
+FILES_MODULE		= $(FLSDIR)models_manager.c $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
 # Window manager section
-WIN_SRC			= window_manager.c hooks.c events_manager.c
+WINDIR			= ./src/window_module/
+WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_manager.c
+# Utils
+UTLDIR			= ./src/utils/
+UTILS			= $(UTLDIR)calculates.c #util.c
 
-GEN_SRC			= fdf.c calculates.c #util.c 
-
-SRCS			= $(GEN_SRC) $(IMG_SRC) $(MODLS_SRC) $(WIN_SRC)
+SRCS			= fdf.c $(UTILS) $(WINDOW_MODULE) $(FILES_MODULE) \
+			  $(GRAPHIC_MODULE)
 # -----------------
 
 # Rules
@@ -54,7 +60,7 @@ build: $(LIBFT) $(MINILIBX)
 	@echo "---->PROGRAM BUILD."
 
 
-%.o: %.c Makefile $(LIBFT)
+%.o: %.c $(INCLUDE) Makefile $(LIBFT)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

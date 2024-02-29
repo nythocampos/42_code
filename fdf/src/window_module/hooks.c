@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events_manager.c                                   :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 19:55:03 by antcampo          #+#    #+#             */
-/*   Updated: 2023/12/29 20:03:52 by antcampo         ###   ########.fr       */
+/*   Created: 2023/12/29 21:01:05 by antcampo          #+#    #+#             */
+/*   Updated: 2024/01/26 17:50:23 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../../fdf.h"
 
-// TO CONCIDER: Use an interface to controler the keys pressed
-int handle_keys(int key_num, t_mlx_data *data)
+void	minimize_window(t_mlx_data *mlx_data)
 {
-  // ESC or X button are pressed
-  if (key_num == XK_Escape)
-  {
-    ft_printf("ESC pressed\n");
-    end_program(data);
-  }
-  //if (key_num == )
-  return (0);
+	mlx_data = malloc(sizeof(t_mlx_data) * 1);
+	if (!mlx_data)
+		return;
+	free(mlx_data);
 }
 
-void	set_events(t_mlx_data *data)
+void	end_program(t_mlx_data *mlx_data)
 {
-	mlx_key_hook(data->win,  handle_keys, &data);
+	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
+  	mlx_destroy_image(mlx_data->mlx, mlx_data->img->img);
+	free(mlx_data->mlx);
+	exit(1);
 }

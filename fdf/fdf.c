@@ -47,7 +47,7 @@ int	main(void)
 {
 	t_mlx_data	mlx_data;
 	t_list		*model;
-
+	
 	mlx_data.mlx = mlx_init();
 	mlx_data.title = ft_strdup("FDF");
 	mlx_data.width = 1300;

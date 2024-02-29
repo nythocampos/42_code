@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   window_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/29 21:01:05 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/26 17:50:23 by antcampo         ###   ########.fr       */
+/*   Created: 2024/01/25 18:20:09 by antcampo          #+#    #+#             */
+/*   Updated: 2024/01/25 18:43:37 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../../fdf.h"
 
-void	minimize_window(t_mlx_data *mlx_data)
+static void	initialize_window(t_mlx_data *mlx_data)
 {
-	mlx_data = malloc(sizeof(t_mlx_data) * 1);
-	if (!mlx_data)
-		return;
-	free(mlx_data);
+	mlx_data->win = mlx_new_window(
+		mlx_data->mlx,
+		mlx_data->width,
+		mlx_data->hight,
+		mlx_data->title
+		);
 }
 
-void	end_program(t_mlx_data *mlx_data)
+/*
+ * This function sets everything nessary to run the window
+ */
+void	set_window(t_mlx_data *mlx_data)
 {
-	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
-  	mlx_destroy_image(mlx_data->mlx, mlx_data->img->img);
-	free(mlx_data->mlx);
-	exit(1);
+	initialize_window(mlx_data);	
 }
+
