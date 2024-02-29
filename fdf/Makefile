@@ -24,14 +24,18 @@ INCLUDE			= fdf.h structs.h
 # C FILES ---------
 # Image builder section
 GRPDIR			= ./src/graphic_module/
-GRAPHIC_MODULE		= $(GRPDIR)img_builder.c
+GRAPHIC_MODULE		= $(GRPDIR)img_builder.c $(GRPDIR)faces_builder.c \
+			$(GRPDIR)screen_coor_builder.c
+
 # Models manager section
 FLSDIR			=./src/files_module/
 FILES_MODULE		= $(FLSDIR)models_manager.c $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
+
 # Window manager section
 WINDIR			= ./src/window_module/
 WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_manager.c
 # Utils
+
 UTLDIR			= ./src/utils/
 UTILS			= $(UTLDIR)calculates.c #util.c
 
