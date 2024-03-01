@@ -13,4 +13,4 @@
 
 // Calculate variables
 #define ROTATION 3.0
-#define	SCALE	1.0
+#define	SCALE	0.5

@@ -78,7 +78,7 @@ static void	draw_line(t_mlx_data *mlx, t_s_cor *a, t_s_cor *b)
 		{
 			set_pixel(
 				mlx->img,
-				temp_x,
+				temp_x,	
 				temp_y,
 				COLOR_B);
 			temp_y = temp_y + step_y;
@@ -104,7 +104,10 @@ static void	draw_face(t_mlx_data *mlx_data, t_s_cor *points)
 	while(end_pts == 0)
 	{
 		a = &points[pts_i];
-
+		ft_printf("Test a.x: %d a.y: %d\n",(int) a->x, (int) a->y);
+		// TODO: !!!FIX NO INITIALIZED VARIABLES IS GETTING 
+		// RANDOM DATA AND THAT MAKES THE SET_PIXELS POINT
+		// TO INVALID MEMORY POSITIONS
 		if (points[pts_i].id == -1)
 		{
 			b = &points[0];
@@ -179,6 +182,10 @@ void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
 	set_background(mlx_data);
 	ft_printf("Drawing model... \n");
 	draw_model(mlx_data, faces_lst);
+
+	/*t_s_cor	a = {10, 10, 0};
+	t_s_cor	b = {500, 500, 0};
+	draw_line(mlx_data, &a, &b);*/
 
 	mlx_put_image_to_window(
 		mlx_data->mlx,

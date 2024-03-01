@@ -32,7 +32,7 @@
 	ft_printf(" --- --- ---\n");
 }*/
 
-/*static void	check_faces(t_face *faces_lst)
+static void	check_faces(t_face *faces_lst)
 {
 	int	index;
 	int	end_faces;
@@ -67,7 +67,7 @@
 			end_faces = 1;
 	}
 	ft_printf(" --- --- ---\n");
-}*/
+}
 
 	// Load all data from the fdf file into a s_model struct considering
 	// the position of the coordinate in the matrix imported.
@@ -104,7 +104,7 @@ int	main(void)
 	ft_printf("Model projected\n");
 
 	// Check projection
-	//check_faces(&faces_list[0]);
+	check_faces(&faces_list[0]);
 	//return (0);
 
 	// Initialize window

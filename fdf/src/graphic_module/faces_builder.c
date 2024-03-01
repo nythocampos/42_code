@@ -27,6 +27,7 @@ float	project_coor(t_w_cor *w_pts, char axis)
 	p_data.f_fov = 90.0;
 	p_data.f_asp_rad = (HEIGHT/WIDTH);
 	p_data.f_fov_rad = (1/tan(p_data.f_fov * 0.5 / 180 * 3.14159));
+	//TODO: CHECK NORMALIZATION between 0 and 2
 	// apply rotation
 	w_pts->z = w_pts->z + ROTATION;
 	// apply projection
