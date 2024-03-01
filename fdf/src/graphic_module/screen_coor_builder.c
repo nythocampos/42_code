@@ -40,15 +40,13 @@ t_face	*build_screen_coors(t_list *model)
 	t_face	*faces_lst;
 	int	index;
 
-	t_s_cor	*temp_pts;
+	//t_s_cor	*temp_pts;
 
 	col_i = 0;
 	index = 0;
 	is_last_line = 0;
 	n_rows = get_rows_num(model); 
-	ft_printf("n_rows %d\n", n_rows);
 	n_cols = get_cols_num((t_w_cor *) model->content);
-	ft_printf("n_cols %d\n", n_cols);
 	faces_lst = (t_face *) malloc(sizeof(t_face) * (n_cols * n_rows));
 	if (!faces_lst)
 		return (NULL);
@@ -58,13 +56,12 @@ t_face	*build_screen_coors(t_list *model)
 		{
 			build_face(model, &faces_lst[index], col_i);
 			
-			//printf("---> Face ID: %d \n", faces_lst[index].id);	
-			temp_pts = faces_lst[index].points;
+			/*temp_pts = faces_lst[index].points;
 			faces_lst[index].id = index;
 			printf("Face ID:%d \n", faces_lst[index].id);
 			printf("X:%.2f, ", temp_pts[0].x);
 			printf("Y:%.2f, ", temp_pts[0].y);
-			printf("ID:%d \n", temp_pts[0].id);
+			printf("ID:%d \n", temp_pts[0].id);*/
 			col_i++;
 			index++;
 		}

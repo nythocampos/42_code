@@ -98,8 +98,8 @@ int	main(void)
 	ft_printf("Model projected\n");
 
 	// Check projection
-	check_faces(&faces_list[0]);
 	return (0);
+	check_faces(&faces_list[0]);
 	// set image / call frame_builder
 	build_image(&mlx_data);
 
