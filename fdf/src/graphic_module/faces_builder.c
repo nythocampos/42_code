@@ -15,32 +15,40 @@ static int	find_face_size(t_list *cur_node, int col_i)
 	return (face_size);
 }
 
-int	project_coor(t_w_cor *w_pts, char axis)
+float	project_coor(t_w_cor *w_pts, char axis)
 {
 	float		result;
 	t_p_data	p_data;
+	float		z_a;
+	float		z_b;
 
 	p_data.f_near = 0.1;
 	p_data.f_far = 1000.0;
 	p_data.f_fov = 90.0;
-	p_data.f_asp_rad = (HIGHT/WIDTH);
+	p_data.f_asp_rad = (HEIGHT/WIDTH);
 	p_data.f_fov_rad = (1/tan(p_data.f_fov * 0.5 / 180 * 3.14159));
+	// apply rotation
+	w_pts->z = w_pts->z + ROTATION;
+	// apply projection
+	z_a = (p_data.f_far / (p_data.f_far - p_data.f_near));
+	z_b = ((-p_data.f_far * p_data.f_near) / 
+		(p_data.f_far - p_data.f_near));
+	w_pts->z = w_pts->z * (z_a + z_b);
 	if (axis == 'x')
-	{
-		// apply rotation
-		w_pts->z = w_pts->z + ROTATION;
-		// apply projection
+	{	
 		result = w_pts->x * (p_data.f_asp_rad * p_data.f_fov_rad);
 		result = result / w_pts->z;
 		// apply scale
-		result = result + SCALE;
-	} 
+		result = result + SCALE;	
+		result = result * (0.5*WIDTH);
+	}
 	else if (axis == 'y')
 	{	
-		w_pts->z = w_pts->z + ROTATION;
 		result = w_pts->y * p_data.f_fov_rad;
 		result = result / w_pts->z;
+		// apply scale
 		result = result + SCALE;
+		result = result * (0.5*HEIGHT);
 	}
 	return (result);
 }

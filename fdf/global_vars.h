@@ -8,7 +8,7 @@
 // Graphic variables ---
 #define COLOR	0x00FF0000
 #define	WIDTH	1300
-#define HIGHT	700
+#define HEIGHT	700
 
 // Calculate variables
 #define ROTATION 3.0

@@ -41,6 +41,8 @@ static void	check_faces(t_face *faces_lst)
 	while(faces_lst[index].id != -1)
 	{
 		points = faces_lst[index].points;
+		printf("Face ID: %d\n", faces_lst[index].id);
+
 		printf("X:%.2f, ", points[0].x);
 		printf("Y:%.2f, ", points[0].y);
 		printf("ID:%d \n", points[0].id);
@@ -98,8 +100,8 @@ int	main(void)
 	ft_printf("Model projected\n");
 
 	// Check projection
-	return (0);
 	check_faces(&faces_list[0]);
+	return (0);
 	// set image / call frame_builder
 	build_image(&mlx_data);
 

@@ -55,9 +55,9 @@ t_face	*build_screen_coors(t_list *model)
 		while (col_i < n_cols)
 		{
 			build_face(model, &faces_lst[index], col_i);
-			
-			/*temp_pts = faces_lst[index].points;
 			faces_lst[index].id = index;
+
+			/*temp_pts = faces_lst[index].points;	
 			printf("Face ID:%d \n", faces_lst[index].id);
 			printf("X:%.2f, ", temp_pts[0].x);
 			printf("Y:%.2f, ", temp_pts[0].y);
@@ -71,6 +71,7 @@ t_face	*build_screen_coors(t_list *model)
 		else
 			model = model->next;
 	}
+	faces_lst[index - 1].id = -1;
 	return (faces_lst);
 }
 
