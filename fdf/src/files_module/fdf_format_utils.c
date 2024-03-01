@@ -15,11 +15,11 @@ int	get_columns_num(char *line)
 	int	index;
 	int	column_num;
 
-	index = 1;
+	index = 0;
 	column_num = 0;
 	while (line[index] != '\0')
 	{
-		if (on_item(line, index))
+		if (on_item(line, (index + 1)))
 			column_num++;
 		index++;
 	}

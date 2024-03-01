@@ -13,7 +13,7 @@
 #include "fdf.h"
 
 #include <stdio.h>
-static void	check_model(void *pts_lst)
+/*static void	check_model(void *pts_lst)
 {
 	int	index;
 	t_w_cor	*w_cor;
@@ -30,7 +30,39 @@ static void	check_model(void *pts_lst)
 		index++;
 	}
 	ft_printf(" --- --- ---\n");
+}*/
+
+static void	check_faces(t_face *faces_lst)
+{
+	int	index;
+	t_s_cor	*points;
+
+	index = 0;
+	while(faces_lst[index].id != -1)
+	{
+		points = faces_lst[index].points;
+		printf("X:%.2f, ", points[0].x);
+		printf("Y:%.2f, ", points[0].y);
+		printf("ID:%d \n", points[0].id);
+
+		ft_printf(" ---\n");
+
+		printf("X:%.2f, ", points[1].x);
+		printf("Y:%.2f, ", points[1].y);
+		printf("ID:%d \n", points[1].id);
+
+		ft_printf(" ---\n");
+
+		printf("X:%.2f, ", points[2].x);
+		printf("Y:%.2f, ", points[2].y);
+		printf("ID:%d \n", points[2].id);
+	
+		ft_printf("||||||||||||||||||||||||\n");
+		index++;
+	}
+	ft_printf(" --- --- ---\n");
 }
+
 	// Load all data from the fdf file into a s_model struct considering
 	// the position of the coordinate in the matrix imported.
 	//
@@ -48,6 +80,7 @@ int	main(void)
 {
 	t_mlx_data	mlx_data;
 	t_list		*model;
+	t_face		*faces_list;
 	
 	// Load model
 	model = load_model("./models/42.fdf");
@@ -56,7 +89,16 @@ int	main(void)
 	ft_printf("Model Loaded\n");
 
 	// Check model
-	ft_lstiter(model, check_model);
+	//ft_lstiter(model, check_model);
+
+	// Project model
+	faces_list = build_screen_coors(model);
+	if(faces_list == NULL)
+		return (0);
+	ft_printf("Model projected\n");
+
+	// Check projection
+	check_faces(&faces_list[0]);
 	return (0);
 	// set image / call frame_builder
 	build_image(&mlx_data);

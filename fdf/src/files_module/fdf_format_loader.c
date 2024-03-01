@@ -19,26 +19,22 @@ static t_w_cor	*load_line(char *line, int row_num)
 	int	cols_num;
 	t_w_cor	*pts_list;
 
-	index = 1;
-	col_i = 1;
+	index = 0;
+	col_i = 0;
 	ft_printf("LINE: %s\n", line);
 	cols_num = get_columns_num(line);
 	pts_list = NULL;
+	// TODO: check this (cols_num + 1) ???
 	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_num + 1));
 	if (!pts_list)
 		return (NULL);
-	while (line[index] != '\0' && col_i <= cols_num)
+	while (line[index] != '\0' && (col_i <= (cols_num - 1)))
 	{
-		if (on_item(line, index) == 1) 
-		{	
-			pts_list[col_i].x =  col_i - 1;
+		if (on_item(line, (index + 1)) == 1){
+			pts_list[col_i].x =  col_i;
 			pts_list[col_i].y =  get_item_value(line, index);
 			pts_list[col_i].z =  row_num;
-			pts_list[col_i].id = col_i - 1;
-			/*ft_printf("POINT X:%d,Y:%d,Z:%d\n",
-					pts_list[col_i].x,
-					pts_list[col_i].y,
-					pts_list[col_i].z);*/
+			pts_list[col_i].id = col_i;
 			col_i++;
 		}
 		index++;

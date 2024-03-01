@@ -2,21 +2,27 @@
 
 #include "../../fdf.h"
 
-static int	get_cols_num(t_s_cor *pts_list)
+#include <stdio.h>
+static int	get_cols_num(t_w_cor *pts_list)
 {
 	int	index;
+	int	n_cols;
 
 	index = 0;
+	n_cols = 1;
 	while(pts_list[index].id != -1)
+	{
 		index++;	
-	return (index);
+		n_cols++;	
+	}
+	return (n_cols);
 }
 
 static int	get_rows_num(t_list *model)
 {
 	int	index;
 
-	index = 0;
+	index = 1;
 	while(model->next != NULL)
 	{
 		model = model->next;
@@ -29,30 +35,45 @@ t_face	*build_screen_coors(t_list *model)
 {
 	int	n_rows;
 	int	n_cols;
-	int	col_index;
+	int	col_i;
 	int	is_last_line;
 	t_face	*faces_lst;
+	int	index;
 
-	col_index = 0;
+	t_s_cor	*temp_pts;
+
+	col_i = 0;
+	index = 0;
 	is_last_line = 0;
-	n_rows = get_cols_num((t_s_cor *) model->content); 
-	n_cols = get_rows_num(model);
-	faces_lst = (t_face *)malloc(sizeof(t_face) * (n_cols * n_rows));
+	n_rows = get_rows_num(model); 
+	ft_printf("n_rows %d\n", n_rows);
+	n_cols = get_cols_num((t_w_cor *) model->content);
+	ft_printf("n_cols %d\n", n_cols);
+	faces_lst = (t_face *) malloc(sizeof(t_face) * (n_cols * n_rows));
 	if (!faces_lst)
 		return (NULL);
-	while(!is_last_line)
+	while(is_last_line == 0)
 	{
-		while (col_index <= n_cols)
+		while (col_i < n_cols)
 		{
-			build_face(model, &faces_lst[col_index], col_index);
-			col_index++;
+			build_face(model, &faces_lst[index], col_i);
+			
+			//printf("---> Face ID: %d \n", faces_lst[index].id);	
+			temp_pts = faces_lst[index].points;
+			faces_lst[index].id = index;
+			printf("Face ID:%d \n", faces_lst[index].id);
+			printf("X:%.2f, ", temp_pts[0].x);
+			printf("Y:%.2f, ", temp_pts[0].y);
+			printf("ID:%d \n", temp_pts[0].id);
+			col_i++;
+			index++;
 		}
+		col_i = 0;
 		if(model->next == NULL)
 			is_last_line = 1;
 		else
 			model = model->next;
 	}
 	return (faces_lst);
-
 }
 
