@@ -26,10 +26,16 @@ t_list	*load_model(char *file_name)
 
 	//file_extension = ft_strchr(file_name, 46);
 	//extension_len = ft_strlen(file_extension);
-	ft_printf("file name: %s \n", file_name);
-	fd = open("42.fdf", O_RDONLY);
+	ft_printf("File name: %s \n", file_name);
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("File %s not found\n", file_name);
+		return (NULL);
+	}
 	model = load_terrain_model(fd);
 	//TODO: add close
+	close(fd);
 	
 	/*if (ft_strncmp(file_extension, ".fdf", extension_len) == 0)
 	{

@@ -15,30 +15,35 @@
 static t_w_cor	*load_line(char *line, int row_num)
 {
 	int   	index;
-	int   	col_num;
-	int	cols_quantity;
+	int   	col_i;
+	int	cols_num;
 	t_w_cor	*pts_list;
 
 	index = 1;
-	col_num = 1;
-	cols_quantity = get_columns_num(line);
+	col_i = 1;
+	ft_printf("LINE: %s\n", line);
+	cols_num = get_columns_num(line);
 	pts_list = NULL;
-	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_quantity + 1));
+	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_num + 1));
 	if (!pts_list)
 		return (NULL);
-	while (line[index] != '\0' && col_num <= cols_quantity)
+	while (line[index] != '\0' && col_i <= cols_num)
 	{
 		if (on_item(line, index) == 1) 
-		{			
-			pts_list[col_num].x = col_num - 1;
-			pts_list[col_num].y = get_item_value(line, index);
-			pts_list[col_num].z = row_num;
-			pts_list[col_num].id = col_num - 1;
-			col_num++;
+		{	
+			pts_list[col_i].x =  col_i - 1;
+			pts_list[col_i].y =  get_item_value(line, index);
+			pts_list[col_i].z =  row_num;
+			pts_list[col_i].id = col_i - 1;
+			/*ft_printf("POINT X:%d,Y:%d,Z:%d\n",
+					pts_list[col_i].x,
+					pts_list[col_i].y,
+					pts_list[col_i].z);*/
+			col_i++;
 		}
 		index++;
 	}
-	pts_list[col_num - 1].id = -1;
+	pts_list[col_i - 1].id = -1;
 	return(&pts_list[0]);
 }
 
@@ -49,10 +54,10 @@ t_list	*load_terrain_model(int file_df)
 	t_list	*first_node;
 	t_list	*cur_node;
 	t_list	*last_node;
-	int	row_num;
-	t_w_cor	*pts_list;
+	int	row_i;
+	t_w_cor	*pts_lst;
 
-	row_num = 0;
+	row_i = 0;
 	last_node = NULL;
 	cur_node = NULL;
 	temp_line = (char *) malloc(sizeof(char) * 1);
@@ -64,13 +69,13 @@ t_list	*load_terrain_model(int file_df)
 		temp_line = get_next_line(file_df);
 		if (temp_line != NULL)
 		{
-			pts_list = load_line(temp_line, row_num);
-			cur_node = ft_lstnew((void *) pts_list);
+			pts_lst = load_line(temp_line, row_i);
+			cur_node = ft_lstnew((void *) pts_lst);
 			if (last_node == NULL)
 				first_node = cur_node;
 			ft_lstadd_back(&last_node, cur_node);
 		}
-		row_num++;
+		row_i++;
 	}
 	free(temp_line);
 	// !TODO: Free pointers cur, last

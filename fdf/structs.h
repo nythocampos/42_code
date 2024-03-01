@@ -2,9 +2,9 @@
 // world coordinates {x,y,z}
 typedef struct
 {
-	float	x;
-	float	y;
-	float	z;
+	int	x;
+	int	y;
+	int	z;
 	int	id;
 }	t_w_cor;
 

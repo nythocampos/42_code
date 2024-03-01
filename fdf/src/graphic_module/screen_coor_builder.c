@@ -55,3 +55,4 @@ t_face	*build_screen_coors(t_list *model)
 	return (faces_lst);
 
 }
+

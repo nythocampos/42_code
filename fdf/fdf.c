@@ -12,16 +12,17 @@
 
 #include "fdf.h"
 
-static void	check_model(void *pts_list)
+#include <stdio.h>
+static void	check_model(void *pts_lst)
 {
 	int	index;
 	t_w_cor	*w_cor;
 
 	index = 1;
-	w_cor =  (t_w_cor *) pts_list;
-	while(w_cor[index].id <= 19)
+	w_cor =  (t_w_cor *) pts_lst;
+	while(w_cor[index - 1].id != -1)
 	{
-		ft_printf("X:%d,Y:%d,Z:%d---|ID:%d \n",
+		printf("X:%d, Y:%d, Z:%d ---|ID:%d \n",
 			w_cor[index].x,
 			w_cor[index].y,
 			w_cor[index].z,
@@ -48,34 +49,24 @@ int	main(void)
 	t_mlx_data	mlx_data;
 	t_list		*model;
 	
+	// Load model
+	model = load_model("./models/42.fdf");
+	if(model == NULL)
+		return (0);
+	ft_printf("Model Loaded\n");
+
+	// Check model
+	ft_lstiter(model, check_model);
+	return (0);
+	// set image / call frame_builder
+	build_image(&mlx_data);
+
 	mlx_data.mlx = mlx_init();
 	mlx_data.title = ft_strdup("FDF");
 	mlx_data.width = 1300;
 	mlx_data.hight = 700;
 	set_window(&mlx_data);
-	// Load model
-		
-	/*char *temp_line = (char *) malloc(sizeof(char) * 1);
-	int	indoso = 0;
-	if (!temp_line)
-		return (0);
-	int fd = open("42.fdf", O_RDONLY);
-	while (temp_line != NULL)
-	{
-		temp_line = get_next_line(fd);
-		ft_printf("line: %s\n",temp_line);
-		indoso++;
-	}
-	return (0);*/
 
-	model = load_model("42.fdf");
-	if(!model)
-		return (0);
-	ft_printf("Model Loaded\n");
-	// Check model
-	ft_lstiter(model, check_model);
-	// set image / call frame_builder
-	build_image(&mlx_data);
 	// run window
 	set_events(&mlx_data);
 	//mlx_loop(mlx_data.mlx);
