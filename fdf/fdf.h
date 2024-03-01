@@ -41,7 +41,7 @@ t_list	*load_model(char *file_name);
 t_list	*load_terrain_model(int file_df);
 
 //Graphic module 
-void	build_image(t_mlx_data *mlx_data);
+void	build_image(t_mlx_data *mlx_data, t_face *faces_lst);
 t_face	*build_screen_coors(t_list *model);
 void	build_face(t_list *cur_node, t_face *faces_list, int col_i);
 

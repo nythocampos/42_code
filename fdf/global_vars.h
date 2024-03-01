@@ -6,10 +6,11 @@
 #define XK_Escape	0xff1b
 
 // Graphic variables ---
-#define COLOR	0x00FF0000
+#define COLOR_A	0x00000000
+#define COLOR_B	0x33FFC4
 #define	WIDTH	1300
 #define HEIGHT	700
 
 // Calculate variables
 #define ROTATION 3.0
-#define	SCALE	1.5
+#define	SCALE	1.0

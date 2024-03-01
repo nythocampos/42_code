@@ -68,13 +68,13 @@ void	build_face(t_list *cur_node, t_face *faces_list, int col_i)
 	w_pts =	(t_w_cor *) cur_node->content;
 	s_pts[0].x = project_coor(&w_pts[col_i], 'x');
 	s_pts[0].y = project_coor(&w_pts[col_i], 'y');
-	s_pts[0].id = w_pts[col_i].id;
+	s_pts[0].id = 0;
 	// right point
 	if (w_pts[col_i].id != -1)
 	{
 		s_pts[1].x = project_coor(&w_pts[col_i + 1], 'x');
 		s_pts[1].y = project_coor(&w_pts[col_i + 1], 'y');
-		s_pts[1].id = w_pts[col_i + 1].id;
+		s_pts[1].id = 0;
 	}
 	// down point
 	if (cur_node->next != NULL)
@@ -83,8 +83,9 @@ void	build_face(t_list *cur_node, t_face *faces_list, int col_i)
 		w_pts = (t_w_cor *) temp_node->content;
 		s_pts[2].x = project_coor(&w_pts[col_i], 'x');
 		s_pts[2].y = project_coor(&w_pts[col_i], 'y');
-		s_pts[2].id = w_pts[col_i].id;
+		s_pts[2].id = 0;
 	}
+	s_pts[face_size - 1].id = -1;
 	faces_list->points = &s_pts[0];
 	s_pts = NULL;
 	cur_node = NULL;

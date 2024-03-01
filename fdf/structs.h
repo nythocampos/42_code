@@ -22,7 +22,6 @@ typedef struct{
 	int	id;
 } t_face;
 // --- --- ---
-// TODO: !!!FIX THIS
 typedef struct {
 	float	f_near;
 	float	f_far;

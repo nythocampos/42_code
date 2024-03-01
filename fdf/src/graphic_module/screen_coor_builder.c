@@ -52,16 +52,10 @@ t_face	*build_screen_coors(t_list *model)
 		return (NULL);
 	while(is_last_line == 0)
 	{
-		while (col_i < n_cols)
+		while (col_i <= n_cols)
 		{
 			build_face(model, &faces_lst[index], col_i);
 			faces_lst[index].id = index;
-
-			/*temp_pts = faces_lst[index].points;	
-			printf("Face ID:%d \n", faces_lst[index].id);
-			printf("X:%.2f, ", temp_pts[0].x);
-			printf("Y:%.2f, ", temp_pts[0].y);
-			printf("ID:%d \n", temp_pts[0].id);*/
 			col_i++;
 			index++;
 		}

@@ -32,13 +32,15 @@
 	ft_printf(" --- --- ---\n");
 }*/
 
-static void	check_faces(t_face *faces_lst)
+/*static void	check_faces(t_face *faces_lst)
 {
 	int	index;
+	int	end_faces;
 	t_s_cor	*points;
 
 	index = 0;
-	while(faces_lst[index].id != -1)
+	end_faces = 0;
+	while(end_faces == 0)
 	{
 		points = faces_lst[index].points;
 		printf("Face ID: %d\n", faces_lst[index].id);
@@ -61,9 +63,11 @@ static void	check_faces(t_face *faces_lst)
 	
 		ft_printf("||||||||||||||||||||||||\n");
 		index++;
+		if (faces_lst[index].id == -1)
+			end_faces = 1;
 	}
 	ft_printf(" --- --- ---\n");
-}
+}*/
 
 	// Load all data from the fdf file into a s_model struct considering
 	// the position of the coordinate in the matrix imported.
@@ -100,20 +104,21 @@ int	main(void)
 	ft_printf("Model projected\n");
 
 	// Check projection
-	check_faces(&faces_list[0]);
-	return (0);
-	// set image / call frame_builder
-	build_image(&mlx_data);
+	//check_faces(&faces_list[0]);
+	//return (0);
 
+	// Initialize window
 	mlx_data.mlx = mlx_init();
 	mlx_data.title = ft_strdup("FDF");
-	mlx_data.width = 1300;
-	mlx_data.hight = 700;
+	mlx_data.width = WIDTH;
+	mlx_data.hight = HEIGHT;
 	set_window(&mlx_data);
 
+	// set image / call frame_builder
+	build_image(&mlx_data, &faces_list[0]);
 	// run window
 	set_events(&mlx_data);
-	//mlx_loop(mlx_data.mlx);
+	mlx_loop(mlx_data.mlx);
 	// free the mlx_data->mlx
 	return (0);
 }
