@@ -31,25 +31,19 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 	p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 / 180.0 * 3.14159);
 
 	// apply rotation
-	//w_pts->z = w_pts->z + 3.0;
+	w_pts->z = w_pts->z + 3.0;
+	w_pts->x = w_pts->x - 2.0;
+	//w_pts->y = w_pts->y + 1; //TODO: check this, is projection a lot
 
 	// apply rotation
 	// isometric view
-	/*float angle_rad_x = ROTATION_X * 3.14159 / 180;
-	float angle_rad_y = ROTATION_Y * 3.14159 / 180;	
-
-	float temp_y = w_pts->y;
-	w_pts->y = cosf(angle_rad_x) * temp_y - sinf(angle_rad_x) * w_pts->z;
-	w_pts->z = sinf(angle_rad_x) * temp_y + cosf(angle_rad_x) * w_pts->z;
-
-	float temp_x = w_pts->x;
-	w_pts->x = cosf(angle_rad_y) * temp_x - sinf(angle_rad_y) * w_pts->z;
-	w_pts->z = sinf(angle_rad_y) * temp_x + cosf(angle_rad_y) * w_pts->z;*/
+	//float angle_rad_y = ROTATION_Y * 3.14159 / 180;
+	//w_pts->z = sinf(angle_rad_y) * temp_x + cosf(angle_rad_y) * w_pts->z;
 
 	// apply scaling
-	//w_pts->y = w_pts->y + 1.0;
-	//w_pts->x = w_pts->x * SCALE_X;
-	//w_pts->y = w_pts->y * SCALE_Y;
+	/*w_pts->x = w_pts->x / SCALE_X;
+	w_pts->y = w_pts->y / SCALE_Y;
+	w_pts->z = w_pts->z / SCALE_Z;*/
 	
 	// apply projection
 	w_a = (p_data.f_far / (p_data.f_far - p_data.f_near));
@@ -64,7 +58,7 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 		if (w != 0)
 			result = result / w;
 		result = result + 1.0;
-		result = result * (0.2 * (float) WIDTH);
+		result = result * (0.3 * (float) WIDTH);
 	}
 	else if (axis == 'y')
 	{	
@@ -72,7 +66,7 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 		if (w != 0)
 			result = result / w;
 		result = result + 1.0;
-		result = result * (0.2 * (float) HEIGHT);
+		result = result * (0.3 * (float) HEIGHT);
 	}
 	return ((int) result);
 }
@@ -85,7 +79,6 @@ t_s_cor	*build_face(t_list *cur_node, int col_i)
 	t_list	*temp_node;
 
 	face_size = find_face_size(cur_node, col_i);
-	//ft_printf("face_size: %d\n", face_size);
 	s_pts = (t_s_cor *) malloc(sizeof(t_s_cor) * face_size);
 	if (!s_pts)
 		return (NULL);
@@ -106,11 +99,10 @@ t_s_cor	*build_face(t_list *cur_node, int col_i)
 	if (cur_node->next != NULL)
 	{
 		temp_node = cur_node->next;
-		w_pts = (t_w_cor *) temp_node->content;
-	
+		w_pts = (t_w_cor *) temp_node->content;	
 		s_pts[(face_size - 1)].x = project_coor(&w_pts[col_i], 'x');
 		s_pts[(face_size - 1)].y = project_coor(&w_pts[col_i], 'y');
-		s_pts[(face_size - 1)].id = 0;		
+		s_pts[(face_size - 1)].id = 0;
 	}
 	s_pts[(face_size - 1)].id = -1;
 	cur_node = NULL;
