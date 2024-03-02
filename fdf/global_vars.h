@@ -12,5 +12,10 @@
 #define HEIGHT	800
 
 // Calculate variables
-#define ROTATION 3.0
-#define	SCALE	1.0
+// x 35.264
+// y 45
+#define ROTATION_X 35.264
+#define ROTATION_Y 45
+#define ROTATION_Z 1
+#define	SCALE_X	3
+#define	SCALE_Y	3
