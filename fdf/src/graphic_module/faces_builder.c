@@ -19,37 +19,39 @@ float	project_coor(t_w_cor *w_pts, char axis)
 {
 	float		result;
 	t_p_data	p_data;
-	float		z_a;
-	float		z_b;
+	float		w_a;
+	float		w_b;
+	float		w;
 
 	p_data.f_near = 0.1;
 	p_data.f_far = 1000.0;
 	p_data.f_fov = 90.0;
-	p_data.f_asp_rad = (HEIGHT/WIDTH);
-	p_data.f_fov_rad = (1/tan(p_data.f_fov * 0.5 / 180 * 3.14159));
-	//TODO: CHECK NORMALIZATION between 0 and 2
+	p_data.f_asp_rad = (WIDTH/HEIGHT);
+	p_data.f_fov_rad = 1 / tanf(p_data.f_fov * 0.5 * 3.14159 / 180);
 	// apply rotation
-	w_pts->z = w_pts->z + ROTATION;
+	//w_pts->z = w_pts->z + ROTATION;
 	// apply projection
-	z_a = (p_data.f_far / (p_data.f_far - p_data.f_near));
-	z_b = ((-p_data.f_far * p_data.f_near) / 
+	w_a = (p_data.f_far / (p_data.f_far - p_data.f_near));
+	w_b = ((-p_data.f_far * p_data.f_near) / 
 		(p_data.f_far - p_data.f_near));
-	w_pts->z = w_pts->z * (z_a + z_b);
+	w = w_pts->z * (w_a + w_b);
 	if (axis == 'x')
 	{	
 		result = w_pts->x * (p_data.f_asp_rad * p_data.f_fov_rad);
-		result = result / w_pts->z;
+		if (w != 0)
+			result = result / w;
 		// apply scale
 		result = result + SCALE;	
-		result = result * (0.5*WIDTH);
+		result = result * (0.2 * (float) WIDTH);
 	}
 	else if (axis == 'y')
 	{	
-		result = w_pts->y * p_data.f_fov_rad;
-		result = result / w_pts->z;
+		result = (w_pts->y * p_data.f_fov_rad);
+		if (w != 0)
+			result = result / w;
 		// apply scale
 		result = result + SCALE;
-		result = result * (0.5*HEIGHT);
+		result = result * (0.2 * (float) HEIGHT);
 	}
 	return (result);
 }
@@ -70,15 +72,33 @@ void	build_face(t_list *cur_node, t_face *faces_list, int col_i)
 	s_pts[0].x = project_coor(&w_pts[col_i], 'x');
 	s_pts[0].y = project_coor(&w_pts[col_i], 'y');
 	s_pts[0].id = 0;
+	
+	if (face_size == 1)
+	{	
+		ft_printf("last point: x:%d y:%d z:%d ID:%d \n",
+				w_pts[col_i].x,
+				w_pts[col_i].y,
+				w_pts[col_i].z,
+				w_pts[col_i].id);
+	}
+
 	// right point
-	if (w_pts[col_i].id != -1)
+	if (w_pts[col_i].id != -1 && face_size > 1)
 	{
 		s_pts[1].x = project_coor(&w_pts[col_i + 1], 'x');
 		s_pts[1].y = project_coor(&w_pts[col_i + 1], 'y');
 		s_pts[1].id = 0;
+		if (face_size == 2)
+		{	
+		ft_printf("last: x:%d y:%d z:%d ID:%d \n",
+				w_pts[col_i + 1].x,
+				w_pts[col_i + 1].y,
+				w_pts[col_i + 1].z,
+				w_pts[col_i].id);
+		}
 	}
 	// down point
-	if (cur_node->next != NULL)
+	if (cur_node->next != NULL && face_size > 1)
 	{
 		temp_node = cur_node->next;
 		w_pts = (t_w_cor *) temp_node->content;

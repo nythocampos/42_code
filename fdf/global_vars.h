@@ -8,9 +8,9 @@
 // Graphic variables ---
 #define COLOR_A	0x00000000
 #define COLOR_B	0x33FFC4
-#define	WIDTH	1300
-#define HEIGHT	700
+#define	WIDTH	800
+#define HEIGHT	800
 
 // Calculate variables
 #define ROTATION 3.0
-#define	SCALE	0.5
+#define	SCALE	1.0

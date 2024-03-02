@@ -23,14 +23,14 @@ static t_w_cor	*load_line(char *line, int row_num)
 	col_i = 0;
 	ft_printf("LINE: %s\n", line);
 	cols_num = get_columns_num(line);
-	pts_list = NULL;
 	// TODO: check this (cols_num + 1) ???
 	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_num + 1));
 	if (!pts_list)
 		return (NULL);
-	while (line[index] != '\0' && (col_i <= (cols_num - 1)))
+	while (line[index] != '\0' && col_i <= cols_num)
 	{
-		if (on_item(line, (index + 1)) == 1){
+		if (on_item(line, (index + 1)) == 1)
+		{
 			pts_list[col_i].x =  col_i;
 			pts_list[col_i].y =  get_item_value(line, index);
 			pts_list[col_i].z =  row_num;
@@ -39,7 +39,7 @@ static t_w_cor	*load_line(char *line, int row_num)
 		}
 		index++;
 	}
-	pts_list[col_i - 1].id = -1;
+	pts_list[cols_num - 1].id = -1;
 	return(&pts_list[0]);
 }
 
@@ -66,7 +66,7 @@ t_list	*load_terrain_model(int file_df)
 		if (temp_line != NULL)
 		{
 			pts_lst = load_line(temp_line, row_i);
-			cur_node = ft_lstnew((void *) pts_lst);
+			cur_node = ft_lstnew((void *) &pts_lst[0]);
 			if (last_node == NULL)
 				first_node = cur_node;
 			ft_lstadd_back(&last_node, cur_node);

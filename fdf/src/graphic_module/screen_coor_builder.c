@@ -47,7 +47,7 @@ t_face	*build_screen_coors(t_list *model)
 	is_last_line = 0;
 	n_rows = get_rows_num(model); 
 	n_cols = get_cols_num((t_w_cor *) model->content);
-	faces_lst = (t_face *) malloc(sizeof(t_face) * (n_cols * n_rows));
+	faces_lst = (t_face *) malloc(sizeof(t_face) * (n_cols * n_rows) +1);
 	if (!faces_lst)
 		return (NULL);
 	while(is_last_line == 0)
@@ -65,7 +65,7 @@ t_face	*build_screen_coors(t_list *model)
 		else
 			model = model->next;
 	}
-	faces_lst[index - 1].id = -1;
+	faces_lst[(n_cols * n_rows) - 1].id = -1;
 	return (faces_lst);
 }
 

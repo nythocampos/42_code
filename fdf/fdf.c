@@ -12,17 +12,16 @@
 
 #include "fdf.h"
 
-#include <stdio.h>
-/*static void	check_model(void *pts_lst)
+static void	check_model(void *pts_lst)
 {
 	int	index;
 	t_w_cor	*w_cor;
-
-	index = 1;
+	//return;
+	index = 0;
 	w_cor =  (t_w_cor *) pts_lst;
 	while(w_cor[index - 1].id != -1)
 	{
-		printf("X:%d, Y:%d, Z:%d ---|ID:%d \n",
+		ft_printf("X:%d, Y:%d, Z:%d ---|ID:%d \n",
 			w_cor[index].x,
 			w_cor[index].y,
 			w_cor[index].z,
@@ -30,41 +29,42 @@
 		index++;
 	}
 	ft_printf(" --- --- ---\n");
-}*/
+}
 
 static void	check_faces(t_face *faces_lst)
 {
-	int	index;
+	int	faces_i;
+	int	pts_i;
 	int	end_faces;
+	int	end_pts;
 	t_s_cor	*points;
 
-	index = 0;
+	return;
+	faces_i = 0;
+	pts_i = 0;
 	end_faces = 0;
+	end_pts = 0;
 	while(end_faces == 0)
 	{
-		points = faces_lst[index].points;
-		printf("Face ID: %d\n", faces_lst[index].id);
-
-		printf("X:%.2f, ", points[0].x);
-		printf("Y:%.2f, ", points[0].y);
-		printf("ID:%d \n", points[0].id);
-
-		ft_printf(" ---\n");
-
-		printf("X:%.2f, ", points[1].x);
-		printf("Y:%.2f, ", points[1].y);
-		printf("ID:%d \n", points[1].id);
-
-		ft_printf(" ---\n");
-
-		printf("X:%.2f, ", points[2].x);
-		printf("Y:%.2f, ", points[2].y);
-		printf("ID:%d \n", points[2].id);
-	
+		ft_printf("Face ID: %d\n", faces_lst[faces_i].id);	
+		points = faces_lst[faces_i].points;
+		while (end_pts == 0)
+		{
+			//break;
+			ft_printf("X:%d, ",(int)points[pts_i].x);
+			ft_printf("Y:%d, ",(int)points[pts_i].y);
+			ft_printf("ID:%d \n", points[pts_i].id);
+			ft_printf(" ---\n");
+			if (points[pts_i].id == -1)
+				end_pts = 1;
+			pts_i++;
+		}	
 		ft_printf("||||||||||||||||||||||||\n");
-		index++;
-		if (faces_lst[index].id == -1)
+		if (faces_lst[faces_i].id == -1)
 			end_faces = 1;
+		end_pts = 0;
+		pts_i = 0;
+		faces_i++;
 	}
 	ft_printf(" --- --- ---\n");
 }
@@ -95,8 +95,8 @@ int	main(void)
 	ft_printf("Model Loaded\n");
 
 	// Check model
-	//ft_lstiter(model, check_model);
-
+	ft_lstiter(model, check_model);
+	return 0;
 	// Project model
 	faces_list = build_screen_coors(model);
 	if(faces_list == NULL)
