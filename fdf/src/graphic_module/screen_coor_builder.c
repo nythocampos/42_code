@@ -2,7 +2,6 @@
 
 #include "../../fdf.h"
 
-#include <stdio.h>
 static int	get_cols_num(t_w_cor *pts_list)
 {
 	int	index;
@@ -12,8 +11,8 @@ static int	get_cols_num(t_w_cor *pts_list)
 	n_cols = 1;
 	while(pts_list[index].id != -1)
 	{
-		index++;	
-		n_cols++;	
+		index++;
+		n_cols++;
 	}
 	return (n_cols);
 }
@@ -47,14 +46,14 @@ t_face	*build_screen_coors(t_list *model)
 	is_last_line = 0;
 	n_rows = get_rows_num(model); 
 	n_cols = get_cols_num((t_w_cor *) model->content);
-	faces_lst = (t_face *) malloc(sizeof(t_face) * (n_cols * n_rows) +1);
+	faces_lst = (t_face *) malloc(sizeof(t_face) * (n_cols * n_rows));
 	if (!faces_lst)
 		return (NULL);
 	while(is_last_line == 0)
 	{
-		while (col_i <= n_cols)
+		while (col_i <= (n_cols - 1))
 		{
-			build_face(model, &faces_lst[index], col_i);
+			faces_lst[index].points = build_face(model, col_i);
 			faces_lst[index].id = index;
 			col_i++;
 			index++;
@@ -66,6 +65,6 @@ t_face	*build_screen_coors(t_list *model)
 			model = model->next;
 	}
 	faces_lst[(n_cols * n_rows) - 1].id = -1;
-	return (faces_lst);
+	return (&faces_lst[0]);
 }
 

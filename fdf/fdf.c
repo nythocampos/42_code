@@ -16,7 +16,8 @@ static void	check_model(void *pts_lst)
 {
 	int	index;
 	t_w_cor	*w_cor;
-	//return;
+
+	return;
 	index = 0;
 	w_cor =  (t_w_cor *) pts_lst;
 	while(w_cor[index - 1].id != -1)
@@ -39,7 +40,7 @@ static void	check_faces(t_face *faces_lst)
 	int	end_pts;
 	t_s_cor	*points;
 
-	return;
+	//return;
 	faces_i = 0;
 	pts_i = 0;
 	end_faces = 0;
@@ -96,7 +97,7 @@ int	main(void)
 
 	// Check model
 	ft_lstiter(model, check_model);
-	return 0;
+
 	// Project model
 	faces_list = build_screen_coors(model);
 	if(faces_list == NULL)
@@ -105,7 +106,7 @@ int	main(void)
 
 	// Check projection
 	check_faces(&faces_list[0]);
-	//return (0);
+	return (0);
 
 	// Initialize window
 	mlx_data.mlx = mlx_init();

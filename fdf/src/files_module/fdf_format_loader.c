@@ -23,8 +23,7 @@ static t_w_cor	*load_line(char *line, int row_num)
 	col_i = 0;
 	ft_printf("LINE: %s\n", line);
 	cols_num = get_columns_num(line);
-	// TODO: check this (cols_num + 1) ???
-	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_num + 1));
+	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_num));
 	if (!pts_list)
 		return (NULL);
 	while (line[index] != '\0' && col_i <= cols_num)
@@ -74,7 +73,6 @@ t_list	*load_terrain_model(int file_df)
 		row_i++;
 	}
 	free(temp_line);
-	// !TODO: Free pointers cur, last
 	cur_node = NULL;
 	last_node = NULL;
 	return (first_node);
