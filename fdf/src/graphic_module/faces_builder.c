@@ -31,9 +31,9 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 	p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 / 180.0 * 3.14159);
 
 	// apply rotation
-	w_pts->z = w_pts->z + 3.0;
-	w_pts->x = w_pts->x - 2.0;
-	//w_pts->y = w_pts->y + 1; //TODO: check this, is projection a lot
+	w_pts->z = w_pts->z + 1.0; // 1
+	//w_pts->x = w_pts->x - 2.0;
+	//w_pts->y = w_pts->y - 1; //TODO: check this, is projection a lot
 
 	// apply rotation
 	// isometric view
@@ -58,7 +58,7 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 		if (w != 0)
 			result = result / w;
 		result = result + 1.0;
-		result = result * (0.3 * (float) WIDTH);
+		result = result * (0.1 * (float) WIDTH);
 	}
 	else if (axis == 'y')
 	{	
@@ -66,7 +66,7 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 		if (w != 0)
 			result = result / w;
 		result = result + 1.0;
-		result = result * (0.3 * (float) HEIGHT);
+		result = result * (0.1 * (float) HEIGHT);
 	}
 	return ((int) result);
 }

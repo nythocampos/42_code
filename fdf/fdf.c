@@ -90,8 +90,8 @@ int	main(void)
 	t_face		*faces_list;
 	
 	// Load model
-	//model = load_model("./models/42.fdf");
-	model = load_model("./models/1.fdf");
+	model = load_model("./models/42.fdf");
+	//model = load_model("./models/1.fdf");
 	if(model == NULL)
 		return (0);
 	ft_printf("Model Loaded\n");

@@ -9,7 +9,7 @@
 #define COLOR_A	0x00000000
 #define COLOR_B	0x33FFC4
 #define	WIDTH	800
-#define HEIGHT	800
+#define HEIGHT	600
 
 // Calculate variables
 // x 35.264
