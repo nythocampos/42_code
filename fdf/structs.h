@@ -33,8 +33,8 @@ typedef struct {
 typedef struct	{
 	void	*img;
 	char	*addr;
-	int	bits_per_pixel;
-	int	line_length;
+	int	bpp;
+	int	size_line;
 	int	endian;
 }	t_img;
 

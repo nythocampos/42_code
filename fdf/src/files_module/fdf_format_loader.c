@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_format_loader.c                                      :+:      :+:    :+:   */
+/*   fdf_format_loader.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -32,8 +32,20 @@ static t_w_cor	*load_line(char *line, int row_num)
 		{
 			pts_list[col_i].x =  col_i;
 			pts_list[col_i].y =  get_item_value(line, index);
-			pts_list[col_i].z =  row_num;
+			pts_list[col_i].z =  row_num;	
 			pts_list[col_i].id = col_i;
+
+			if (pts_list[col_i].y == 0)
+				pts_list[col_i].y =  (pts_list[col_i].y + 1);// 12
+
+
+			// CORRECTION
+			// AVOID THIS ROTATING THE MODEL
+			/*pts_list[col_i].z =  (11 - pts_list[col_i].z);
+			if (pts_list[col_i].y == 0)
+				pts_list[col_i].y =  (pts_list[col_i].y + 12);*/
+
+			
 			col_i++;
 		}
 		index++;

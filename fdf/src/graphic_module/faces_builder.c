@@ -27,25 +27,22 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 	p_data.f_far = 1000.0;
 	p_data.f_fov = 90.0;
 	p_data.f_asp_rad = ((float)WIDTH/(float)HEIGHT);
-	//p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 * 3.14159 / 180.0);
-	p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 / 180.0 * 3.14159);
+	p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 * 3.14159 / 180.0);
 
-	// apply rotation
-	w_pts->z = w_pts->z + 1.0; // 1
-	//w_pts->x = w_pts->x - 2.0;
-	//w_pts->y = w_pts->y - 1; //TODO: check this, is projection a lot
+	// A little correction
+	w_pts->z = w_pts->z + 1;
 
 	// apply rotation
 	// isometric view
-	//float angle_rad_y = ROTATION_Y * 3.14159 / 180;
-	//w_pts->z = sinf(angle_rad_y) * temp_x + cosf(angle_rad_y) * w_pts->z;
+	// float angle_rad_y = ROTATION_Y * 3.14159 / 180;
+	// w_pts->z = sinf(angle_rad_y) * temp_x + cosf(angle_rad_y) * w_pts->z;
 
-	// apply scaling
+	// Apply scaling
 	/*w_pts->x = w_pts->x / SCALE_X;
 	w_pts->y = w_pts->y / SCALE_Y;
 	w_pts->z = w_pts->z / SCALE_Z;*/
-	
-	// apply projection
+
+	// Apply projection
 	w_a = (p_data.f_far / (p_data.f_far - p_data.f_near));
 	w_b = ((-p_data.f_far * p_data.f_near) / 
 		(p_data.f_far - p_data.f_near));
@@ -58,7 +55,7 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 		if (w != 0)
 			result = result / w;
 		result = result + 1.0;
-		result = result * (0.1 * (float) WIDTH);
+		result = result * (0.2 * (float) WIDTH);
 	}
 	else if (axis == 'y')
 	{	
@@ -66,7 +63,7 @@ static int	project_coor(t_w_cor *w_pts, char axis)
 		if (w != 0)
 			result = result / w;
 		result = result + 1.0;
-		result = result * (0.1 * (float) HEIGHT);
+		result = result * (0.3 * (float) HEIGHT);
 	}
 	return ((int) result);
 }
