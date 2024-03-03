@@ -17,6 +17,6 @@
 #define ROTATION_X 35.264
 #define ROTATION_Y 45
 #define ROTATION_Z 1
-#define	SCALE_X	0.1
-#define	SCALE_Y	0.1
+#define	SCALE_X	0.2
+#define	SCALE_Y	0.2
 #define	SCALE_Z	0.5

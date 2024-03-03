@@ -73,8 +73,8 @@ static float	*gen_prj_mtx()
 	int		m_size;
 
 	m_size = 16;
-	p_data.f_near = 0.1;
-	p_data.f_far = 1000.0;
+	p_data.f_near = 1.0;
+	p_data.f_far = 10000.0;
 	p_data.f_fov = 90.0;
 	p_data.f_asp_rad = ((float)WIDTH / (float)HEIGHT);
 	p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 * 3.14159 / 180.0);
@@ -120,11 +120,17 @@ t_cor	*build_face(t_list *cur_node, int col_i)
 	float	*rot_x_m;
 	int	z_offs;
 
-	z_offs = 3;
+	// TODO: add a way to modify:
+	// z_offs, elip_x, elip_z
+
+	z_offs = 40;
 	face_size = find_face_size(cur_node, col_i);
-	rot_z_m = gen_rot_mtx_z(75);
-	rot_x_m = gen_rot_mtx_x(5);
+	//TODO:  ADD EVENTS TO CONTROLE THE ROTATION EASIER
+	rot_z_m = gen_rot_mtx_z(10);
+	rot_x_m = gen_rot_mtx_x(2);
 	prj_m = gen_prj_mtx();
+	// TODO: consider create several temp points list
+	// and free them before return the real result
 	tmp_p = (t_cor *) malloc(sizeof(t_cor) * face_size);
 	if (!tmp_p)
 		return (NULL);
@@ -151,7 +157,7 @@ t_cor	*build_face(t_list *cur_node, int col_i)
 	if (w_pts[col_i].id != -1)
 	{
 
-		w_pts[col_i].z = w_pts[col_i].z + z_offs;
+		w_pts[col_i + 1].z = w_pts[col_i + 1].z + z_offs;
 		apply_matrix(&tmp_p[1], &w_pts[col_i + 1], rot_z_m);
 		apply_matrix(&s_pts[1], &tmp_p[col_i + 1], rot_x_m);
 
@@ -169,7 +175,7 @@ t_cor	*build_face(t_list *cur_node, int col_i)
 		temp_node = cur_node->next;
 		w_pts = (t_cor *) temp_node->content;
 
-		w_pts[(face_size - 1)].z = w_pts[(face_size - 1)].z + z_offs;
+		w_pts[col_i].z = w_pts[col_i].z + z_offs;
 		apply_matrix(&tmp_p[(face_size - 1)], &w_pts[col_i], rot_z_m);
 		apply_matrix(&s_pts[(face_size - 1)], &tmp_p[col_i], rot_x_m);
 		apply_matrix(&tmp_p[(face_size - 1)], &s_pts[col_i], prj_m);

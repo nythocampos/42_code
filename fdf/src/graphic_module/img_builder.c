@@ -181,6 +181,8 @@ void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
 	ft_printf("Drawing background... \n");
 	set_background(mlx_data);
 	ft_printf("Drawing model... \n");
+
+	ft_printf("null %d\n",faces_lst[0].id);
 	draw_model(mlx_data, faces_lst);
 	ft_printf("Model drawn\n");
 
