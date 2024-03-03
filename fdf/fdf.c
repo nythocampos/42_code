@@ -15,11 +15,11 @@
 static void	check_model(void *pts_lst)
 {
 	int	index;
-	t_w_cor	*w_cor;
+	t_cor	*w_cor;
 
 	return;
 	index = 0;
-	w_cor =  (t_w_cor *) pts_lst;
+	w_cor =  (t_cor *) pts_lst;
 	while(w_cor[index - 1].id != -1)
 	{
 		ft_printf("X:%d, Y:%d, Z:%d ---|ID:%d \n",
@@ -38,7 +38,7 @@ static void	check_faces(t_face *faces_lst)
 	int	pts_i;
 	int	end_faces;
 	int	end_pts;
-	t_s_cor	*points;
+	t_cor	*points;
 
 	return;
 	faces_i = 0;

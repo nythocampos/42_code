@@ -12,18 +12,18 @@
 
 #include "../../fdf.h"
 
-static t_w_cor	*load_line(char *line, int row_num)
+static t_cor	*load_line(char *line, int row_num)
 {
 	int   	index;
 	int   	col_i;
 	int	cols_num;
-	t_w_cor	*pts_list;
+	t_cor	*pts_list;
 
 	index = 0;
 	col_i = 0;
 	ft_printf("LINE: %s\n", line);
 	cols_num = get_columns_num(line);
-	pts_list = (t_w_cor *) malloc(sizeof(t_w_cor) * (cols_num));
+	pts_list = (t_cor *) malloc(sizeof(t_cor) * (cols_num));
 	if (!pts_list)
 		return (NULL);
 	while (line[index] != '\0' && col_i <= cols_num)
@@ -32,13 +32,18 @@ static t_w_cor	*load_line(char *line, int row_num)
 		{
 			pts_list[col_i].x =  col_i;
 			pts_list[col_i].y =  get_item_value(line, index);
-			pts_list[col_i].z =  row_num;	
+			pts_list[col_i].z =  row_num;
 			pts_list[col_i].id = col_i;
 
 			if (pts_list[col_i].y == 0)
-				pts_list[col_i].y =  (pts_list[col_i].y + 1);// 12
+				pts_list[col_i].y = (pts_list[col_i].y + 1);// 12
 
-
+			// TODO: CHECK THIS AND MOVE IT TO A BETTER PLACE
+			// A little correction ??
+			pts_list[col_i].z = pts_list[col_i].z + 3;
+			// SCALE
+			pts_list[col_i].x = pts_list[col_i].x * SCALE_X;
+			pts_list[col_i].y = pts_list[col_i].y * SCALE_Y;
 			// CORRECTION
 			// AVOID THIS ROTATING THE MODEL
 			/*pts_list[col_i].z =  (11 - pts_list[col_i].z);
@@ -62,7 +67,7 @@ t_list	*load_terrain_model(int file_df)
 	t_list	*cur_node;
 	t_list	*last_node;
 	int	row_i;
-	t_w_cor	*pts_lst;
+	t_cor	*pts_lst;
 
 	row_i = 0;
 	last_node = NULL;

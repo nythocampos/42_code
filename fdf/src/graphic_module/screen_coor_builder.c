@@ -2,7 +2,8 @@
 
 #include "../../fdf.h"
 
-static int	get_cols_num(t_w_cor *pts_list)
+//TODO: MOVE THIS TO UTILS
+static int	get_cols_num(t_cor *pts_list)
 {
 	int	index;
 	int	n_cols;
@@ -17,6 +18,7 @@ static int	get_cols_num(t_w_cor *pts_list)
 	return (n_cols);
 }
 
+//TODO: MOVE THIS TO UTILS
 static int	get_rows_num(t_list *model)
 {
 	int	index;
@@ -45,7 +47,7 @@ t_face	*build_screen_coors(t_list *model)
 	index = 0;
 	is_last_line = 0;
 	n_rows = get_rows_num(model); 
-	n_cols = get_cols_num((t_w_cor *) model->content);
+	n_cols = get_cols_num((t_cor *) model->content);
 	faces_lst = (t_face *) malloc(sizeof(t_face) * (n_cols * n_rows));
 	if (!faces_lst)
 		return (NULL);

@@ -6,19 +6,11 @@ typedef struct
 	int	y;
 	int	z;
 	int	id;
-}	t_w_cor;
-
-// screen coordinates {x, y}
-typedef struct
-{
-	float	x;
-	float	y;
-	int	id;
-}	t_s_cor;
+}	t_cor;
 
 // screen face [{x,y},[{x,y},[{x,y}]
 typedef struct{
-	t_s_cor	*points;
+	t_cor	*points;
 	int	id;
 } t_face;
 // --- --- ---

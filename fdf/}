@@ -99,8 +99,8 @@ static void	draw_face(t_mlx_data *mlx_data, t_cor *points)
 {
 	int	pts_i;
 	int	end_pts;
-	t_cor	*a;
-	t_cor	*b;
+	t_s_cor	*a;
+	t_s_cor	*b;
 
 	pts_i = 0;
 	end_pts = 0;
@@ -128,7 +128,7 @@ static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
 {
 	int	faces_i;
 	int	end_faces;
-	t_cor	*points;
+	t_s_cor	*points;
 
 	faces_i = 0;
 	end_faces = 0;
