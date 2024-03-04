@@ -24,7 +24,7 @@ static void	initialize_m(float *m,int size)
 	}
 }
 
-static float	*gen_rot_mtx_z(float elip)
+/*static float	*gen_rot_mtx_z(float elip)
 {
 	float	*m_rot;
 	float	f_theta;
@@ -43,9 +43,9 @@ static float	*gen_rot_mtx_z(float elip)
 	m_rot[10] = 1.0;
 	m_rot[15] = 1.0; 
 	return (&m_rot[0]);
-}
+}*/
 
-static float	*gen_rot_mtx_x(float elip)
+/*static float	*gen_rot_mtx_x(float elip)
 {
 	float	*m_rot;
 	float	f_theta;
@@ -64,7 +64,7 @@ static float	*gen_rot_mtx_x(float elip)
 	m_rot[10] = cosf(f_theta * 0.5);
 	m_rot[15] = 1.0; 
 	return (&m_rot[0]);
-}
+}*/
 
 static float	*gen_prj_mtx()
 {
@@ -73,11 +73,12 @@ static float	*gen_prj_mtx()
 	int		m_size;
 
 	m_size = 16;
-	p_data.f_near = 1.0;
-	p_data.f_far = 10000.0;
+	p_data.f_near = 0.1;
+	p_data.f_far = 1000.0;
 	p_data.f_fov = 90.0;
 	p_data.f_asp_rad = ((float)WIDTH / (float)HEIGHT);
 	p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 * 3.14159 / 180.0);
+	//p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 / 180.0* 3.14159);
 	m_prj = (float *) malloc (sizeof(float) * m_size);
 	if (!m_prj)
 		return (NULL);
@@ -116,18 +117,12 @@ t_cor	*build_face(t_list *cur_node, int col_i)
 	t_cor	*w_pts;
 	t_list	*temp_node;
 	float	*prj_m;
-	float	*rot_z_m;
-	float	*rot_x_m;
-	int	z_offs;
+	//float	*rot_z_m;
+	//float	*rot_x_m;
 
-	// TODO: add a way to modify:
-	// z_offs, elip_x, elip_z
-
-	z_offs = 40;
 	face_size = find_face_size(cur_node, col_i);
-	//TODO:  ADD EVENTS TO CONTROLE THE ROTATION EASIER
-	rot_z_m = gen_rot_mtx_z(10);
-	rot_x_m = gen_rot_mtx_x(2);
+	//rot_z_m = gen_rot_mtx_z(10);
+	//rot_x_m = gen_rot_mtx_x(2);
 	prj_m = gen_prj_mtx();
 	// TODO: consider create several temp points list
 	// and free them before return the real result
@@ -140,34 +135,34 @@ t_cor	*build_face(t_list *cur_node, int col_i)
 	// current point
 	w_pts =	(t_cor *) cur_node->content;
 
-	w_pts[col_i].z = w_pts[col_i].z + z_offs;
-	apply_matrix(&tmp_p[0], &w_pts[col_i], rot_z_m);
-	apply_matrix(&s_pts[0], &tmp_p[col_i], rot_x_m);
+	//apply_matrix(&tmp_p[0], &w_pts[col_i], rot_z_m);
+	//apply_matrix(&s_pts[0], &tmp_p[col_i], rot_x_m);
+	//apply_matrix(&tmp_p[0], &s_pts[col_i], prj_m);
 
-	apply_matrix(&tmp_p[0], &s_pts[col_i], prj_m);
+	apply_matrix(&tmp_p[0], &w_pts[col_i], prj_m);
 	tmp_p[0].id = 0;
 
-	tmp_p[0].x = tmp_p[0].x + 1;
-	tmp_p[0].y = tmp_p[0].y + 1;
+	//tmp_p[0].x = tmp_p[0].x + 1;
+	//tmp_p[0].y = tmp_p[0].y + 1;
 
-	tmp_p[0].x = tmp_p[0].x * SCALE_X * (float) WIDTH;
-	tmp_p[0].y = tmp_p[0].y * SCALE_Y * (float) HEIGHT;
+	//tmp_p[0].x = tmp_p[0].x * SCALE_X * (float) WIDTH;
+	//tmp_p[0].y = tmp_p[0].y * SCALE_Y * (float) HEIGHT;
 
 	// right point
 	if (w_pts[col_i].id != -1)
 	{
 
-		w_pts[col_i + 1].z = w_pts[col_i + 1].z + z_offs;
-		apply_matrix(&tmp_p[1], &w_pts[col_i + 1], rot_z_m);
-		apply_matrix(&s_pts[1], &tmp_p[col_i + 1], rot_x_m);
+		//apply_matrix(&tmp_p[1], &w_pts[col_i + 1], rot_z_m);
+		//apply_matrix(&s_pts[1], &tmp_p[col_i + 1], rot_x_m);
+		//apply_matrix(&tmp_p[1], &s_pts[col_i + 1], prj_m);
+		apply_matrix(&tmp_p[1], &w_pts[col_i + 1], prj_m);
 
-		apply_matrix(&tmp_p[1], &s_pts[col_i + 1], prj_m);
 		tmp_p[1].id = 0;
 
-		tmp_p[1].x = tmp_p[1].x + 1;
-		tmp_p[1].y = tmp_p[1].y + 1;
-		tmp_p[1].x = tmp_p[1].x * SCALE_X * (float) WIDTH;
-		tmp_p[1].y = tmp_p[1].y * SCALE_Y * (float) HEIGHT;
+		//tmp_p[1].x = tmp_p[1].x + 1;
+		//tmp_p[1].y = tmp_p[1].y + 1;
+		//tmp_p[1].x = tmp_p[1].x * SCALE_X * (float) WIDTH;
+		//tmp_p[1].y = tmp_p[1].y * SCALE_Y * (float) HEIGHT;
 	}
 	// down point
 	if (cur_node->next != NULL)
@@ -175,17 +170,17 @@ t_cor	*build_face(t_list *cur_node, int col_i)
 		temp_node = cur_node->next;
 		w_pts = (t_cor *) temp_node->content;
 
-		w_pts[col_i].z = w_pts[col_i].z + z_offs;
-		apply_matrix(&tmp_p[(face_size - 1)], &w_pts[col_i], rot_z_m);
-		apply_matrix(&s_pts[(face_size - 1)], &tmp_p[col_i], rot_x_m);
-		apply_matrix(&tmp_p[(face_size - 1)], &s_pts[col_i], prj_m);
+		//apply_matrix(&tmp_p[(face_size - 1)], &w_pts[col_i], rot_z_m);
+		//apply_matrix(&s_pts[(face_size - 1)], &tmp_p[col_i], rot_x_m);
+		//apply_matrix(&tmp_p[(face_size - 1)], &s_pts[col_i], prj_m);
+		apply_matrix(&tmp_p[(face_size - 1)], &w_pts[col_i], prj_m);
 
 		tmp_p[(face_size - 1)].id = 0;
 
-		tmp_p[(face_size - 1)].x = tmp_p[(face_size - 1)].x + 1;
-		tmp_p[(face_size - 1)].y = tmp_p[(face_size - 1)].y + 1;
-		tmp_p[(face_size-1)].x = tmp_p[(face_size-1)].x * SCALE_X * (float) WIDTH;
-		tmp_p[(face_size-1)].y = tmp_p[(face_size-1)].y * SCALE_Y * (float) HEIGHT;
+		//tmp_p[(face_size - 1)].x = tmp_p[(face_size - 1)].x + 1;
+		//tmp_p[(face_size - 1)].y = tmp_p[(face_size - 1)].y + 1;
+		//tmp_p[(face_size-1)].x = tmp_p[(face_size-1)].x * SCALE_X * (float) WIDTH;
+		//tmp_p[(face_size-1)].y = tmp_p[(face_size-1)].y * SCALE_Y * (float) HEIGHT;
 
 	}
 	tmp_p[(face_size - 1)].id = -1;
