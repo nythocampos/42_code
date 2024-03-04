@@ -26,6 +26,7 @@ INCLUDE			= fdf.h structs.h
 GRPDIR			= ./src/graphic_module/
 GRAPHIC_MODULE		= $(GRPDIR)images_builder.c $(GRPDIR)triangles_builder.c \
 $(GRPDIR)faces_builder.c $(GRPDIR)models_projector.c \
+$(GRPDIR)models_magnifier.c
 
 # Files module
 FLSDIR			=./src/files_module/

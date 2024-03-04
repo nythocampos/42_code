@@ -106,24 +106,28 @@ int	main(void)
 	// ROTATE
 	// TODO: error rotating X and Y
 	t_cor angles;
-	angles.x = 1;//45
-	angles.y = 0;
-	angles.z = 0;//5
+	angles.x = 0;//35.264
+	angles.y = 0;//45
+	angles.z = 3;//5
 	rotate_model(&model[0], &angles);
 	ft_printf("Model rotated\n");
 
 	// MOVE
 	t_cor n_pos;
-	n_pos.x = 1000;
-	n_pos.y = 1000;
-	n_pos.z = 5;
+	n_pos.x = 10;
+	n_pos.y = 10;
+	n_pos.z = 3;
 	move_model(&model[0], &n_pos, 1);
 
 	// PROJECT
 	project_model(&model[0]);
 	ft_printf("Model projected\n");
 
-	// SCALE??	
+	// SCALE??
+	// TODO: FIX THE SCALATION
+	/*float scale;
+	scale = 50;
+	magnify_model(&model[0], &scale);*/
 
 	// Check projection
 	check_faces(&model[0]);

@@ -35,16 +35,7 @@ static t_cor	*load_line(char *line, int row_num)
 			pts_list[col_i].z =  row_num;
 			pts_list[col_i].id = col_i;
 
-			/*if (pts_list[col_i].y == 0)//12
-				pts_list[col_i].y = 15;*/
-
-			// TODO: CHECK THIS AND MOVE IT TO A BETTER PLACE
-			// Move the cube away the camera position
-			// 11 = num of rows
 			//pts_list[col_i].z =  (11 - (pts_list[col_i].z * SCALE_Z));
-			// SCALE
-			pts_list[col_i].x = pts_list[col_i].x * SCALE_X* (float) WIDTH;
-			pts_list[col_i].y = pts_list[col_i].y * SCALE_Y* (float) HEIGHT;
 			
 			col_i++;
 		}

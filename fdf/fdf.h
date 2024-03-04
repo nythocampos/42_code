@@ -50,6 +50,7 @@ void	build_image(t_mlx_data *mlx_data, t_face *faces_lst);
 t_face	*build_faces(t_list *model);
 t_cor	*build_triangle(t_list *cur_node, int col_i);
 void	project_model(t_face *model);
+void 	magnify_model(t_face *model, float *scale);
 
 //Utils
 void	apply_matrix(t_cor *src, void *m);
