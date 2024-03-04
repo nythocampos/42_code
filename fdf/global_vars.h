@@ -10,13 +10,10 @@
 #define COLOR_B	0x33FFC4
 #define	WIDTH	800
 #define HEIGHT	600
-
 // Calculate variables
 // x 35.264
 // y 45
-#define ROTATION_X 35.264
-#define ROTATION_Y 45
-#define ROTATION_Z 1
-#define	SCALE_X	0.3
-#define	SCALE_Y	0.3
-#define	SCALE_Z	0.7
+#define	SCALE_X	0.2
+#define	SCALE_Y	0.2
+#define	SCALE_Z	0.1
+

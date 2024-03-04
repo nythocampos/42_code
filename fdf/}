@@ -99,31 +99,22 @@ int	main(void)
 	// Check model
 	ft_lstiter(model_data, check_model);
 
+	// Project model
 	model = build_faces(model_data);
+	
+	t_cor angles;
+	angles.x = 0;
+	angles.y = 0;
+	angles.z = 6;//5
+	rotate_model(&model[0],&angles);
+	ft_printf("Model rotated\n");
+	
 	if(model == NULL)
 		return (0);
-
-	// ROTATE
-	// TODO: error rotating X and Y
-	t_cor angles;
-	angles.x = 1;//45
-	angles.y = 0;
-	angles.z = 0;//5
-	rotate_model(&model[0], &angles);
-	ft_printf("Model rotated\n");
-
-	// MOVE
-	t_cor n_pos;
-	n_pos.x = 1000;
-	n_pos.y = 1000;
-	n_pos.z = 5;
-	move_model(&model[0], &n_pos, 1);
-
-	// PROJECT
 	project_model(&model[0]);
 	ft_printf("Model projected\n");
 
-	// SCALE??	
+	
 
 	// Check projection
 	check_faces(&model[0]);

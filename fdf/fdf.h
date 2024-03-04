@@ -43,6 +43,7 @@ t_list	*load_terrain_model(int file_df);
 // Models manager module
 void	rotate_model(t_face *model, t_cor *angles);
 void	process_model(t_face *model, void *data, void (*f)(t_cor *, void *));
+void	move_model(t_face *model, t_cor *n_pos, int mov_ty);
 
 //Graphic module 
 void	build_image(t_mlx_data *mlx_data, t_face *faces_lst);
