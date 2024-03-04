@@ -30,6 +30,7 @@ static void	update_cor(t_cor *points, void *data, void (*f)(t_cor *, void *))
  *
  * Args:
  * 	model (t_face *): all faces in the model
+ * 	data (void *): data used by f
  * 	f (function): the function to apply in the model
  * */
 void	process_model(t_face *model, void *data, void (*f)(t_cor *, void *))

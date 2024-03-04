@@ -106,6 +106,13 @@ int	main(void)
 	project_model(&model[0]);
 	ft_printf("Model projected\n");
 
+	t_cor angles;
+	angles.x = 0;
+	angles.y = 0;
+	angles.z = 5;
+	rotate_model(&model[0],&angles);
+	ft_printf("Model rotated\n");
+
 	// Check projection
 	check_faces(&model[0]);
 	//return (0);

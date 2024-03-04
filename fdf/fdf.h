@@ -41,9 +41,7 @@ t_list	*load_model(char *file_name);
 t_list	*load_terrain_model(int file_df);
 
 // Models manager module
-float	*gen_rot_mtx_x(float x_angle);
-float	*gen_rot_mtx_z(float z_angle);
-void	rotate_model(t_cor *model, t_cor *angles);
+void	rotate_model(t_face *model, t_cor *angles);
 void	process_model(t_face *model, void *data, void (*f)(t_cor *, void *));
 
 //Graphic module 
