@@ -86,27 +86,28 @@ static void	check_faces(t_face *faces_lst)
 int	main(void)
 {
 	t_mlx_data	mlx_data;
-	t_list		*model;
-	t_face		*faces_list;
+	t_list		*model_data;
+	t_face		*model;
 	
 	// Load model
-	model = load_model("./models/42.fdf");
-	//model = load_model("./models/1.fdf");
-	if(model == NULL)
+	model_data = load_model("./models/42.fdf");
+	//model_data = load_model("./models/1.fdf");
+	if(model_data == NULL)
 		return (0);
 	ft_printf("Model Loaded\n");
 
 	// Check model
-	ft_lstiter(model, check_model);
+	ft_lstiter(model_data, check_model);
 
 	// Project model
-	faces_list = build_screen_coors(model);
-	if(faces_list == NULL)
+	model = build_faces(model_data);
+	if(model == NULL)
 		return (0);
+	project_model(&model[0]);
 	ft_printf("Model projected\n");
 
 	// Check projection
-	check_faces(&faces_list[0]);
+	check_faces(&model[0]);
 	//return (0);
 
 	// Initialize window
@@ -117,7 +118,7 @@ int	main(void)
 	set_window(&mlx_data);
 
 	// set image / call frame_builder
-	build_image(&mlx_data, &faces_list[0]);
+	build_image(&mlx_data, &model[0]);
 	// run window
 	set_events(&mlx_data);
 	mlx_loop(mlx_data.mlx);

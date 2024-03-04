@@ -33,18 +33,27 @@ void	end_program(t_mlx_data *data);
 void	set_events(t_mlx_data *data);
 void	set_window();
 
-// Models module 
+// Files module 
 int	get_columns_num(char *line);
 int	get_item_value(char *str, int end);
 int	on_item(char *line, int index);
 t_list	*load_model(char *file_name);
 t_list	*load_terrain_model(int file_df);
 
+// Models manager module
+float	*gen_rot_mtx_x(float x_angle);
+float	*gen_rot_mtx_z(float z_angle);
+void	rotate_model(t_cor *model, t_cor *angles);
+void	process_model(t_face *model, void *data, void (*f)(t_cor *, void *));
+
 //Graphic module 
 void	build_image(t_mlx_data *mlx_data, t_face *faces_lst);
-t_face	*build_screen_coors(t_list *model);
-t_cor	*build_face(t_list *cur_node, int col_i);
+t_face	*build_faces(t_list *model);
+t_cor	*build_triangle(t_list *cur_node, int col_i);
+void	project_model(t_face *model);
 
 //Utils
+void	apply_matrix(t_cor *src, void *m);
+void	initialize_m(float *m, int size);
 
 #endif

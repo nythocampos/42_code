@@ -21,9 +21,27 @@ static void	set_pixel(t_img *img, int x, int y, int color)
 
 	if (x > WIDTH || y > HEIGHT || x < 0 || y < 0)	
 		return;
-	//y = HEIGHT - y; // invert y
 	offset = (img->size_line *y) + (x*(img->bpp/8));
 	*((unsigned int*)(offset + img->addr)) = color;
+}
+
+static void	set_background(t_mlx_data *mlx_data)
+{
+	int	x_index;
+	int	y_index;
+
+	x_index = 0;
+	y_index = 0;
+	while(y_index < HEIGHT)
+	{
+		while(x_index < WIDTH)
+		{	
+			set_pixel(mlx_data->img, x_index, y_index, COLOR_A);
+			x_index++;
+		}
+		x_index = 0;
+		y_index++;
+	}
 }
 
 static void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
@@ -142,24 +160,7 @@ static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
 	}
 }
 
-static void	set_background(t_mlx_data *mlx_data)
-{
-	int	x_index;
-	int	y_index;
 
-	x_index = 0;
-	y_index = 0;
-	while(y_index < HEIGHT)
-	{
-		while(x_index < WIDTH)
-		{	
-			set_pixel(mlx_data->img, x_index, y_index, COLOR_A);
-			x_index++;
-		}
-		x_index = 0;
-		y_index++;
-	}
-}
 
 void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
 {
@@ -181,8 +182,6 @@ void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
 	ft_printf("Drawing background... \n");
 	set_background(mlx_data);
 	ft_printf("Drawing model... \n");
-
-	ft_printf("null %d\n",faces_lst[0].id);
 	draw_model(mlx_data, faces_lst);
 	ft_printf("Model drawn\n");
 

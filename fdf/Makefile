@@ -22,14 +22,18 @@ CFLAGS			= -Wall -Wextra -Werror -g
 INCLUDE			= fdf.h structs.h
 
 # C FILES ---------
-# Image builder section
+# Graphic module 
 GRPDIR			= ./src/graphic_module/
-GRAPHIC_MODULE		= $(GRPDIR)img_builder.c $(GRPDIR)faces_builder.c \
-			$(GRPDIR)screen_coor_builder.c
+GRAPHIC_MODULE		= $(GRPDIR)images_builder.c $(GRPDIR)triangles_builder.c \
+$(GRPDIR)faces_builder.c $(GRPDIR)models_projector.c \
 
-# Models manager section
+# Files module
 FLSDIR			=./src/files_module/
 FILES_MODULE		= $(FLSDIR)models_manager.c $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
+
+# Models manager module
+MMDIR			=./src/models_manager_module/
+MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c $(MMDIR)models_processor.c
 
 # Window manager section
 WINDIR			= ./src/window_module/
@@ -37,10 +41,10 @@ WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_mana
 # Utils
 
 UTLDIR			= ./src/utils/
-UTILS			= $(UTLDIR)calculates.c #util.c
+UTILS			= $(UTLDIR)matrix_tools.c
 
 SRCS			= fdf.c $(UTILS) $(WINDOW_MODULE) $(FILES_MODULE) \
-			  $(GRAPHIC_MODULE)
+			  $(GRAPHIC_MODULE) $(MM_MODULE)
 # -----------------
 
 # Rules

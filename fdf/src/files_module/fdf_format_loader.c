@@ -40,15 +40,12 @@ static t_cor	*load_line(char *line, int row_num)
 
 			// TODO: CHECK THIS AND MOVE IT TO A BETTER PLACE
 			// Move the cube away the camera position
-			//pts_list[col_i].z = pts_list[col_i].z + 3;
+			// 11 = num of rows
+			pts_list[col_i].z =  (11 - (pts_list[col_i].z*SCALE_Z));
 			// SCALE
 			pts_list[col_i].x = pts_list[col_i].x * SCALE_X* (float) WIDTH;
 			pts_list[col_i].y = pts_list[col_i].y * SCALE_Y* (float) HEIGHT;
-			//pts_list[col_i].z = pts_list[col_i].z * SCALE_Z;
-			// CORRECTION
-			// AVOID THIS ROTATING THE MODEL
-			// 11 = num of rows
-			pts_list[col_i].z =  (11 - (pts_list[col_i].z*SCALE_Z));
+			
 			/*if (pts_list[col_i].y == 0)
 				pts_list[col_i].y =  (pts_list[col_i].y + 12);*/
 			
