@@ -54,14 +54,14 @@ static void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
 	int	temp_y;
 	int	p;
 
-	/*if (a->y > HEIGHT)
+	if (a->y > HEIGHT)
 		a->y = HEIGHT;
-	if (a->x > WIDHT)
+	if (a->x > WIDTH)
 		a->x = WIDTH;
 	if (b->y > HEIGHT)
 		b->y = HEIGHT;
 	if (b->x > WIDTH)
-		b->x = WIDTH;*/
+		b->x = WIDTH;
 	dy = (int) (b->y - a->y);
 	dx = (int) (b->x - a->x);
 	if (dx > 0){

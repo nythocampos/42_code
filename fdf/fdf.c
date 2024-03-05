@@ -106,12 +106,15 @@ int	main(void)
 	set_window(&mlx_data);
 	
 	// Load model
-	//model_data = load_model("./models/42.fdf");
-	model_data = load_model("./models/1.fdf");
+	model_data = load_model("./models/42.fdf");
+	//model_data = load_model("./models/1.fdf");
 	if(model_data == NULL)
 		return (0);
 	ft_printf("Model Loaded\n");
-	
+	scl.x = 1; // 120
+	scl.y = 0.2; // 120
+	scl.z = 1; // 120
+	magnify_model(model_data, &scl);
 	// ROTATE
 	angles.x = 1;//35 !!! ERROR 15
 	angles.y = 0.7;//45  !!! ERROR 15
