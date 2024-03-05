@@ -113,23 +113,23 @@ int	main(void)
 	ft_printf("Model Loaded\n");
 	
 	// ROTATE
-	angles.x = 0;//35 !!! ERROR
-	angles.y = 0;//45  !!! ERROR
-	angles.z = 15;//15 !!! WORKING A LITTLE
+	angles.x = 1;//35 !!! ERROR 15
+	angles.y = 0.7;//45  !!! ERROR 15
+	angles.z = 0.1;//15 !!! WORKING A LITTLE
 	rotate_model(model_data, &angles);
 	// SCALE
-	scl.x = 100; // 120
-	scl.y = 100; // 120
-	scl.z = 1; // 120
+	scl.x = 90; // 120
+	scl.y = 90; // 120
+	scl.z = 0.1; // 120
 	magnify_model(model_data, &scl);
 	// CORRECT POS
 	n_pos.x = 0; //500 // 100 /-50 -50 -50
 	n_pos.y = 0; //500 /2000
 	n_pos.z = 0;
 	move_model(model_data, &n_pos, 1);
-	n_pos.x = 1500; //500 // 100
-	n_pos.y = 1500; //500 /2000
-	n_pos.z = 3;
+	n_pos.x = 100; //500 // 100
+	n_pos.y = 200; //500 /2000
+	n_pos.z = 1;
 	move_model(model_data, &n_pos, 1);
 
 	// SCALE
