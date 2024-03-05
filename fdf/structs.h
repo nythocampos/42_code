@@ -1,10 +1,11 @@
 
 // world coordinates {x,y,z}
+// TODO: update this to work with float
 typedef struct
 {
-	int	x;
-	int	y;
-	int	z;
+	float	x;
+	float	y;
+	float	z;
 	int	id;
 }	t_cor;
 
@@ -14,6 +15,18 @@ typedef struct{
 	int	id;
 } t_face;
 // --- --- ---
+
+/*
+ * ang: angles
+ * n_pos: new position
+ * slc: scale
+ */
+typedef struct {
+	t_cor	*ang;
+	t_cor	*n_pos;
+	t_cor	*scl;
+} t_ctl;
+
 typedef struct {
 	float	f_near;
 	float	f_far;
@@ -38,6 +51,7 @@ typedef struct
 	int	width;
 	int	hight;
 	char	*title;
+	t_ctl	*ctl;
 }	t_mlx_data;
 
 

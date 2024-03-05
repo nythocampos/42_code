@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static void	check_model(void *pts_lst)
+/*static void	check_model(void *pts_lst)
 {
 	int	index;
 	t_cor	*w_cor;
@@ -30,9 +30,9 @@ static void	check_model(void *pts_lst)
 		index++;
 	}
 	ft_printf(" --- --- ---\n");
-}
+}*/
 
-static void	check_faces(t_face *faces_lst)
+/*static void	check_faces(t_face *faces_lst)
 {
 	int	faces_i;
 	int	pts_i;
@@ -68,7 +68,7 @@ static void	check_faces(t_face *faces_lst)
 		faces_i++;
 	}
 	ft_printf(" --- --- ---\n");
-}
+}*/
 
 	// Load all data from the fdf file into a s_model struct considering
 	// the position of the coordinate in the matrix imported.
@@ -88,63 +88,71 @@ int	main(void)
 	t_mlx_data	mlx_data;
 	t_list		*model_data;
 	t_face		*model;
-	
-	// Load model
-	model_data = load_model("./models/42.fdf");
-	//model_data = load_model("./models/1.fdf");
-	if(model_data == NULL)
-		return (0);
-	ft_printf("Model Loaded\n");
+	t_ctl		ctl;
 
-	// Check model
-	ft_lstiter(model_data, check_model);
-
-	model = build_faces(model_data);
-	if(model == NULL)
-		return (0);
-
-	// ROTATE
-	// TODO: error rotating X and Y
 	t_cor angles;
-	angles.x = 0;//35.264
-	angles.y = 0;//45
-	angles.z = 3;//5
-	rotate_model(&model[0], &angles);
-	ft_printf("Model rotated\n");
-
-	// MOVE
+	t_cor scl;
 	t_cor n_pos;
-	n_pos.x = 10;
-	n_pos.y = 10;
-	n_pos.z = 3;
-	move_model(&model[0], &n_pos, 1);
-
-	// PROJECT
-	project_model(&model[0]);
-	ft_printf("Model projected\n");
-
-	// SCALE??
-	// TODO: FIX THE SCALATION
-	/*float scale;
-	scale = 50;
-	magnify_model(&model[0], &scale);*/
-
-	// Check projection
-	check_faces(&model[0]);
-	//return (0);
+	//ctl.ang = &angles;
+	//ctl.scl = &scl;
+	//ctl.n_pos = &n_pos;
 
 	// Initialize window
 	mlx_data.mlx = mlx_init();
 	mlx_data.title = ft_strdup("FDF");
 	mlx_data.width = WIDTH;
 	mlx_data.hight = HEIGHT;
+	mlx_data.ctl = &ctl;
 	set_window(&mlx_data);
+	
+	// Load model
+	//model_data = load_model("./models/42.fdf");
+	model_data = load_model("./models/1.fdf");
+	if(model_data == NULL)
+		return (0);
+	ft_printf("Model Loaded\n");
+	
+	// ROTATE
+	angles.x = 0;//35 !!! ERROR
+	angles.y = 0;//45  !!! ERROR
+	angles.z = 15;//15 !!! WORKING A LITTLE
+	rotate_model(model_data, &angles);
+	// SCALE
+	scl.x = 100; // 120
+	scl.y = 100; // 120
+	scl.z = 1; // 120
+	magnify_model(model_data, &scl);
+	// CORRECT POS
+	n_pos.x = 0; //500 // 100 /-50 -50 -50
+	n_pos.y = 0; //500 /2000
+	n_pos.z = 0;
+	move_model(model_data, &n_pos, 1);
+	n_pos.x = 1500; //500 // 100
+	n_pos.y = 1500; //500 /2000
+	n_pos.z = 3;
+	move_model(model_data, &n_pos, 1);
 
-	// set image / call frame_builder
+	// SCALE
+	//magnify_model(model_data, &scl);
+
+	// MOVE
+	//move_model(model_data, &n_pos, 1);
+
+	// PROJECT
+	project_model(model_data);
+
+	//magnify_model(model_data, &scl);
+
+	model = build_faces(model_data);
+	if(model == NULL)
+		return (0);
+
 	build_image(&mlx_data, &model[0]);
-	// run window
 	set_events(&mlx_data);
 	mlx_loop(mlx_data.mlx);
+
 	// free the mlx_data->mlx
+	// free model_data t_list and t_cor inside
+	// free model t_faces and t_cor inside
 	return (0);
 }

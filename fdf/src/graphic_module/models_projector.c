@@ -9,11 +9,11 @@ float	*gen_prj_mtx()
 
 	m_size = 16;
 	p_data.f_near = 0.1;
-	p_data.f_far = 1000.0;
-	p_data.f_fov = 90.0;
+	p_data.f_far = 1000;
+	p_data.f_fov = 120;
 	p_data.f_asp_rad = ((float)WIDTH / (float)HEIGHT);
-	p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 * 3.14159 / 180.0);
-	//p_data.f_fov_rad = 1.0 / tanf(p_data.f_fov * 0.5 / 180.0* 3.14159);
+	p_data.f_fov_rad = 1 / tanf(p_data.f_fov * 0.5 * 3.14159 / 180.0);
+	//p_data.f_fov_rad = 1 / tanf(p_data.f_fov * 0.5 / 180.0* 3.14159);
 	m_prj = (float *) malloc (sizeof(float) * m_size);
 	if (!m_prj)
 		return (NULL);
@@ -35,14 +35,14 @@ float	*gen_prj_mtx()
  * Args:
  * 	a (t_cor *): a pointer to the cor destination
  */
-void	project_model(t_face *cor)
+void	project_model(t_list *model)
 {
 	float	*prj_m;
 
 	prj_m = gen_prj_mtx();
 	if (!prj_m)
 		return;
-	process_model(cor, (void *) prj_m, apply_matrix);
+	process_lists(model, (void *) prj_m, apply_matrix);
 	free(prj_m);
 }
 

@@ -54,6 +54,14 @@ static void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
 	int	temp_y;
 	int	p;
 
+	/*if (a->y > HEIGHT)
+		a->y = HEIGHT;
+	if (a->x > WIDHT)
+		a->x = WIDTH;
+	if (b->y > HEIGHT)
+		b->y = HEIGHT;
+	if (b->x > WIDTH)
+		b->x = WIDTH;*/
 	dy = (int) (b->y - a->y);
 	dx = (int) (b->x - a->x);
 	if (dx > 0){
@@ -76,7 +84,7 @@ static void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
 	if (dx >= dy)
 	{
 		p = 2 * dy - dx;
-		while (temp_x != b->x)
+		while (temp_x != (int) b->x)
 		{
 			set_pixel(
 				mlx->img,
@@ -95,7 +103,7 @@ static void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
 	else
 	{
 		p = 2 * dx - dy;
-		while (temp_y != b->y)
+		while (temp_y != (int) b->y)
 		{
 			set_pixel(
 				mlx->img,

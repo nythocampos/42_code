@@ -4,6 +4,10 @@
 
 // Event variables ---
 #define XK_Escape	0xff1b
+#define XK_Left		65361
+#define XK_Right	65363
+#define XK_Up		65362
+#define XK_Down		65364
 
 // Graphic variables ---
 #define COLOR_A	0x00000000

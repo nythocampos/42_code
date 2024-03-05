@@ -22,14 +22,15 @@ static float	*gen_rot_mtx_x(float x_angle)
 {
 	float	*m_rot;
 
+	//x_angle = x_angle + 1;
 	m_rot = (float *) malloc (sizeof(float) * 16);
 	if (!m_rot)
 		return (NULL);
 	initialize_m(m_rot, 16);
 	m_rot[0] = 1;
 	m_rot[5] = cosf(x_angle);
-	m_rot[6] = sinf(x_angle);
-	m_rot[9] = -sinf(x_angle);
+	m_rot[6] = sinf(x_angle); // sin
+	m_rot[9] = -sinf(x_angle); // -sin
 	m_rot[10] = cosf(x_angle);
 	m_rot[15] = 1.0; 
 	return (&m_rot[0]);
@@ -59,7 +60,7 @@ static float	*gen_rot_mtx_y(float y_angle)
  * 	angles (t_cor): x, y, z angles to apply in the rotation
  * 	model (t_cor *): model faces
  */
-void	rotate_model(t_face *model, t_cor *angles)
+void	rotate_model(t_list *model, t_cor *angles)
 {
 	float	*rot_z_m;
 	float	*rot_x_m;
@@ -71,11 +72,11 @@ void	rotate_model(t_face *model, t_cor *angles)
 	if (!rot_z_m || !rot_x_m || !rot_y_m)
 		return;	
 	if (angles->x != 0)
-		process_model(model, (void *) rot_x_m, apply_matrix);
+		process_lists(model, (void *) rot_x_m, apply_matrix);
 	if (angles->y != 0)
-		process_model(model, (void *) rot_y_m, apply_matrix);
+		process_lists(model, (void *) rot_y_m, apply_matrix);
 	if (angles->z != 0)
-		process_model(model, (void *) rot_z_m, apply_matrix);
+		process_lists(model, (void *) rot_z_m, apply_matrix);
 	free(rot_x_m);
 	free(rot_y_m);
 	free(rot_z_m);

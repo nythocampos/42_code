@@ -13,6 +13,7 @@ static void	move_to_pos(t_cor *cor, void *n_pos)
 	t_cor	*new_p;
 
 	new_p = (t_cor *) n_pos;
+	//ft_printf("move z: %d\n", (int)new_p->z);
 	cor->x = cor->x + new_p->x;
 	cor->y = cor->y + new_p->y;
 	cor->z = cor->z + new_p->z;
@@ -44,11 +45,11 @@ static void	apply_position(t_cor *cor, void *n_pos)
  * 	n_pos(t_cor): new position where the model must be
  * 	pleaced.
  */
-void	move_model(t_face *model, t_cor *n_pos, int mov_ty)
+void	move_model(t_list *model, t_cor *n_pos, int mov_ty)
 {
 	if (mov_ty == 0)
-		process_model(model, (void *) n_pos, apply_position);
+		process_lists(model, (void *) n_pos, apply_position);
 	else if (mov_ty == 1)
-		process_model(model, (void *) n_pos, move_to_pos);
+		process_lists(model, (void *) n_pos, move_to_pos);
 }
 

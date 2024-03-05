@@ -34,15 +34,17 @@ FILES_MODULE		= $(FLSDIR)models_manager.c $(FLSDIR)fdf_format_loader.c $(FLSDIR)
 
 # Models manager module
 MMDIR			=./src/models_manager_module/
-MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c $(MMDIR)models_processor.c
+MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c $(MMDIR)lists_processor.c \
+			  $(MMDIR)faces_processor.c
+
 
 # Window manager section
 WINDIR			= ./src/window_module/
 WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_manager.c
-# Utils
 
+# Utils
 UTLDIR			= ./src/utils/
-UTILS			= $(UTLDIR)matrix_tools.c
+UTILS			= $(UTLDIR)matrix_tools.c $(UTLDIR)list_tools.c
 
 SRCS			= fdf.c $(UTILS) $(WINDOW_MODULE) $(FILES_MODULE) \
 			  $(GRAPHIC_MODULE) $(MM_MODULE)

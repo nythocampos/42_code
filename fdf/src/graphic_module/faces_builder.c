@@ -2,36 +2,6 @@
 
 #include "../../fdf.h"
 
-//TODO: MOVE THIS TO UTILS??
-static int	get_cols_num(t_cor *pts_list)
-{
-	int	index;
-	int	n_cols;
-
-	index = 0;
-	n_cols = 1;
-	while(pts_list[index].id != -1)
-	{
-		index++;
-		n_cols++;
-	}
-	return (n_cols);
-}
-
-//TODO: MOVE THIS TO UTILS??
-static int	get_rows_num(t_list *model)
-{
-	int	index;
-
-	index = 1;
-	while(model->next != NULL)
-	{
-		model = model->next;
-		index++;
-	}
-	return (index);
-}
-
 /*
  * This function builds the faces TODO: considering
  * the type of face needed.
