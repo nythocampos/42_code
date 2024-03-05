@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   models_positioner.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 13:48:07 by antcampo          #+#    #+#             */
+/*   Updated: 2024/03/05 13:48:20 by antcampo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../fdf.h"
 
@@ -13,7 +24,6 @@ static void	move_to_pos(t_cor *cor, void *n_pos)
 	t_cor	*new_p;
 
 	new_p = (t_cor *) n_pos;
-	//ft_printf("move z: %d\n", (int)new_p->z);
 	cor->x = cor->x + new_p->x;
 	cor->y = cor->y + new_p->y;
 	cor->z = cor->z + new_p->z;
@@ -52,4 +62,3 @@ void	move_model(t_list *model, t_cor *n_pos, int mov_ty)
 	else if (mov_ty == 1)
 		process_lists(model, (void *) n_pos, move_to_pos);
 }
-

@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/31 20:08:42 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:53:49 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,27 @@
 #ifndef FDF_H
 # define FDF_H
 
-//TODO: check what is being imported twice
+# include <fcntl.h>
+# include <stdlib.h>
+# include <math.h>
 
-#include <fcntl.h>
-#include <stdlib.h>
-#include <math.h>
+# include "libraries/libft_ulti/libft.h"
+# include "libraries/mlx/mlx.h"
 
-#include "libraries/libft_ulti/libft.h"
-#include "libraries/mlx/mlx.h"
-
-#include "structs.h"
-#include "global_vars.h"
+# include "structs.h"
+# include "global_vars.h"
 
 // Window module 
 // Hooks
 void	minimize_window(t_mlx_data *data);
 void	end_program(t_mlx_data *data);
 void	set_events(t_mlx_data *data);
-void	set_window();
+void	set_window(t_mlx_data *mlx_data);
 
 // Files module 
-int	get_columns_num(char *line);
-int	get_item_value(char *str, int end);
-int	on_item(char *line, int index);
+int		get_columns_num(char *line);
+int		get_item_value(char *str, int end);
+int		on_item(char *line, int index);
 t_list	*load_model(char *file_name);
 t_list	*load_terrain_model(int file_df);
 
@@ -56,8 +54,7 @@ void	magnify_model(t_list *model, t_cor *scale);
 //Utils
 void	apply_matrix(t_cor *src, void *m);
 void	initialize_m(float *m, int size);
-
-int	get_rows_num(t_list *model);
-int	get_cols_num(t_cor *pts_list);
+int		get_rows_num(t_list *model);
+int		get_cols_num(t_cor *pts_list);
 
 #endif

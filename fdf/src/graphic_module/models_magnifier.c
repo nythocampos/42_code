@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   models_magnifier.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 13:42:08 by antcampo          #+#    #+#             */
+/*   Updated: 2024/03/05 13:42:11 by antcampo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../fdf.h"
 
@@ -6,16 +17,6 @@ static void	scale_model(t_cor *cor, void *scale)
 	t_cor	*scl;
 
 	scl = (t_cor *) scale;
-	//cor->x = cor->x + 1;
-	//cor->y = cor->y + 1;
-
-	// Scale the projection
-	//cor->x = cor->x * (0.1 * (float) WIDTH);
-	//cor->y = cor->y * (0.1 * (float) HEIGHT);
-	ft_printf("x: %d\n",(int)cor->x);
-	ft_printf("y: %d\n",(int)cor->y);
-	ft_printf("z: %d\n",(int)scl->z);
-	// Scale the model
 	cor->x = cor->x * scl->x;
 	cor->y = cor->y * scl->y;
 	cor->z = cor->z * scl->z;

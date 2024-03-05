@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 00:28:01 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/23 22:49:32 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:02:29 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
  */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t  str_size;
-  int     s1_len;
-  int     s2_len;
-	char		*str;
+	size_t	str_size;
+	int		s1_len;
+	int		s2_len;
+	char	*str;
 
-  s1_len = ft_strlen(s1);
-  s2_len = ft_strlen(s2);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
 	if (s1 == 0 || s2 == 0)
 		return (0);
 	if ((s1_len <= 0 && s2_len <= 0))

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   faces_processor.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/05 13:46:11 by antcampo          #+#    #+#             */
+/*   Updated: 2024/03/05 13:46:51 by antcampo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../fdf.h"
 
@@ -16,7 +27,7 @@ static void	update_cor(t_cor *points, void *data, void (*f)(t_cor *, void *))
 
 	pts_i = 0;
 	end_pts = 0;
-	while(end_pts == 0)
+	while (end_pts == 0)
 	{
 		f(&points[pts_i], data);
 		if (points[pts_i].id == -1)
@@ -35,13 +46,13 @@ static void	update_cor(t_cor *points, void *data, void (*f)(t_cor *, void *))
  * */
 void	process_faces(t_face *model, void *data, void (*f)(t_cor *, void *))
 {
-	int	faces_i;
-	int	end_faces;
+	int		faces_i;
+	int		end_faces;
 	t_cor	*points;
 
 	faces_i = 0;
 	end_faces = 0;
-	while(end_faces == 0)
+	while (end_faces == 0)
 	{
 		points = model[faces_i].points;
 		update_cor(points, data, f);

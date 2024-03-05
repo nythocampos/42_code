@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:20:09 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/25 18:43:37 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:25:49 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static void	initialize_window(t_mlx_data *mlx_data)
 {
 	mlx_data->win = mlx_new_window(
-		mlx_data->mlx,
-		mlx_data->width,
-		mlx_data->hight,
-		mlx_data->title
-		);
+			mlx_data->mlx,
+			mlx_data->width,
+			mlx_data->hight,
+			mlx_data->title
+			);
 }
 
 /*
@@ -27,6 +27,5 @@ static void	initialize_window(t_mlx_data *mlx_data)
  */
 void	set_window(t_mlx_data *mlx_data)
 {
-	initialize_window(mlx_data);	
+	initialize_window(mlx_data);
 }
-
