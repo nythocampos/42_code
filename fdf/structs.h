@@ -10,6 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+typedef struct s_vec
+{
+	int	dy;
+	int	dx;
+	int	step_x;
+	int	step_y;
+	int	temp_x;
+	int	temp_y;
+	int	p;
+}	t_vec;
+
 // world coordinates {x,y,z}
 typedef struct s_cor
 {

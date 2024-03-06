@@ -14,8 +14,9 @@
 
 /*
  * This function the pixels direct to the space of memory
+ * TODO: move this to a better place
  */
-static void	set_pixel(t_img *img, int x, int y, int color)
+void	set_pixel(t_img *img, int x, int y, int color)
 {
 	int	offset;
 
@@ -41,104 +42,6 @@ static void	set_background(t_mlx_data *mlx_data)
 		}
 		x_index = 0;
 		y_index++;
-	}
-}
-
-static void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
-{
-	int	dy;
-	int	dx;
-	int	step_x;
-	int	step_y;
-	int	temp_x;
-	int	temp_y;
-	int	p;
-
-	dy = (int)(b->y - a->y);
-	dx = (int)(b->x - a->x);
-	if (dx > 0)
-	{
-		step_x = 1;
-	}
-	else
-	{
-		step_x = -1;
-		dx = -dx;
-	}
-	if (dy > 0)
-	{
-		step_y = 1;
-	}
-	else
-	{
-		step_y = -1;
-		dy = -dy;
-	}
-	temp_x = (int) a->x;
-	temp_y = (int) a->y;
-	if (dx >= dy)
-	{
-		p = 2 * dy - dx;
-		while (temp_x != (int) b->x)
-		{
-			set_pixel(
-				mlx->img,
-				temp_x,
-				temp_y,
-				COLOR_B);
-			temp_x = temp_x + step_x;
-			if (p >= 0)
-			{
-				temp_y = temp_y + step_y;
-				p = p - (2 * dx);
-			}
-			p = p + (2 * dy);
-		}
-	}
-	else
-	{
-		p = 2 * dx - dy;
-		while (temp_y != (int) b->y)
-		{
-			set_pixel(
-				mlx->img,
-				temp_x,
-				temp_y,
-				COLOR_B);
-			temp_y = temp_y + step_y;
-			if (p >= 0)
-			{
-				temp_x = temp_x + step_x;
-				p = p - (2 * dy);
-			}
-			p = p + (2 * dx);
-		}
-	}
-}
-
-static void	draw_face(t_mlx_data *mlx_data, t_cor *points)
-{
-	int		pts_i;
-	int		end_pts;
-	t_cor	*a;
-	t_cor	*b;
-
-	pts_i = 0;
-	end_pts = 0;
-	while (end_pts == 0)
-	{
-		a = &points[pts_i];
-		if (points[pts_i].id == -1)
-		{
-			b = &points[0];
-			end_pts = 1;
-		}
-		else
-		{
-			b = &points[pts_i + 1];
-		}
-		pts_i++;
-		draw_line(mlx_data, a, b);
 	}
 }
 

@@ -50,6 +50,8 @@ t_face	*build_faces(t_list *model);
 t_cor	*build_triangle(t_list *cur_node, int col_i);
 void	project_model(t_list *model);
 void	magnify_model(t_list *model, t_cor *scale);
+void	draw_face(t_mlx_data *mlx_data, t_cor *points);
+void	set_pixel(t_img *img, int x, int y, int color);
 
 // Data manager
 t_state	*initialize_state(int n_mod, char **argv);
