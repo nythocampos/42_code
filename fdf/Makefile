@@ -30,26 +30,29 @@ $(GRPDIR)models_magnifier.c
 
 # Files module
 FLSDIR			=./src/files_module/
-FILES_MODULE		= $(FLSDIR)models_manager.c $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
+FILES_MODULE		= $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
 
 # Models manager module
 MMDIR			=./src/models_manager_module/
 MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c $(MMDIR)lists_processor.c \
-			  $(MMDIR)faces_processor.c
+			  $(MMDIR)faces_processor.c $(MMDIR)models_manager.c $(MMDIR)models_loader.c
 
-
-# Window manager section
+# Window manager module
 WINDIR			= ./src/window_module/
 WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_manager.c
+
+# Data manager module
+DATDIR			= ./src/data_module/
+DATA_MODULE		= $(DATDIR)state_manager.c
 
 # Utils
 UTLDIR			= ./src/utils/
 UTILS			= $(UTLDIR)matrix_tools.c $(UTLDIR)list_tools.c
 
 SRCS			= fdf.c $(UTILS) $(WINDOW_MODULE) $(FILES_MODULE) \
-			  $(GRAPHIC_MODULE) $(MM_MODULE)
-# -----------------
+			  $(GRAPHIC_MODULE) $(MM_MODULE) $(DATA_MODULE)
 
+# -----------------
 # Rules
 all: makelib build
 

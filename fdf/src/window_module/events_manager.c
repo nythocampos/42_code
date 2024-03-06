@@ -15,33 +15,18 @@
 // TO CONCIDER: Use an interface to controler the keys pressed
 int	handle_keys(int key_num, t_mlx_data *data)
 {
-	t_ctl	*ctl;
-
-	ctl = data->ctl;
 	if (key_num == 0xff1b)
-	{
 		end_program(data);
-	}
-	else if (key_num == 65361)
-	{
-		ctl->ang->x = ctl->ang->x + 10;
-	}
-	else if (key_num == 65363)
-	{
-		ctl->ang->y = ctl->ang->y + 10;
-	}
-	else if (key_num == 65362)
-	{
-		ctl->ang->z = ctl->ang->z + 10;
-	}
-	else if (key_num == 65364)
-	{
-		mlx_clear_window(data->mlx, data->win);
-	}
 	return (0);
 }
 
-void	set_events(t_mlx_data *data)
+int	handle_expose(t_mlx_data *data)
 {
-	mlx_key_hook(data->win, handle_keys, &data);
+	// ADD REFRESH IMAGE
+}
+
+void	set_events(t_state *data)
+{
+	mlx_hook(data->win, 2, handle_keys, &data);
+	t_mlx_data(data->win, 12, handle_expose, &data);
 }

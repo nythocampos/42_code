@@ -13,23 +13,44 @@
 #include "../../fdf.h"
 
 /*
-* This function is used to choose the process to follow
-* considering the format of model to load
-*/
-
-t_list	*load_model(char *file_name)
+ * This function corrects the size
+ * and position of the model
+ */
+static void	correct_mod(t_list *model_data)
 {
-	t_list	*model;
-	int		fd;
+	t_cor	scl;
+	t_cor	n_pos;
 
-	ft_printf("File name: %s \n", file_name);
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_printf("File %s not found\n", file_name);
-		return (NULL);
-	}
-	model = load_terrain_model(fd);
-	close(fd);
-	return (model);
+	scl.x = 90;
+	scl.y = 90;
+	scl.z = 0.1;
+	magnify_model(model_data, &scl);
+	n_pos.x = 0;
+	n_pos.y = 0;
+	n_pos.z = 0;
+	move_model(model_data, &n_pos, 1);
 }
+
+void	initialize_mod(t_list *model_data, int model_num)
+{
+	t_cor	angles;
+	t_cor	scl;
+	t_cor	n_pos;
+
+	ft_printf("model_num: %d\n", model_num);
+	scl.x = 1;
+	scl.y = 0.2;
+	scl.z = 1;
+	magnify_model(model_data, &scl);
+	angles.x = 1;
+	angles.y = 0.7;
+	angles.z = 0.1;
+	rotate_model(model_data, &angles);
+	correct_mod(model_data);
+	n_pos.x = 100;
+	n_pos.y = 200;
+	n_pos.z = 1;
+	move_model(model_data, &n_pos, 1);
+	project_model(model_data);
+}
+

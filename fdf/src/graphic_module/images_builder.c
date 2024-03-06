@@ -167,11 +167,11 @@ void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
 {
 	t_img	img;
 
-	ft_printf("Building img... \n");
+	ft_printf("Building image... \n");
 	img.img = mlx_new_image(
 			mlx_data->mlx,
-			mlx_data->width,
-			mlx_data->hight);
+			WIDTH,
+			HEIGHT);
 	img.addr = mlx_get_data_addr(
 			img.img,
 			&img.bpp,
@@ -179,7 +179,6 @@ void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
 			&img.endian);
 	mlx_data->img = &img;
 	set_background(mlx_data);
-	ft_printf("Drawing model... \n");
 	draw_model(mlx_data, faces_lst);
 	ft_printf("Model drawn\n");
 	mlx_put_image_to_window(

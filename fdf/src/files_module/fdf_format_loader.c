@@ -59,6 +59,7 @@ t_list	*load_terrain_model(int file_df)
 	{
 		free(temp_line);
 		temp_line = get_next_line(file_df);
+		ft_printf("--->%s\n",temp_line);
 		if (temp_line != NULL)
 		{
 			pts_lst = load_line(temp_line, row_i);
@@ -72,3 +73,4 @@ t_list	*load_terrain_model(int file_df)
 	free(temp_line);
 	return (first_node);
 }
+

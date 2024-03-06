@@ -16,28 +16,16 @@ typedef struct s_cor
 	float	x;
 	float	y;
 	float	z;
-	int		id;
+	int	id;
 }	t_cor;
 
 // screen face [{x,y},[{x,y},[{x,y}]
 typedef struct s_face
 {
 	t_cor	*points;
-	int		id;
+	int	id;
 }	t_face;
 // --- --- ---
-
-/*
- * ang: angles
- * n_pos: new position
- * slc: scale
- */
-typedef struct s_ctl
-{
-	t_cor	*ang;
-	t_cor	*n_pos;
-	t_cor	*scl;
-}	t_ctl;
 
 typedef struct s_p_data
 {
@@ -48,13 +36,13 @@ typedef struct s_p_data
 	float	f_fov_rad;
 }	t_p_data;
 
-typedef struct t_img
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int		bpp;
-	int		size_line;
-	int		endian;
+	int	bpp;
+	int	size_line;
+	int	endian;
 }	t_img;
 
 typedef struct s_mlx_data
@@ -62,8 +50,29 @@ typedef struct s_mlx_data
 	void	*mlx;
 	void	*win;
 	t_img	*img;
-	int		width;
-	int		hight;
-	char	*title;
-	t_ctl	*ctl;
 }	t_mlx_data;
+
+/*
+ * model_data (t_list *): the model coordinates in a list.
+ * model_faces (t_face *): the model coordinates group in faces.
+ * model_proj (t_face *): the model projection.
+ * id (int): the model id.
+ */
+typedef struct s_models
+{
+	t_list	*model_data;
+	t_face	*model_faces;
+	t_face	*model_proj;
+	int	id;
+}	t_models;
+/*
+ * This model allows a easy way to access
+ * to the most important information
+ * in the promgram
+ */
+typedef struct s_state
+{
+	t_mlx_data	*mlx_data;
+	t_models	*models;
+}	t_state;
+

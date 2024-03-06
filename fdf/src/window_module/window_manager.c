@@ -12,20 +12,20 @@
 
 #include "../../fdf.h"
 
-static void	initialize_window(t_mlx_data *mlx_data)
+static void	initialize_window(t_mlx_data *mlx_data, char *title)
 {
 	mlx_data->win = mlx_new_window(
 			mlx_data->mlx,
-			mlx_data->width,
-			mlx_data->hight,
-			mlx_data->title
+			WIDTH,
+			HEIGHT,
+			title
 			);
 }
 
 /*
  * This function sets everything nessary to run the window
  */
-void	set_window(t_mlx_data *mlx_data)
+void	set_window(t_mlx_data *mlx_data, char *title)
 {
-	initialize_window(mlx_data);
+	initialize_window(mlx_data, title);
 }
