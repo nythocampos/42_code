@@ -14,12 +14,17 @@
 
 static void	initialize_window(t_mlx_data *mlx_data, char *title)
 {
+	t_img	*img;
+
+	img = (t_img *) malloc(sizeof(img) * 1);
+	if (!img)
+		return ;
 	mlx_data->win = mlx_new_window(
-			mlx_data->mlx,
-			WIDTH,
-			HEIGHT,
-			title
-			);
+			mlx_data->mlx, WIDTH, HEIGHT, title);
+	img->img = mlx_new_image(mlx_data->mlx, WIDTH, HEIGHT);
+	img->addr = mlx_get_data_addr(
+			img->img, &img->bpp, &img->size_line, &img->endian);
+	mlx_data->img = img;
 }
 
 /*

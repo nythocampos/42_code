@@ -17,7 +17,7 @@ int	main(int argc, char  *argv[])
 	t_state		*state;
 	t_models	*models;
 
-	if (argc < 1)
+	if (argc < 2)
 		return (0);	
 	state = initialize_state((argc - 1), argv);
 	if (state == NULL)
@@ -28,7 +28,7 @@ int	main(int argc, char  *argv[])
 	models = state->models;
 	build_image(
 		state->mlx_data, 
-		models->model_faces);
+		models->model_faces);	
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);
 }

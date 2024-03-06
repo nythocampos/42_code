@@ -26,9 +26,8 @@
 
 // Window module 
 // Hooks
-void	minimize_window(t_mlx_data *data);
-void	end_program(t_mlx_data *data);
-void	set_events(t_mlx_data *data);
+void	end_program(t_state *state);
+void	set_events(t_state *data);
 void	set_window(t_mlx_data *mlx_data, char *title);
 
 // Files module 

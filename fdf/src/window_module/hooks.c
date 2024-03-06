@@ -12,18 +12,14 @@
 
 #include "../../fdf.h"
 
-void	minimize_window(t_mlx_data *mlx_data)
+void	end_program(t_state *state)
 {
-	mlx_data = malloc(sizeof(t_mlx_data) * 1);
-	if (!mlx_data)
-		return ;
-	free(mlx_data);
-}
+	t_mlx_data	*mlx_data;
 
-void	end_program(t_mlx_data *mlx_data)
-{
+	mlx_data = state->mlx_data;
 	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
 	mlx_destroy_image(mlx_data->mlx, mlx_data->img->img);
+	//TODO: free all memory used
 	free(mlx_data->mlx);
 	exit(1);
 }
