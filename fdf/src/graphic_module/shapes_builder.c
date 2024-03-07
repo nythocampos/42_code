@@ -61,7 +61,7 @@ void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
 	{
 		vec.step_y = -1;
 		vec.dy = -vec.dy;
-	}	
+	}
 	if (vec.dx >= vec.dy)
 		draw_x(mlx, &vec, b);
 	else
