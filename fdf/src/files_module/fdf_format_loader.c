@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:35:46 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/07 21:25:10 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,42 @@ static t_cor	*load_line(char *line, int row_num)
 	return (&pts_list[0]);
 }
 
-t_list	*load_terrain_model(int file_df)
+t_list	*add_node(char *tmp_l, int row_n)
 {
-	char	*temp_line;
-	t_list	*first_node;
-	t_list	*cur_node;
-	t_list	*last_node;
-	int		row_i;
 	t_cor	*pts_lst;
+	t_list	*cur_n;
 
-	row_i = 0;
-	last_node = NULL;
-	temp_line = (char *) malloc(sizeof(char) * 1);
-	if (!temp_line)
+	if (tmp_l == NULL)
 		return (NULL);
-	while (temp_line != NULL)
-	{
-		free(temp_line);
-		temp_line = get_next_line(file_df);
-		ft_printf("--->%s\n",temp_line);
-		if (temp_line != NULL)
-		{
-			pts_lst = load_line(temp_line, row_i);
-			cur_node = ft_lstnew((void *) &pts_lst[0]);
-			if (last_node == NULL)
-				first_node = cur_node;
-			ft_lstadd_back(&last_node, cur_node);
-		}
-		row_i++;
-	}
-	free(temp_line);
-	return (first_node);
+	ft_printf("--->%s\n", tmp_l);
+	pts_lst = load_line(tmp_l, row_n);
+	cur_n = ft_lstnew((void *) &pts_lst[0]);
+	return (cur_n);
 }
 
+t_list	*load_terrain_model(int file_df)
+{
+	char	*tmp_l;
+	t_list	*first_n;
+	t_list	*last_n;
+	int		row_i;
+	t_list	*cur_n;
+
+	row_i = 0;
+	last_n = NULL;
+	tmp_l = (char *) malloc(sizeof(char) * 1);
+	if (!tmp_l)
+		return (NULL);
+	while (tmp_l != NULL)
+	{
+		free(tmp_l);
+		tmp_l = get_next_line(file_df);
+		cur_n = add_node(tmp_l, row_i);
+		if (last_n == NULL)
+			first_n = cur_n;
+		ft_lstadd_back(&last_n, cur_n);
+		row_i++;
+	}
+	free(tmp_l);
+	return (first_n);
+}

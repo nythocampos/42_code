@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   models_loader.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/07 19:45:15 by antcampo          #+#    #+#             */
+/*   Updated: 2024/03/07 19:50:09 by antcampo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../fdf.h"
 
@@ -28,24 +39,21 @@ static t_list	*load_model(char *file_name)
 t_models	*import_models(int n_mod, char **argv)
 {
 	t_models	*models;
-	int		index;
+	int			index;
 
 	models = (t_models *) malloc(sizeof(t_models) * n_mod);
 	if (!models)
 		return (NULL);
 	index = 0;
-	while(index < n_mod)
+	while (index < n_mod)
 	{
 		models[index].model_data = load_model(argv[index + 1]);
 		if (models[index].model_data == NULL)
 			return (NULL);
 		initialize_mod(models[index].model_data, index);
-		models[index].model_faces = build_faces(
-				models[index].model_data);
+		models[index].model_faces = build_faces(models[index].model_data);
 		models[index].id = index;
-		
 		index++;
 	}
 	return (models);
 }
-

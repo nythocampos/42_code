@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:12:50 by antcampo          #+#    #+#             */
-/*   Updated: 2024/01/31 20:08:41 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:43:41 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
 
 void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
 {
-	ft_printf("Building image... \n");	
+	ft_printf("Building image... \n");
 	set_background(mlx_data);
 	draw_model(mlx_data, faces_lst);
 	ft_printf("Image built. \n");

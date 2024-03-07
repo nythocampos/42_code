@@ -61,10 +61,8 @@ all: makelib build
 makelib:
 	@echo "---->COMPILING LIBRARIES..."
 	@make -C $(LIBFTDIR)
-	@cp $(LIBFT) ./
 	@echo "---->LIBFT LIBRARY COMPLIED."
 	@make -C $(MINILIBXDIR)
-	@cp $(MINILIBX) ./
 	@echo "---->LIBFT LIBRARY COMPILED."
 	@echo "---->MINILIBX LIBRARY COMPILED."
 

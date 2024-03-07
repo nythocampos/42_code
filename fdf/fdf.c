@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:50:30 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 14:05:39 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:15:46 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char  *argv[])
 	models = state->models;
 	build_image(
 		state->mlx_data, 
-		models->model_faces);	
+		models->model_faces);
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);
 }

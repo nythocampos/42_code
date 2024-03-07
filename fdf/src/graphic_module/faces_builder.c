@@ -6,11 +6,23 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:36:06 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:36:53 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:34:26 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
+
+static int	get_matrix_size(t_list *node)
+{
+	int	m_size;
+	int	n_rows;
+	int	n_cols;
+
+	n_rows = get_rows_num(node);
+	n_cols = get_cols_num((t_cor *) node->content);
+	m_size = (n_cols * n_rows);
+	return (m_size);
+}
 
 /*
  * This function builds the faces TODO: considering
@@ -22,40 +34,29 @@
  * Return:
  * 	faces_list (t_face *): the list of faces generated
  */
-t_face	*build_faces(t_list *model)
+t_face	*build_faces(t_list *node)
 {
-	int		n_rows;
 	int		n_cols;
-	int		col_i;
+	int		m_size;
 	int		is_last_line;
-	t_face	*faces_lst;
+	t_face	*faces;
 	int		index;
 
-	col_i = 0;
-	index = 0;
 	is_last_line = 0;
-	n_rows = get_rows_num(model);
-	n_cols = get_cols_num((t_cor *) model->content);
-	faces_lst = (t_face *) malloc(sizeof(t_face) * (n_cols * n_rows));
-	if (!faces_lst)
+	index = 0;
+	n_cols = get_cols_num((t_cor *) node->content);
+	m_size = get_matrix_size(node);
+	faces = (t_face *) malloc(sizeof(t_face) * m_size);
+	if (!faces)
 		return (NULL);
 	while (is_last_line == 0)
 	{
-		while (col_i <= (n_cols - 1))
-		{
-			faces_lst[index].points = build_triangle(
-					model,
-					col_i);
-			faces_lst[index].id = index;
-			col_i++;
-			index++;
-		}
-		col_i = 0;
-		if (model->next == NULL)
+		build_triangles(node, faces, n_cols, &index);
+		if (node->next == NULL)
 			is_last_line = 1;
 		else
-			model = model->next;
+			node = node->next;
 	}
-	faces_lst[(n_cols * n_rows) - 1].id = -1;
-	return (&faces_lst[0]);
+	faces[(m_size) - 1].id = -1;
+	return (&faces[0]);
 }

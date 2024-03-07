@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:57:25 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:57:29 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/07 21:32:03 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ typedef struct s_cor
 	float	x;
 	float	y;
 	float	z;
-	int	id;
+	int		id;
 }	t_cor;
 
 // screen face [{x,y},[{x,y},[{x,y}]
 typedef struct s_face
 {
 	t_cor	*points;
-	int	id;
+	int		id;
 }	t_face;
 // --- --- ---
 
@@ -51,9 +51,9 @@ typedef struct s_img
 {
 	void	*img;
 	char	*addr;
-	int	bpp;
-	int	size_line;
-	int	endian;
+	int		bpp;
+	int		size_line;
+	int		endian;
 }	t_img;
 
 typedef struct s_mlx_data
@@ -74,7 +74,7 @@ typedef struct s_models
 	t_list	*model_data;
 	t_face	*model_faces;
 	t_face	*model_proj;
-	int	id;
+	int		id;
 }	t_models;
 /*
  * This model allows a easy way to access
@@ -86,4 +86,3 @@ typedef struct s_state
 	t_mlx_data	*mlx_data;
 	t_models	*models;
 }	t_state;
-
