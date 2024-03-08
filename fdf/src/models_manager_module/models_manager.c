@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 21:01:41 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/07 19:50:56 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/08 20:55:51 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 /*
  * This function corrects the size
  * and position of the model
+ *
+ * Linux: x: 90, y: 90, z:0.1
+ * Mac: x: ?, y: ?, z: ?
  */
 static void	correct_mod(t_list *model_data)
 {
 	t_cor	scl;
 	t_cor	n_pos;
 
-	scl.x = 90;
-	scl.y = 90;
-	scl.z = 0.1;
+	scl.x = 90; // linux 90 // mac
+	scl.y = 90; // 90
+	scl.z = 0.1; //0.1
 	magnify_model(model_data, &scl);
 	n_pos.x = 0;
 	n_pos.y = 0;

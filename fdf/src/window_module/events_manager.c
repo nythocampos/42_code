@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:55:03 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/08 13:19:10 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/08 20:55:52 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	handle_destroy(t_state *state)
 	return (0);
 }
 
-// TO CONCIDER: Use an interface to controler the keys pressed
 static int	handle_keys(int key, t_state *state)
 {
 	t_mlx_data	*mlx_data;
@@ -26,19 +25,24 @@ static int	handle_keys(int key, t_state *state)
 	mlx_data = state->mlx_data;
 	if (key == 0xff1b || key == 53)
 		end_program(state);
-	if (key == 't')
+	if (key == 17)
 	{
 		mlx_put_image_to_window(
 			mlx_data->mlx,
 			mlx_data->win,
 			mlx_data->img->img, 0, 0);
+		ft_printf("refresh\n");
 	}
-	if (key == 'a' || key == 'w' || key == 's' || key == 'd')
-		move_model(state, key);
-	if (key == 'i' || key == 'k' || key == 'j' || key == 'l')
-		move_model(state, key);
-	if (key == '+' || key == '-')
-		scale_model(state, key);
+	if (key == M_FORWARD || key == M_BACKWARD 
+			|| key == M_LEFT || key == M_RIGHT
+			||key == M_UP || key == M_DOWN)
+		update_m_pos(state, key);
+	if (key == R_POS_X || key == R_NEG_X 
+			|| key == R_NEG_Y || key == R_POS_Y
+			|| key == R_NEG_Z || key == R_POS_Z)
+		update_m_r(state, key);
+	if (key == S_PLUS || key == S_LESS)
+		update_m_s(state, key);
 	return (0);
 }
 

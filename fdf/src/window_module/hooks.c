@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:01:05 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/08 13:15:40 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/08 20:55:54 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,63 +47,67 @@ void	update_m_pos(t_state *state, int key)
 	n_pos.x = 0;
 	n_pos.y = 0;
 	n_pos.z = 0;
-	if (key == 'w')
+	if (key == M_FORWARD)
 	{
 		n_pos.z = increment;
-		move_model(model, n_pos);
+		move_model(model, &n_pos, 1);
 		ft_printf("move to forward\n");
 	}
-	else if (key == 's'){
+	else if (key == M_BACKWARD){
 		n_pos.z = increment;
-		move_model(model, n_pos);
-		move_model(0, 0, -increment);
+		move_model(model, &n_pos, 1);
 		ft_printf("move to backward\n");
 	}
-	else if (key == 'a'){
+	else if (key == M_LEFT){
 		n_pos.x = -increment;
-		move_model(model, n_pos);
+		move_model(model,&n_pos, 1);
 		ft_printf("move to left\n");
 	}
-	else if (key == 'd'){
+	else if (key == M_RIGHT){
 		n_pos.x = increment;
-		move_model(model, 0, 0);
+		move_model(model, &n_pos, 1);
 		ft_printf("move to right\n");
 	}
+	refresh_window(state);
 }
 
 /*
 This function updates the model scale
 
 */
-void	scale_model(t_state *state, int key)
+void	update_m_s(t_state *state, int key)
 {
-	int		increment;
-	t_cor	n_pos;
+	float	increment;
+	t_cor	scl;
 	t_list	*model;
 
-	increment = 1;	
+	increment = 1;
+	scl.x = 0;
+	scl.y = 0;
+	scl.z = 0;
 	model = state->models[0].model_data;
-	if (key == '+')
+	if (key == S_PLUS)
 	{
 		scl.x = increment;
 		scl.y = increment * 0.2;
 		scl.z = increment;
-		magnify_model(model_data, &scl);
+		magnify_model(model, &scl);
 		ft_printf("scale +\n");
 	}
-	else if (key == '-')
+	else if (key == S_LESS)
 	{
 		scl.x = -increment;
 		scl.y = -increment * 0.2;
 		scl.z = -increment;
-		magnify_model(model_data, &scl);
+		magnify_model(model, &scl);
 		ft_printf("scale +\n");
 	}
+	refresh_window(state);
 }
-void	update_r_pos(t_state *state, int key)
+void	update_m_r(t_state *state, int key)
 {
 	t_list	*model;
-	int		increment;
+	float	increment;
 	t_cor	n_ang;
 
 	increment = 0.5;
@@ -111,25 +115,26 @@ void	update_r_pos(t_state *state, int key)
 	n_ang.x = 0;
 	n_ang.y = 0;
 	n_ang.z = 0;
-	if (key == 'i')
+	if (key == R_POS_X)
 	{
 		n_ang.x = increment;
-		scale_model(model, n_pos);
+		rotate_model(model, &n_ang);
 		ft_printf("rotate to forward\n");
 	}
-	else if (key == 'k'){
+	else if (key == R_NEG_X){
 		n_ang.x = increment;
-		scale_model(model, n_pos);
+		rotate_model(model, &n_ang);
 		ft_printf("rotate to backward\n");
 	}
-	else if (key == 'j'){
+	else if (key == R_NEG_Y){
 		n_ang.z = -increment;
-		scale_model(model, n_pos);
+		rotate_model(model, &n_ang);
 		ft_printf("rotate to left\n");
 	}
-	else if (key == 'l'){
+	else if (key == R_POS_Y){
 		n_ang.z = increment;
-		scale_model(model, n_ang);
+		rotate_model(model, &n_ang);
 		ft_printf("rotate to right\n");
 	}
+	refresh_window(state);
 }

@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/07 21:31:03 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/08 19:54:34 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void		end_program(t_state *state);
 void		set_events(t_state *data);
 void		set_window(t_mlx_data *mlx_data, char *title);
 
+void		refresh_window(t_state *state);
+
 // Files module 
 int			get_columns_num(char *line);
 int			get_item_value(char *str, int end);
@@ -45,6 +47,9 @@ void		process_lists(t_list *node, void *data, void (*f)(t_cor *, void *));
 void		initialize_mod(t_list *model_data, int model_num);
 t_models	*import_models(int n_mod, char **argv);
 
+void		update_m_pos(t_state *state, int key);
+void		update_m_s(t_state *state, int key);
+void		update_m_r(t_state *state, int key);
 // Graphic module 
 void		build_image(t_mlx_data *mlx_data, t_face *faces_lst);
 t_face		*build_faces(t_list *node);
