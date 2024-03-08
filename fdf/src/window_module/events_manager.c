@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:55:03 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/07 19:52:45 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:19:10 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,26 @@ static int	handle_destroy(t_state *state)
 }
 
 // TO CONCIDER: Use an interface to controler the keys pressed
-static int	handle_keys(int key_num, t_state *state)
+static int	handle_keys(int key, t_state *state)
 {
 	t_mlx_data	*mlx_data;
 
 	mlx_data = state->mlx_data;
-	if (key_num == 0xff1b)
+	if (key == 0xff1b || key == 53)
 		end_program(state);
-	if (key_num == 't')
+	if (key == 't')
 	{
 		mlx_put_image_to_window(
 			mlx_data->mlx,
 			mlx_data->win,
 			mlx_data->img->img, 0, 0);
 	}
+	if (key == 'a' || key == 'w' || key == 's' || key == 'd')
+		move_model(state, key);
+	if (key == 'i' || key == 'k' || key == 'j' || key == 'l')
+		move_model(state, key);
+	if (key == '+' || key == '-')
+		scale_model(state, key);
 	return (0);
 }
 
