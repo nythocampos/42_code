@@ -55,5 +55,6 @@ t_models	*import_models(int n_mod, char **argv)
 		models[index].id = index;
 		index++;
 	}
+	models[n_mod - 1].id = -1;
 	return (models);
 }

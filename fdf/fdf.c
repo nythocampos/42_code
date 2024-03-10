@@ -26,9 +26,7 @@ int	main(int argc, char  *argv[])
 		return (0);
 	}
 	models = state->models;
-	build_image(
-		state->mlx_data, 
-		models->model_faces);
+	build_image(state->mlx_data, models->model_faces);
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);
 }

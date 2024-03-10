@@ -12,18 +12,74 @@
 
 #include "../../fdf.h"
 
+static void	del(void *content)
+{
+	free(content);
+	content = NULL;
+}
+
+/*static void	clean_models(t_models *models)
+{
+	int	index;
+	int	is_end;
+
+	index = 0;
+	is_end = 0;
+	while (is_end == 0)
+	{
+		ft_lstclear(&models[index].model_data, &del);
+		free(models[index].model_faces);
+		free(models[index].model_proj);
+		if (models[index].id == -1)
+			is_end = 1;
+		index++;
+	}
+	free(models);
+}*/
+
 /*
  * This function close the program and free al
  * memory used
+ *
+ * TO FREE:
+ *
+ * 	- To use lists function to clean the list
+ * 	t_models:
+ * 	t_list *model_data
+ * 		content: s_cors *cors
+ * 	- To free just free the fire the pointer
+ * 	t_face *model_faces
+ * 	t_face *model_proj
+ *
+ *
+ * 	- To free check if is necessary to free the mlx and win pointers
+ * 	t_mlx_data *mlx_data
+ * 		s_img *img
+ * 			void *img
+ * 			char  *addr
  */
 void	end_program(t_state *state)
 {
 	t_mlx_data	*mlx_data;
+	t_img		*img;
+	t_list		*model;
 
+	// free mlx data
 	mlx_data = state->mlx_data;
+	img = mlx_data->img;
 	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
-	mlx_destroy_image(mlx_data->mlx, mlx_data->img->img);
+	mlx_destroy_image(mlx_data->mlx, img->img);
+	//mlx_destroy_display(mlx_data->mlx);
+	free(mlx_data->img);
 	free(mlx_data->mlx);
+
+	// free models
+	//clean_models(state->models);
+	model = state->models[0].model_data;
+	ft_lstclear(&model, &del);
+
+	// free state
+	free(state);
 	exit(1);
 }
 
@@ -39,10 +95,10 @@ TODO: update this name to move_model
 void	update_m_pos(t_state *state, int key)
 {
 	t_list	*model;
-	int		increment;
+	int	increment;
 	t_cor	n_pos;
 
-	increment = 1;
+	increment = 100;
 	model = state->models[0].model_data;
 	n_pos.x = 0;
 	n_pos.y = 0;
@@ -81,7 +137,7 @@ void	update_m_s(t_state *state, int key)
 	t_cor	scl;
 	t_list	*model;
 
-	increment = 1;
+	increment = 100;
 	scl.x = 0;
 	scl.y = 0;
 	scl.z = 0;

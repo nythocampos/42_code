@@ -23,3 +23,6 @@ Create a module to update the model
     - add functions
     - add physics
     - add effects
+
+Add a way to resize the model considering its dimentions
+

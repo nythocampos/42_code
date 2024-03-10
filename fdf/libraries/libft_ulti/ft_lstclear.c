@@ -12,34 +12,18 @@
 
 #include "libft.h"
 
-/*static void	delete(void *ptr)
-{
-	free(ptr);
-	ptr++;
-}*/
-
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	struct s_list	*node_ptr;
 	struct s_list	*next_ptr;
 
-	if (*lst == 0 || del == 0)
+	if (*lst == NULL || del == NULL)
 		return ;
-	node_ptr = *lst;
-	while (node_ptr->next != NULL)
+	while (*lst)
 	{
-		next_ptr = node_ptr->next;
-		if (node_ptr->content != NULL)
-			del(node_ptr->content);
-		free(node_ptr);
-		node_ptr = next_ptr;
+		next_ptr = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = next_ptr;
 	}
-	if (node_ptr->content != NULL)
-		del(node_ptr->content);
-	free(node_ptr);
-	node_ptr = NULL;
-	next_ptr = NULL;
-	*lst = NULL;
 }
 
 /*

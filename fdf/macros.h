@@ -48,4 +48,7 @@
 # define R_POS_Y 108
 # define R_NEG_Z 117
 # define R_POS_Z 111
+
+# define S_PLUS 43
+# define S_LESS 45
 #endif

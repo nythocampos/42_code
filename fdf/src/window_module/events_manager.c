@@ -25,7 +25,7 @@ static int	handle_keys(int key, t_state *state)
 	mlx_data = state->mlx_data;
 	if (key == 0xff1b || key == 53)
 		end_program(state);
-	if (key == 17)
+	if (key == 17 || key == 't')
 	{
 		mlx_put_image_to_window(
 			mlx_data->mlx,
