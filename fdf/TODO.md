@@ -26,3 +26,7 @@ Create a module to update the model
 
 Add a way to resize the model considering its dimentions
 
+To refactor
+
+- reduce get_cols_num: remove 1 variable
+

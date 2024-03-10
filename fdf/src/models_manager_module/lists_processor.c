@@ -12,6 +12,7 @@
 
 #include "../../fdf.h"
 
+//TODO: find memory error
 void	process_lists(t_list *node, void *data, void (*f)(t_cor *, void *))
 {
 	int		col_i;
@@ -25,7 +26,7 @@ void	process_lists(t_list *node, void *data, void (*f)(t_cor *, void *))
 	while (is_last_line == 0)
 	{
 		cor_lst = (t_cor *) node->content;
-		while (col_i <= col_n)
+		while (col_i <= (col_n - 1))
 		{
 			f(&cor_lst[col_i], data);
 			col_i++;
