@@ -18,7 +18,7 @@ int	main(int argc, char  *argv[])
 	t_models	*models;
 
 	if (argc < 2)
-		return (0);	
+		return (0);
 	state = initialize_state((argc - 1), argv);
 	if (state == NULL)
 	{

@@ -18,7 +18,7 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC			= cc
 # IMPLEMENT FLAGS!!!!!
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address 
 INCLUDE			= fdf.h structs.h
 
 # C FILES ---------

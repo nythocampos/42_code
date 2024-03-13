@@ -69,7 +69,6 @@ void	end_program(t_state *state)
 	img = mlx_data->img;
 	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
 	mlx_destroy_image(mlx_data->mlx, img->img);
-	//mlx_destroy_display(mlx_data->mlx);
 	free(mlx_data->img);
 	free(mlx_data->mlx);
 

@@ -9,7 +9,7 @@ Add a image updater
 - rebuild the image
 - push the image to the window
 
-Check the memory leaks and free
+Check the memory leaks
     - t_state
     - t_models
     - t_mlx_data

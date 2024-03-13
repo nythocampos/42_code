@@ -17,11 +17,8 @@
  */
 void	initialize_m(float *m, int size)
 {
-	while (size >= 0)
-	{
+	while (--size >= 0)
 		m[size] = 0;
-		size--;
-	}
 }
 
 void	apply_matrix(t_cor *src, void *mtx)
