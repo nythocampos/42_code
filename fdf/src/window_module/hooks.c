@@ -72,10 +72,15 @@ void	end_program(t_state *state)
 	free(mlx_data->img);
 	free(mlx_data->mlx);
 
-	// free models
+	//TODO: fix this LEAK	
+	// is necessary to free all memory located
+	// to  build the models
 	//clean_models(state->models);
 	model = state->models[0].model_data;
 	ft_lstclear(&model, &del);
+	//free(state->models[0].model_faces);
+	//free(state->models[0].model_proj);
+	//free(state->models);
 
 	// free state
 	free(state);

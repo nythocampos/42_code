@@ -1,6 +1,17 @@
 
 # TODO:
 
+## Important requirements
+
+- Optimize image building
+- Self-center the model
+- Test with all maps
+- Parcing
+    - act like the example fdf
+- Paint tall faces
+
+## Less important requirements
+
 Add a image updater
 
 >steps to update the image

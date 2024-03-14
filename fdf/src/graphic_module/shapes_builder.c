@@ -15,6 +15,11 @@
 void	draw_y(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 {
 	vec->p = 2 * vec->dx - vec->dy;
+	// remove this block to draw the lines
+	/*set_pixel(mlx->img, vec->temp_x, vec->temp_y,
+			COLOR_B);
+	return ;*/
+	// --- --- ---
 	while (vec->temp_y != (int) b->y)
 	{
 		set_pixel(mlx->img, vec->temp_x, vec->temp_y,
@@ -32,6 +37,11 @@ void	draw_y(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 void	draw_x(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 {
 	vec->p = 2 * vec->dy - vec->dx;
+	// remove this block to draw the lines
+	/*set_pixel(mlx->img, vec->temp_x, vec->temp_y,
+			COLOR_B);
+	return ;*/
+	// --- --- ---
 	while (vec->temp_x != (int) b->x)
 	{
 		set_pixel(mlx->img, vec->temp_x, vec->temp_y,
