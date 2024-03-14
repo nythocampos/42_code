@@ -18,14 +18,14 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC			= cc
 # IMPLEMENT FLAGS!!!!!
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address 
 INCLUDE			= fdf.h structs.h
 
 # C FILES ---------
 # Graphic module 
 GRPDIR			= ./src/graphic_module/
-GRAPHIC_MODULE		= $(GRPDIR)images_builder.c $(GRPDIR)triangles_builder.c \
-$(GRPDIR)faces_builder.c $(GRPDIR)models_projector.c \
+	GRAPHIC_MODULE		= $(GRPDIR)images_builder.c $(GRPDIR)triangles_builder.c \
+	$(GRPDIR)faces_builder.c $(GRPDIR)models_projector.c \
 $(GRPDIR)models_magnifier.c $(GRPDIR)shapes_builder.c
 
 # Files module

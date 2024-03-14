@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:12:50 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/07 19:43:41 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:31:32 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	set_pixel(t_img *img, int x, int y, int color)
 	if (x > WIDTH || y > HEIGHT || x < 0 || y < 0)
 		return ;
 	offset = (img->size_line * y) + (x * (img->bpp / 8));
+	//ft_printf("offset:%d \n", offset);
 	*((unsigned int *)(offset + img->addr)) = color;
 }
 

@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:01:05 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/08 20:55:54 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/14 21:27:38 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,18 @@ static void	del(void *content)
 	content = NULL;
 }
 
-/*static void	clean_models(t_models *models)
+/*
+ * This function cleans the list of models
+ *
+ * Models structure
+ * t_list *models:
+ * 	t_list *next
+ * 	void *content
+ * 		content->t_face *faces
+ * 			faces->t_cor *cors
+ * 				cors: int x, int y, int z
+ */
+static void	clean_models(t_models *models)
 {
 	int	index;
 	int	is_end;
@@ -28,14 +39,14 @@ static void	del(void *content)
 	while (is_end == 0)
 	{
 		ft_lstclear(&models[index].model_data, &del);
+		clean_faces(models[index].model_faces);
 		free(models[index].model_faces);
-		free(models[index].model_proj);
 		if (models[index].id == -1)
 			is_end = 1;
 		index++;
 	}
 	free(models);
-}*/
+}
 
 /*
  * This function close the program and free al
@@ -60,27 +71,17 @@ static void	del(void *content)
  */
 void	end_program(t_state *state)
 {
-	t_mlx_data	*mlx_data;
-	t_img		*img;
-	t_list		*model;
-
 	// free mlx data
-	mlx_data = state->mlx_data;
-	img = mlx_data->img;
-	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
-	mlx_destroy_image(mlx_data->mlx, img->img);
-	free(mlx_data->img);
-	free(mlx_data->mlx);
+	mlx_destroy_window(
+			state->mlx_data->mlx, state->mlx_data->win);
+	mlx_destroy_image(
+			state->mlx_data->mlx, state->mlx_data->img->img);
+	free(state->mlx_data->img);
+	free(state->mlx_data->mlx);
+	free(state->mlx_data);
 
-	//TODO: fix this LEAK	
-	// is necessary to free all memory located
 	// to  build the models
-	//clean_models(state->models);
-	model = state->models[0].model_data;
-	ft_lstclear(&model, &del);
-	//free(state->models[0].model_faces);
-	//free(state->models[0].model_proj);
-	//free(state->models);
+	clean_models(state->models);
 
 	// free state
 	free(state);

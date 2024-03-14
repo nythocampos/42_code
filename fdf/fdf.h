@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/08 19:54:34 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:51:47 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_models	*import_models(int n_mod, char **argv);
 void		update_m_pos(t_state *state, int key);
 void		update_m_s(t_state *state, int key);
 void		update_m_r(t_state *state, int key);
+void		clean_faces(t_face *model);
 // Graphic module 
 void		build_image(t_mlx_data *mlx_data, t_face *faces_lst);
 t_face		*build_faces(t_list *node);

@@ -6,11 +6,27 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:46:11 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:46:51 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:51:51 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
+
+void	clean_faces(t_face *model)
+{
+	int		faces_i;
+	int		end_faces;
+
+	faces_i = 0;
+	end_faces = 0;
+	while (end_faces == 0)
+	{
+		free(model[faces_i].points);
+		if (model[faces_i].id == -1)
+			end_faces = 1;
+		faces_i++;
+	}
+}
 
 /*
  * This function go through every point in the model

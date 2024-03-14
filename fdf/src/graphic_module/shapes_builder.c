@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:40:26 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/07 19:40:47 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:33:19 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	draw_y(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 {
 	vec->p = 2 * vec->dx - vec->dy;
 	// remove this block to draw the lines
-	/*set_pixel(mlx->img, vec->temp_x, vec->temp_y,
+	set_pixel(mlx->img, vec->temp_x, vec->temp_y,
 			COLOR_B);
-	return ;*/
+	return ;
 	// --- --- ---
 	while (vec->temp_y != (int) b->y)
 	{
@@ -38,9 +38,9 @@ void	draw_x(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 {
 	vec->p = 2 * vec->dy - vec->dx;
 	// remove this block to draw the lines
-	/*set_pixel(mlx->img, vec->temp_x, vec->temp_y,
+	set_pixel(mlx->img, vec->temp_x, vec->temp_y,
 			COLOR_B);
-	return ;*/
+	return ;
 	// --- --- ---
 	while (vec->temp_x != (int) b->x)
 	{

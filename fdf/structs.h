@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:57:25 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/07 21:32:03 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/14 18:58:55 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_models
 {
 	t_list	*model_data;
 	t_face	*model_faces;
-	t_face	*model_proj;
+	//t_face	*model_proj;
 	int		id;
 }	t_models;
 /*
