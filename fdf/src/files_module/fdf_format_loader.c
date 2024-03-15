@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/07 21:25:10 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 00:34:08 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_list	*add_node(char *tmp_l, int row_n)
 
 	if (tmp_l == NULL)
 		return (NULL);
-	ft_printf("--->%s\n", tmp_l);
+	//ft_printf("--->%s\n", tmp_l);
 	pts_lst = load_line(tmp_l, row_n);
 	cur_n = ft_lstnew((void *) &pts_lst[0]);
 	return (cur_n);
@@ -64,6 +64,7 @@ t_list	*load_terrain_model(int file_df)
 
 	row_i = 0;
 	last_n = NULL;
+	first_n = NULL;
 	tmp_l = (char *) malloc(sizeof(char) * 1);
 	if (!tmp_l)
 		return (NULL);

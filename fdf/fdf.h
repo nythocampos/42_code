@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/14 18:51:47 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/15 22:00:36 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void		process_faces(
 void		move_model(t_list *model, t_cor *n_pos, int mov_ty);
 void		process_lists(t_list *node, void *data, void (*f)(t_cor *, void *));
 void		initialize_mod(t_list *model_data, int model_num);
-t_models	*import_models(int n_mod, char **argv);
+//t_models	*import_models(int n_mod, char **argv);
+t_models	*import_model(char **argv);
 
 void		update_m_pos(t_state *state, int key);
 void		update_m_s(t_state *state, int key);

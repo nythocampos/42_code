@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 21:01:41 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/08 20:55:51 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/15 21:05:32 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	initialize_mod(t_list *model_data, int model_num)
 	t_cor	scl;
 	t_cor	n_pos;
 
+	//remove model_num
 	ft_printf("model_num: %d\n", model_num);
 	scl.x = 1;
 	scl.y = 0.2;
