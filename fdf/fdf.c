@@ -52,11 +52,13 @@ int	main(int argc, char *argv[])
 		end_program(state);
 		return (0);
 	}
-	//ft_printf("OK 1\n");
-	//end_program(state);
-	//return (0);
+	/*ft_printf("OK 1\n");
+	end_program(state);
+	return (0);*/
 	models = state->models;
-	build_image(state->mlx_data, models->model_faces);
+	//TODO: find a way to render the map
+	// while the program is running
+	build_image(state, models->model_faces);
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);
 }

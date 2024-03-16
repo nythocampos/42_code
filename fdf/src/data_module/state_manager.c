@@ -28,10 +28,11 @@ static t_mlx_data	*initialize_win(void)
 	return (mlx_data);
 }
 
-t_state	*initialize_state(int n_mod, char **argv)
+t_state	*initialize_state(int models_num, char **argv)
 {
 	t_state	*state;
 
+	ft_printf("Models loaded: %d\n", models_num);
 	state = (t_state *) malloc(sizeof(t_state) * 1);
 	if (!state)
 		return (NULL);
@@ -42,7 +43,6 @@ t_state	*initialize_state(int n_mod, char **argv)
 		// end_program
 		return (NULL);
 	}
-	n_mod = n_mod+1;
 	state->models = import_model(argv);
 	if (state->models == NULL)
 	{

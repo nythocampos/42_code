@@ -21,14 +21,14 @@
  */
 static void	correct_mod(t_list *model_data)
 {
-	magnify_model(model_data, 50, 50, 0.1);
+	magnify_model(model_data, 70, 70, 0.2);
 	move_model(model_data, 0, 0, 0);
 }
 
 void	initialize_mod(t_list *model_data)
 {
-	magnify_model(model_data, 1, 0.1, 0.8);
-	rotate_model(model_data, 1.1, 0.2, 0.1);
+	magnify_model(model_data, 1, 0.2, 1);
+	rotate_model(model_data, 1, 0.2, 0.1);
 	correct_mod(model_data);
 	move_model(model_data, 100, 200, 1);
 	project_model(model_data);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   img_builder.c                                    :+:      :+:    :+:   */
+/*   img_builder.c                                    	:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -23,10 +23,19 @@ void	set_pixel(t_img *img, int x, int y, int color)
 	if (x > WIDTH || y > HEIGHT || x < 0 || y < 0)
 		return ;
 	offset = (img->size_line * y) + (x * (img->bpp / 8));
-	//ft_printf("offset:%d \n", offset);
 	*((unsigned int *)(offset + img->addr)) = color;
 }
 
+void	draw_pixel(t_state *state, int x, int y, int color)
+{
+	t_img	*img;
+
+	img = state->mlx_data->img;
+	set_pixel(img, x, y, color);
+	refresh_window(state);
+}
+
+// TODO: remove this function
 static void	set_background(t_mlx_data *mlx_data)
 {
 	int	x_index;
@@ -49,7 +58,7 @@ static void	set_background(t_mlx_data *mlx_data)
 /* 
  * This function draw the faces 
  * */
-static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
+static void	draw_model(t_state *state, t_face *faces_lst)
 {
 	int		faces_i;
 	int		end_faces;
@@ -60,17 +69,17 @@ static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
 	while (end_faces == 0)
 	{
 		points = faces_lst[faces_i].points;
-		draw_face(mlx_data, points);
+		draw_face(state->mlx_data, points);
 		if (faces_lst[faces_i].id == -1)
 			end_faces = 1;
 		faces_i++;
 	}
 }
 
-void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
+void	build_image(t_state *state, t_face *faces_lst)
 {
 	ft_printf("Building image... \n");
-	set_background(mlx_data);
-	draw_model(mlx_data, faces_lst);
+	set_background(state->mlx_data);
+	draw_model(state, faces_lst);
 	ft_printf("Image built. \n");
 }

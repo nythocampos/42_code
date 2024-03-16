@@ -54,6 +54,7 @@ t_cor	*fill_triangle(t_list *node, t_cor *tmp_f, int col_i, int f_len)
 	return (&tmp_f[0]);
 }
 
+//TO FIX: leak generating faces
 void	build_triangles(t_list *node, t_face *faces, int n_cols, int *index)
 {
 	int		col_i;

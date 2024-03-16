@@ -69,7 +69,7 @@ t_models	*import_model(char **argv)
 	models->model_data = load_model(argv[1]);
 	if (models->model_data == NULL)
 		return (NULL);
-	initialize_mod(models->model_data, 1);
+	initialize_mod(models->model_data);
 	/*models->model_faces = NULL; 
 	models->id = -1;
 	return (models);*/

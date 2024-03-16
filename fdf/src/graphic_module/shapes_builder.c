@@ -12,13 +12,14 @@
 
 #include "../../fdf.h"
 
-void	draw_y(t_mlx_data *mlx, t_vec *vec, t_cor *b)
+static void	draw_y(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 {
 	vec->p = 2 * vec->dx - vec->dy;
 	// remove this block to draw the lines
-	set_pixel(mlx->img, vec->temp_x, vec->temp_y,
+	// TODO: implement draw_pixel
+	/*draw_pixel(mlx->img, vec->temp_x, vec->temp_y,
 			COLOR_B);
-	return ;
+	return ;*/
 	// --- --- ---
 	while (vec->temp_y != (int) b->y)
 	{
@@ -34,13 +35,13 @@ void	draw_y(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 	}
 }
 
-void	draw_x(t_mlx_data *mlx, t_vec *vec, t_cor *b)
+static void	draw_x(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 {
 	vec->p = 2 * vec->dy - vec->dx;
 	// remove this block to draw the lines
-	set_pixel(mlx->img, vec->temp_x, vec->temp_y,
+	/*draw_pixel(mlx->img, vec->temp_x, vec->temp_y,
 			COLOR_B);
-	return ;
+	return ;*/
 	// --- --- ---
 	while (vec->temp_x != (int) b->x)
 	{
@@ -64,7 +65,7 @@ void	set_vec(t_vec *vec, t_cor *a, t_cor *b)
 	vec->temp_y = (int) a->y;
 }
 
-void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
+static void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
 {
 	t_vec	vec;
 

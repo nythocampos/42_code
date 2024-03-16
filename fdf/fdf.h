@@ -44,7 +44,7 @@ void		process_faces(
 				t_face *model, void *data, void (*f)(t_cor *, void *));
 void		move_model(t_list *model, float x, float y, float z);
 void		process_lists(t_list *node, void *data, void (*f)(t_cor *, void *));
-void		initialize_mod(t_list *model_data, int model_num);
+void		initialize_mod(t_list *model_data);
 //t_models	*import_models(int n_mod, char **argv);
 t_models	*import_model(char **argv);
 
@@ -53,7 +53,7 @@ void		update_m_s(t_state *state, int key);
 void		update_m_r(t_state *state, int key);
 void		clean_faces(t_face *model);
 // Graphic module 
-void		build_image(t_mlx_data *mlx_data, t_face *faces_lst);
+void		build_image(t_state *state, t_face *faces_lst);
 t_face		*build_faces(t_list *node);
 void		build_triangles(
 				t_list *node, t_face *faces, int n_cols, int *index);
@@ -61,6 +61,7 @@ void		project_model(t_list *model);
 void		magnify_model(t_list *model, float x, float y, float z);
 void		draw_face(t_mlx_data *mlx_data, t_cor *points);
 void		set_pixel(t_img *img, int x, int y, int color);
+void		draw_pixel(t_state *state, int x, int y, int color);
 
 // Data manager
 t_state		*initialize_state(int n_mod, char **argv);
