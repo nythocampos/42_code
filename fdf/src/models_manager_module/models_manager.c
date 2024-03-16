@@ -21,39 +21,16 @@
  */
 static void	correct_mod(t_list *model_data)
 {
-	t_cor	scl;
-	t_cor	n_pos;
-
-	scl.x = 90; // linux 90 // mac
-	scl.y = 90; // 90
-	scl.z = 0.1; //0.1
-	magnify_model(model_data, &scl);
-	n_pos.x = 0;
-	n_pos.y = 0;
-	n_pos.z = 0;
-	move_model(model_data, &n_pos, 1);
+	magnify_model(model_data, 60, 60, 0.2);
+	move_model(model_data, 0, 0, 0);
 }
 
 void	initialize_mod(t_list *model_data, int model_num)
 {
-	t_cor	angles;
-	t_cor	scl;
-	t_cor	n_pos;
-
-	//remove model_num
 	ft_printf("model_num: %d\n", model_num);
-	scl.x = 1;
-	scl.y = 0.2;
-	scl.z = 1;
-	magnify_model(model_data, &scl);
-	angles.x = 1;
-	angles.y = 0.7;
-	angles.z = 0.1;
-	rotate_model(model_data, &angles);
+	magnify_model(model_data, 1, 0.2, 1);
+	rotate_model(model_data, 1, 0.7, 0.1);
 	correct_mod(model_data);
-	n_pos.x = 100;
-	n_pos.y = 200;
-	n_pos.z = 1;
-	move_model(model_data, &n_pos, 1);
+	move_model(model_data, 100, 200, 1);
 	project_model(model_data);
 }

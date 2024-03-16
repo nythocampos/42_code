@@ -22,7 +22,12 @@ static void	scale_model(t_cor *cor, void *scale)
 	cor->z = cor->z * scl->z;
 }
 
-void	magnify_model(t_list *model, t_cor *scale)
+void	magnify_model(t_list *model, float x, float y, float z)
 {
-	process_lists(model, (void *) scale, scale_model);
+	t_cor	scale;
+
+	scale.x = x;
+	scale.y = y;
+	scale.z = z;
+	process_lists(model, (void *) &scale, scale_model);
 }

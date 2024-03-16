@@ -39,10 +39,10 @@ int			on_item(char *line, int index);
 t_list		*load_terrain_model(int file_df);
 
 // Models manager module
-void		rotate_model(t_list *model, t_cor *angles);
+void		rotate_model(t_list *model, float x, float y, float z);
 void		process_faces(
 				t_face *model, void *data, void (*f)(t_cor *, void *));
-void		move_model(t_list *model, t_cor *n_pos, int mov_ty);
+void		move_model(t_list *model, float x, float y, float z);
 void		process_lists(t_list *node, void *data, void (*f)(t_cor *, void *));
 void		initialize_mod(t_list *model_data, int model_num);
 //t_models	*import_models(int n_mod, char **argv);
@@ -58,7 +58,7 @@ t_face		*build_faces(t_list *node);
 void		build_triangles(
 				t_list *node, t_face *faces, int n_cols, int *index);
 void		project_model(t_list *model);
-void		magnify_model(t_list *model, t_cor *scale);
+void		magnify_model(t_list *model, float x, float y, float z);
 void		draw_face(t_mlx_data *mlx_data, t_cor *points);
 void		set_pixel(t_img *img, int x, int y, int color);
 
