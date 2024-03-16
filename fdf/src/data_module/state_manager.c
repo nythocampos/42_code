@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:43:56 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/15 22:29:01 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:44:27 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_mlx_data	*initialize_win(void)
 	return (mlx_data);
 }
 
-t_state	*initialize_state(int n_mod, char **argv)
+t_state	*initialize_state(void)
 {
 	t_state	*state;
 
@@ -39,14 +39,6 @@ t_state	*initialize_state(int n_mod, char **argv)
 	if (state->mlx_data == NULL)
 	{
 		ft_printf("[INITIALIZING WINDOW]\n");
-		// end_program
-		return (NULL);
-	}
-	n_mod = n_mod+1;
-	state->models = import_model(argv);
-	if (state->models == NULL)
-	{
-		ft_printf("[IMPORTING MODELS]\n");
 		// end_program
 		return (NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:42:20 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:43:49 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 00:59:30 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ float	*gen_prj_mtx(void)
  * Args:
  * 	a (t_cor *): a pointer to the cor destination
  */
-void	project_model(t_list *model)
+void	project_model(t_cor *cor)
 {
 	float	*prj_m;
 
 	prj_m = gen_prj_mtx();
 	if (!prj_m)
 		return ;
-	process_lists(model, (void *) prj_m, apply_matrix);
+	apply_matrix(cor, prj_m);
 	free(prj_m);
 }

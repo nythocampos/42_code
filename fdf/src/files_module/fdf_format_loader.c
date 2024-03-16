@@ -6,78 +6,85 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:34:08 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 02:42:19 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-static t_cor	*load_line(char *line, int row_num)
+void draw_cor(t_cor *cor, t_mlx_data *mlx)
+{
+	set_pixel(mlx->img, cor->x, cor->y,
+			COLOR_B);
+}
+
+static void	load_line(char *line, int row_i, t_state *state)
 {
 	int		index;
 	int		col_i;
-	int		cols_num;
-	t_cor	*pts_list;
+	t_cor	*cor;
 
 	index = 0;
 	col_i = 0;
-	cols_num = get_columns_num(line);
-	pts_list = (t_cor *) malloc(sizeof(t_cor) * (cols_num));
-	if (!pts_list)
-		return (NULL);
-	while (line[index] != '\0' && col_i <= cols_num)
+	if (line == NULL)
+		return ;
+	cor = (t_cor *) malloc(sizeof(t_cor) * 1);
+	if (!cor)
+		return ;
+	//ft_printf("LINE: %s %d %d\n", line, state->mlx_data->img->bpp, row_i);
+	while (line[index] != '\0')
 	{
 		if (on_item(line, (index + 1)) == 1)
 		{
-			pts_list[col_i].x = col_i;
-			pts_list[col_i].y = get_item_value(line, index);
-			pts_list[col_i].z = row_num;
-			pts_list[col_i].id = col_i;
+			cor->x = col_i;
+			cor->y = get_item_value(line, index);
+			cor->z = row_i;
+			initialize_mod(cor);
+			draw_cor(cor, state->mlx_data);
 			col_i++;
 		}
 		index++;
 	}
-	pts_list[cols_num - 1].id = -1;
-	return (&pts_list[0]);
+	free(cor);
 }
 
-t_list	*add_node(char *tmp_l, int row_n)
-{
-	t_cor	*pts_lst;
-	t_list	*cur_n;
-
-	if (tmp_l == NULL)
-		return (NULL);
-	//ft_printf("--->%s\n", tmp_l);
-	pts_lst = load_line(tmp_l, row_n);
-	cur_n = ft_lstnew((void *) &pts_lst[0]);
-	return (cur_n);
-}
-
-t_list	*load_terrain_model(int file_df)
+static void	load_terrain_model(int file_df, t_state *state)
 {
 	char	*tmp_l;
-	t_list	*first_n;
-	t_list	*last_n;
 	int		row_i;
-	t_list	*cur_n;
 
 	row_i = 0;
-	last_n = NULL;
-	first_n = NULL;
 	tmp_l = (char *) malloc(sizeof(char) * 1);
 	if (!tmp_l)
-		return (NULL);
+		return ;
 	while (tmp_l != NULL)
 	{
 		free(tmp_l);
 		tmp_l = get_next_line(file_df);
-		cur_n = add_node(tmp_l, row_i);
-		if (last_n == NULL)
-			first_n = cur_n;
-		ft_lstadd_back(&last_n, cur_n);
+		load_line(tmp_l, row_i, state);
 		row_i++;
 	}
 	free(tmp_l);
-	return (first_n);
+}
+
+/*
+* This function is used to choose the process to follow
+* considering the format of model to load
+*/
+void	load_model(char *file_name, t_state *state)
+{
+	int		fd;
+	char	*file_path;
+
+	file_path = ft_strjoin(MAPS_PATH, file_name);
+	ft_printf("File name: %s \n", file_path);
+	fd = open(file_path, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_printf("File %s not found\n", file_path);
+		return ;
+	}
+	free(file_path);
+	load_terrain_model(fd, state);
+	close(fd);
 }

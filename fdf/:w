@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 02:18:34 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:49:21 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void		refresh_window(t_state *state);
 int			get_columns_num(char *line);
 int			get_item_value(char *str, int end);
 int			on_item(char *line, int index);
-void		load_model(char *file_name,t_state *state);
+t_list		*load_model(char *file_name,t_state *state);
 
 // Models manager module
 void		rotate_model(t_cor *cor, float x, float y, float z);
 void		move_model(t_cor *cor, float x, float y, float z);
-void		scale_model(t_cor *cor, float x, float y, float z);
+void		magnify_model(t_cor *cor, float x, float y, float z);
 void		project_model(t_cor *cor);
-void		initialize_mod(t_cor *cor);
+void		initialize_mod(t_list *model_data, int model_num);
 
 void		update_m_pos(t_state *state, int key);
 void		update_m_s(t_state *state, int key);
@@ -51,7 +51,6 @@ void		update_m_r(t_state *state, int key);
 
 // Graphic module 
 void		set_pixel(t_img *img, int x, int y, int color);
-void		build_image(t_mlx_data *mlx_data);
 
 // Data manager
 t_state		*initialize_state(void);

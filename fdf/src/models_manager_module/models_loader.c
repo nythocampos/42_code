@@ -6,35 +6,11 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:45:15 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:05:43 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:33:30 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
-
-/*
-* This function is used to choose the process to follow
-* considering the format of model to load
-*/
-static t_list	*load_model(char *file_name)
-{
-	t_list	*model;
-	int		fd;
-	char	*file_path;
-
-	file_path = ft_strjoin(MAPS_PATH, file_name);
-	//ft_printf("File name: %s \n", file_path);
-	fd = open(file_path, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_printf("File %s not found\n", file_path);
-		return (NULL);
-	}
-	free(file_path);
-	model = load_terrain_model(fd);
-	close(fd);
-	return (model);
-}
 
 /*t_models	*import_models(int n_mod, char **argv)
 {

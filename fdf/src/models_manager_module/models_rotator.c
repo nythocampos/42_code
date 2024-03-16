@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:48:38 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:49:07 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 01:21:12 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,23 @@ static float	*gen_rot_mtx_y(float y_angle)
  * 	angles (t_cor): x, y, z angles to apply in the rotation
  * 	model (t_cor *): model faces
  */
-void	rotate_model(t_list *model, t_cor *angles)
+void	rotate_model(t_cor *cor, float x, float y, float z)
 {
 	float	*rot_z_m;
 	float	*rot_x_m;
 	float	*rot_y_m;
 
-	rot_z_m = gen_rot_mtx_z(angles->z);
-	rot_x_m = gen_rot_mtx_x(angles->x);
-	rot_y_m = gen_rot_mtx_y(angles->y);
+	rot_x_m = gen_rot_mtx_x(x);
+	rot_y_m = gen_rot_mtx_y(y);
+	rot_z_m = gen_rot_mtx_z(z);
 	if (!rot_z_m || !rot_x_m || !rot_y_m)
 		return ;
-	if (angles->x != 0)
-		process_lists(model, (void *) rot_x_m, apply_matrix);
-	if (angles->y != 0)
-		process_lists(model, (void *) rot_y_m, apply_matrix);
-	if (angles->z != 0)
-		process_lists(model, (void *) rot_z_m, apply_matrix);
+	if (x != 0)
+		apply_matrix(cor, rot_x_m);
+	if (y != 0)	
+		apply_matrix(cor, rot_y_m);
+	if (z != 0)
+		apply_matrix(cor, rot_z_m);
 	free(rot_x_m);
 	free(rot_y_m);
 	free(rot_z_m);

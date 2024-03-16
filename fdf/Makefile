@@ -24,30 +24,28 @@ INCLUDE			= fdf.h structs.h
 # C FILES ---------
 # Graphic module 
 GRPDIR			= ./src/graphic_module/
-	GRAPHIC_MODULE		= $(GRPDIR)images_builder.c $(GRPDIR)triangles_builder.c \
-	$(GRPDIR)faces_builder.c $(GRPDIR)models_projector.c \
-$(GRPDIR)models_magnifier.c $(GRPDIR)shapes_builder.c
+GRAPHIC_MODULE		= $(GRPDIR)images_builder.c 
 
 # Files module
 FLSDIR			=./src/files_module/
-FILES_MODULE		= $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
+FILES_MODULE	= $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
 
 # Models manager module
 MMDIR			=./src/models_manager_module/
-MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c $(MMDIR)lists_processor.c \
-			  $(MMDIR)faces_processor.c $(MMDIR)models_manager.c $(MMDIR)models_loader.c
+MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c \
+$(MMDIR)models_manager.c $(MMDIR)models_projector.c $(MMDIR)models_magnifier.c
 
 # Window manager module
 WINDIR			= ./src/window_module/
-WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_manager.c
+WINDOW_MODULE	= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_manager.c
 
 # Data manager module
 DATDIR			= ./src/data_module/
 DATA_MODULE		= $(DATDIR)state_manager.c
 
 # Utils
-UTLDIR			= ./src/utils/
-UTILS			= $(UTLDIR)matrix_tools.c $(UTLDIR)list_tools.c
+UTLDIR			= ./src/shared/
+UTILS			= $(UTLDIR)matrix_tools.c
 
 SRCS			= fdf.c $(UTILS) $(WINDOW_MODULE) $(FILES_MODULE) \
 			  $(GRAPHIC_MODULE) $(MM_MODULE) $(DATA_MODULE)

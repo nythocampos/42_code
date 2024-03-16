@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:12:50 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:34:07 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 02:07:19 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	set_background(t_mlx_data *mlx_data)
 /* 
  * This function draw the faces 
  * */
-static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
+/*static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
 {
 	int		faces_i;
 	int		end_faces;
@@ -65,12 +65,12 @@ static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
 			end_faces = 1;
 		faces_i++;
 	}
-}
+}*/
 
-void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
+void	build_image(t_mlx_data *mlx_data)
 {
 	ft_printf("Building image... \n");
 	set_background(mlx_data);
-	draw_model(mlx_data, faces_lst);
+	//draw_model(mlx_data, faces_lst);
 	ft_printf("Image built. \n");
 }
