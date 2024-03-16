@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 02:42:19 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/16 03:18:15 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	load_line(char *line, int row_i, t_state *state)
 			cor->x = col_i;
 			cor->y = get_item_value(line, index);
 			cor->z = row_i;
-			initialize_mod(cor);
+			initialize_mod(cor, col_i, row_i);
 			draw_cor(cor, state->mlx_data);
 			col_i++;
 		}
