@@ -1,9 +1,18 @@
 
 #include "fdf.h"
 
-/*
- * Data collector interface
- */
+typedef struct s_ipixels_writer
+{
+	void	(*write_pixel)(t_mlx_data,int,int,int);
+}	t_ipixels_writer;
+
+typedef struct	s_imodel_updater
+{
+	void	(*scale_model)(t_model *,int,int,int);
+	void	(*rotate_model)(t_model *,int,int,int);
+	void	(*move_model)(t_model *,int,int,int);
+}	s_imodel_updater;
+
 typedef struct s_imodel_collector
 {
 	void	(collect_data)(t_cor *, t_istate *);
@@ -11,7 +20,7 @@ typedef struct s_imodel_collector
 
 typedef struct	s_imodel_printer
 {
-	void	(*print_model)(t_model *);
+	void	(*print_model)(t_model *, t_ipixels_writer *);
 }	t_imodel_printer;
 
 /*
