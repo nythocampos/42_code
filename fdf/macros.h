@@ -16,6 +16,7 @@
 #define WIDTH	800
 #define HEIGHT	600 
 #define MAPS_PATH "./models/"
+#define TITLE "FDF"
 // TODO: add a way to control the MAC correction in the drawing
 #if defined(__APPLE__) || (__MACH__)
 # define M_FORWARD 13

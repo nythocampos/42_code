@@ -12,24 +12,102 @@
 
 #include "../../fdf.h"
 
+
+
 /*
- * This function corrects the size
- * and position of the model
+ * This function cleans the list of models
  *
- * Linux: x: 90, y: 90, z:0.1
- * Mac: x: ?, y: ?, z: ?
+ * Models structure
+ * t_list *models:
+ * 	t_list *next
+ * 	void *content
+ * 		content->t_cors *cors
+ * 				cors: int x, int y, int z
  */
-static void	correct_mod(t_list *model_data)
+void	clean_models(t_models *models)
 {
-	magnify_model(model_data, 50, 50, 0.1);
-	move_model(model_data, 0, 0, 0);
+	return ;
+	int	index;
+	int	is_end;
+
+	index = 0;
+	is_end = 0;
+	if (models == NULL)
+		return ;
+	while (is_end == 0)
+	{
+		if (models[index].model_data)
+			ft_lstclear(&models[index].model_data, &del);
+		if (models[index].model_faces)
+			clean_faces(models[index].model_faces);
+		free(models[index].model_faces);
+		if (models[index].id == -1)
+			is_end = 1;
+		index++;
+	}
+	free(models);
+	models = NULL;
 }
 
-void	initialize_mod(t_list *model_data)
+/*
+ * This function must be able to be called just if there is not models
+ * created
+ * TODO: check this
+ */
+t_list	*create_models()
 {
-	magnify_model(model_data, 1, 0.1, 0.8);
-	rotate_model(model_data, 1.1, 0.2, 0.1);
-	correct_mod(model_data);
-	move_model(model_data, 100, 200, 1);
-	project_model(model_data);
+	t_list	*models;
+
+	models = (char *) malloc(sizeof(char) * 1);
+	if (models)
+		return (NULL);
+	models = ft_lstnew((void *) NULL);
+	return (models);
 }
+
+/*
+ * This function get a a model from the models list
+ */
+t_model	*get_model(t_list *models_list, int id)
+{
+	int	index;
+
+	index = 0;
+	while (models_list != NULL)
+	{
+		if (index == id)
+			return ((t_model *) models_list->content);
+		index++;
+		models_list = models_list->next;
+	}
+	return (NULL);
+}
+
+/*
+ * This function add a new t_model object in a node to the
+ * models list
+ */
+void	set_model(t_list *models, t_model *model)
+{
+	t_list	*cur_n;
+
+	cur_n = ft_lstnew((void *) model);
+	if (!cur_n)
+		return ;
+	ft_lstadd_back(ft_lstlast(models), cur_n);
+}
+
+t_imodels	*create_models_manager()
+{
+	t_imodels imodels;
+
+	imodels = (imodels *) malloc (sizeof(imodels) * 1);
+	if (!imodels)
+		return (NULL);
+	imodel->create_models = create_models;
+	imodel->clean_models = clean_models;
+	imodel->set_model = set_model;
+	imodel->get_model = get_model;
+	return (imodels);
+}
+

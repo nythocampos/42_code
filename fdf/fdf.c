@@ -12,30 +12,29 @@
 
 #include "fdf.h"
 
-int	test()
+/*
+ * This function corrects the size
+ * and position of the model
+ *
+ * Linux: x: 90, y: 90, z:0.1
+ * Mac: x: ?, y: ?, z: ?
+ */
+static void	correct_mod(t_list *model_data)
 {
-	int		fd;
-	char	*tmp_l;
-	
-	fd = open("./models/42.fdf", O_RDONLY);
-	if (fd == -1)
-	{
-		ft_printf("File not found\n");
-		return (0);
-	}
-	tmp_l = (char *) malloc(sizeof(char) * 1);
-	if (!tmp_l)
-		return (0);
-	while (tmp_l != NULL)
-	{
-		free(tmp_l);
-		tmp_l = get_next_line(fd);
-		ft_printf("LINE: %s\n",tmp_l);
-	}
-	free(tmp_l);
-	close(fd);
-	return 0;
+	magnify_model(model_data, 50, 50, 0.1);
+	move_model(model_data, 0, 0, 0);
 }
+
+void	initialize_mod(t_list *model_data)
+{
+	magnify_model(model_data, 1, 0.1, 0.8);
+	rotate_model(model_data, 1.1, 0.2, 0.1);
+	correct_mod(model_data);
+	move_model(model_data, 100, 200, 1);
+	project_model(model_data);
+}
+
+
 
 int	main(int argc, char *argv[])
 {

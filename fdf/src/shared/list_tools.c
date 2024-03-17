@@ -39,3 +39,9 @@ int	get_rows_num(t_list *model)
 	}
 	return (index);
 }
+
+void	del(void *content)
+{
+	free(content);
+	content = NULL;
+}

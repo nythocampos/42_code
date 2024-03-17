@@ -66,10 +66,10 @@ void		draw_pixel(t_state *state, int x, int y, int color);
 // Data manager
 t_state		*initialize_state(int n_mod, char **argv);
 
-// Utils
+//	Shared 
 void		apply_matrix(t_cor *src, void *m);
 void		initialize_m(float *m, int size);
 int			get_rows_num(t_list *model);
 int			get_cols_num(t_cor *pts_list);
-
+void		del(void *content)
 #endif

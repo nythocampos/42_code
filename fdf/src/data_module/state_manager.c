@@ -1,34 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   state_manager.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 19:43:56 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/15 22:29:01 by antcampo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../../fdf.h"
 
-/*
- * TODO: move this function to the window module
- *
- */
-static t_mlx_data	*initialize_win(void)
-{
-	t_mlx_data	*mlx_data;
-
-	mlx_data = (t_mlx_data *) malloc(sizeof(t_mlx_data) * 1);
-	if (!mlx_data)
-		return (NULL);// end_program
-	mlx_data->mlx = mlx_init();
-	set_window(mlx_data, "FDF");
-	return (mlx_data);
-}
-
-t_state	*initialize_state(int models_num, char **argv)
+// TODO: update this code
+t_state	*create_state()
 {
 	t_state	*state;
 
@@ -51,4 +25,20 @@ t_state	*initialize_state(int models_num, char **argv)
 		return (NULL);
 	}
 	return (state);
+}
+
+void	clean_state(t_state *state)
+{
+	free(state);
+}
+
+istate	*create_state()
+{
+	t_istate	*istate;
+
+	istate = (t_istate *) malloc(sizeof(t_istate) * 1);
+	if (!istate)
+		return (NULL);
+	istate->create_state = create_state;
+	istate->clean_state = &clean_state;
 }

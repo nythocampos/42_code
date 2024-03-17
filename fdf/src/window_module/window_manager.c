@@ -15,21 +15,16 @@
 /*
  *	TODO: check if is necessary controlle errors here
  */
-void	refresh_window(t_state *state)
+void	refresh_window(t_mlx_data *mlx_data)
 {
-	t_mlx_data	*mlx_data;
-	t_models	*models;
-
-	models = state->models;
 	mlx_data = state->mlx_data;
-	project_model(models[0].model_data);
 	mlx_put_image_to_window(
 			mlx_data->mlx,
 			mlx_data->win,
 			mlx_data->img->img, 0, 0);
 }
 
-static void	initialize_window(t_mlx_data *mlx_data, char *title)
+void	initialize_img(t_mlx_data *mlx_data, char *title)
 {
 	t_img	*img;
 
@@ -49,10 +44,37 @@ static void	initialize_window(t_mlx_data *mlx_data, char *title)
 	mlx_data->img = img;
 }
 
-/*
- * This function sets everything nessary to run the window
- */
-void	set_window(t_mlx_data *mlx_data, char *title)
+t_mlx_data	*create_mlx_data(void)
 {
-	initialize_window(mlx_data, title);
+	t_mlx_data	*mlx_data;
+
+	mlx_data = (t_mlx_data *) malloc(sizeof(t_mlx_data) * 1);
+	if (!mlx_data)
+		return (NULL);
+	mlx_data->mlx = mlx_init();
+	initialize_img(mlx_data, TITLE);
+	return (mlx_data);
 }
+
+// clean mlx data memory
+void	clean_mlx_data(t_mlx_data mlx_data)
+{
+	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
+	mlx_destroy_image(mlx_data->mlx, mlx_data->img->img);
+	free(mlx_data->img);
+	free(mlx_data->mlx);
+	free(mlx_data);
+}
+
+t_imlx_data	create_mlx_manager()
+{
+	t_imlx_data	imlx_data;
+
+	imlx_data = (t_imlx_data *) malloc (sizeof(t_imlx_data) * 1);
+	if (!imlx_data)
+		return(NULL);	
+	imlx_data->clean_mlx_data = &clean_mlx_data;
+	imlx_data->create_mlx_data = &create_mlx_data;
+	return (imlx_data);
+}
+
