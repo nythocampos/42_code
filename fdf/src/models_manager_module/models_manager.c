@@ -12,17 +12,16 @@
 
 #include "../../fdf.h"
 
-
-
 /*
  * This function cleans the list of models
  *
  * Models structure
  * t_list *models:
  * 	t_list *next
- * 	void *content
- * 		content->t_cors *cors
- * 				cors: int x, int y, int z
+ * 	void *content: content->t_list *model
+ * 		t_list *model_data
+ * 		void *content: content->t_cors
+ * 			int x, int y, int z
  */
 void	clean_models(t_models *models)
 {
@@ -96,18 +95,3 @@ void	set_model(t_list *models, t_model *model)
 		return ;
 	ft_lstadd_back(ft_lstlast(models), cur_n);
 }
-
-t_imodels	*create_models_manager()
-{
-	t_imodels imodels;
-
-	imodels = (imodels *) malloc (sizeof(imodels) * 1);
-	if (!imodels)
-		return (NULL);
-	imodel->create_models = create_models;
-	imodel->clean_models = clean_models;
-	imodel->set_model = set_model;
-	imodel->get_model = get_model;
-	return (imodels);
-}
-

@@ -13,7 +13,7 @@
 #include "../../fdf.h"
 
 /*
- *	TODO: check if is necessary controlle errors here
+ * TODO: check if is necessary controlle errors here
  */
 void	refresh_window(t_mlx_data *mlx_data)
 {
@@ -24,7 +24,7 @@ void	refresh_window(t_mlx_data *mlx_data)
 			mlx_data->img->img, 0, 0);
 }
 
-void	initialize_img(t_mlx_data *mlx_data, char *title)
+static void	initialize_img(t_mlx_data *mlx_data, char *title)
 {
 	t_img	*img;
 
@@ -33,10 +33,10 @@ void	initialize_img(t_mlx_data *mlx_data, char *title)
 		return ;
 	mlx_data->win = mlx_new_window(
 			mlx_data->mlx, WIDTH, HEIGHT, title);
-	if (mlx_data->win == NULL)
+	if (!mlx_data->win)
 	{
 		free(mlx_data->mlx);
-		return ; // return error
+		return ;
 	}
 	img->img = mlx_new_image(mlx_data->mlx, WIDTH, HEIGHT);
 	img->addr = mlx_get_data_addr(
@@ -56,7 +56,6 @@ t_mlx_data	*create_mlx_data(void)
 	return (mlx_data);
 }
 
-// clean mlx data memory
 void	clean_mlx_data(t_mlx_data mlx_data)
 {
 	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
@@ -65,16 +64,3 @@ void	clean_mlx_data(t_mlx_data mlx_data)
 	free(mlx_data->mlx);
 	free(mlx_data);
 }
-
-t_imlx_data	create_mlx_manager()
-{
-	t_imlx_data	imlx_data;
-
-	imlx_data = (t_imlx_data *) malloc (sizeof(t_imlx_data) * 1);
-	if (!imlx_data)
-		return(NULL);	
-	imlx_data->clean_mlx_data = &clean_mlx_data;
-	imlx_data->create_mlx_data = &create_mlx_data;
-	return (imlx_data);
-}
-

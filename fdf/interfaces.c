@@ -16,6 +16,7 @@ typedef struct	s_imodel_updater
 	void	(*scale_model)(t_model *, int, int, int);
 	void	(*rotate_model)(t_model *, int, int, int);
 	void	(*move_model)(t_model *, int, int, int);
+	void	(*project_model)(t_model *);
 }	s_imodel_updater;
 
 /*
@@ -33,36 +34,3 @@ typedef struct	s_imodel_printer
 {
 	void	(*print_model)(t_model *, t_ipixels_writer *);
 }	t_imodel_printer;
-
-
-
-/*
- * This interface provides a structure
- * that allows the implementation and modification
- * of the state
- */
-typedef struct s_istate_manager
-{
-	void		(*create_state)();
-	void		(*clean_state)();
-}	t_istate_manager;
-
-typedef struct	s_imlx_manager
-{
-	void		(*clean_mlx_data)(t_mlx_data *);
-	t_mlx_data	*(*create_mlx_data)();
-	void		(*refresh_window)(t_mlx_data *);
-}	t_imlx_manager;
-
-/*
- * models (t_list): pointer to the first node of the models linked list
- *
- */
-typedef struct	s_imodels_manager
-{
-	t_list		*(*create_models)();
-	void		(*clean_models)(t_list *);
-	void		(*set_model)(t_list *, t_model *);
-	t_list		*(*get_model)(t_list *, int);
-}	t_imodels_manager;
-

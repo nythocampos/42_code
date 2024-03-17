@@ -12,7 +12,7 @@
 
 #include "../../fdf.h"
 
-static void	scale_model(t_cor *cor, void *scale)
+static void	magnify_model(t_cor *cor, void *scale)
 {
 	t_cor	*scl;
 
@@ -22,7 +22,7 @@ static void	scale_model(t_cor *cor, void *scale)
 	cor->z = cor->z * scl->z;
 }
 
-void	magnify_model(t_list *model, float x, float y, float z)
+void	scale_model(t_list *model, float x, float y, float z)
 {
 	t_cor	scale;
 

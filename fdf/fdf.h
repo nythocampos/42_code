@@ -23,6 +23,7 @@
 
 # include "structs.h"
 # include "macros.h"
+# include "interfaces.h"
 
 // Window module 
 // Hooks

@@ -19,7 +19,7 @@
  * Linux: x: 90, y: 90, z:0.1
  * Mac: x: ?, y: ?, z: ?
  */
-static void	correct_mod(t_list *model_data)
+/*static void	correct_mod(t_list *model_data)
 {
 	magnify_model(model_data, 50, 50, 0.1);
 	move_model(model_data, 0, 0, 0);
@@ -32,32 +32,54 @@ void	initialize_mod(t_list *model_data)
 	correct_mod(model_data);
 	move_model(model_data, 100, 200, 1);
 	project_model(model_data);
+}*/
+
+t_state	*create_state()
+{
+	t_state	*state;
+
+	state = (t_state *) malloc(sizeof(t_state) * 1);
+	if (!state)
+		return (NULL);
+	state->mlx_data = create_mlx_data();
+	if (!state->mlx_data)
+		return (NULL);
+	state->models = create_model();
+	if (!state->models)
+		return (NULL);
+	return (state);
 }
-
-
 
 int	main(int argc, char *argv[])
 {
-	t_state		*state;
-	t_models	*models;
+	t_ifile_loader	*file_loader;
+	s_imodel_updater *m_updater;
+	t_model	*model;
+	t_list	*model_data;
 
-	//test();
 	if (argc != 2)
-		return (0);
-	state = initialize_state((argc - 1), argv);	
-	if (state == NULL || state->models == NULL) // check models and mlx
-	{
-		ft_printf("Error generating the state\n");
-		end_program(state);
-		return (0);
-	}
-	/*ft_printf("OK 1\n");
-	end_program(state);
-	return (0);*/
-	models = state->models;
+		return (0);	
+	state = create_state();
+	if (!state)
+		return (NULL);
+	file_loader = create_file_loader();
+	file_loader->load_file(argv, argc, state);
+	
+	model = get_model(state->models, 1);
+	model_data = model->model_data;
+	m_updater->scale_model(model_data, 1, 0.1, 0.8)
+	m_updater->rotate_model(model_data, 1.1, 0.2, 0.1);
+
+	m_updater->magnify_model(model_data, 50, 50, 0.1);
+	m_updater->move_model(model_data, 0, 0, 0);
+
+	m_updater->move_model(model_data, 100, 200, 1);
+	m_updater->project_model(model_data);
+
 	//TODO: find a way to render the map
 	// while the program is running
-	build_image(state, models->model_faces);
+	// TODO: call model_printer
+
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);
 }

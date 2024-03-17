@@ -35,7 +35,7 @@ void	read_file(int file_df, t_state state, t_imodel_collector *m_collector)
 	}
 	free(tmp_l);
 	model->model_data = m_collector->model;
-	m_manager->set_model(state->models, model);
+	set_model(state->models, model);
 }
 
 /*
