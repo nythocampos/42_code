@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:12:50 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:34:07 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:46:32 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,60 +26,23 @@ void	set_pixel(t_img *img, int x, int y, int color)
 	*((unsigned int *)(offset + img->addr)) = color;
 }
 
-void	draw_pixel(t_state *state, int x, int y, int color)
+void	draw_pixel(t_state *state, t_cor *cor, int color)
 {
 	t_img	*img;
 
 	img = state->mlx_data->img;
-	set_pixel(img, x, y, color);
-	refresh_window(state);
+	set_pixel(img, cor->x, cor->y, color);
+	//refresh_window(state);
 }
 
-// TODO: remove this function
-static void	set_background(t_mlx_data *mlx_data)
+t_ipixels_writer	*create_pixels_writer()
 {
-	int	x_index;
-	int	y_index;
+	t_ipixels_writer	*pw;
 
-	x_index = 0;
-	y_index = 0;
-	while (y_index < HEIGHT)
-	{
-		while (x_index < WIDTH)
-		{
-			set_pixel(mlx_data->img, x_index, y_index, COLOR_A);
-			x_index++;
-		}
-		x_index = 0;
-		y_index++;
-	}
-}
-
-/* 
- * This function draw the faces 
- * */
-static void	draw_model(t_state *state, t_face *faces_lst)
-{
-	int		faces_i;
-	int		end_faces;
-	t_cor	*points;
-
-	faces_i = 0;
-	end_faces = 0;
-	while (end_faces == 0)
-	{
-		points = faces_lst[faces_i].points;
-		draw_face(state->mlx_data, points);
-		if (faces_lst[faces_i].id == -1)
-			end_faces = 1;
-		faces_i++;
-	}
-}
-
-void	build_image(t_state *state, t_face *faces_lst)
-{
-	ft_printf("Building image... \n");
-	set_background(state->mlx_data);
-	draw_model(state, faces_lst);
-	ft_printf("Image built. \n");
+	pw = (t_ipixels_writer *) malloc(sizeof(t_ipixels_writer) * 1);
+	if (!pw)
+		return (NULL);
+	pw->set_pixel = &set_pixel;
+	pw->write_pixel = &draw_pixel;
+	return (pw);
 }

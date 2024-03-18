@@ -6,13 +6,13 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:42:08 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:42:11 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:26:57 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-static void	magnify_model(t_cor *cor, void *scale)
+void	magnify_model(t_cor *cor, void *scale)
 {
 	t_cor	*scl;
 
@@ -29,5 +29,5 @@ void	scale_model(t_list *model, float x, float y, float z)
 	scale.x = x;
 	scale.y = y;
 	scale.z = z;
-	process_lists(model, (void *) &scale, scale_model);
+	process_lists(model, (void *) &scale, magnify_model);
 }

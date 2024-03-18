@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:50:30 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:34:05 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:45:03 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,41 +44,59 @@ t_state	*create_state()
 	state->mlx_data = create_mlx_data();
 	if (!state->mlx_data)
 		return (NULL);
-	state->models = create_model();
-	if (!state->models)
+	state->models_lst = create_models_list();
+	if (!state->models_lst)
 		return (NULL);
 	return (state);
 }
 
+void	update_model(t_list *model_data)
+{
+	t_imodel_updater	*m_updater;
+
+	m_updater = create_model_updater();
+	m_updater->scale_model(model_data, 1, 0.1, 0.8);
+	m_updater->rotate_model(model_data, 1.1, 0.2, 0.1);
+
+	m_updater->scale_model(model_data, 50, 50, 0.1);
+	m_updater->move_model(model_data, 0, 0, 0);
+
+	m_updater->move_model(model_data, 100, 200, 1);
+	m_updater->project_model(model_data);
+	free(m_updater);
+}
+
+static void	draw_model(t_state *state, t_list *model)
+{
+	t_ipixels_writer	*pw;
+	t_imodel_printer	*m_p;
+	
+	pw = create_pixels_writer();
+	m_p = create_model_printer();
+	m_p->print_model(model, pw, state);
+	free(pw);
+	free(m_p);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_ifile_loader	*file_loader;
-	s_imodel_updater *m_updater;
-	t_model	*model;
-	t_list	*model_data;
+	t_ifile_loader		*file_loader;
+	t_model				*model;
+	t_state				*state;
 
 	if (argc != 2)
 		return (0);	
 	state = create_state();
 	if (!state)
-		return (NULL);
+		return (0);
 	file_loader = create_file_loader();
 	file_loader->load_file(argv, argc, state);
-	
-	model = get_model(state->models, 1);
-	model_data = model->model_data;
-	m_updater->scale_model(model_data, 1, 0.1, 0.8)
-	m_updater->rotate_model(model_data, 1.1, 0.2, 0.1);
+	free(file_loader);
 
-	m_updater->magnify_model(model_data, 50, 50, 0.1);
-	m_updater->move_model(model_data, 0, 0, 0);
+	model = get_model(state->models_lst, 1);
 
-	m_updater->move_model(model_data, 100, 200, 1);
-	m_updater->project_model(model_data);
-
-	//TODO: find a way to render the map
-	// while the program is running
-	// TODO: call model_printer
+	update_model(model->model_data);
+	draw_model(state, model->model_data);
 
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);

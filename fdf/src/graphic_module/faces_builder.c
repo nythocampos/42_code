@@ -6,23 +6,11 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:36:06 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:05:35 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:08:01 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
-
-static int	get_matrix_size(t_list *node)
-{
-	int	m_size;
-	int	n_rows;
-	int	n_cols;
-
-	n_rows = get_rows_num(node);
-	n_cols = get_cols_num((t_cor *) node->content);
-	m_size = (n_cols * n_rows);
-	return (m_size);
-}
 
 /*
  * This function builds the faces TODO: considering

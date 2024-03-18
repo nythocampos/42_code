@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 21:01:41 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/15 21:05:32 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:45:02 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,28 @@
 
 /*
  * This function cleans the list of models
+ * TO FIX: clean all data in models
+ *	t_list models
+ *	^
+ *	* t_list *model
+ *	* t_list *model
+ *	* t_list *model
+ *	* t_list *model
  *
- * Models structure
- * t_list *models:
- * 	t_list *next
- * 	void *content: content->t_list *model
- * 		t_list *model_data
- * 		void *content: content->t_cors
- * 			int x, int y, int z
+ *	t_list *model
+ *	^
+ *	* t_cor *cor
+ *	* t_cor	*cor
+ *	* t_cor	*cor
+ *	* t_cor	*cor
  */
-void	clean_models(t_models *models)
+void	clean_models(t_list *models_lst)
 {
-	return ;
-	int	index;
-	int	is_end;
-
-	index = 0;
-	is_end = 0;
-	if (models == NULL)
+	if (models_lst == NULL)
 		return ;
-	while (is_end == 0)
-	{
-		if (models[index].model_data)
-			ft_lstclear(&models[index].model_data, &del);
-		if (models[index].model_faces)
-			clean_faces(models[index].model_faces);
-		free(models[index].model_faces);
-		if (models[index].id == -1)
-			is_end = 1;
-		index++;
-	}
-	free(models);
-	models = NULL;
+	// TODO: go through all models
+	if (models_lst)
+			ft_lstclear(&models_lst, &del);
 }
 
 /*
@@ -53,11 +43,11 @@ void	clean_models(t_models *models)
  * created
  * TODO: check this
  */
-t_list	*create_models()
+t_list	*create_models_list()
 {
 	t_list	*models;
 
-	models = (char *) malloc(sizeof(char) * 1);
+	models = (t_list *) malloc(sizeof(t_list) * 1);
 	if (models)
 		return (NULL);
 	models = ft_lstnew((void *) NULL);
@@ -67,17 +57,17 @@ t_list	*create_models()
 /*
  * This function get a a model from the models list
  */
-t_model	*get_model(t_list *models_list, int id)
+t_model	*get_model(t_list *models_lst, int id)
 {
 	int	index;
 
 	index = 0;
-	while (models_list != NULL)
+	while (models_lst != NULL)
 	{
 		if (index == id)
-			return ((t_model *) models_list->content);
+			return ((t_model *) models_lst->content);
 		index++;
-		models_list = models_list->next;
+		models_lst = models_lst->next;
 	}
 	return (NULL);
 }
@@ -89,9 +79,11 @@ t_model	*get_model(t_list *models_list, int id)
 void	set_model(t_list *models, t_model *model)
 {
 	t_list	*cur_n;
+	t_list	*first_n;
 
 	cur_n = ft_lstnew((void *) model);
 	if (!cur_n)
 		return ;
-	ft_lstadd_back(ft_lstlast(models), cur_n);
+	first_n = ft_lstlast(models);
+	ft_lstadd_back(&first_n, cur_n);
 }

@@ -6,13 +6,13 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:01:05 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/15 22:51:23 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:59:58 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	end_program(t_state *state)
+void	end_program()
 {
 	exit(1);
 }

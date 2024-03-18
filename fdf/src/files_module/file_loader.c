@@ -6,26 +6,25 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:45:15 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:05:43 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:45:01 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-void	read_file(int file_df, t_state state, t_imodel_collector *m_collector)
+void	read_file(int file_df, t_state *state, t_imodel_collector *m_collector)
 {
 	char	*tmp_l;
 	int	row_i;
-	t_list	*cur_n;
 	t_model	*model;
 
 	row_i = 0;
 	tmp_l = (char *) malloc(sizeof(char) * 1);
 	if (!tmp_l)
-		return (NULL);
+		return ;
 	model = (t_model *) malloc(sizeof(t_model) * 1);
 	if (!model)
-		return (NULL);
+		return ;
 	while (tmp_l != NULL)
 	{
 		free(tmp_l);
@@ -35,7 +34,7 @@ void	read_file(int file_df, t_state state, t_imodel_collector *m_collector)
 	}
 	free(tmp_l);
 	model->model_data = m_collector->model;
-	set_model(state->models, model);
+	set_model(state->models_lst, model);
 }
 
 /*
@@ -61,7 +60,8 @@ void	load_file(char **argv, int n_mod, t_state *state)
 		}
 		mod_col = create_fdf_collector();
 		free(file_path);
-		read_data(fd, state, mod_col);
+		read_file(fd, state, mod_col);
+		free(mod_col);
 		close(fd);
 	}
 }

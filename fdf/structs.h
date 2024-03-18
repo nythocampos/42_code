@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:57:25 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/15 23:08:48 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:13:13 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,15 @@ typedef struct s_mlx_data
 /*
  * model_data (t_list *): the model coordinates in a list.
  * model_faces (t_face *): the model coordinates group in faces.
- * model_proj (t_face *): the model projection.
  * id (int): the model id.
  */
-typedef struct s_models
+typedef struct s_model
 {
 	t_list	*model_data;
-	t_face	*model_faces;
+	//t_face	*model_faces;
 	//t_face	*model_proj;
 	int		id;
-}	t_models;
+}	t_model;
 /*
  * This model allows a easy way to access
  * to the most important information
@@ -84,5 +83,5 @@ typedef struct s_models
 typedef struct s_state
 {
 	t_mlx_data	*mlx_data;
-	t_models	*models;
+	t_list		*models_lst;
 }	t_state;

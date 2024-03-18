@@ -6,11 +6,23 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:15:00 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/05 13:15:29 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:07:58 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
+
+int	get_matrix_size(t_list *node)
+{
+	int	m_size;
+	int	n_rows;
+	int	n_cols;
+
+	n_rows = get_rows_num(node);
+	n_cols = get_cols_num((t_cor *) node->content);
+	m_size = (n_cols * n_rows);
+	return (m_size);
+}
 
 /*
  * This function initialize the matrix provided to 0
