@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:50:30 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/18 19:45:03 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:59:21 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,17 @@ int	main(int argc, char *argv[])
 	state = create_state();
 	if (!state)
 		return (0);
+	ft_printf("OK1\n");
 	file_loader = create_file_loader();
+	if (!file_loader)
+		return (0);
+	ft_printf("OK2\n");
 	// TODO: find problem in load file
-	file_loader->load_file(argv, argc, state);
-	//free(file_loader);
-	return 0;
+	if (file_loader->load_file(argv, argc, state) == 0)
+		return (0);
+	free(file_loader);
+	ft_printf("OK3\n");
+	return 1;
 	model = get_model(state->models_lst, 1);
 
 	update_model(model->model_data);

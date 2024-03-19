@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 21:01:41 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/18 19:45:02 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:46:55 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,15 @@ void	clean_models(t_list *models_lst)
 /*
  * This function must be able to be called just if there is not models
  * created
- * TODO: check this
  */
 t_list	*create_models_list()
 {
-	t_list	*models;
+	t_list	*models_list;
 
-	models = (t_list *) malloc(sizeof(t_list) * 1);
-	if (models)
+	models_list = ft_lstnew((void *) NULL);
+	if (models_list == NULL)
 		return (NULL);
-	models = ft_lstnew((void *) NULL);
-	return (models);
+	return (models_list);
 }
 
 /*

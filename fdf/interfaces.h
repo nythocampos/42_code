@@ -3,7 +3,7 @@
 
 typedef struct	s_ifile_loader
 {
-	void	(*load_file)(char **, int, t_state *);
+	int	(*load_file)(char **, int, t_state *);
 }	t_ifile_loader;
 
 typedef struct s_ipixels_writer
@@ -27,7 +27,7 @@ typedef struct	s_imodel_updater
 typedef struct s_imodel_collector
 {
 	t_list	*model;
-	void	(*collect_data)(char *, int, t_list *);
+	int	(*collect_data)(char *, int, t_list *);
 }	t_imodel_collector;
 
 typedef struct	s_imodel_printer

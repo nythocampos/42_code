@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:20:09 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/18 19:05:09 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:45:33 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,17 @@ void	refresh_window(t_state *state)
 			mlx_data->img->img, 0, 0);
 }
 
-static void	initialize_img(t_mlx_data *mlx_data, char *title)
+static t_img	*initialize_img(t_mlx_data *mlx_data)
 {
 	t_img	*img;
 
 	img = (t_img *) malloc(sizeof(t_img) * 1);
 	if (!img)
-		return ;
-	mlx_data->win = mlx_new_window(
-			mlx_data->mlx, WIDTH, HEIGHT, title);
-	if (!mlx_data->win)
-	{
-		free(mlx_data->mlx);
-		return ;
-	}
+		return (NULL);	
 	img->img = mlx_new_image(mlx_data->mlx, WIDTH, HEIGHT);
 	img->addr = mlx_get_data_addr(
 			img->img, &img->bpp, &img->size_line, &img->endian);
-	mlx_data->img = img;
+	return (img);
 }
 
 void	clean_mlx_data(t_mlx_data *mlx_data)
@@ -63,8 +56,14 @@ t_mlx_data	*create_mlx_data(void)
 	if (!mlx_data)
 		return (NULL);
 	mlx_data->mlx = mlx_init();
-	initialize_img(mlx_data, TITLE);
+	mlx_data->win = mlx_new_window(
+			mlx_data->mlx, WIDTH, HEIGHT, TITLE);
+	if (!mlx_data->win)
+	{
+		free(mlx_data->mlx);
+		return (NULL);
+	}
+	mlx_data->img = initialize_img(mlx_data);
 	return (mlx_data);
 }
-
 

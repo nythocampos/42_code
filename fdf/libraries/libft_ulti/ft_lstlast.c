@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:12:23 by antcampo          #+#    #+#             */
-/*   Updated: 2023/09/29 11:12:33 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:59:51 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ t_list	*ft_lstlast(t_list *lst)
 	struct s_list	*node_ptr;
 
 	node_ptr = lst;
-	if (lst == 0)
-		return (0);
+	if (lst == NULL)
+		return (NULL);
 	while (node_ptr->next != NULL)
 		node_ptr = node_ptr->next;
 	return (node_ptr);
