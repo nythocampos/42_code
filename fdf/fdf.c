@@ -59,7 +59,7 @@ void	update_model(t_list *model_data)
 	m_updater->rotate_model(model_data, 1.1, 0.2, 0.1);
 
 	m_updater->scale_model(model_data, 50, 50, 0.1);
-	m_updater->move_model(model_data, 0, 0, 0);
+	//m_updater->move_model(model_data, 0, 0, 0);
 
 	m_updater->move_model(model_data, 100, 200, 1);
 	m_updater->project_model(model_data);
@@ -89,17 +89,12 @@ int	main(int argc, char *argv[])
 	state = create_state();
 	if (!state)
 		return (0);
-	ft_printf("OK1\n");
 	file_loader = create_file_loader();
 	if (!file_loader)
 		return (0);
-	ft_printf("OK2\n");
-	// TODO: find problem in load file
 	if (file_loader->load_file(argv, argc, state) == 0)
 		return (0);
 	free(file_loader);
-	ft_printf("OK3\n");
-	return 1;
 	model = get_model(state->models_lst, 1);
 
 	update_model(model->model_data);
@@ -107,5 +102,6 @@ int	main(int argc, char *argv[])
 
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);
+	return (1);
 }
 

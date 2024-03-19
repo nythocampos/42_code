@@ -27,7 +27,7 @@ typedef struct	s_imodel_updater
 typedef struct s_imodel_collector
 {
 	t_list	*model;
-	int	(*collect_data)(char *, int, t_list *);
+	int	(*collect_data)(char *, int, t_list **);
 }	t_imodel_collector;
 
 typedef struct	s_imodel_printer

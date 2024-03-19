@@ -27,6 +27,8 @@ int	get_columns_num(char *line)
 
 	index = 0;
 	column_num = 0;
+	if (!line)
+		return (0);
 	while (line[index] != '\0')
 	{
 		if (on_item(line, (index + 1)))

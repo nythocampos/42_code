@@ -13,17 +13,33 @@
 #include "../../fdf.h"
 
 //TODO: refactor this function
-int	load_line(char *line, int row_num, t_list *model_data)
+/*
+ * This function recive every line got from the file and
+ * extract all values from it, then storage the items in
+ * a new node in model_data.
+ *
+ * Args:
+ * 	line (char *): line got from the file.
+ * 	row_num (int): number of the line got from the file.
+ * 	model_data (t_list *): first node of linked list where
+ * 	the model will be storaged.
+ * Return:
+ * 	0: ERROR
+ * 	1: OK
+ */
+int	load_line(char *line, int row_num, t_list **model_data)
 {
 	int	index;
 	int	col_i;
 	int	cols_num;
 	t_cor	*cors;
 	t_list	*new_node;
-	t_list	*first_n;
+	t_list	*last_n;
 
 	index = 0;
 	col_i = 0;
+	if (line == NULL)
+		return (0);
 	cols_num = get_columns_num(line);
 	cors = (t_cor *) malloc (sizeof(t_cor) * cols_num);
 	if (!cors)
@@ -44,13 +60,11 @@ int	load_line(char *line, int row_num, t_list *model_data)
 	new_node = ft_lstnew((void *) &cors[0]);
 	if (!new_node)
 		return (0);
-	ft_printf("OK 2.1.1\n");
-	first_n = ft_lstlast(model_data);
-	if (!first_n)
-		return (0);
-	ft_printf("OK 2.1.2\n");
-	ft_lstadd_back(&first_n, new_node);
-	ft_printf("OK 2.1.3\n");
+	last_n = ft_lstlast(*model_data);
+	if (!last_n)
+		*model_data = new_node;
+	else
+		ft_lstadd_back(&last_n, new_node);
 	return (1);
 }
 

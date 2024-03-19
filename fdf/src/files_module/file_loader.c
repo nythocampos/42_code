@@ -12,11 +12,12 @@
 
 #include "../../fdf.h"
 
-static int	read_file(int file_df, t_state *state, t_imodel_collector *m_collector)
+static int	read_file(int file_df, t_state *state)
 {
-	char	*tmp_l;
-	int	row_i;
-	t_model	*model;
+	char			*tmp_l;
+	int			row_i;
+	t_model			*model;	
+	t_imodel_collector	*m_collector;
 
 	row_i = 0;
 	tmp_l = (char *) malloc(sizeof(char) * 1);
@@ -25,16 +26,17 @@ static int	read_file(int file_df, t_state *state, t_imodel_collector *m_collecto
 	model = (t_model *) malloc(sizeof(t_model) * 1);
 	if (!model)
 		return (0);
-	ft_printf("OK 2.1\n");
+	model->model_data = NULL;
+	m_collector = create_fdf_collector();
 	while (tmp_l != NULL)
 	{
 		free(tmp_l);
 		tmp_l = get_next_line(file_df);
-		m_collector->collect_data(tmp_l, row_i, model->model_data);
+		m_collector->collect_data(tmp_l, row_i, &model->model_data);
 		row_i++;
 	}
 	free(tmp_l);
-	ft_printf("OK 2.2\n");
+	free(m_collector);
 	set_model(state->models_lst, model);
 	ft_printf("Model loaded \n");
 	return (1);
@@ -48,7 +50,6 @@ static int	load_file(char **argv, int n_mod, t_state *state)
 {
 	int					fd;
 	char				*file_path;
-	t_imodel_collector	*mod_col;
 	int					index;
 
 	index = 0;
@@ -62,12 +63,10 @@ static int	load_file(char **argv, int n_mod, t_state *state)
 			return (0);
 		}
 		ft_printf("Generating models collector \n");
-		mod_col = create_fdf_collector();
 		free(file_path);
 		ft_printf("Loading file \n");
-		if (read_file(fd, state, mod_col) == 0)
+		if (read_file(fd, state) == 0)
 			return (0);
-		free(mod_col);
 		close(fd);
 	}
 	return (1);
