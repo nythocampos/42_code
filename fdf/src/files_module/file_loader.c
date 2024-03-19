@@ -27,7 +27,8 @@ static int	read_file(int file_df, t_state *state)
 	if (!model)
 		return (0);
 	model->model_data = NULL;
-	m_collector = create_fdf_collector();
+	//m_collector = create_fdf_collector();
+	m_collector = create_ins_collector();
 	while (tmp_l != NULL)
 	{
 		free(tmp_l);

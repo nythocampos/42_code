@@ -1,16 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fdf_format_loader.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/19 16:12:18 by antcampo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../../fdf.h"
+
+void	update_model(t_list *model_data)
+{
+	t_imodel_updater	*m_updater;
+
+	m_updater = create_model_updater();
+	m_updater->scale_model(model_data, 1, 0.1, 0.8);
+	m_updater->rotate_model(model_data, 1.1, 0.2, 0.1);
+
+	m_updater->scale_model(model_data, 50, 50, 0.1);
+	//m_updater->move_model(model_data, 0, 0, 0);
+
+	m_updater->move_model(model_data, 100, 200, 1);
+	m_updater->project_model(model_data);
+	free(m_updater);
+}
 
 //TODO: refactor this function
 /*
@@ -35,11 +40,13 @@ static int	load_line(char *line, int row_num, t_list **model_data)
 	t_cor	*cors;
 	t_list	*new_node;
 	t_list	*last_n;
+	t_imodel_updater	*mp;
 
 	index = 0;
 	col_i = 0;
 	if (line == NULL)
 		return (0);
+	mp = create_model_updater();
 	cols_num = get_columns_num(line);
 	cors = (t_cor *) malloc (sizeof(t_cor) * cols_num);
 	if (!cors)
@@ -52,6 +59,9 @@ static int	load_line(char *line, int row_num, t_list **model_data)
 			cors[col_i].y = get_item_value(line, index);
 			cors[col_i].z = row_num;
 			cors[col_i].id = col_i;
+			mp.
+			// initialize point
+			// draw point
 			col_i++;
 		}
 		index++;
@@ -68,14 +78,14 @@ static int	load_line(char *line, int row_num, t_list **model_data)
 	return (1);
 }
 
-t_imodel_collector	*create_fdf_collector()
+t_imodel_collector	*create_ins_collector()
 {
-	t_imodel_collector	*fdf_collector;
+	t_imodel_collector	*m_collector;
 
-	fdf_collector = (
+	m_collector = (
 		t_imodel_collector *) malloc(sizeof(t_imodel_collector));
-	if (!fdf_collector)
+	if (!m_collector)
 		return (NULL);
-	fdf_collector->collect_data = &load_line;
-	return (fdf_collector);
+	m_collector->collect_data = &load_line;
+	return (m_collector);
 }

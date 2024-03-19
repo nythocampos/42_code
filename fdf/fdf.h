@@ -51,6 +51,7 @@ void		process_lists(t_list *node, void *data, void (*f)(t_cor *, void *));
 t_imodel_collector	*create_fdf_collector();
 t_model				*get_model(t_list *models_lst, int id);
 t_imodel_updater	*create_model_updater();
+t_imatrix_creator	*create_matrix_creator();
 
 // what is this????
 void		update_m_pos(t_state *state, int key);
