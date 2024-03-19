@@ -70,4 +70,6 @@ int			get_rows_num(t_list *model);
 int			get_columns_num(char *line); // check this???
 int			get_cols_num(t_cor *pts_list);
 void		del(void *content);
+void	*err_ret_num(char *location, char *err);
+void	*err_ret_null(char *location, char *err);
 #endif

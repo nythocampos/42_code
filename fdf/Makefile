@@ -18,7 +18,7 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC			= cc
 # IMPLEMENT FLAGS!!!!!
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address
 INCLUDE			= fdf.h structs.h
 
 # C FILES ---------
@@ -47,7 +47,8 @@ WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_mana
 
 # Utils
 SHRDIR			= ./src/shared/
-SHARED			= $(SHRDIR)matrix_tools.c $(SHRDIR)list_tools.c
+SHARED			= $(SHRDIR)matrix_tools.c $(SHRDIR)list_tools.c \
+			$(SHRDIR)errors_handler.c
 
 SRCS			= fdf.c $(SHARED) $(WINDOW_MODULE) $(FILES_MODULE) \
 			  $(GRAPHIC_MODULE) $(MM_MODULE) $(DATA_MODULE)

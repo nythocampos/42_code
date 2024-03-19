@@ -35,6 +35,7 @@ void	read_file(int file_df, t_state *state, t_imodel_collector *m_collector)
 	free(tmp_l);
 	model->model_data = m_collector->model;
 	set_model(state->models_lst, model);
+	ft_printf("Model loaded \n");
 }
 
 /*
@@ -58,8 +59,10 @@ void	load_file(char **argv, int n_mod, t_state *state)
 			ft_printf("File %s not found\n", file_path);
 			return ;
 		}
+		ft_printf("Generating models collector \n");
 		mod_col = create_fdf_collector();
 		free(file_path);
+		ft_printf("Loading file \n");
 		read_file(fd, state, mod_col);
 		free(mod_col);
 		close(fd);

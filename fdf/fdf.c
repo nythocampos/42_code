@@ -90,9 +90,10 @@ int	main(int argc, char *argv[])
 	if (!state)
 		return (0);
 	file_loader = create_file_loader();
+	// TODO: find problem in load file
 	file_loader->load_file(argv, argc, state);
-	free(file_loader);
-
+	//free(file_loader);
+	return 0;
 	model = get_model(state->models_lst, 1);
 
 	update_model(model->model_data);
