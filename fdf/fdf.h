@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 15:40:31 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:33:02 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ t_models	*import_model(char **argv, t_state *state);
 void		set_pixel(t_img *img, int x, int y, int color);
 void		build_triangles(t_list *node, int n_cols, int *row, t_state *state);
 
-void	build_image(t_mlx_data *mlx_data);
-void	build_faces(t_list *node, t_state *state);
+void		build_image(t_mlx_data *mlx_data);
+void		build_faces(t_list *node, t_state *state);
+
+void		draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b);
 
 void		project_model(t_cor *cor);
 void		move_model(t_cor *cor, float x, float y, float z);
 void		rotate_model(t_cor *cor, float x, float y, float z);
 void		scale_model(t_cor *cor, float x, float y, float z);
+void		scale_projection(t_cor *cor, float x, float y);
 
 void		draw_cor(t_cor *cor, t_mlx_data *mlx);
 void		initialize_mod(t_cor *cor, int col_i, int row_i);

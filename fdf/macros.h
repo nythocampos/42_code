@@ -6,17 +6,16 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:58:04 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/08 20:55:53 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:32:10 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//TODO: check if this needs the #if def
 #define COLOR_A	0x00000000
 #define COLOR_B	0x33FFC4
 #define WIDTH	800
 #define HEIGHT	600 
 #define MAPS_PATH "./models/"
-// TODO: add a way to control the MAC correction in the drawing
+
 #if defined(__APPLE__) || (__MACH__)
 # define M_FORWARD 13
 # define M_BACKWARD 1

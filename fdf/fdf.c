@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:50:30 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 15:42:21 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:13:34 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	test()
 int	main(int argc, char *argv[])
 {
 	t_state		*state;
-	t_models	*models;
 
 	//test();
 	if (argc != 2)
@@ -52,8 +51,6 @@ int	main(int argc, char *argv[])
 		end_program(state);
 		return (0);
 	}
-	models = state->models;
-	//build_image(state->mlx_data, models->model_faces);
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);
 }

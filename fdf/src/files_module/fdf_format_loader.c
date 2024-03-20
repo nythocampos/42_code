@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:34:08 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:10:05 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ static t_cor	*load_line(char *line, int row_num)
 
 	index = 0;
 	col_i = 0;
+	if (!line)
+		return (NULL);
 	cols_num = get_columns_num(line);
 	pts_list = (t_cor *) malloc(sizeof(t_cor) * (cols_num));
 	if (!pts_list)
 		return (NULL);
-	while (line[index] != '\0' && col_i <= cols_num)
+	while (line[index] != '\0' && col_i <= (cols_num - 1))
 	{
 		if (on_item(line, (index + 1)) == 1)
 		{
@@ -48,7 +50,6 @@ t_list	*add_node(char *tmp_l, int row_n)
 
 	if (tmp_l == NULL)
 		return (NULL);
-	//ft_printf("--->%s\n", tmp_l);
 	pts_lst = load_line(tmp_l, row_n);
 	cur_n = ft_lstnew((void *) &pts_lst[0]);
 	return (cur_n);

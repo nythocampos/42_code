@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:12:50 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 15:37:56 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:26:20 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,4 @@ void	draw_cor(t_cor *cor, t_mlx_data *mlx)
 {
 	set_pixel(mlx->img, cor->x, cor->y,
 			COLOR_B);
-}
-
-static void	set_background(t_mlx_data *mlx_data)
-{
-	int	x_index;
-	int	y_index;
-
-	x_index = 0;
-	y_index = 0;
-	while (y_index < HEIGHT)
-	{
-		while (x_index < WIDTH)
-		{
-			set_pixel(mlx_data->img, x_index, y_index, COLOR_A);
-			x_index++;
-		}
-		x_index = 0;
-		y_index++;
-	}
-}
-
-void	build_image(t_mlx_data *mlx_data)
-{
-	ft_printf("Building image... \n");
-	set_background(mlx_data);
-	ft_printf("Image built. \n");
 }
