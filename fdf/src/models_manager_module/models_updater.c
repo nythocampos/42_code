@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:35:08 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/18 19:32:16 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:29:42 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	rotate_model(t_list *model, float x, float y, float z)
  * 	pleaced.
  */
 static void	move_model(t_list *model, float x, float y, float z)
-{	
+{
 	t_cor		n_pos;
 	t_iaxes_updater	*a_updater;
 
@@ -88,7 +88,7 @@ static void	move_model(t_list *model, float x, float y, float z)
 void	project_model(t_list *model)
 {
 	t_imatrix_creator	*pro_mtx;
-	float			*mtx;
+	float				*mtx;
 
 	pro_mtx = create_matrix_creator();
 	mtx = pro_mtx->get_pro_mtx();

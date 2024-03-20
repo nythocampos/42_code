@@ -21,13 +21,14 @@ typedef struct s_iaxes_updater
 	void	(*scale_projection_axes)(t_cor *,float, float, float);
 }	t_iaxes_updater;
 
+void	process_lists(t_list *node, void *data, void (*f)(t_cor *, float,float,float))
 typedef struct	s_imodel_updater
 {
 	void	(*scale_model)(t_list *, float, float, float);
 	void	(*rotate_model)(t_list *, float, float, float);
 	void	(*move_model)(t_list *, float, float, float);
 	void	(*project_model)(t_list *);
-	void	(*scale_model_projection)(t_list *,float, float, float)
+	void	(*scale_model_projection)(t_list *,float, float, float);
 }	t_imodel_updater;
 
 typedef struct s_imatrix_creator

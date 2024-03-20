@@ -6,14 +6,14 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:47:13 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/08 12:57:48 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/20 14:29:44 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
 //TODO: find memory error
-void	process_lists(t_list *node, void *data, void (*f)(t_cor *, void *))
+void	process_lists(t_list *node, void *data, void (*f)(t_cor *, float,float,float))
 {
 	int		col_i;
 	int		is_last_line;
