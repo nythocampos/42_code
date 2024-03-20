@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:50:30 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:34:05 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:42:21 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,15 @@ int	main(int argc, char *argv[])
 	//test();
 	if (argc != 2)
 		return (0);
-	state = initialize_state((argc - 1), argv);	
+	state = initialize_state(argv);	
 	if (state == NULL || state->models == NULL) // check models and mlx
 	{
 		ft_printf("Error generating the state\n");
 		end_program(state);
 		return (0);
 	}
-	//ft_printf("OK 1\n");
-	//end_program(state);
-	//return (0);
 	models = state->models;
-	build_image(state->mlx_data, models->model_faces);
+	//build_image(state->mlx_data, models->model_faces);
 	set_events(state);
 	mlx_loop(state->mlx_data->mlx);
 }

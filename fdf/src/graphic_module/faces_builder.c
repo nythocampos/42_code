@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:36:06 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:05:35 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:15:57 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,23 @@ static int	get_matrix_size(t_list *node)
  * Return:
  * 	faces_list (t_face *): the list of faces generated
  */
-t_face	*build_faces(t_list *node)
+void	build_faces(t_list *node, t_state *state)
 {
 	int		n_cols;
 	int		m_size;
 	int		is_last_line;
-	t_face	*faces;
 	int		index;
 
 	is_last_line = 0;
 	index = 0;
 	n_cols = get_cols_num((t_cor *) node->content);
 	m_size = get_matrix_size(node);
-	faces = (t_face *) malloc(sizeof(t_face) * m_size);
-	if (!faces)
-		return (NULL);
 	while (is_last_line == 0)
 	{
-		build_triangles(node, faces, n_cols, &index);
+		build_triangles(node, n_cols, &index, state);
 		if (node->next == NULL)
 			is_last_line = 1;
 		else
 			node = node->next;
 	}
-	faces[(m_size) - 1].id = -1;
-	return (&faces[0]);
 }

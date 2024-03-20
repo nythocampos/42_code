@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:45:15 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:05:43 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:19:45 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static t_list	*load_model(char *file_name)
 	char	*file_path;
 
 	file_path = ft_strjoin(MAPS_PATH, file_name);
-	//ft_printf("File name: %s \n", file_path);
 	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
 	{
@@ -36,30 +35,7 @@ static t_list	*load_model(char *file_name)
 	return (model);
 }
 
-/*t_models	*import_models(int n_mod, char **argv)
-{
-	t_models	*models;
-	int			index;
-
-	models = (t_models *) malloc(sizeof(t_models) * n_mod);
-	if (!models)
-		return (NULL);
-	index = 0;
-	while (index < n_mod)
-	{
-		models[index].model_data = load_model(argv[index + 1]);
-		if (models[index].model_data == NULL)
-			return (NULL);
-		initialize_mod(models[index].model_data, index);
-		models[index].model_faces = build_faces(models[index].model_data);
-		models[index].id = index;
-		index++;
-	}
-	models[n_mod - 1].id = -1;
-	return (models);
-}*/
-
-t_models	*import_model(char **argv)
+t_models	*import_model(char **argv, t_state *state)
 {
 	t_models	*models;
 
@@ -69,13 +45,7 @@ t_models	*import_model(char **argv)
 	models->model_data = load_model(argv[1]);
 	if (models->model_data == NULL)
 		return (NULL);
-	initialize_mod(models->model_data, 1);
-	/*models->model_faces = NULL; 
-	models->id = -1;
-	return (models);*/
-	models->model_faces = build_faces(models->model_data);
-	if (models->model_faces == NULL)
-		return (NULL);
+	build_faces(models->model_data, state);
 	models->id = -1;
 	return (models);
 }

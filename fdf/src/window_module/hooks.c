@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:01:05 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/15 22:51:23 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:30:51 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,6 @@ static void	del(void *content)
 {
 	free(content);
 	content = NULL;
-}
-
-/*
- * This function cleans the list of models
- *
- * Models structure
- * t_list *models:
- * 	t_list *next
- * 	void *content
- * 		content->t_cors *cors
- * 				cors: int x, int y, int z
- */
-static void	clean_models(t_models *models)
-{
-	return ;
-	int	index;
-	int	is_end;
-
-	index = 0;
-	is_end = 0;
-	if (models == NULL)
-		return ;
-	while (is_end == 0)
-	{
-		if (models[index].model_data)
-			ft_lstclear(&models[index].model_data, &del);
-		if (models[index].model_faces)
-			clean_faces(models[index].model_faces);
-		free(models[index].model_faces);
-		if (models[index].id == -1)
-			is_end = 1;
-		index++;
-	}
-	free(models);
 }
 
 /*
@@ -84,13 +50,7 @@ void	end_program(t_state *state)
 	free(state->mlx_data->mlx);
 	free(state->mlx_data);
 
-	// to  build the models
-	clean_models(state->models);
-
 	ft_lstclear(&state->models->model_data, &del);
-	free(state->models->model_data);
-	clean_faces(state->models->model_faces);
-	free(state->models->model_faces);
 	free(state->models);
 
 	// free state

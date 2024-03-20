@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:12:50 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/16 00:34:07 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:37:56 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@ void	set_pixel(t_img *img, int x, int y, int color)
 	if (x > WIDTH || y > HEIGHT || x < 0 || y < 0)
 		return ;
 	offset = (img->size_line * y) + (x * (img->bpp / 8));
-	//ft_printf("offset:%d \n", offset);
 	*((unsigned int *)(offset + img->addr)) = color;
+}
+
+void	draw_cor(t_cor *cor, t_mlx_data *mlx)
+{
+	set_pixel(mlx->img, cor->x, cor->y,
+			COLOR_B);
 }
 
 static void	set_background(t_mlx_data *mlx_data)
@@ -46,31 +51,9 @@ static void	set_background(t_mlx_data *mlx_data)
 	}
 }
 
-/* 
- * This function draw the faces 
- * */
-static void	draw_model(t_mlx_data *mlx_data, t_face *faces_lst)
-{
-	int		faces_i;
-	int		end_faces;
-	t_cor	*points;
-
-	faces_i = 0;
-	end_faces = 0;
-	while (end_faces == 0)
-	{
-		points = faces_lst[faces_i].points;
-		draw_face(mlx_data, points);
-		if (faces_lst[faces_i].id == -1)
-			end_faces = 1;
-		faces_i++;
-	}
-}
-
-void	build_image(t_mlx_data *mlx_data, t_face *faces_lst)
+void	build_image(t_mlx_data *mlx_data)
 {
 	ft_printf("Building image... \n");
 	set_background(mlx_data);
-	draw_model(mlx_data, faces_lst);
 	ft_printf("Image built. \n");
 }

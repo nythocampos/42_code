@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/15 22:00:36 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:40:31 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void		end_program(t_state *state);
 void		set_events(t_state *data);
 void		set_window(t_mlx_data *mlx_data, char *title);
 
-void		refresh_window(t_state *state);
-
 // Files module 
 int			get_columns_num(char *line);
 int			get_item_value(char *str, int end);
@@ -39,31 +37,26 @@ int			on_item(char *line, int index);
 t_list		*load_terrain_model(int file_df);
 
 // Models manager module
-void		rotate_model(t_list *model, t_cor *angles);
 void		process_faces(
 				t_face *model, void *data, void (*f)(t_cor *, void *));
-void		move_model(t_list *model, t_cor *n_pos, int mov_ty);
 void		process_lists(t_list *node, void *data, void (*f)(t_cor *, void *));
-void		initialize_mod(t_list *model_data, int model_num);
-//t_models	*import_models(int n_mod, char **argv);
-t_models	*import_model(char **argv);
-
-void		update_m_pos(t_state *state, int key);
-void		update_m_s(t_state *state, int key);
-void		update_m_r(t_state *state, int key);
-void		clean_faces(t_face *model);
+t_models	*import_model(char **argv, t_state *state);
 // Graphic module 
-void		build_image(t_mlx_data *mlx_data, t_face *faces_lst);
-t_face		*build_faces(t_list *node);
-void		build_triangles(
-				t_list *node, t_face *faces, int n_cols, int *index);
-void		project_model(t_list *model);
-void		magnify_model(t_list *model, t_cor *scale);
-void		draw_face(t_mlx_data *mlx_data, t_cor *points);
 void		set_pixel(t_img *img, int x, int y, int color);
+void		build_triangles(t_list *node, int n_cols, int *row, t_state *state);
 
+void	build_image(t_mlx_data *mlx_data);
+void	build_faces(t_list *node, t_state *state);
+
+void		project_model(t_cor *cor);
+void		move_model(t_cor *cor, float x, float y, float z);
+void		rotate_model(t_cor *cor, float x, float y, float z);
+void		scale_model(t_cor *cor, float x, float y, float z);
+
+void		draw_cor(t_cor *cor, t_mlx_data *mlx);
+void		initialize_mod(t_cor *cor, int col_i, int row_i);
 // Data manager
-t_state		*initialize_state(int n_mod, char **argv);
+t_state		*initialize_state(char **argv);
 
 // Utils
 void		apply_matrix(t_cor *src, void *m);
