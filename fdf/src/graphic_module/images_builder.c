@@ -58,9 +58,12 @@ void	set_pixel(t_img *img, int x, int y, int color)
 
 static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
 {
-	cor->x = cor->x + 1;
-	cor->y = cor->y + 1;
-	//cor->z = cor->z + 1;
+	//cor->x = cor->x + 1;
+	//cor->y = cor->y + 1;
+	if (cor->y >= (state->models->val_len/2))
+		cor->y = cor->y - state->models->val_len;
+	else
+		cor->y = cor->y + state->models->val_len;
 	cor->z = (state->models->rows_len - cor->z);
 
 	cor->x = cor->x - (state->models->cols_len / 2);
@@ -74,12 +77,11 @@ static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
 	//cor->z = cor->z * (2 * state->models->rows_len);
 	move_model(cor, 0, 0, 5);
 
-	//scale_model(cor, 0, 0, 2);
-	ft_printf("x: %d, y: %d, z:%d\n",(int)cor->x, (int)cor->y, (int)cor->z); 
+	//ft_printf("x: %d, y: %d, z:%d\n",(int)cor->x, (int)cor->y, (int)cor->z); 
 	project_model(cor);
 	scale_projection(cor, 0.2, 0.2);
-	//cor->x = cor->x + (WIDTH / 2);
-	//cor->y = cor->y + (HEIGHT / 2);
+	cor->x = cor->x + (WIDTH / 2);
+	cor->y = cor->y + (HEIGHT / 2);
 
 	ptn->x = (int) cor->x;
 	ptn->y = (int) cor->y;
