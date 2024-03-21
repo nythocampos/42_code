@@ -33,18 +33,16 @@ static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
 	cor->x = cor->x - (state->models->cols_len / 2);
 	cor->y = cor->y - (state->models->val_len / 2);
 	cor->z = cor->z - (state->models->rows_len / 2);
-	//rotate_model(cor, 2.5, 0.5, 0.2);// 1, 0.2, 0.2 basic z
-	rotate_model(cor, 0, 0, 0);
+	rotate_model(cor, 0.8, 0, 0);
 	cor->x = cor->x + (state->models->cols_len / 2);
 	cor->y = cor->y + (state->models->val_len / 2);
 	cor->z = cor->z + (state->models->rows_len / 2);
-	//cor->z = cor->z * (2 * state->models->rows_len);
-	move_model(cor, 0, 0, 3);
+	move_model(cor, 0, 0, 8);
 
 	project_model(cor);
-	scale_projection(cor, 0.2, 0.2);
-	cor->x = cor->x + (WIDTH / 5);
-	cor->y = cor->y + (HEIGHT / 5);
+	scale_projection(cor, 0.5, 0.5);
+	cor->x = cor->x + (WIDTH / 8);
+	cor->y = cor->y + (HEIGHT / 8);
 
 	ptn->x = (int) cor->x;
 	ptn->y = (int) cor->y;
