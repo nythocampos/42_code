@@ -1,7 +1,7 @@
 NAME 	= libft.a
 CC 		= cc
 LIB 	= ar rcs
-CFLAGS 	= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS 	= -Wall -Wextra -Werror -g3 #-fsanitize=address
 INCLUDE = libft.h
 # libft files
 SRC_LIBFT	= ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c \
