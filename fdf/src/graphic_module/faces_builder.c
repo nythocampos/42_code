@@ -12,18 +12,6 @@
 
 #include "../../fdf.h"
 
-static int	get_matrix_size(t_list *node)
-{
-	int	m_size;
-	int	n_rows;
-	int	n_cols;
-
-	n_rows = get_rows_num(node);
-	n_cols = get_cols_num((t_cor *) node->content);
-	m_size = (n_cols * n_rows);
-	return (m_size);
-}
-
 /*
  * This function builds the faces TODO: considering
  * the type of face needed.
@@ -37,14 +25,12 @@ static int	get_matrix_size(t_list *node)
 void	build_faces(t_list *node, t_state *state)
 {
 	int		n_cols;
-	int		m_size;
 	int		is_last_line;
 	int		index;
 
 	is_last_line = 0;
 	index = 0;
 	n_cols = get_cols_num((t_cor *) node->content);
-	m_size = get_matrix_size(node);
 	while (is_last_line == 0)
 	{
 		build_triangles(node, n_cols, &index, state);

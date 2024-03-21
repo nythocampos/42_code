@@ -20,9 +20,6 @@ static int	handle_destroy(t_state *state)
 
 static int	handle_keys(int key, t_state *state)
 {
-	t_mlx_data	*mlx_data;
-
-	mlx_data = state->mlx_data;
 	if (key == 0xff1b || key == 53)
 		end_program(state);
 	return (0);

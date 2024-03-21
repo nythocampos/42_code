@@ -12,36 +12,10 @@
 
 #include "fdf.h"
 
-int	test()
-{
-	int		fd;
-	char	*tmp_l;
-	
-	fd = open("./models/42.fdf", O_RDONLY);
-	if (fd == -1)
-	{
-		ft_printf("File not found\n");
-		return (0);
-	}
-	tmp_l = (char *) malloc(sizeof(char) * 1);
-	if (!tmp_l)
-		return (0);
-	while (tmp_l != NULL)
-	{
-		free(tmp_l);
-		tmp_l = get_next_line(fd);
-		ft_printf("LINE: %s\n",tmp_l);
-	}
-	free(tmp_l);
-	close(fd);
-	return 0;
-}
-
 int	main(int argc, char *argv[])
 {
 	t_state		*state;
 
-	//test();
 	if (argc != 2)
 		return (0);
 	state = initialize_state(argv);	

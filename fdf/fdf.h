@@ -57,7 +57,7 @@ void		scale_model(t_cor *cor, float x, float y, float z);
 void		scale_projection(t_cor *cor, float x, float y);
 
 void		draw_cor(t_cor *cor, t_mlx_data *mlx);
-void		initialize_mod(t_cor *cor, int col_i, int row_i);
+void		draw_vector(t_cor *a, t_cor *b, t_mlx_data *mlx);
 // Data manager
 t_state		*initialize_state(char **argv);
 
