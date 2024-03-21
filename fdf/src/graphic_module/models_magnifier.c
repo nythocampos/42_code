@@ -14,9 +14,12 @@
 
 void	scale_model(t_cor *cor, float x, float y, float z)
 {
-	cor->x = cor->x * x;
-	cor->y = cor->y * y;
-	cor->z = cor->z * z;
+	if (x != 0)
+		cor->x = cor->x * x;
+	if (y != 0)
+		cor->y = cor->y * y;
+	if (z != 0)
+		cor->z = cor->z * z;
 }
 
 void	scale_projection(t_cor *cor, float x, float y)

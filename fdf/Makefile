@@ -35,7 +35,7 @@ FILES_MODULE		= $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
 # Models manager module
 MMDIR			=./src/models_manager_module/
 MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c $(MMDIR)lists_processor.c \
-			  $(MMDIR)faces_processor.c $(MMDIR)models_manager.c $(MMDIR)models_loader.c
+			  $(MMDIR)faces_processor.c $(MMDIR)models_loader.c
 
 # Window manager module
 WINDIR			= ./src/window_module/

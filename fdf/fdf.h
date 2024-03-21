@@ -34,7 +34,7 @@ void		set_window(t_mlx_data *mlx_data, char *title);
 int			get_columns_num(char *line);
 int			get_item_value(char *str, int end);
 int			on_item(char *line, int index);
-t_list		*load_terrain_model(int file_df);
+t_list		*load_terrain_model(int file_df, t_state *state);
 
 // Models manager module
 void		process_faces(
@@ -48,7 +48,7 @@ void		build_triangles(t_list *node, int n_cols, int *row, t_state *state);
 void		build_image(t_mlx_data *mlx_data);
 void		build_faces(t_list *node, t_state *state);
 
-void		draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b);
+void		draw_line(t_mlx_data *mlx, t_ptn *a, t_ptn *b);
 
 void		project_model(t_cor *cor);
 void		move_model(t_cor *cor, float x, float y, float z);
@@ -57,7 +57,7 @@ void		scale_model(t_cor *cor, float x, float y, float z);
 void		scale_projection(t_cor *cor, float x, float y);
 
 void		draw_cor(t_cor *cor, t_mlx_data *mlx);
-void		draw_vector(t_cor *a, t_cor *b, t_mlx_data *mlx);
+void		draw_vector(t_cor *a, t_cor *b, t_state * state);
 // Data manager
 t_state		*initialize_state(char **argv);
 

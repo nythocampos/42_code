@@ -16,7 +16,7 @@
  *
  * This function builds a triangular face
  */
-static void	fill_triangle(t_list *node, int col_i, int row_i, t_state *state)
+static void	fill_triangle(t_list *node, int col_i, t_state *state)
 {
 	t_cor	*cors;
 	t_list	*tmp_node;
@@ -25,17 +25,14 @@ static void	fill_triangle(t_list *node, int col_i, int row_i, t_state *state)
 	cors = (t_cor *) node->content;
 	if (cors[col_i].id != -1)
 	{
-		draw_vector(&cors[col_i], &cors[col_i + 1], state->mlx_data);
+		draw_vector(&cors[col_i], &cors[col_i + 1], state);
 	}
 	if (node->next != NULL)
 	{
 		tmp_node = node->next;
 		tmp_cors = (t_cor *) tmp_node->content;
-
-		draw_vector(&cors[col_i], &tmp_cors[col_i], state->mlx_data);
+		draw_vector(&cors[col_i], &tmp_cors[col_i], state);
 	}
-	return ;
-	ft_printf("%d",row_i);
 }
 
 void	build_triangles(t_list *node, int n_cols, int *row, t_state *state)
@@ -45,7 +42,7 @@ void	build_triangles(t_list *node, int n_cols, int *row, t_state *state)
 	col_i = 0;
 	while (col_i <= (n_cols - 1))
 	{
-		fill_triangle(node, col_i, *row, state);
+		fill_triangle(node, col_i, state);
 		col_i++;
 		*row = *row + 1;
 	}

@@ -16,7 +16,7 @@
 * This function is used to choose the process to follow
 * considering the format of model to load
 */
-static t_list	*load_model(char *file_name)
+static t_list	*load_model(char *file_name, t_state *state)
 {
 	t_list	*model;
 	int		fd;
@@ -30,7 +30,7 @@ static t_list	*load_model(char *file_name)
 		return (NULL);
 	}
 	free(file_path);
-	model = load_terrain_model(fd);
+	model = load_terrain_model(fd, state);
 	close(fd);
 	return (model);
 }
@@ -42,9 +42,13 @@ t_models	*import_model(char **argv, t_state *state)
 	models = (t_models *) malloc(sizeof(t_models) * 1);
 	if (!models)
 		return (NULL);
-	models->model_data = load_model(argv[1]);
+	state->models = models;
+	state->models->cols_len = 0;
+	state->models->val_len = 0;
+	state->models->rows_len = 0;
+	models->model_data = load_model(argv[1], state);
 	if (models->model_data == NULL)
-		return (NULL);
+		return (NULL); 
 	build_faces(models->model_data, state);
 	models->id = -1;
 	return (models);

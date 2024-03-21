@@ -30,6 +30,12 @@ typedef struct s_cor
 	int		id;
 }	t_cor;
 
+typedef struct	s_ptn
+{
+	int	x;
+	int	y;
+}	t_ptn;
+
 // screen face [{x,y},[{x,y},[{x,y}]
 typedef struct s_face
 {
@@ -72,8 +78,9 @@ typedef struct s_mlx_data
 typedef struct s_models
 {
 	t_list	*model_data;
-	t_face	*model_faces;
-	//t_face	*model_proj;
+	int	cols_len;
+	int	rows_len;
+	int	val_len;
 	int		id;
 }	t_models;
 /*

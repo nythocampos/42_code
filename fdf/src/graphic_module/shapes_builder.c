@@ -12,10 +12,10 @@
 
 #include "../../fdf.h"
 
-void	draw_y(t_mlx_data *mlx, t_vec *vec, t_cor *b)
+void	draw_y(t_mlx_data *mlx, t_vec *vec, t_ptn *b)
 {
 	vec->p = 2 * vec->dx - vec->dy;
-	while (vec->temp_y != (int) b->y)
+	while (vec->temp_y != b->y)
 	{
 		set_pixel(mlx->img, vec->temp_x, vec->temp_y,
 			COLOR_B);
@@ -29,10 +29,10 @@ void	draw_y(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 	}
 }
 
-void	draw_x(t_mlx_data *mlx, t_vec *vec, t_cor *b)
+void	draw_x(t_mlx_data *mlx, t_vec *vec, t_ptn *b)
 {
 	vec->p = 2 * vec->dy - vec->dx;
-	while (vec->temp_x != (int) b->x)
+	while (vec->temp_x != b->x)
 	{
 		set_pixel(mlx->img, vec->temp_x, vec->temp_y,
 			COLOR_B);
@@ -46,15 +46,15 @@ void	draw_x(t_mlx_data *mlx, t_vec *vec, t_cor *b)
 	}
 }
 
-void	set_vec(t_vec *vec, t_cor *a, t_cor *b)
+void	set_vec(t_vec *vec, t_ptn *a, t_ptn *b)
 {
-	vec->dy = (int)(b->y - a->y);
-	vec->dx = (int)(b->x - a->x);
-	vec->temp_x = (int) a->x;
-	vec->temp_y = (int) a->y;
+	vec->dy = (b->y - a->y);
+	vec->dx = (b->x - a->x);
+	vec->temp_x = a->x;
+	vec->temp_y = a->y;
 }
 
-void	draw_line(t_mlx_data *mlx, t_cor *a, t_cor *b)
+void	draw_line(t_mlx_data *mlx, t_ptn *a, t_ptn *b)
 {
 	t_vec	vec;
 

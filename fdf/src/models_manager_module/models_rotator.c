@@ -49,7 +49,7 @@ static float	*gen_rot_mtx_x(float x_angle)
 static float	*gen_rot_mtx_y(float y_angle)
 {
 	float	*m_rot;
-
+	
 	m_rot = (float *) malloc (sizeof(float) * 16);
 	if (!m_rot)
 		return (NULL);
@@ -62,6 +62,12 @@ static float	*gen_rot_mtx_y(float y_angle)
 	m_rot[15] = 1.0;
 	return (&m_rot[0]);
 }
+
+//This function convert radiants to angles
+/*static float	rads_to_ang(float value)
+{
+	return (value * (180/3.14159));
+}*/
 
 /*
  * This function apply a rotation to the object
