@@ -12,6 +12,11 @@
 
 #include "../../fdf.h"
 
+static int	check_file_format(char *file_name)
+{
+
+}
+
 /*
 * This function is used to choose the process to follow
 * considering the format of model to load
@@ -27,6 +32,7 @@ static t_list	*load_model(char *file_name, t_state *state)
 	if (fd == -1)
 	{
 		ft_printf("File %s not found\n", file_path);
+		free(file_path);
 		return (NULL);
 	}
 	free(file_path);
@@ -48,7 +54,10 @@ t_models	*import_model(char **argv, t_state *state)
 	state->models->rows_len = 0;
 	models->model_data = load_model(argv[1], state);
 	if (models->model_data == NULL)
+	{
+		free(models);
 		return (NULL); 
+	}
 	build_faces(models->model_data, state);
 	models->id = -1;
 	return (models);

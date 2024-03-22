@@ -39,12 +39,14 @@ t_state	*initialize_state(char **argv)
 	if (state->mlx_data == NULL)
 	{
 		ft_printf("[INITIALIZING WINDOW]\n");
+		end_program(state);
 		exit(1);
 		return (NULL);
 	}
 	state->models = import_model(argv, state);
 	if (state->models == NULL)
 	{
+		end_program(state);
 		ft_printf("[IMPORTING MODELS]\n");
 		exit(1);
 		return (NULL);
