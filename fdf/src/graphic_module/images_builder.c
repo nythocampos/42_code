@@ -26,10 +26,26 @@ void	set_pixel(t_img *img, int x, int y, int color)
 	*((unsigned int *)(offset + img->addr)) = color;
 }
 
+static float	get_scale(t_state *state)
+{
+	float	scale_f;
+	int	cols_len;
+	int	rows_len;
+
+	cols_len = state->models->cols_len;
+	rows_len = state->models->rows_len;
+	scale_f = fminf((HEIGHT / rows_len), (WIDTH/cols_len));
+	scale_f = scale_f * ((rows_len*0.2) + (cols_len*0.2));
+	return (scale_f);
+}
+
+#include <stdio.h>
 static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
 {
+	float	scale_f;
+	
+	scale_f = get_scale(state);
 	cor->z = (state->models->rows_len - cor->z);
-
 	cor->x = cor->x - (state->models->cols_len / 2);
 	cor->y = cor->y - (state->models->val_len / 2);
 	cor->z = cor->z - (state->models->rows_len / 2);
@@ -38,12 +54,11 @@ static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
 	cor->y = cor->y + (state->models->val_len / 2);
 	cor->z = cor->z + (state->models->rows_len / 2);
 	move_model(cor, 0, 0, 8);
-
 	project_model(cor);
-	scale_projection(cor, 0.5, 0.5);
+	cor->x = cor->x *(scale_f);
+	cor->y = cor->y *(scale_f);
 	cor->x = cor->x + (WIDTH / 8);
-	cor->y = cor->y + (HEIGHT / 8);
-
+	cor->y = cor->y + (HEIGHT / 2);
 	ptn->x = (int) cor->x;
 	ptn->y = (int) cor->y;
 	ptn->y = (HEIGHT - ptn->y);
@@ -68,8 +83,5 @@ void	draw_vector(t_cor *a, t_cor *b, t_state *state)
 	initialize_mod(&tmp_b, &ptn_b, state);
 
 	draw_line(mlx, &ptn_a, &ptn_b);
-	return ;
-	set_pixel(mlx->img, tmp_a.x, tmp_a.y, COLOR_B);
-	set_pixel(mlx->img, tmp_b.x, tmp_b.y, COLOR_B);
 }
 
