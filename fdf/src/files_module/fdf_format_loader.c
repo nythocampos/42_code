@@ -12,54 +12,45 @@
 
 #include "../../fdf.h"
 
-static void	get_longest_line(int cur_line_len, t_state *state)
-{
-	if (state->models->cols_len < cur_line_len)
-		state->models->cols_len = cur_line_len;
-}
-
-static t_cor	*load_line(char *line, int row_num, t_state *state)
+static t_cor	*load_line(char *line, int row_i, int cols_n, t_state *state)
 {
 	int		index;
 	int		col_i;
-	int		cols_num;
 	t_cor	*pts_list;
 
 	index = 0;
 	col_i = 0;
-	if (!line)
-		return (NULL);
-	cols_num = get_columns_num(line);
-	get_longest_line(cols_num, state);
-	pts_list = (t_cor *) malloc(sizeof(t_cor) * (cols_num));
+	pts_list = (t_cor *) malloc(sizeof(t_cor) * (cols_n));
 	if (!pts_list)
 		return (NULL);
-	while (line[index] != '\0' && col_i <= (cols_num - 1))
-	{
+	while (line[index] != '\0' && col_i <= (cols_n - 1))
+	{	
 		if (on_item(line, (index + 1)) == 1)
 		{
 			pts_list[col_i].x = (float) col_i;
 			pts_list[col_i].y = (float) get_item_value(line, index);
-			pts_list[col_i].z = (float) row_num;
+			pts_list[col_i].z = (float) row_i;
 			pts_list[col_i].id = col_i;
-			if (state->models->val_len < pts_list[col_i].y)
-				state->models->val_len = pts_list[col_i].y;
+			get_largest_item(pts_list[col_i].y, state);
 			col_i++;
 		}
 		index++;
 	}
-	pts_list[cols_num - 1].id = -1;
+	pts_list[cols_n - 1].id = -1;
 	return (&pts_list[0]);
 }
 
-static t_list	*add_node(char *tmp_l, int row_n, t_state *state)
+static t_list	*add_node(char *tmp_l, int row_i, t_state *state)
 {
 	t_cor	*pts_lst;
 	t_list	*cur_n;
+	int	cols_n;
 
 	if (tmp_l == NULL)
 		return (NULL);
-	pts_lst = load_line(tmp_l, row_n, state);
+	get_columns_num(tmp_l, &cols_n);
+	get_longest_line(cols_n, state);
+	pts_lst = load_line(tmp_l, row_i, cols_n, state);
 	cur_n = ft_lstnew((void *) &pts_lst[0]);
 	return (cur_n);
 }
@@ -82,6 +73,7 @@ t_list	*load_terrain_model(int file_df, t_state *state)
 	{
 		free(tmp_l);
 		tmp_l = get_next_line(file_df);
+		is_garbage(tmp_l);
 		cur_n = add_node(tmp_l, row_i, state);
 		if (last_n == NULL)
 			first_n = cur_n;

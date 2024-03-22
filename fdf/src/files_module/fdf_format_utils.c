@@ -24,20 +24,17 @@ int	on_item(char *line, int index)
 	return (0);
 }
 
-int	get_columns_num(char *line)
+void	get_columns_num(char *line, int	*cols_n)
 {
 	int	index;
-	int	column_num;
 
 	index = 0;
-	column_num = 0;
 	while (line[index] != '\0')
 	{
 		if (on_item(line, (index + 1)))
-			column_num++;
+			*cols_n = *cols_n + 1;
 		index++;
 	}
-	return (column_num);
 }
 
 /*

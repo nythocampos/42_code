@@ -47,7 +47,7 @@ DATA_MODULE		= $(DATDIR)state_manager.c
 
 # Utils
 UTLDIR			= ./src/utils/
-UTILS			= $(UTLDIR)matrix_tools.c $(UTLDIR)list_tools.c
+UTILS			= $(UTLDIR)matrix_tools.c $(UTLDIR)list_tools.c $(UTLDIR)data_checker.c
 
 SRCS			= fdf.c $(UTILS) $(WINDOW_MODULE) $(FILES_MODULE) \
 			  $(GRAPHIC_MODULE) $(MM_MODULE) $(DATA_MODULE)
