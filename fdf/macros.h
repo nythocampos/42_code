@@ -12,8 +12,8 @@
 
 #define COLOR_A	0x00000000
 #define COLOR_B	0x33FFC4
-#define WIDTH	800
-#define HEIGHT	600 
+#define WIDTH	1200
+#define HEIGHT	700 
 #define MAPS_PATH "./models/"
 
 #if defined(__APPLE__) || (__MACH__)

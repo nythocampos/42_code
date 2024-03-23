@@ -31,20 +31,18 @@ static float	get_scale(t_state *state)
 	float	scale_f;
 	int	cols_len;
 	int	rows_len;
+	float	mul_factor;
 
+	mul_factor = 0.4;
 	cols_len = state->models->cols_len;
 	rows_len = state->models->rows_len;
 	scale_f = fminf((HEIGHT / rows_len), (WIDTH/cols_len));
-	scale_f = scale_f * ((rows_len*0.2) + (cols_len*0.2));
+	scale_f = scale_f * ((rows_len*0.2) + (cols_len*mul_factor));
 	return (scale_f);
 }
 
-#include <stdio.h>
-static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
+static void	move_model_pos(t_cor *cor, t_state *state)
 {
-	float	scale_f;
-	
-	scale_f = get_scale(state);
 	cor->z = (state->models->rows_len - cor->z);
 	cor->x = cor->x - (state->models->cols_len / 2);
 	cor->y = cor->y - (state->models->val_len / 2);
@@ -54,10 +52,26 @@ static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
 	cor->y = cor->y + (state->models->val_len / 2);
 	cor->z = cor->z + (state->models->rows_len / 2);
 	move_model(cor, 0, 0, 8);
+}
+
+#include <stdio.h>
+/*
+ * This function initialize the parameters of the model
+ * - initialize the position and rotation
+ * - projects the model
+ * - scale the projection
+ * - move the projection
+ */
+static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
+{
+	float	scale_f;
+	
+	scale_f = get_scale(state);
+	move_model_pos(cor, state);
 	project_model(cor);
 	cor->x = cor->x *(scale_f);
 	cor->y = cor->y *(scale_f);
-	cor->x = cor->x + (WIDTH / 8);
+	cor->x = cor->x + (WIDTH * 0.02);
 	cor->y = cor->y + (HEIGHT / 2);
 	ptn->x = (int) cor->x;
 	ptn->y = (int) cor->y;
@@ -81,7 +95,6 @@ void	draw_vector(t_cor *a, t_cor *b, t_state *state)
 	mlx = state->mlx_data;
 	initialize_mod(&tmp_a, &ptn_a, state);
 	initialize_mod(&tmp_b, &ptn_b, state);
-
 	draw_line(mlx, &ptn_a, &ptn_b);
 }
 

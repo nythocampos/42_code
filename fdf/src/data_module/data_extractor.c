@@ -41,19 +41,15 @@ t_cor	*extract_items(int row_i, char *line, t_state * state)
 	pts = (t_cor *) malloc(sizeof(t_cor) * (cols_n));
 	if (!pts)
 		return (NULL);
-	ft_printf("value: ");
 	while (items[index] != NULL && index <= (cols_n - 1))
 	{
 		pts[index].x = (float) index;
 		pts[index].y = (float) ft_atoi(items[index]);
-		//ft_printf("item: %s\n", items[index]);
-		ft_printf(" %d ", (int)pts[index].y);
 		get_largest_item(pts[index].y, state);
 		pts[index].z = (float) row_i;
 		pts[index].id = index;
 		index++;
 	}
-	ft_printf("$\n");
 	free_items(items);
 	pts[cols_n - 1].id = -1;
 	return (pts);
