@@ -6,7 +6,7 @@ void	get_longest_line(int cur_line_len, t_state *state)
 	if (state->models->cols_len < cur_line_len)
 		state->models->cols_len = cur_line_len;
 }
-void	get_largest_item(int item, t_state *state)
+void	get_largest_item(float item, t_state *state)
 {
 	if (state->models->val_len < item)
 		state->models->val_len = item;

@@ -14,15 +14,11 @@
 
 static t_cor	*load_line(char *line, int row_i, t_state *state)
 {
-	int			index;
 	t_data_extractor	*d_ext;
 	t_cor			*cor;
 
-	d_ext = (t_data_extractor *) malloc(sizeof(t_data_extractor));
-	if (!d_ext)
-		return (NULL);
 	d_ext = create_data_extractor();
-	cor = d_ext->extract_items(row_i, line);
+	cor = d_ext->extract_items(row_i, line, state);
 	free(d_ext);
 	return (cor);
 }
@@ -31,12 +27,10 @@ static t_list	*add_node(char *tmp_l, int row_i, t_state *state)
 {
 	t_cor	*pts_lst;
 	t_list	*cur_n;
-	int	cols_n;
 
 	if (tmp_l == NULL)
 		return (NULL);
-	get_longest_line(cols_n, state);
-	pts_lst = load_line(tmp_l, row_i,  state);
+	pts_lst = load_line(tmp_l, row_i, state);
 	cur_n = ft_lstnew((void *) &pts_lst[0]);
 	return (cur_n);
 }

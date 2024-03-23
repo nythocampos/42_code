@@ -3,6 +3,6 @@
 
 typedef struct	s_data_extractor
 {
-	t_cor	*(*extract_items)(int, char *);
+	t_cor	*(*extract_items)(int, char *, t_state *);
 }	t_data_extractor;
 

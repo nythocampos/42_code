@@ -7,7 +7,7 @@
  * valid data in decimal or hexadecimal.
  *
  */
-static int	is_valid(char c)
+/*static int	is_valid(char c)
 {
 	if (ft_isdigit(c)
 		|| c == '-' 
@@ -15,7 +15,7 @@ static int	is_valid(char c)
 			&& ft_tolower(c) <= 'f'))
 		return (1);
 	return (0);	
-}
+}*/
 
 static int	count_items(char **items)
 {
@@ -27,7 +27,21 @@ static int	count_items(char **items)
 	return (index);
 }
 
-t_cor	*extract_items(int row_i, char *line)
+static void	free_items(char **items)
+{
+	int	index;
+
+	index = 0;
+	while (items[index] != NULL)
+	{
+		free(items[index]);
+		index++;
+	}
+	free(items);
+	items = NULL;
+}
+
+t_cor	*extract_items(int row_i, char *line, t_state * state)
 {
 	t_cor	*pts;
 	char	**items;
@@ -36,22 +50,32 @@ t_cor	*extract_items(int row_i, char *line)
 
 	index = 0;
 	items = ft_split(line, ' ');
+	if (items == NULL)
+		return (NULL);
 	cols_n = count_items(items);
+	get_longest_line(cols_n, state);
 	pts = (t_cor *) malloc(sizeof(t_cor) * (cols_n));
 	if (!pts)
 		return (NULL);
-	while (items[index] != NULL)
+	ft_printf("value: ");
+	while (items[index] != NULL && index <= (cols_n - 1))
 	{
-		pts[col_i].x = (float) index;
-		pts[index]->y = (float) ft_atoi(items[index]);
-		get_largest_item(pts[col_i].y, state);
-		pts[col_i].z = (float) row_i;
-		pts[col_i].id = index;
+		pts[index].x = (float) index;
+		pts[index].y = (float) ft_atoi(items[index]);
+		//ft_printf("item: %s\n", items[index]);
+		ft_printf(" %d ", (int)pts[index].y);
+		get_largest_item(pts[index].y, state);
+		pts[index].z = (float) row_i;
+		pts[index].id = index;
 		index++;
 	}
+	ft_printf("$\n");
+	free_items(items);
+	pts[cols_n - 1].id = -1;
+	return (pts);
 }
 
-t_data_extractor	*create_data_extractor()
+t_data_extractor	*create_data_extractor(void)
 {
 	t_data_extractor	*de;
 

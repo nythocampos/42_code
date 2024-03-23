@@ -23,6 +23,7 @@
 
 # include "structs.h"
 # include "macros.h"
+# include "interfaces.h"
 
 // Window module 
 // Hooks
@@ -31,9 +32,9 @@ void		set_events(t_state *data);
 void		set_window(t_mlx_data *mlx_data, char *title);
 
 // Files module 
-void		get_columns_num(char *line, int	*cols_n);
+/*void		get_columns_num(char *line, int	*cols_n);
 int		get_item_value(char *str, int end);
-int		on_item(char *line, int index);
+int		on_item(char *line, int index);*/
 t_list		*load_terrain_model(int file_df, t_state *state);
 
 // Models manager module
@@ -41,21 +42,20 @@ void		process_lists(t_list *node, void *data, void (*f)(t_cor *, void *));
 t_models	*import_model(char **argv, t_state *state);
 // Graphic module 
 void		set_pixel(t_img *img, int x, int y, int color);
-void		build_triangles(t_list *node, int n_cols, int *row, t_state *state);
+void		build_triangles(
+			t_list *node, int n_cols, int *row, t_state *state);
 
 void		build_image(t_mlx_data *mlx_data);
 void		build_faces(t_list *node, t_state *state);
-
 void		draw_line(t_mlx_data *mlx, t_ptn *a, t_ptn *b);
-
 void		project_model(t_cor *cor);
 void		move_model(t_cor *cor, float x, float y, float z);
 void		rotate_model(t_cor *cor, float x, float y, float z);
 void		scale_model(t_cor *cor, float x, float y, float z);
 void		scale_projection(t_cor *cor, float x, float y);
 
-void		draw_cor(t_cor *cor, t_mlx_data *mlx);
 void		draw_vector(t_cor *a, t_cor *b, t_state * state);
+
 // Data manager
 t_state		*initialize_state(char **argv);
 
@@ -65,6 +65,9 @@ void		initialize_m(float *m, int size);
 int		get_rows_num(t_list *model); // REMOVE THIS??
 int		get_cols_num(t_cor *pts_list); //REMOVE THIS??
 void		is_garbage(char *tmp_l);
-void		get_largest_item(int item, t_state *state);
+void		get_largest_item(float item, t_state *state);
 void		get_longest_line(int cur_line_len, t_state *state);
+
+// interfaces
+t_data_extractor	*create_data_extractor(void);
 #endif

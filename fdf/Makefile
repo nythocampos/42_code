@@ -30,7 +30,7 @@ $(GRPDIR)models_magnifier.c $(GRPDIR)shapes_builder.c
 
 # Files module
 FLSDIR			=./src/files_module/
-FILES_MODULE		= $(FLSDIR)fdf_format_loader.c $(FLSDIR)fdf_format_utils.c
+FILES_MODULE		= $(FLSDIR)fdf_format_loader.c
 
 # Models manager module
 MMDIR			=./src/models_manager_module/
@@ -43,7 +43,7 @@ WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_mana
 
 # Data manager module
 DATDIR			= ./src/data_module/
-DATA_MODULE		= $(DATDIR)state_manager.c
+DATA_MODULE		= $(DATDIR)state_manager.c $(DATDIR)data_extractor.c
 
 # Utils
 UTLDIR			= ./src/utils/
