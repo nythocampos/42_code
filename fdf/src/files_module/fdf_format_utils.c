@@ -12,19 +12,9 @@
 
 #include "../../fdf.h"
 
-/*
- * This function check if line on index-1 position
- * is a number and line on index position is different from
- * a number.
- */
-int	on_item(char *line, int index)
-{
-	if (ft_isdigit(line[index - 1]) && !ft_isdigit(line[index]))
-		return (1);
-	return (0);
-}
 
-void	get_columns_num(char *line, int	*cols_n)
+// !!!DEPRECATED???
+void	get_columns_num(char *line and, int	*cols_n)
 {
 	int	index;
 
@@ -66,7 +56,7 @@ int	get_item_value(char *str, int end)
 	num = 0;
 	if ((start - 1) < 0 || end == 0)
 		return (0);
-	while (ft_isdigit(str[start - 1]) || str[start - 1] == 45)
+	while (ft_isdigit(str[start - 1]) || str[start - 1] == '-')
 		start--;
 	str_num = (char *) malloc(sizeof(char) * ((end - start) + 2));
 	if (!str_num)

@@ -12,32 +12,19 @@
 
 #include "../../fdf.h"
 
-static t_cor	*load_line(char *line, int row_i, int cols_n, t_state *state)
+static t_cor	*load_line(char *line, int row_i, t_state *state)
 {
-	int		index;
-	int		col_i;
-	t_cor	*pts_list;
+	int			index;
+	t_data_extractor	*d_ext;
+	t_cor			*cor;
 
-	index = 0;
-	col_i = 0;
-	pts_list = (t_cor *) malloc(sizeof(t_cor) * (cols_n));
-	if (!pts_list)
+	d_ext = (t_data_extractor *) malloc(sizeof(t_data_extractor));
+	if (!d_ext)
 		return (NULL);
-	while (line[index] != '\0' && col_i <= (cols_n - 1))
-	{	
-		if (on_item(line, (index + 1)) == 1)
-		{
-			pts_list[col_i].x = (float) col_i;
-			pts_list[col_i].y = (float) get_item_value(line, index);
-			pts_list[col_i].z = (float) row_i;
-			pts_list[col_i].id = col_i;
-			get_largest_item(pts_list[col_i].y, state);
-			col_i++;
-		}
-		index++;
-	}
-	pts_list[cols_n - 1].id = -1;
-	return (&pts_list[0]);
+	d_ext = create_data_extractor();
+	cor = d_ext->extract_items(row_i, line);
+	free(d_ext);
+	return (cor);
 }
 
 static t_list	*add_node(char *tmp_l, int row_i, t_state *state)
@@ -48,9 +35,8 @@ static t_list	*add_node(char *tmp_l, int row_i, t_state *state)
 
 	if (tmp_l == NULL)
 		return (NULL);
-	get_columns_num(tmp_l, &cols_n);
 	get_longest_line(cols_n, state);
-	pts_lst = load_line(tmp_l, row_i, cols_n, state);
+	pts_lst = load_line(tmp_l, row_i,  state);
 	cur_n = ft_lstnew((void *) &pts_lst[0]);
 	return (cur_n);
 }

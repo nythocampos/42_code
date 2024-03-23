@@ -93,3 +93,4 @@ typedef struct s_state
 	t_mlx_data	*mlx_data;
 	t_models	*models;
 }	t_state;
+
