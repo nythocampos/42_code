@@ -31,6 +31,7 @@ static t_list	*add_node(char *tmp_l, int row_i, t_state *state)
 	if (tmp_l == NULL)
 		return (NULL);
 	pts_lst = load_line(tmp_l, row_i, state);
+	//is_garbage(tmp_l);
 	cur_n = ft_lstnew((void *) &pts_lst[0]);
 	return (cur_n);
 }
@@ -53,7 +54,6 @@ t_list	*load_terrain_model(int file_df, t_state *state)
 	{
 		free(tmp_l);
 		tmp_l = get_next_line(file_df);
-		is_garbage(tmp_l);
 		cur_n = add_node(tmp_l, row_i, state);
 		if (last_n == NULL)
 			first_n = cur_n;

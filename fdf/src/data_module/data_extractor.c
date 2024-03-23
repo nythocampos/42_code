@@ -1,22 +1,6 @@
 
 #include "../../fdf.h"
 
-/*
- * This function checks if the
- * character could be a part of a
- * valid data in decimal or hexadecimal.
- *
- */
-/*static int	is_valid(char c)
-{
-	if (ft_isdigit(c)
-		|| c == '-' 
-		|| (ft_tolower(c) >= 'a'
-			&& ft_tolower(c) <= 'f'))
-		return (1);
-	return (0);	
-}*/
-
 static int	count_items(char **items)
 {
 	int	index;

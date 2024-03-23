@@ -12,6 +12,22 @@ void	get_largest_item(float item, t_state *state)
 		state->models->val_len = item;
 }
 
+/*
+ * This function checks if the
+ * character could be a part of a
+ * valid data in decimal or hexadecimal.
+ *
+ */
+static int	is_valid(char c)
+{
+	if (ft_isdigit(c)
+		|| c == '-' 
+		|| (ft_tolower(c) >= 'a'
+			&& ft_tolower(c) <= 'f'))
+		return (1);
+	return (0);
+}
+
 void	is_garbage(char *tmp_l)
 {
 	int	index;
@@ -21,14 +37,13 @@ void	is_garbage(char *tmp_l)
 		return ;
 	while (tmp_l[index] != '\0')
 	{
-		if (!ft_isdigit(tmp_l[index]) && (tmp_l[index] != 45) 
-			&& (tmp_l[index] != 32) && (tmp_l[index] != '\n'))
+		if (is_valid(tmp_l[index]) == 0)
 		{
 			free(tmp_l);
 			ft_printf("Invalid data found in the file\n");
 			exit (1);
 			return ;
-		}	
+		}
 		index++;
 	}
 }
