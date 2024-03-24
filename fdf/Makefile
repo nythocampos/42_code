@@ -16,30 +16,30 @@ LIBFTDIR		= libraries/libft_ulti/
 # Program variables
 PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
-CC			= cc
+CC				= cc
 # IMPLEMENT FLAGS!!!!!
 CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
-INCLUDE			= fdf.h structs.h
+INCLUDE			= fdf.h structs.h interfaces.h
 
 # C FILES ---------
 # Graphic module 
 GRPDIR			= ./src/graphic_module/
-	GRAPHIC_MODULE		= $(GRPDIR)images_builder.c $(GRPDIR)triangles_builder.c \
+GRAPHIC_MODULE	= $(GRPDIR)images_builder.c $(GRPDIR)triangles_builder.c \
 	$(GRPDIR)faces_builder.c $(GRPDIR)models_projector.c \
-$(GRPDIR)models_magnifier.c $(GRPDIR)shapes_builder.c
+	$(GRPDIR)models_magnifier.c $(GRPDIR)shapes_builder.c
 
 # Files module
 FLSDIR			=./src/files_module/
-FILES_MODULE		= $(FLSDIR)fdf_format_loader.c
+FILES_MODULE	= $(FLSDIR)fdf_format_loader.c
 
 # Models manager module
 MMDIR			=./src/models_manager_module/
 MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c $(MMDIR)lists_processor.c \
-			  $(MMDIR)faces_processor.c $(MMDIR)models_loader.c
+	$(MMDIR)faces_processor.c $(MMDIR)models_loader.c
 
 # Window manager module
 WINDIR			= ./src/window_module/
-WINDOW_MODULE		= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_manager.c
+WINDOW_MODULE	= $(WINDIR)window_manager.c $(WINDIR)hooks.c $(WINDIR)events_manager.c
 
 # Data manager module
 DATDIR			= ./src/data_module/
@@ -50,7 +50,7 @@ UTLDIR			= ./src/utils/
 UTILS			= $(UTLDIR)matrix_tools.c $(UTLDIR)list_tools.c $(UTLDIR)data_checker.c
 
 SRCS			= fdf.c $(UTILS) $(WINDOW_MODULE) $(FILES_MODULE) \
-			  $(GRAPHIC_MODULE) $(MM_MODULE) $(DATA_MODULE)
+	$(GRAPHIC_MODULE) $(MM_MODULE) $(DATA_MODULE)
 
 # -----------------
 # Rules
@@ -84,7 +84,7 @@ clean:
 fclean: clean
 	@rm -f $(LIBFT)
 	@rm -f $(MINILIBX)
-	@rm -f $(PROGRAM)
+	@rm -f $(PROGRAM) fdf.o
 	@echo "---->ALL CLEANED."
 	
 re: fclean all
