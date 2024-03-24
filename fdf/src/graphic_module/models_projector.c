@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   models_projector.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:42:20 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 14:57:15 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:33:10 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ float	*gen_prj_mtx(void)
 	p_data.f_far = 1000;
 	p_data.f_fov = 90;
 	p_data.f_asp_rad = ((float)HEIGHT / (float)WIDTH);
-	p_data.f_fov_rad = 1 / tanf(p_data.f_fov * 0.5 / 180.0* 3.14159);
+	p_data.f_fov_rad = 1 / tanf(p_data.f_fov * 0.5 / 180.0 * 3.14159);
 	m_prj = (float *) malloc (sizeof(float) * m_size);
 	if (!m_prj)
 		return (NULL);

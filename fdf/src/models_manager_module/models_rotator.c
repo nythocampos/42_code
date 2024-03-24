@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   models_rotator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:48:38 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 14:54:14 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:21:22 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static float	*gen_rot_mtx_x(float x_angle)
 static float	*gen_rot_mtx_y(float y_angle)
 {
 	float	*m_rot;
-	
+
 	m_rot = (float *) malloc (sizeof(float) * 16);
 	if (!m_rot)
 		return (NULL);
@@ -89,7 +89,7 @@ void	rotate_model(t_cor *cor, float x, float y, float z)
 		return ;
 	if (x != 0)
 		apply_matrix(cor, rot_x_m);
-	if (y != 0)	
+	if (y != 0)
 		apply_matrix(cor, rot_y_m);
 	if (z != 0)
 		apply_matrix(cor, rot_z_m);

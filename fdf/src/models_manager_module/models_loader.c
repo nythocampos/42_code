@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   models_loader.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:45:15 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 15:19:45 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:20:53 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	is_fdf_file(char *file_name)
 {
 	char	*file_extension;
-	int	extension_len;
+	int		extension_len;
 
 	file_extension = ft_strchr(file_name, 46);
 	extension_len = ft_strlen(file_extension);
@@ -34,7 +34,7 @@ static t_list	*load_model(char *file_name, t_state *state)
 	t_list	*model;
 	int		fd;
 	char	*file_path;
-	
+
 	if (is_fdf_file(file_name) == 0)
 		return (NULL);
 	file_path = ft_strjoin(MAPS_PATH, file_name);
@@ -66,7 +66,7 @@ t_models	*import_model(char **argv, t_state *state)
 	if (models->model_data == NULL)
 	{
 		free(models);
-		return (NULL); 
+		return (NULL);
 	}
 	build_faces(models->model_data, state);
 	models->id = -1;

@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:01:05 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 15:30:51 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:31:58 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	del(void *content)
 void	end_program(t_state *state)
 {
 	mlx_destroy_window(
-			state->mlx_data->mlx, state->mlx_data->win);
+		state->mlx_data->mlx, state->mlx_data->win);
 	mlx_destroy_image(
-			state->mlx_data->mlx, state->mlx_data->img->img);
+		state->mlx_data->mlx, state->mlx_data->img->img);
 	free(state->mlx_data->img);
 	free(state->mlx_data->mlx);
 	free(state->mlx_data);
@@ -47,7 +47,7 @@ void	end_program(t_state *state)
 	{
 		ft_lstclear(&state->models->model_data, &del);
 		free(state->models);
-	} 
+	}
 	free(state);
 	exit(1);
 }

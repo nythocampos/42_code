@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_manager.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:20:09 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 15:41:15 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:32:45 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	initialize_window(t_mlx_data *mlx_data, char *title)
 	if (mlx_data->win == NULL)
 	{
 		free(mlx_data->mlx);
-		return ; 
+		return ;
 	}
 	img->img = mlx_new_image(mlx_data->mlx, WIDTH, HEIGHT);
 	img->addr = mlx_get_data_addr(

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data_extractor.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/24 18:15:40 by anthony           #+#    #+#             */
+/*   Updated: 2024/03/24 18:18:10 by anthony          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../fdf.h"
 
@@ -25,17 +36,15 @@ static void	free_items(char **items)
 	items = NULL;
 }
 
-t_cor	*extract_items(int row_i, char *line, t_state * state)
+t_cor	*extract_items(int row_i, char *line, t_state *state)
 {
 	t_cor	*pts;
 	char	**items;
-	int	cols_n;
-	int	index;
+	int		cols_n;
+	int		index;
 
 	index = 0;
 	items = ft_split(line, ' ');
-	if (items == NULL)
-		return (NULL);
 	cols_n = count_items(items);
 	get_longest_line(cols_n, state);
 	pts = (t_cor *) malloc(sizeof(t_cor) * (cols_n));

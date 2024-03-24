@@ -29,12 +29,12 @@ void	set_pixel(t_img *img, int x, int y, int color)
 static float	get_scale(t_state *state)
 {
 	float	scale_f;
-	int	cols_len;
-	int	rows_len;
+	int		cols_len;
+	int		rows_len;
 
 	cols_len = state->models->cols_len;
 	rows_len = state->models->rows_len;
-	scale_f = fminf((HEIGHT / rows_len), (WIDTH/cols_len));
+	scale_f = fminf((HEIGHT / rows_len), (WIDTH / cols_len));
 	return (scale_f);
 }
 
@@ -65,10 +65,10 @@ static void	initialize_mod(t_cor *cor, t_ptn *ptn, t_state *state)
 	scale_f = get_scale(state);
 	move_model_pos(cor, state);
 	project_model(cor);
-	cor->x = cor->x *(scale_f*(state->models->cols_len*0.5));
-	cor->y = cor->y *(scale_f*(state->models->rows_len*0.5));
-	ptn->x = (int) (cor->x + (WIDTH * 0.01));
-	ptn->y = (int) (cor->y + (HEIGHT / 2));
+	cor->x = cor->x *(scale_f * (state->models->cols_len * 0.5));
+	cor->y = cor->y *(scale_f * (state->models->rows_len * 0.5));
+	ptn->x = (int)(cor->x + (WIDTH * 0.01));
+	ptn->y = (int)(cor->y + (HEIGHT / 2));
 	ptn->y = (HEIGHT - ptn->y);
 }
 
@@ -91,4 +91,3 @@ void	draw_vector(t_cor *a, t_cor *b, t_state *state)
 	initialize_mod(&tmp_b, &ptn_b, state);
 	draw_line(mlx, &ptn_a, &ptn_b);
 }
-

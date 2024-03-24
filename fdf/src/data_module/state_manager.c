@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_manager.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:43:56 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 15:44:14 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:18:29 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_mlx_data	*initialize_win(void)
 
 	mlx_data = (t_mlx_data *) malloc(sizeof(t_mlx_data) * 1);
 	if (!mlx_data)
-		return (NULL);// end_program
+		return (NULL);
 	mlx_data->mlx = mlx_init();
 	set_window(mlx_data, "FDF");
 	return (mlx_data);

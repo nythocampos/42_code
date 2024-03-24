@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   models_positioner.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:48:07 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 14:53:30 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:21:09 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ void	move_model(t_cor *cor, float x, float y, float z)
 	cor->y = cor->y + y;
 	cor->z = cor->z + z;
 }
-

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data_checker.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/24 18:21:58 by anthony           #+#    #+#             */
+/*   Updated: 2024/03/24 18:22:12 by anthony          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../fdf.h"
 
@@ -6,6 +17,7 @@ void	get_longest_line(int cur_line_len, t_state *state)
 	if (state->models->cols_len < cur_line_len)
 		state->models->cols_len = cur_line_len;
 }
+
 void	get_largest_item(float item, t_state *state)
 {
 	if (state->models->val_len < item)
@@ -21,7 +33,7 @@ void	get_largest_item(float item, t_state *state)
 static int	is_valid(char c)
 {
 	if (ft_isdigit(c)
-		|| c == '-' 
+		|| c == '-'
 		|| (ft_tolower(c) >= 'a'
 			&& ft_tolower(c) <= 'f'))
 		return (1);

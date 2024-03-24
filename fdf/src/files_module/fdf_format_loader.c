@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_format_loader.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 19:29:19 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 16:10:05 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:18:57 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_cor	*load_line(char *line, int row_i, t_state *state)
 {
 	t_data_extractor	*d_ext;
-	t_cor			*cor;
+	t_cor				*cor;
 
 	d_ext = create_data_extractor();
 	cor = d_ext->extract_items(row_i, line, state);
@@ -31,7 +31,6 @@ static t_list	*add_node(char *tmp_l, int row_i, t_state *state)
 	if (tmp_l == NULL)
 		return (NULL);
 	pts_lst = load_line(tmp_l, row_i, state);
-	//is_garbage(tmp_l);
 	cur_n = ft_lstnew((void *) &pts_lst[0]);
 	return (cur_n);
 }

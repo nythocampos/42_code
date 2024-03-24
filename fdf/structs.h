@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:57:25 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/15 23:08:48 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:30:54 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_cor
 	int		id;
 }	t_cor;
 
-typedef struct	s_ptn
+typedef struct s_ptn
 {
 	int	x;
 	int	y;
@@ -78,9 +78,9 @@ typedef struct s_mlx_data
 typedef struct s_models
 {
 	t_list	*model_data;
-	int	cols_len;
-	int	rows_len;
-	int	val_len;
+	int		cols_len;
+	int		rows_len;
+	int		val_len;
 	int		id;
 }	t_models;
 /*
@@ -93,4 +93,3 @@ typedef struct s_state
 	t_mlx_data	*mlx_data;
 	t_models	*models;
 }	t_state;
-
