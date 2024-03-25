@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:03:34 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/24 18:29:44 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 15:05:58 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 // Hooks
 void				end_program(t_state *state);
 void				set_events(t_state *data);
-void				set_window(t_mlx_data *mlx_data, char *title);
+void				initialize_img(t_mlx_data *mlx_data, char *title);
 
 // Files module 
 /*void		get_columns_num(char *line, int	*cols_n);

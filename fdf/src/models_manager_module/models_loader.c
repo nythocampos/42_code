@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 19:45:15 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/24 18:20:53 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 14:54:57 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_models	*import_model(char **argv, t_state *state)
 {
 	t_models	*models;
 
-	models = (t_models *) malloc(sizeof(t_models) * 1);
+	models = (t_models *) malloc(sizeof(t_models));
 	if (!models)
 		return (NULL);
 	state->models = models;
@@ -66,6 +66,7 @@ t_models	*import_model(char **argv, t_state *state)
 	if (models->model_data == NULL)
 	{
 		free(models);
+		end_program(state);
 		return (NULL);
 	}
 	build_faces(models->model_data, state);

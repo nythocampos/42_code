@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:57:25 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/24 18:30:54 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 15:15:10 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,6 @@ typedef struct s_ptn
 	int	x;
 	int	y;
 }	t_ptn;
-
-// screen face [{x,y},[{x,y},[{x,y}]
-typedef struct s_face
-{
-	t_cor	*points;
-	int		id;
-}	t_face;
-// --- --- ---
 
 typedef struct s_p_data
 {

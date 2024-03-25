@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:58:04 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 16:32:10 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:21:18 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define COLOR_B	0x33FFC4
 #define WIDTH	1200
 #define HEIGHT	700 
-#define MAPS_PATH "./models/"
+#define MAPS_PATH ""
 
 #if defined(__APPLE__) || (__MACH__)
 # define M_FORWARD 13

@@ -6,7 +6,7 @@
 /*   By: antcampo <antcampo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:12:50 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/20 16:26:20 by antcampo         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:14:22 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	move_model_pos(t_cor *cor, t_state *state)
 	cor->x = cor->x - (state->models->cols_len / 2);
 	cor->y = cor->y - (state->models->val_len / 2);
 	cor->z = cor->z - (state->models->rows_len / 2);
-	rotate_model(cor, 0.6, 0, 0);
+	rotate_model(cor, M_PI*0.2, -M_PI_4, 0); //M_PI*0.2, -M_PI_4, 0
 	cor->x = cor->x + (state->models->cols_len / 2);
 	cor->y = cor->y + (state->models->val_len / 2);
 	cor->z = cor->z + (state->models->rows_len / 2);

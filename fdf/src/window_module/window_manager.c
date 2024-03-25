@@ -6,17 +6,17 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:20:09 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/24 18:32:45 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 15:05:37 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
 
-static void	initialize_window(t_mlx_data *mlx_data, char *title)
+void	initialize_img(t_mlx_data *mlx_data, char *title)
 {
 	t_img	*img;
 
-	img = (t_img *) malloc(sizeof(t_img) * 1);
+	img = (t_img *) malloc(sizeof(t_img));
 	if (!img)
 		return ;
 	mlx_data->win = mlx_new_window(
@@ -32,10 +32,3 @@ static void	initialize_window(t_mlx_data *mlx_data, char *title)
 	mlx_data->img = img;
 }
 
-/*
- * This function sets everything nessary to run the window
- */
-void	set_window(t_mlx_data *mlx_data, char *title)
-{
-	initialize_window(mlx_data, title);
-}

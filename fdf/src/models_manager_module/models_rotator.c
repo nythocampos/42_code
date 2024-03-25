@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:48:38 by antcampo          #+#    #+#             */
-/*   Updated: 2024/03/24 18:21:22 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 16:09:15 by antcampo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,13 @@ void	rotate_model(t_cor *cor, float x, float y, float z)
 	rot_z_m = gen_rot_mtx_z(z);
 	if (!rot_z_m || !rot_x_m || !rot_y_m)
 		return ;
-	if (x != 0)
-		apply_matrix(cor, rot_x_m);
 	if (y != 0)
 		apply_matrix(cor, rot_y_m);
+	if (x != 0)
+		apply_matrix(cor, rot_x_m);
 	if (z != 0)
 		apply_matrix(cor, rot_z_m);
+	
 	free(rot_x_m);
 	free(rot_y_m);
 	free(rot_z_m);

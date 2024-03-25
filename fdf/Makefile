@@ -18,7 +18,7 @@ PROGRAM			= fdf
 LIBS			= $(LIBFT) $(MINILIBX)
 CC				= cc
 # IMPLEMENT FLAGS!!!!!
-CFLAGS			= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS			= -Wall -Wextra -Werror -g3 #-fsanitize=address
 INCLUDE			= fdf.h structs.h interfaces.h
 
 # C FILES ---------
@@ -35,7 +35,7 @@ FILES_MODULE	= $(FLSDIR)fdf_format_loader.c
 # Models manager module
 MMDIR			=./src/models_manager_module/
 MM_MODULE		= $(MMDIR)models_positioner.c $(MMDIR)models_rotator.c $(MMDIR)lists_processor.c \
-	$(MMDIR)faces_processor.c $(MMDIR)models_loader.c
+	 $(MMDIR)models_loader.c
 
 # Window manager module
 WINDIR			= ./src/window_module/
